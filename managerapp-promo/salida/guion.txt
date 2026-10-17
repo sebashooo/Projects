@@ -1,0 +1,22 @@
+MANAGER APP — PROMO 30 s (vertical 1080x1920, también 1:1) · español de Colombia
+Voz: Kokoro-82M «ef_dora» (local, Apache-2.0) · Todos los datos en pantalla son de ejemplo.
+
+ESCENA                 TIEMPO      VOZ                                                                 TEXTO EN PANTALLA
+1 Gancho               0,0–2,9     ¿Cuánto vendiste hoy? ¿Y cuánto te deben?                            ¿Cuánto vendiste hoy? / ¿Y cuánto te deben?
+2 Caos                 2,9–9,0     Si todavía lo llevas en un cuaderno, algo se te está escapando:      Cuaderno de fiados con total tachado, calculadora,
+                                   el inventario no cuadra y la caja nunca da.                          post-it «¿Quedan 2… o 0?», «Faltan $20.000 en la caja»
+3 Giro                 9,0–11,9    Con Manager App, tu negocio queda en tu celular.                     Flash → logo · «Tu negocio en tu celular»
+4 Vender               11,9–15,3   Vende escaneando el código, en segundos.                             Escáner + bip, carrito, total, Cobrar, «Vendido» · «Escanea. Cobra. Listo.»
+5 Inventario           15,3–19,7   Mira tu inventario al instante y entérate antes de quedarte          «Quedan 2» (ámbar), «Agotado» (rojo) · «Te avisa antes de que se acabe.»
+                                   sin producto.
+6 Caja                 19,7–22,3   Abre y cierra tu caja, y sabe si cuadra.                             Abrió con $200.000 → Diferencia $0 · «La caja cuadra.»
+7 Control              22,3–25,8   Sabe quién te debe, cuánto vendiste y cómo va cada sucursal.         Te deben $350.000 · 4 clientes, ventas del día, Centro / Norte (modo oscuro)
+                                                                                                        «Quién te debe. Cuánto ganas. En cada sucursal.»
+8 CTA                  25,8–30,0   Manager App: tu negocio, en control. Pide tu demo hoy.               Logo · «Tu negocio, en control» · [Pide tu demo] · WhatsApp [WHATSAPP] · managerapp-eight.vercel.app
+
+VERSIÓN CORTA 15 s
+1 Gancho      0,0–2,9    ¿Cuánto vendiste hoy? ¿Y cuánto te deben?
+2 Vender      2,9–5,6    Vende escaneando el código.
+3 Inventario  5,6–8,1    Mira tu inventario al instante.
+4 Caja        8,1–10,4   Y sabe si tu caja cuadra.
+5 CTA         10,4–15,0  Manager App: tu negocio, en control. Pide tu demo hoy.

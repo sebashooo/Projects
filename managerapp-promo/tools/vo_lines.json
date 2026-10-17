@@ -1,0 +1,16 @@
+{
+ "s1a": ["¿Cuánto vendiste hoy?", "¿Cuánto vendiste hoy?"],
+ "s1b": ["¿Y cuánto te deben?", "¿Y cuánto te deben?"],
+ "s2a": ["Si todavía lo llevas en un cuaderno, algo se te está escapando:", "Si todavía lo llevas en un cuaderno, algo se te está escapando:"],
+ "s2b": ["el inventario no cuadra y la caja nunca da.", "el inventario no cuadra, y la caja nunca da."],
+ "s3":  ["Con Manager App, tu negocio queda en tu celular.", "Con Mánayer Ap, tu negocio queda en tu celular."],
+ "s4":  ["Vende escaneando el código, en segundos.", "Vende escaneando el código, en segundos."],
+ "s5":  ["Mira tu inventario al instante y entérate antes de quedarte sin producto.", "Mira tu inventario al instante, y entérate antes de quedarte sin producto."],
+ "s6":  ["Abre y cierra tu caja, y sabe si cuadra.", "Abre y cierra tu caja, y sabe si cuadra."],
+ "s7":  ["Sabe quién te debe, cuánto vendiste y cómo va cada sucursal.", "Sabe quién te debe, cuánto vendiste, y cómo va cada sucursal."],
+ "s8a": ["Manager App: tu negocio, en control.", "Mánayer Ap: tu negocio, en control."],
+ "s8b": ["Pide tu demo hoy.", "Pide tu demo hoy."],
+ "k4":  ["Vende escaneando el código.", "Vende escaneando el código."],
+ "k5":  ["Mira tu inventario al instante.", "Mira tu inventario al instante."],
+ "k6":  ["Y sabe si tu caja cuadra.", "Y sabe si tu caja cuadra."]
+}

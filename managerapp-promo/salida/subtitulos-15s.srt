@@ -1,0 +1,27 @@
+1
+00:00:00,100 --> 00:00:01,518
+¿Cuánto vendiste hoy?
+
+2
+00:00:01,500 --> 00:00:02,802
+¿Y cuánto te deben?
+
+3
+00:00:03,000 --> 00:00:04,728
+Vende escaneando el código.
+
+4
+00:00:05,700 --> 00:00:07,637
+Mira tu inventario al instante.
+
+5
+00:00:08,200 --> 00:00:09,882
+Y sabe si tu caja cuadra.
+
+6
+00:00:10,600 --> 00:00:12,728
+Manager App: tu negocio, en control.
+
+7
+00:00:12,850 --> 00:00:14,134
+Pide tu demo hoy.

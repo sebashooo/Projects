@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="es" data-resolution="portrait" data-composition-variables='[
+  {"id":"whatsapp","type":"string","label":"WhatsApp","default":"[WHATSAPP]"},
+  {"id":"url","type":"string","label":"URL","default":"managerapp-eight.vercel.app"}
+]'>
+<!-- Generado por tools/build.mjs — edita allí (WhatsApp y URL al inicio de ese archivo) y vuelve a correr: node tools/build.mjs -->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="assets/js/gsap.min.js"></script>
+<style>
+@font-face{font-family:"Geist";src:url("assets/fonts/Geist-Regular.woff2") format("woff2");font-weight:400;font-style:normal;}@font-face{font-family:"Geist";src:url("assets/fonts/Geist-Medium.woff2") format("woff2");font-weight:500;font-style:normal;}@font-face{font-family:"Geist";src:url("assets/fonts/Geist-SemiBold.woff2") format("woff2");font-weight:600;font-style:normal;}@font-face{font-family:"Geist";src:url("assets/fonts/Geist-Bold.woff2") format("woff2");font-weight:700;font-style:normal;}@font-face{font-family:"Geist";src:url("assets/fonts/Geist-Black.woff2") format("woff2");font-weight:900;font-style:normal;}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#ebe7de}
+#root{position:relative;width:100%;height:100%;overflow:hidden;font-family:"Geist",sans-serif;color:#0b0b0b;font-variant-numeric:tabular-nums;background:#ebe7de}
+.scene{position:absolute;inset:0;overflow:hidden}
+.inner{position:absolute;inset:0}
+.bgfill{position:absolute;inset:0}
+.paper .bgfill{background-color:#ebe7de;background-image:repeating-linear-gradient(180deg,transparent 0 62px,#cfd5dc 62px 64px)}
+.paper .margin{position:absolute;top:0;bottom:0;left:64px;width:3px;background:#e2a5a0}
+.brand .bgfill{background:#256abf}
+.light .bgfill{background:#f9f9f7}
+.dark .bgfill{background:#0d0d0d}
+.box{position:absolute;width:900px;height:1000px;transform-origin:0 0}
+.abs{position:absolute}
+.h1{font-weight:700;font-size:68px;line-height:1.08;letter-spacing:-0.02em}
+.demo{position:absolute;z-index:50;right:0;bottom:-8px;font-size:24px;font-weight:500;color:#5f5e5a;padding:4px 10px;border-radius:9999px;background:rgba(255,255,255,0.75)}
+.dark .demo{color:#b4b3ab;background:rgba(26,26,25,0.85)}
+.brand .demo{color:#ffffff;background:rgba(0,0,0,0.18)}
+.card{background:#ffffff;border:2px solid #e4e3dd;border-radius:8px}
+.pill{display:inline-flex;align-items:center;gap:10px;border-radius:9999px;font-weight:600;padding:10px 22px;font-size:28px}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;z-index:90;pointer-events:none}
+.cap{position:absolute;left:90px;width:900px;top:1300px;display:flex;justify-content:center;z-index:100}
+.cap-in{max-width:900px;text-align:center;background:rgba(11,11,11,0.86);color:#fff;font-weight:700;font-size:60px;line-height:1.32;padding:14px 26px;border-radius:8px;border:2px solid rgba(255,255,255,0.18)}
+.cap .w{border-radius:6px;padding:0 6px;margin:0 -6px}
+/* teléfono */
+.phone{position:absolute;background:#fff;border:14px solid #0b0b0b;border-radius:64px;overflow:hidden}
+.notch{position:absolute;top:10px;left:50%;width:120px;height:30px;margin-left:-60px;background:#0b0b0b;border-radius:9999px}
+.scr{position:absolute;inset:0;padding:64px 26px 0}
+.row{display:flex;align-items:center;justify-content:space-between}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="15" data-width="1080" data-height="1920" data-fps="30">
+<section id="sc-hook" class="clip scene paper" data-start="0" data-duration="2.92" data-track-index="1" style="z-index:10">
+  <div class="inner" id="sc-hook-inner"><div class="bgfill"></div><div class="margin"></div>
+    <div class="box" style="left:90px;top:250px;transform:scale(1)"><div id="sc-hook-shake" class="abs" style="inset:0">
+        <div id="sc-hook-q1" class="abs" style="left:0;right:0;top:40px;font-weight:900;font-size:132px;line-height:1.05;letter-spacing:-0.04em;color:#3a3935;text-align:center"><span id="hook-s1a-w0" style="border-radius:10px;padding:0 10px;margin:0 -4px">¿Cuánto</span> <span id="hook-s1a-w1" style="border-radius:10px;padding:0 10px;margin:0 -4px">vendiste</span> <span id="hook-s1a-w2" style="border-radius:10px;padding:0 10px;margin:0 -4px">hoy?</span></div>
+        <div id="sc-hook-q2" class="abs" style="left:0;right:0;top:500px;font-weight:900;font-size:132px;line-height:1.05;letter-spacing:-0.04em;color:#0b0b0b;text-align:center"><span id="hook-s1b-w0" style="border-radius:10px;padding:0 10px;margin:0 -4px">¿Y</span> <span id="hook-s1b-w1" style="border-radius:10px;padding:0 10px;margin:0 -4px">cuánto</span> <span id="hook-s1b-w2" style="border-radius:10px;padding:0 10px;margin:0 -4px">te</span> <span id="hook-s1b-w3" style="border-radius:10px;padding:0 10px;margin:0 -4px">deben?</span></div>
+      </div></div>
+  </div>
+</section>
+<section id="sc-sell" class="clip scene light" data-start="2.9" data-duration="2.72" data-track-index="2" style="z-index:11">
+  <div class="inner" id="sc-sell-inner"><div class="bgfill"></div>
+    <div class="box" style="left:90px;top:250px;transform:scale(1)"><div class="abs h1" style="left:0;right:0;top:0;text-align:center"><span id="sc-sell-h0" style="display:inline-block">Escanea.</span> <span id="sc-sell-h1" style="display:inline-block;color:#256abf">Cobra.</span> <span id="sc-sell-h2" style="display:inline-block;color:#1a7f37">Listo.</span></div>
+      <div class="phone" style="left:40px;top:120px;width:660px;height:870px"><div class="notch"></div>
+        <div class="scr">
+          <div class="row" style="margin-bottom:22px"><div style="font-size:42px;font-weight:600">Vender</div><div class="pill" style="background:#e8f1fc;color:#256abf;font-size:26px;padding:6px 18px">Centro</div></div>
+          <div id="sc-sell-field" class="row" style="height:92px;border:3px solid #256abf;border-radius:8px;padding:0 22px;font-size:30px;color:#5f5e5a"><span>Escanea o busca</span>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#256abf" stroke-width="2" stroke-linecap="round"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 8v8M11 8v8M15 8v8M18 8v8"/></svg></div>
+          <div style="margin-top:14px"><div id="sc-sell-r1" class="row" style="height:112px;border-bottom:2px solid #e4e3dd">
+      <div><div style="font-size:36px;font-weight:600">Tenis blancos</div><div style="font-size:28px;color:#5f5e5a;margin-top:4px">Talla 38</div></div>
+      <div style="font-size:36px;font-weight:600">$159.900</div></div></div>
+          <div class="row" style="gap:12px;margin-top:22px"><div style="flex:1;height:72px;border:3px solid #256abf;background:#e8f1fc;color:#256abf;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:29px;font-weight:600">Efectivo</div><div style="flex:1;height:72px;border:2px solid #8a8983;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:29px;font-weight:500">Transferencia</div></div>
+        </div>
+        <div id="sc-sell-pay" class="abs row" style="left:0;right:0;bottom:0;height:170px;border-top:2px solid #e4e3dd;background:#fff;padding:0 26px">
+          <div><div style="font-size:28px;color:#5f5e5a">Total</div><div id="sc-sell-total" style="font-size:68px;font-weight:600;letter-spacing:-0.02em">$0</div></div>
+          <div id="sc-sell-btn" style="position:relative;width:230px;height:100px;background:#256abf;color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:600">Cobrar
+            <div id="sc-sell-tap" class="abs" style="left:85px;top:20px;width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,0.85);opacity:0"></div></div>
+        </div>
+        <div id="sc-sell-sold" class="abs" style="left:0;right:0;bottom:0;height:170px;background:#eaf6ec;color:#1a7f37;display:flex;align-items:center;justify-content:center;gap:16px;font-size:42px;font-weight:600;opacity:0">
+          <span id="sc-sell-sold-ck" style="display:inline-flex"><svg width="48" height="48" viewBox="0 0 24 24" style="flex:none"><circle cx="12" cy="12" r="12" fill="#1a7f37"/><path d="M6.5 12.5l3.5 3.5 7.5-8" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Vendido $159.900</div>
+      </div>
+      <div id="sc-sell-tag" class="abs" style="left:620px;top:150px;width:280px;height:200px;background:#fff;border:2px solid #e4e3dd;border-radius:8px;box-shadow:0 12px 30px rgba(0,0,0,0.14);padding:22px">
+        <div style="display:flex;gap:4px;height:100px;align-items:stretch"><div style="width:9px;background:#0b0b0b"></div><div style="width:3px;background:#0b0b0b"></div><div style="width:6px;background:#0b0b0b"></div><div style="width:3px;background:#0b0b0b"></div><div style="width:9px;background:#0b0b0b"></div><div style="width:6px;background:#0b0b0b"></div><div style="width:3px;background:#0b0b0b"></div><div style="width:3px;background:#0b0b0b"></div><div style="width:9px;background:#0b0b0b"></div><div style="width:3px;background:#0b0b0b"></div><div style="width:6px;background:#0b0b0b"></div><div style="width:9px;background:#0b0b0b"></div><div style="width:3px;background:#0b0b0b"></div><div style="width:6px;background:#0b0b0b"></div><div style="width:3px;background:#0b0b0b"></div><div style="width:9px;background:#0b0b0b"></div><div style="width:3px;background:#0b0b0b"></div><div style="width:6px;background:#0b0b0b"></div></div>
+        <div style="font-size:22px;font-weight:500;margin-top:10px;letter-spacing:0.08em">7702 0045 1938</div>
+        <div id="sc-sell-laser" class="abs" style="left:10px;right:10px;top:22px;height:4px;background:#e5322d;box-shadow:0 0 12px #e5322d;opacity:0"></div>
+      </div>
+      <div class="demo" id="sc-sell-demo">Datos de ejemplo</div></div>
+  </div>
+</section>
+<section id="sc-stock" class="clip scene light" data-start="5.32" data-duration="2.8" data-track-index="1" style="z-index:12">
+  <div class="inner" id="sc-stock-inner"><div class="bgfill"></div>
+    <div class="box" style="left:90px;top:250px;transform:scale(1)"><div id="sc-stock-h" class="abs h1" style="left:0;right:0;top:0;text-align:center">Te avisa antes de que se acabe.</div>
+      <div class="abs card" style="left:0;right:0;top:230px;overflow:hidden">
+        <div class="row" style="height:96px;padding:0 30px;border-bottom:2px solid #e4e3dd;background:#f9f9f7"><div style="font-size:32px;font-weight:600">Inventario</div><div style="font-size:26px;color:#5f5e5a">Sucursal Centro</div></div>
+        <div id="sc-stock-row0" class="row" style="height:150px;padding:0 30px;border-bottom:2px solid #e4e3dd">
+      <div><div style="font-size:38px;font-weight:600">Tenis blancos</div><div style="font-size:27px;color:#5f5e5a;margin-top:6px">Talla 38</div></div>
+      <div id="sc-stock-p0" class="pill" style="background:#efede7;color:#0b0b0b;font-size:30px"><span id="sc-stock-n0">12 und.</span></div></div><div id="sc-stock-row1" class="row" style="height:150px;padding:0 30px;border-bottom:2px solid #e4e3dd">
+      <div><div style="font-size:38px;font-weight:600">Cuaderno argollado</div><div style="font-size:27px;color:#5f5e5a;margin-top:6px">100 hojas</div></div>
+      <div id="sc-stock-p1" class="pill" style="background:#efede7;color:#0b0b0b;font-size:30px"><span id="sc-stock-n1">8 und.</span></div></div><div id="sc-stock-row2" class="row" style="height:150px;padding:0 30px;border-bottom:2px solid #e4e3dd">
+      <div><div style="font-size:38px;font-weight:600">Medias tobilleras</div><div style="font-size:27px;color:#5f5e5a;margin-top:6px">Blancas</div></div>
+      <div id="sc-stock-p2" class="pill" style="background:#efede7;color:#0b0b0b;font-size:30px"><span id="sc-stock-i2" style="display:inline-flex"><svg id="sc-stock-svg2" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#9a6700" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/></svg></span><span id="sc-stock-n2">3 und.</span></div></div><div id="sc-stock-row3" class="row" style="height:150px;padding:0 30px;border-bottom:2px solid #e4e3dd">
+      <div><div style="font-size:38px;font-weight:600">Gorra negra</div><div style="font-size:27px;color:#5f5e5a;margin-top:6px">Talla única</div></div>
+      <div id="sc-stock-p3" class="pill" style="background:#efede7;color:#0b0b0b;font-size:30px"><span id="sc-stock-i3" style="display:inline-flex"><svg id="sc-stock-svg3" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#b8312c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/></svg></span><span id="sc-stock-n3">1 und.</span></div></div>
+      </div>
+      <div class="demo" id="sc-stock-demo">Datos de ejemplo</div></div>
+  </div>
+</section>
+<section id="sc-cash" class="clip scene light" data-start="7.82" data-duration="2.6" data-track-index="2" style="z-index:13">
+  <div class="inner" id="sc-cash-inner"><div class="bgfill"></div>
+    <div class="box" style="left:90px;top:250px;transform:scale(1)"><div class="abs row" style="left:0;right:0;top:0;height:80px"><div style="font-size:40px;font-weight:600">Caja · Turno de hoy</div><div class="pill" style="background:#e8f1fc;color:#256abf;font-size:24px;padding:8px 18px">Centro</div></div>
+      <div id="sc-cash-open" class="abs card" style="left:0;right:0;top:120px;padding:26px 34px">
+        <div style="font-size:26px;font-weight:600;color:#256abf;margin-bottom:6px">Apertura</div>
+        <div class="row" style="height:90px"><span style="font-size:38px">Abrió con</span><span id="sc-cash-openv" style="font-size:52px;font-weight:600">$0</span></div></div>
+      <div id="sc-cash-close" class="abs card" style="left:0;right:0;top:380px;padding:26px 34px">
+        <div style="font-size:26px;font-weight:600;color:#256abf;margin-bottom:6px">Cierre</div>
+        <div class="row" style="height:84px;font-size:34px"><span style="color:#5f5e5a">Debía haber</span><span  style="font-weight:600">$845.000</span></div><div class="row" style="height:84px;font-size:34px"><span style="color:#5f5e5a">Contaste</span><span id="sc-cash-cnt" style="font-weight:600">$0</span></div></div>
+      <div id="sc-cash-diff" class="abs" style="left:0;right:0;top:710px;display:flex;justify-content:center">
+        <div class="pill" style="background:#eaf6ec;color:#1a7f37;font-size:50px;padding:20px 40px;gap:18px;border:3px solid #1a7f37"><svg width="60" height="60" viewBox="0 0 24 24" style="flex:none"><circle cx="12" cy="12" r="12" fill="#1a7f37"/><path d="M6.5 12.5l3.5 3.5 7.5-8" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Diferencia $0</div></div>
+      <div id="sc-cash-h" class="abs h1" style="left:0;right:0;top:850px;text-align:center;font-size:64px">La caja cuadra.</div>
+      <div class="demo" id="sc-cash-demo">Datos de ejemplo</div></div>
+  </div>
+</section>
+<section id="sc-cta" class="clip scene brand" data-start="10.12" data-duration="4.88" data-track-index="1" style="z-index:14">
+  <div class="inner" id="sc-cta-inner"><div class="bgfill"></div>
+    <div class="box" style="left:90px;top:250px;transform:scale(1)"><div class="abs" style="left:0;right:0;top:110px;display:flex;justify-content:center"><div id="sc-cta-logo" style="display:flex;align-items:center;gap:36.400000000000006px">
+  <div style="width:130px;height:130px;border-radius:28.6px;background:#fff;display:flex;align-items:center;justify-content:center;color:#256abf;font-weight:900;font-size:80.6px;letter-spacing:-0.04em">M</div>
+  <div style="font-weight:700;font-size:85.8px;letter-spacing:-0.03em;color:#fff">Manager App</div></div></div>
+      <div id="sc-cta-tag" class="abs" style="left:0;right:0;top:320px;text-align:center;color:#fff;font-weight:700;font-size:78px;line-height:1.08;letter-spacing:-0.03em">Tu negocio, en control</div>
+      <div class="abs" style="left:0;right:0;top:560px;display:flex;justify-content:center">
+        <div id="sc-cta-btn" style="height:130px;padding:0 64px;background:#fff;color:#256abf;border-radius:8px;display:flex;align-items:center;font-size:66px;font-weight:700;letter-spacing:-0.02em;box-shadow:0 14px 40px rgba(0,0,0,0.22)">Pide tu demo</div></div>
+      <div id="sc-cta-contact" class="abs" style="left:0;right:0;top:760px;text-align:center;color:#fff">
+        <div style="font-size:44px;font-weight:600">WhatsApp <span data-wa>[WHATSAPP]</span></div>
+        <div data-url style="font-size:38px;font-weight:500;margin-top:16px;opacity:0.95">managerapp-eight.vercel.app</div></div></div>
+  </div>
+</section>
+<div id="flash"></div>
+<div id="cap0" class="clip cap" data-start="2.95" data-duration="1.2" data-track-index="30"><div class="cap-in" id="cap0-in"><span id="cap0-w0" class="w">Vende</span> <span id="cap0-w1" class="w">escaneando</span> <span id="cap0-w2" class="w">el</span></div></div>
+<div id="cap1" class="clip cap" data-start="4.17" data-duration="0.658" data-track-index="30"><div class="cap-in" id="cap1-in"><span id="cap1-w0" class="w">código.</span></div></div>
+<div id="cap2" class="clip cap" data-start="5.65" data-duration="1.31" data-track-index="30"><div class="cap-in" id="cap2-in"><span id="cap2-w0" class="w">Mira</span> <span id="cap2-w1" class="w">tu</span> <span id="cap2-w2" class="w">inventario</span> <span id="cap2-w3" class="w">al</span></div></div>
+<div id="cap3" class="clip cap" data-start="6.98" data-duration="0.757" data-track-index="30"><div class="cap-in" id="cap3-in"><span id="cap3-w0" class="w">instante.</span></div></div>
+<div id="cap4" class="clip cap" data-start="8.15" data-duration="1.832" data-track-index="30"><div class="cap-in" id="cap4-in"><span id="cap4-w0" class="w">Y</span> <span id="cap4-w1" class="w">sabe</span> <span id="cap4-w2" class="w">si</span> <span id="cap4-w3" class="w">tu</span> <span id="cap4-w4" class="w">caja</span> <span id="cap4-w5" class="w">cuadra.</span></div></div>
+<div id="cap5" class="clip cap" data-start="10.55" data-duration="1.443" data-track-index="30"><div class="cap-in" id="cap5-in"><span id="cap5-w0" class="w">Manager</span> <span id="cap5-w1" class="w">App:</span> <span id="cap5-w2" class="w">tu</span> <span id="cap5-w3" class="w">negocio,</span></div></div>
+<div id="cap6" class="clip cap" data-start="12.013" data-duration="0.767" data-track-index="30"><div class="cap-in" id="cap6-in"><span id="cap6-w0" class="w">en</span> <span id="cap6-w1" class="w">control.</span></div></div>
+<div id="cap7" class="clip cap" data-start="12.8" data-duration="1.434" data-track-index="30"><div class="cap-in" id="cap7-in"><span id="cap7-w0" class="w">Pide</span> <span id="cap7-w1" class="w">tu</span> <span id="cap7-w2" class="w">demo</span> <span id="cap7-w3" class="w">hoy.</span></div></div>
+<audio id="vo-s1a" src="assets/audio/vo_s1a.wav" data-start="0.1" data-duration="1.268" data-track-index="20" data-volume="1"></audio>
+<audio id="vo-s1b" src="assets/audio/vo_s1b.wav" data-start="1.5" data-duration="1.152" data-track-index="20" data-volume="1"></audio>
+<audio id="vo-k4" src="assets/audio/vo_k4.wav" data-start="3" data-duration="1.578" data-track-index="20" data-volume="1"></audio>
+<audio id="vo-k5" src="assets/audio/vo_k5.wav" data-start="5.7" data-duration="1.787" data-track-index="20" data-volume="1"></audio>
+<audio id="vo-k6" src="assets/audio/vo_k6.wav" data-start="8.2" data-duration="1.532" data-track-index="20" data-volume="1"></audio>
+<audio id="vo-s8a" src="assets/audio/vo_s8a.wav" data-start="10.6" data-duration="1.978" data-track-index="20" data-volume="1"></audio>
+<audio id="vo-s8b" src="assets/audio/vo_s8b.wav" data-start="12.85" data-duration="1.134" data-track-index="20" data-volume="1"></audio>
+<audio id="sfx" src="assets/audio/sfx_v15.wav" data-start="0" data-duration="15" data-track-index="21" data-volume="1"></audio>
+<audio id="music" src="assets/audio/music_v15.wav" data-start="0" data-duration="15" data-track-index="22" data-volume="1"></audio>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+const vars = (window.__hyperframes && window.__hyperframes.getVariables) ? window.__hyperframes.getVariables() : {};
+if (vars.whatsapp) document.querySelectorAll("[data-wa]").forEach((el) => (el.textContent = vars.whatsapp));
+if (vars.url) document.querySelectorAll("[data-url]").forEach((el) => (el.textContent = vars.url));
+const fmt = (n) => "$" + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+const STATE = {"count":[["#sc-sell-total",3.38,0.45,0,159900],["#sc-cash-openv",8.25,0.5,0,200000],["#sc-cash-cnt",9.074,0.45,0,845000]],"text":[["#sc-stock-n2",5.6,"3 und."],["#sc-stock-n2",6.475,"Quedan 2"],["#sc-stock-n3",5.6,"1 und."],["#sc-stock-n3",7.225,"Agotado"]],"hi":[["#hook-s1a-w0",0.1,0.562,"#ffe27a"],["#hook-s1a-w1",0.542,1.123,"#ffe27a"],["#hook-s1a-w2",1.103,1.388,"#ffe27a"],["#hook-s1b-w0",1.5,1.664,"#ffe27a"],["#hook-s1b-w1",1.644,2.096,"#ffe27a"],["#hook-s1b-w2",2.076,2.298,"#ffe27a"],["#hook-s1b-w3",2.278,2.672,"#ffe27a"],["#cap0-w0",3,3.354,"#256abf"],["#cap0-w1",3.354,3.979,"#256abf"],["#cap0-w2",3.979,5.17,"#256abf"],["#cap1-w0",4.17,5.828,"#256abf"],["#cap2-w0",5.7,5.993,"#256abf"],["#cap2-w1",5.993,6.18,"#256abf"],["#cap2-w2",6.18,6.794,"#256abf"],["#cap2-w3",6.794,7.98,"#256abf"],["#cap3-w0",6.98,8.737,"#256abf"],["#cap4-w0",8.2,8.337,"#256abf"],["#cap4-w1",8.337,8.638,"#256abf"],["#cap4-w2",8.638,8.829,"#256abf"],["#cap4-w3",8.829,9.021,"#256abf"],["#cap4-w4",9.021,9.322,"#256abf"],["#cap4-w5",9.322,10.982,"#256abf"],["#cap5-w0",10.6,11,"#256abf"],["#cap5-w1",11,11.33,"#256abf"],["#cap5-w2",11.33,11.495,"#256abf"],["#cap5-w3",11.495,13.013,"#256abf"],["#cap6-w0",12.013,12.178,"#256abf"],["#cap6-w1",12.178,13.828,"#256abf"],["#cap7-w0",12.85,13.178,"#256abf"],["#cap7-w1",13.178,13.387,"#256abf"],["#cap7-w2",13.387,13.715,"#256abf"],["#cap7-w3",13.715,15.234,"#256abf"]]};
+const $ = (s) => document.querySelector(s);
+function applyState(t) {
+  const cnt = {};
+  for (const [sel, t0, d, a, b] of STATE.count) {
+    if (!(sel in cnt)) cnt[sel] = a;
+    if (t >= t0) { const p = Math.min(1, (t - t0) / d); cnt[sel] = a + (b - a) * (1 - Math.pow(1 - p, 2)); }
+  }
+  for (const sel in cnt) $(sel).textContent = fmt(cnt[sel]);
+  const txt = {};
+  for (const [sel, t0, v] of STATE.text) { if (!(sel in txt) || t >= t0) txt[sel] = v; }
+  for (const sel in txt) $(sel).textContent = txt[sel];
+  for (const [sel, t0, t1, color] of STATE.hi) $(sel).style.backgroundColor = t >= t0 && t < t1 ? color : "transparent";
+}
+tl.fromTo("#sc-hook-q1", {"scale":1.6,"opacity":0.85,"rotation":-6}, {"scale":1,"opacity":1,"rotation":-3,"duration":0.42,"ease":"back.out(1.6)","immediateRender":true}, 0);
+tl.fromTo("#sc-hook-q1", {"y":0,"opacity":1,"scale":1}, {"y":-40,"opacity":0.18,"scale":0.86,"duration":0.3,"ease":"power3.in","immediateRender":false}, 1.32);
+tl.fromTo("#sc-hook-q2", {"scale":2.4,"opacity":0,"rotation":5}, {"scale":1,"opacity":1,"rotation":2,"duration":0.42,"ease":"back.out(1.6)","immediateRender":true}, 1.42);
+tl.fromTo("#sc-hook-shake", {"x":0}, {"x":0,"keyframes":{"x":[0,-14,12,-8,6,0]},"duration":0.3,"ease":"none","immediateRender":true}, 1.5);
+tl.fromTo("#sc-sell-tag", {"x":420,"rotation":20}, {"x":0,"rotation":6,"duration":0.35,"ease":"power3.out","immediateRender":true}, 2.92);
+tl.fromTo("#sc-sell-laser", {"y":0,"opacity":1}, {"y":120,"opacity":1,"duration":0.3,"ease":"power1.inOut","immediateRender":true}, 3);
+tl.fromTo("#sc-sell-tag", {"scale":1,"opacity":1,"x":0,"y":0}, {"scale":0.3,"opacity":0,"x":-360,"y":180,"duration":0.3,"ease":"power3.in","immediateRender":false}, 3.35);
+tl.fromTo("#sc-sell-field", {"boxShadow":"0 0 0 0px rgba(26,127,55,0)"}, {"boxShadow":"0 0 0 10px rgba(26,127,55,0.35)","duration":0.12,"yoyo":true,"repeat":1,"immediateRender":true}, 3.3);
+tl.fromTo("#sc-sell-r1", {"opacity":0,"y":-30}, {"opacity":1,"y":0,"duration":0.3,"ease":"back.out(1.6)","immediateRender":true}, 3.38);
+tl.fromTo("#sc-sell-h0", {"opacity":0,"y":30}, {"opacity":1,"y":0,"duration":0.25,"ease":"power3.out","immediateRender":true}, 3.3);
+tl.fromTo("#sc-sell-h1", {"opacity":0,"y":30}, {"opacity":1,"y":0,"duration":0.25,"ease":"power3.out","immediateRender":true}, 4.6);
+tl.fromTo("#sc-sell-h2", {"opacity":0,"y":30}, {"opacity":1,"y":0,"duration":0.25,"ease":"power3.out","immediateRender":true}, 4.82);
+tl.fromTo("#sc-sell-tap", {"scale":0.2,"opacity":0}, {"scale":0.2,"opacity":0,"duration":0.01,"immediateRender":true}, 2.9);
+tl.fromTo("#sc-sell-tap", {"scale":0.2,"opacity":0.9}, {"scale":2.2,"opacity":0,"duration":0.45,"ease":"power2.out","immediateRender":false}, 4.6);
+tl.fromTo("#sc-sell-btn", {"scale":1}, {"scale":0.92,"duration":0.08,"yoyo":true,"repeat":1,"ease":"power1.inOut","immediateRender":true}, 4.6);
+tl.fromTo("#sc-sell-pay", {"opacity":1}, {"opacity":0,"duration":0.15,"immediateRender":true}, 4.82);
+tl.fromTo("#sc-sell-sold", {"opacity":0,"y":40}, {"opacity":1,"y":0,"duration":0.3,"ease":"back.out(1.5)","immediateRender":true}, 4.82);
+tl.fromTo("#sc-sell-sold-ck", {"scale":0}, {"scale":1,"duration":0.35,"ease":"back.out(3)","immediateRender":true}, 4.87);
+tl.fromTo("#flash", {"opacity":0}, {"opacity":1,"duration":0.08,"ease":"power1.in","immediateRender":true}, 2.82);
+tl.fromTo("#flash", {"opacity":1}, {"opacity":0,"duration":0.55,"ease":"power2.out","immediateRender":false}, 2.9);
+tl.fromTo("#sc-sell-inner", {"scale":1.08}, {"scale":1,"duration":0.6,"ease":"power3.out","immediateRender":true}, 2.9);
+tl.fromTo("#sc-sell-inner", {"x":0,"skewX":0}, {"x":-378,"skewX":4,"duration":0.30000000000000004,"ease":"power3.in","immediateRender":false}, 5.32);
+tl.fromTo("#sc-stock-h", {"opacity":0,"y":30}, {"opacity":1,"y":0,"duration":0.35,"ease":"power3.out","immediateRender":true}, 5.7);
+tl.fromTo("#sc-stock-row0", {"opacity":0,"x":60}, {"opacity":1,"x":0,"duration":0.35,"ease":"power3.out","immediateRender":true}, 5.75);
+tl.fromTo("#sc-stock-row1", {"opacity":0,"x":60}, {"opacity":1,"x":0,"duration":0.35,"ease":"power3.out","immediateRender":true}, 5.83);
+tl.fromTo("#sc-stock-row2", {"opacity":0,"x":60}, {"opacity":1,"x":0,"duration":0.35,"ease":"power3.out","immediateRender":true}, 5.91);
+tl.fromTo("#sc-stock-row3", {"opacity":0,"x":60}, {"opacity":1,"x":0,"duration":0.35,"ease":"power3.out","immediateRender":true}, 5.99);
+tl.fromTo("#sc-stock-p2", {"backgroundColor":"#efede7","color":"#0b0b0b","scale":1}, {"backgroundColor":"#fff6db","color":"#9a6700","scale":1.12,"duration":0.25,"ease":"back.out(2)","immediateRender":true}, 6.475);
+tl.fromTo("#sc-stock-row2", {"backgroundColor":"rgba(255,246,219,0)"}, {"backgroundColor":"#fff6db","duration":0.3,"immediateRender":false}, 6.475);
+tl.fromTo("#sc-stock-i2", {"scale":0}, {"scale":1,"duration":0.3,"ease":"back.out(3)","immediateRender":true}, 6.475);
+tl.fromTo("#sc-stock-p3", {"backgroundColor":"#efede7","color":"#0b0b0b","scale":1}, {"backgroundColor":"#fdecea","color":"#b8312c","scale":1.12,"duration":0.25,"ease":"back.out(2)","immediateRender":true}, 7.225);
+tl.fromTo("#sc-stock-row3", {"backgroundColor":"rgba(253,236,234,0)"}, {"backgroundColor":"#fdecea","duration":0.3,"immediateRender":false}, 7.225);
+tl.fromTo("#sc-stock-i3", {"scale":0}, {"scale":1,"duration":0.3,"ease":"back.out(3)","immediateRender":true}, 7.225);
+tl.fromTo("#sc-stock-inner", {"x":1080,"skewX":-6}, {"x":0,"skewX":0,"duration":0.38,"ease":"power3.out","immediateRender":true}, 5.32);
+tl.fromTo("#sc-stock-inner", {"x":0,"skewX":0}, {"x":-378,"skewX":4,"duration":0.30000000000000004,"ease":"power3.in","immediateRender":false}, 7.82);
+tl.fromTo("#sc-cash-h", {"opacity":0,"y":30}, {"opacity":1,"y":0,"duration":0.3,"ease":"power3.out","immediateRender":true}, 9.664);
+tl.fromTo("#sc-cash-open", {"opacity":0,"y":40}, {"opacity":1,"y":0,"duration":0.35,"ease":"power3.out","immediateRender":true}, 8.2);
+tl.fromTo("#sc-cash-close", {"opacity":0,"y":40}, {"opacity":1,"y":0,"duration":0.35,"ease":"power3.out","immediateRender":true}, 8.974);
+tl.fromTo("#sc-cash-diff", {"opacity":0,"scale":0.6}, {"opacity":1,"scale":1,"duration":0.4,"ease":"back.out(2.2)","immediateRender":true}, 9.664);
+tl.fromTo("#sc-cash-inner", {"x":1080,"skewX":-6}, {"x":0,"skewX":0,"duration":0.38,"ease":"power3.out","immediateRender":true}, 7.82);
+tl.fromTo("#sc-cash-inner", {"x":0,"skewX":0}, {"x":-378,"skewX":4,"duration":0.30000000000000004,"ease":"power3.in","immediateRender":false}, 10.12);
+tl.fromTo("#sc-cta-logo", {"scale":0.4,"opacity":0}, {"scale":1,"opacity":1,"duration":0.55,"ease":"back.out(1.7)","immediateRender":true}, 10.45);
+tl.fromTo("#sc-cta-tag", {"y":40,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"power3.out","immediateRender":true}, 10.9);
+tl.fromTo("#sc-cta-btn", {"y":60,"opacity":0,"scale":1}, {"y":0,"opacity":1,"scale":1,"duration":0.45,"ease":"back.out(1.6)","immediateRender":true}, 11.6);
+tl.fromTo("#sc-cta-btn", {"scale":1}, {"scale":1.05,"duration":0.45,"yoyo":true,"repeat":5,"ease":"sine.inOut","immediateRender":false}, 12.15);
+tl.fromTo("#sc-cta-contact", {"y":30,"opacity":0}, {"y":0,"opacity":1,"duration":0.4,"ease":"power3.out","immediateRender":true}, 12);
+tl.fromTo("#sc-cta-inner", {"x":1080,"skewX":-6}, {"x":0,"skewX":0,"duration":0.38,"ease":"power3.out","immediateRender":true}, 10.12);
+tl.fromTo("#cap0-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 2.95);
+tl.fromTo("#cap1-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 4.17);
+tl.fromTo("#cap2-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 5.65);
+tl.fromTo("#cap3-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 6.98);
+tl.fromTo("#cap4-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 8.15);
+tl.fromTo("#cap5-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 10.55);
+tl.fromTo("#cap6-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 12.013);
+tl.fromTo("#cap7-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 12.8);
+tl.to({}, { duration: 15 }, 0);
+tl.eventCallback("onUpdate", () => applyState(tl.time()));
+applyState(0);
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

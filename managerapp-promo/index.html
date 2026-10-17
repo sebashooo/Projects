@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="es" data-resolution="portrait" data-composition-variables='[
+  {"id":"whatsapp","type":"string","label":"WhatsApp","default":"[WHATSAPP]"},
+  {"id":"url","type":"string","label":"URL","default":"managerapp-eight.vercel.app"}
+]'>
+<!-- Generado por tools/build.mjs — edita allí (WhatsApp y URL al inicio de ese archivo) y vuelve a correr: node tools/build.mjs -->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="assets/js/gsap.min.js"></script>
+<style>
+@font-face{font-family:"Geist";src:url("assets/fonts/Geist-Regular.woff2") format("woff2");font-weight:400;font-style:normal;}@font-face{font-family:"Geist";src:url("assets/fonts/Geist-Medium.woff2") format("woff2");font-weight:500;font-style:normal;}@font-face{font-family:"Geist";src:url("assets/fonts/Geist-SemiBold.woff2") format("woff2");font-weight:600;font-style:normal;}@font-face{font-family:"Geist";src:url("assets/fonts/Geist-Bold.woff2") format("woff2");font-weight:700;font-style:normal;}@font-face{font-family:"Geist";src:url("assets/fonts/Geist-Black.woff2") format("woff2");font-weight:900;font-style:normal;}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#ebe7de}
+#root{position:relative;width:100%;height:100%;overflow:hidden;font-family:"Geist",sans-serif;color:#0b0b0b;font-variant-numeric:tabular-nums;background:#ebe7de}
+.scene{position:absolute;inset:0;overflow:hidden}
+.inner{position:absolute;inset:0}
+.bgfill{position:absolute;inset:0}
+.paper .bgfill{background-color:#ebe7de;background-image:repeating-linear-gradient(180deg,transparent 0 62px,#cfd5dc 62px 64px)}
+.paper .margin{position:absolute;top:0;bottom:0;left:64px;width:3px;background:#e2a5a0}
+.brand .bgfill{background:#256abf}
+.light .bgfill{background:#f9f9f7}
+.dark .bgfill{background:#0d0d0d}
+.box{position:absolute;width:900px;height:1000px;transform-origin:0 0}
+.abs{position:absolute}
+.h1{font-weight:700;font-size:68px;line-height:1.08;letter-spacing:-0.02em}
+.demo{position:absolute;z-index:50;right:0;bottom:-8px;font-size:24px;font-weight:500;color:#5f5e5a;padding:4px 10px;border-radius:9999px;background:rgba(255,255,255,0.75)}
+.dark .demo{color:#b4b3ab;background:rgba(26,26,25,0.85)}
+.brand .demo{color:#ffffff;background:rgba(0,0,0,0.18)}
+.card{background:#ffffff;border:2px solid #e4e3dd;border-radius:8px}
+.pill{display:inline-flex;align-items:center;gap:10px;border-radius:9999px;font-weight:600;padding:10px 22px;font-size:28px}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;z-index:90;pointer-events:none}
+.cap{position:absolute;left:90px;width:900px;top:1300px;display:flex;justify-content:center;z-index:100}
+.cap-in{max-width:900px;text-align:center;background:rgba(11,11,11,0.86);color:#fff;font-weight:700;font-size:60px;line-height:1.32;padding:14px 26px;border-radius:8px;border:2px solid rgba(255,255,255,0.18)}
+.cap .w{border-radius:6px;padding:0 6px;margin:0 -6px}
+/* teléfono */
+.phone{position:absolute;background:#fff;border:14px solid #0b0b0b;border-radius:64px;overflow:hidden}
+.notch{position:absolute;top:10px;left:50%;width:120px;height:30px;margin-left:-60px;background:#0b0b0b;border-radius:9999px}
+.scr{position:absolute;inset:0;padding:64px 26px 0}
+.row{display:flex;align-items:center;justify-content:space-between}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="30" data-width="1080" data-height="1920" data-fps="30">
+<section id="sc-hook" class="clip scene paper" data-start="0" data-duration="2.92" data-track-index="1" style="z-index:10">
+  <div class="inner" id="sc-hook-inner"><div class="bgfill"></div><div class="margin"></div>
+    <div class="box" style="left:90px;top:250px;transform:scale(1)"><div id="sc-hook-shake" class="abs" style="inset:0">
+        <div id="sc-hook-q1" class="abs" style="left:0;right:0;top:40px;font-weight:900;font-size:132px;line-height:1.05;letter-spacing:-0.04em;color:#3a3935;text-align:center"><span id="hook-s1a-w0" style="border-radius:10px;padding:0 10px;margin:0 -4px">¿Cuánto</span> <span id="hook-s1a-w1" style="border-radius:10px;padding:0 10px;margin:0 -4px">vendiste</span> <span id="hook-s1a-w2" style="border-radius:10px;padding:0 10px;margin:0 -4px">hoy?</span></div>
+        <div id="sc-hook-q2" class="abs" style="left:0;right:0;top:500px;font-weight:900;font-size:132px;line-height:1.05;letter-spacing:-0.04em;color:#0b0b0b;text-align:center"><span id="hook-s1b-w0" style="border-radius:10px;padding:0 10px;margin:0 -4px">¿Y</span> <span id="hook-s1b-w1" style="border-radius:10px;padding:0 10px;margin:0 -4px">cuánto</span> <span id="hook-s1b-w2" style="border-radius:10px;padding:0 10px;margin:0 -4px">te</span> <span id="hook-s1b-w3" style="border-radius:10px;padding:0 10px;margin:0 -4px">deben?</span></div>
+      </div></div>
+  </div>
+</section>
+<section id="sc-chaos" class="clip scene paper" data-start="2.62" data-duration="6.4" data-track-index="2" style="z-index:11">
+  <div class="inner" id="sc-chaos-inner"><div class="bgfill"></div><div class="margin"></div>
+    <div class="box" style="left:90px;top:250px;transform:scale(1)"><div id="sc-chaos-shake" class="abs" style="inset:0">
+      <div id="sc-chaos-nbwrap" class="abs" style="inset:0">
+        <div id="sc-chaos-nb" class="abs" style="left:30px;top:60px;width:640px;height:560px;background:#fffef9;border-radius:6px;box-shadow:0 10px 30px rgba(0,0,0,0.12);padding:40px 44px;color:#3a3935">
+          <div style="font-size:52px;font-weight:700;border-bottom:3px solid #3a3935;padding-bottom:10px;margin-bottom:24px">Fiados</div>
+          <div class="row" style="font-size:40px;font-weight:500;margin:18px 0"><span>Doña Rosa</span><span>$45.000</span></div>
+          <div class="row" style="font-size:40px;font-weight:500;margin:18px 0"><span>Don Carlos</span><span>$38.500</span></div>
+          <div class="row" style="font-size:40px;font-weight:500;margin:18px 0;position:relative"><span>Total</span><span>$93.500</span>
+            <div id="sc-chaos-strike" class="abs" style="left:-10px;right:-10px;top:24px;height:7px;background:#b8312c;border-radius:4px;transform-origin:0 50%"></div></div>
+          <div id="sc-chaos-wrong" class="abs" style="right:40px;bottom:40px;font-size:64px;font-weight:900;color:#b8312c">¿$83.500?</div>
+        </div>
+        <div id="sc-chaos-calc" class="abs" style="left:560px;top:420px;width:300px;height:420px;background:#3b3a36;border-radius:24px;padding:24px">
+          <div id="sc-chaos-calcd" style="height:96px;background:#c8d2b8;border-radius:8px;font-size:58px;font-weight:600;color:#2b2b28;text-align:right;padding:14px 18px">83.500</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px"><div style="height:58px;background:#5a5953;border-radius:10px"></div><div style="height:58px;background:#5a5953;border-radius:10px"></div><div style="height:58px;background:#5a5953;border-radius:10px"></div><div style="height:58px;background:#5a5953;border-radius:10px"></div><div style="height:58px;background:#5a5953;border-radius:10px"></div><div style="height:58px;background:#5a5953;border-radius:10px"></div><div style="height:58px;background:#5a5953;border-radius:10px"></div><div style="height:58px;background:#5a5953;border-radius:10px"></div><div style="height:58px;background:#5a5953;border-radius:10px"></div><div style="height:58px;background:#5a5953;border-radius:10px"></div><div style="height:58px;background:#5a5953;border-radius:10px"></div><div style="height:58px;background:#5a5953;border-radius:10px"></div></div>
+        </div>
+      </div>
+      <div id="sc-chaos-pwrap" class="abs" style="inset:0">
+        <div id="sc-chaos-pa" class="abs" style="left:80px;top:620px;width:520px;height:330px;background:#f7e08a;box-shadow:0 10px 24px rgba(0,0,0,0.15);padding:34px;font-size:50px;font-weight:700;line-height:1.15;color:#3a3935">Medias blancas: ¿Quedan 2… o 0?</div>
+        <div id="sc-chaos-pb" class="abs" style="left:520px;top:120px;width:340px;height:260px;background:#f7c3d0;box-shadow:0 10px 24px rgba(0,0,0,0.15);padding:30px;font-size:44px;font-weight:700;line-height:1.15;color:#3a3935">¿Pedir tenis talla 38?</div>
+      </div>
+      <div id="sc-chaos-r0" class="abs" style="left:40px;top:80px;width:230px;height:300px;background:#fffdf7;border-radius:4px;box-shadow:0 6px 18px rgba(0,0,0,0.12);padding:22px">
+      <div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:90%"></div><div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:70%"></div><div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:80%"></div><div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:55%"></div><div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:85%"></div><div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:60%"></div></div><div id="sc-chaos-r1" class="abs" style="left:620px;top:140px;width:230px;height:300px;background:#fffdf7;border-radius:4px;box-shadow:0 6px 18px rgba(0,0,0,0.12);padding:22px">
+      <div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:70%"></div><div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:80%"></div><div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:55%"></div><div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:85%"></div><div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:60%"></div><div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:90%"></div></div><div id="sc-chaos-r2" class="abs" style="left:90px;top:560px;width:230px;height:300px;background:#fffdf7;border-radius:4px;box-shadow:0 6px 18px rgba(0,0,0,0.12);padding:22px">
+      <div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:80%"></div><div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:55%"></div><div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:85%"></div><div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:60%"></div><div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:90%"></div><div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:70%"></div></div><div id="sc-chaos-r3" class="abs" style="left:600px;top:600px;width:230px;height:300px;background:#fffdf7;border-radius:4px;box-shadow:0 6px 18px rgba(0,0,0,0.12);padding:22px">
+      <div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:55%"></div><div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:85%"></div><div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:60%"></div><div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:90%"></div><div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:70%"></div><div style="height:10px;margin:12px 0;background:#d9d4c7;border-radius:3px;width:80%"></div></div>
+      <div id="sc-chaos-falta" class="abs" style="left:20px;right:20px;top:330px;background:#b8312c;color:#fff;font-weight:900;font-size:84px;line-height:1.05;letter-spacing:-0.02em;padding:34px 36px;border-radius:8px;text-align:center;box-shadow:0 14px 40px rgba(0,0,0,0.25)">Faltan $20.000 en la caja</div>
+      </div>
+      <div class="demo" id="sc-chaos-demo">Datos de ejemplo</div></div>
+  </div>
+</section>
+<section id="sc-turn" class="clip scene brand" data-start="9" data-duration="2.92" data-track-index="1" style="z-index:12">
+  <div class="inner" id="sc-turn-inner"><div class="bgfill"></div>
+    <div class="box" style="left:90px;top:250px;transform:scale(1)"><div class="abs" style="left:0;right:0;top:120px;display:flex;justify-content:center"><div id="sc-turn-logo" style="display:flex;align-items:center;gap:33.6px">
+  <div style="width:120px;height:120px;border-radius:26.4px;background:#fff;display:flex;align-items:center;justify-content:center;color:#256abf;font-weight:900;font-size:74.4px;letter-spacing:-0.04em">M</div>
+  <div style="font-weight:700;font-size:79.2px;letter-spacing:-0.03em;color:#fff">Manager App</div></div></div>
+      <div id="sc-turn-tag" class="abs" style="left:0;right:0;top:330px;text-align:center;color:#fff;font-weight:700;font-size:80px;line-height:1.08;letter-spacing:-0.03em">Tu negocio en tu celular</div>
+      <div id="sc-turn-ph" class="abs" style="left:300px;top:540px;width:300px;height:440px;border:12px solid #fff;border-radius:48px;background:rgba(255,255,255,0.12)">
+        <div style="position:absolute;top:14px;left:50%;width:100px;height:24px;margin-left:-50px;background:#fff;border-radius:9999px"></div>
+        <div style="position:absolute;left:40px;right:40px;top:90px;height:70px;border:5px solid #fff;border-radius:8px"></div>
+        <div style="position:absolute;left:40px;right:40px;top:190px;height:22px;background:rgba(255,255,255,0.5);border-radius:6px"></div>
+        <div style="position:absolute;left:40px;right:120px;top:232px;height:22px;background:rgba(255,255,255,0.5);border-radius:6px"></div>
+      </div></div>
+  </div>
+</section>
+<section id="sc-sell" class="clip scene light" data-start="11.62" data-duration="3.7" data-track-index="2" style="z-index:13">
+  <div class="inner" id="sc-sell-inner"><div class="bgfill"></div>
+    <div class="box" style="left:90px;top:250px;transform:scale(1)"><div class="abs h1" style="left:0;right:0;top:0;text-align:center"><span id="sc-sell-h0" style="display:inline-block">Escanea.</span> <span id="sc-sell-h1" style="display:inline-block;color:#256abf">Cobra.</span> <span id="sc-sell-h2" style="display:inline-block;color:#1a7f37">Listo.</span></div>
+      <div class="phone" style="left:40px;top:120px;width:660px;height:870px"><div class="notch"></div>
+        <div class="scr">
+          <div class="row" style="margin-bottom:22px"><div style="font-size:42px;font-weight:600">Vender</div><div class="pill" style="background:#e8f1fc;color:#256abf;font-size:26px;padding:6px 18px">Centro</div></div>
+          <div id="sc-sell-field" class="row" style="height:92px;border:3px solid #256abf;border-radius:8px;padding:0 22px;font-size:30px;color:#5f5e5a"><span>Escanea o busca</span>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#256abf" stroke-width="2" stroke-linecap="round"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 8v8M11 8v8M15 8v8M18 8v8"/></svg></div>
+          <div style="margin-top:14px"><div id="sc-sell-r1" class="row" style="height:112px;border-bottom:2px solid #e4e3dd">
+      <div><div style="font-size:36px;font-weight:600">Tenis blancos</div><div style="font-size:28px;color:#5f5e5a;margin-top:4px">Talla 38</div></div>
+      <div style="font-size:36px;font-weight:600">$159.900</div></div><div id="sc-sell-r2" class="row" style="height:112px;border-bottom:2px solid #e4e3dd">
+      <div><div style="font-size:36px;font-weight:600">Medias tobilleras</div><div style="font-size:28px;color:#5f5e5a;margin-top:4px">Blancas · x2</div></div>
+      <div style="font-size:36px;font-weight:600">$24.000</div></div></div>
+          <div class="row" style="gap:12px;margin-top:22px"><div style="flex:1;height:72px;border:3px solid #256abf;background:#e8f1fc;color:#256abf;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:29px;font-weight:600">Efectivo</div><div style="flex:1;height:72px;border:2px solid #8a8983;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:29px;font-weight:500">Transferencia</div></div>
+        </div>
+        <div id="sc-sell-pay" class="abs row" style="left:0;right:0;bottom:0;height:170px;border-top:2px solid #e4e3dd;background:#fff;padding:0 26px">
+          <div><div style="font-size:28px;color:#5f5e5a">Total</div><div id="sc-sell-total" style="font-size:68px;font-weight:600;letter-spacing:-0.02em">$0</div></div>
+          <div id="sc-sell-btn" style="position:relative;width:230px;height:100px;background:#256abf;color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:600">Cobrar
+            <div id="sc-sell-tap" class="abs" style="left:85px;top:20px;width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,0.85);opacity:0"></div></div>
+        </div>
+        <div id="sc-sell-sold" class="abs" style="left:0;right:0;bottom:0;height:170px;background:#eaf6ec;color:#1a7f37;display:flex;align-items:center;justify-content:center;gap:16px;font-size:42px;font-weight:600;opacity:0">
+          <span id="sc-sell-sold-ck" style="display:inline-flex"><svg width="48" height="48" viewBox="0 0 24 24" style="flex:none"><circle cx="12" cy="12" r="12" fill="#1a7f37"/><path d="M6.5 12.5l3.5 3.5 7.5-8" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Vendido $183.900</div>
+      </div>
+      <div id="sc-sell-tag" class="abs" style="left:620px;top:150px;width:280px;height:200px;background:#fff;border:2px solid #e4e3dd;border-radius:8px;box-shadow:0 12px 30px rgba(0,0,0,0.14);padding:22px">
+        <div style="display:flex;gap:4px;height:100px;align-items:stretch"><div style="width:9px;background:#0b0b0b"></div><div style="width:3px;background:#0b0b0b"></div><div style="width:6px;background:#0b0b0b"></div><div style="width:3px;background:#0b0b0b"></div><div style="width:9px;background:#0b0b0b"></div><div style="width:6px;background:#0b0b0b"></div><div style="width:3px;background:#0b0b0b"></div><div style="width:3px;background:#0b0b0b"></div><div style="width:9px;background:#0b0b0b"></div><div style="width:3px;background:#0b0b0b"></div><div style="width:6px;background:#0b0b0b"></div><div style="width:9px;background:#0b0b0b"></div><div style="width:3px;background:#0b0b0b"></div><div style="width:6px;background:#0b0b0b"></div><div style="width:3px;background:#0b0b0b"></div><div style="width:9px;background:#0b0b0b"></div><div style="width:3px;background:#0b0b0b"></div><div style="width:6px;background:#0b0b0b"></div></div>
+        <div style="font-size:22px;font-weight:500;margin-top:10px;letter-spacing:0.08em">7702 0045 1938</div>
+        <div id="sc-sell-laser" class="abs" style="left:10px;right:10px;top:22px;height:4px;background:#e5322d;box-shadow:0 0 12px #e5322d;opacity:0"></div>
+      </div>
+      <div class="demo" id="sc-sell-demo">Datos de ejemplo</div></div>
+  </div>
+</section>
+<section id="sc-stock" class="clip scene light" data-start="15.02" data-duration="4.7" data-track-index="1" style="z-index:14">
+  <div class="inner" id="sc-stock-inner"><div class="bgfill"></div>
+    <div class="box" style="left:90px;top:250px;transform:scale(1)"><div id="sc-stock-h" class="abs h1" style="left:0;right:0;top:0;text-align:center">Te avisa antes de que se acabe.</div>
+      <div class="abs card" style="left:0;right:0;top:230px;overflow:hidden">
+        <div class="row" style="height:96px;padding:0 30px;border-bottom:2px solid #e4e3dd;background:#f9f9f7"><div style="font-size:32px;font-weight:600">Inventario</div><div style="font-size:26px;color:#5f5e5a">Sucursal Centro</div></div>
+        <div id="sc-stock-row0" class="row" style="height:150px;padding:0 30px;border-bottom:2px solid #e4e3dd">
+      <div><div style="font-size:38px;font-weight:600">Tenis blancos</div><div style="font-size:27px;color:#5f5e5a;margin-top:6px">Talla 38</div></div>
+      <div id="sc-stock-p0" class="pill" style="background:#efede7;color:#0b0b0b;font-size:30px"><span id="sc-stock-n0">12 und.</span></div></div><div id="sc-stock-row1" class="row" style="height:150px;padding:0 30px;border-bottom:2px solid #e4e3dd">
+      <div><div style="font-size:38px;font-weight:600">Cuaderno argollado</div><div style="font-size:27px;color:#5f5e5a;margin-top:6px">100 hojas</div></div>
+      <div id="sc-stock-p1" class="pill" style="background:#efede7;color:#0b0b0b;font-size:30px"><span id="sc-stock-n1">8 und.</span></div></div><div id="sc-stock-row2" class="row" style="height:150px;padding:0 30px;border-bottom:2px solid #e4e3dd">
+      <div><div style="font-size:38px;font-weight:600">Medias tobilleras</div><div style="font-size:27px;color:#5f5e5a;margin-top:6px">Blancas</div></div>
+      <div id="sc-stock-p2" class="pill" style="background:#efede7;color:#0b0b0b;font-size:30px"><span id="sc-stock-i2" style="display:inline-flex"><svg id="sc-stock-svg2" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#9a6700" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/></svg></span><span id="sc-stock-n2">3 und.</span></div></div><div id="sc-stock-row3" class="row" style="height:150px;padding:0 30px;border-bottom:2px solid #e4e3dd">
+      <div><div style="font-size:38px;font-weight:600">Gorra negra</div><div style="font-size:27px;color:#5f5e5a;margin-top:6px">Talla única</div></div>
+      <div id="sc-stock-p3" class="pill" style="background:#efede7;color:#0b0b0b;font-size:30px"><span id="sc-stock-i3" style="display:inline-flex"><svg id="sc-stock-svg3" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#b8312c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/></svg></span><span id="sc-stock-n3">1 und.</span></div></div>
+      </div>
+      <div class="demo" id="sc-stock-demo">Datos de ejemplo</div></div>
+  </div>
+</section>
+<section id="sc-cash" class="clip scene light" data-start="19.42" data-duration="2.9" data-track-index="2" style="z-index:15">
+  <div class="inner" id="sc-cash-inner"><div class="bgfill"></div>
+    <div class="box" style="left:90px;top:250px;transform:scale(1)"><div class="abs row" style="left:0;right:0;top:0;height:80px"><div style="font-size:40px;font-weight:600">Caja · Turno de hoy</div><div class="pill" style="background:#e8f1fc;color:#256abf;font-size:24px;padding:8px 18px">Centro</div></div>
+      <div id="sc-cash-open" class="abs card" style="left:0;right:0;top:120px;padding:26px 34px">
+        <div style="font-size:26px;font-weight:600;color:#256abf;margin-bottom:6px">Apertura</div>
+        <div class="row" style="height:90px"><span style="font-size:38px">Abrió con</span><span id="sc-cash-openv" style="font-size:52px;font-weight:600">$0</span></div></div>
+      <div id="sc-cash-close" class="abs card" style="left:0;right:0;top:380px;padding:26px 34px">
+        <div style="font-size:26px;font-weight:600;color:#256abf;margin-bottom:6px">Cierre</div>
+        <div class="row" style="height:84px;font-size:34px"><span style="color:#5f5e5a">Debía haber</span><span  style="font-weight:600">$845.000</span></div><div class="row" style="height:84px;font-size:34px"><span style="color:#5f5e5a">Contaste</span><span id="sc-cash-cnt" style="font-weight:600">$0</span></div></div>
+      <div id="sc-cash-diff" class="abs" style="left:0;right:0;top:710px;display:flex;justify-content:center">
+        <div class="pill" style="background:#eaf6ec;color:#1a7f37;font-size:50px;padding:20px 40px;gap:18px;border:3px solid #1a7f37"><svg width="60" height="60" viewBox="0 0 24 24" style="flex:none"><circle cx="12" cy="12" r="12" fill="#1a7f37"/><path d="M6.5 12.5l3.5 3.5 7.5-8" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Diferencia $0</div></div>
+      <div id="sc-cash-h" class="abs h1" style="left:0;right:0;top:850px;text-align:center;font-size:64px">La caja cuadra.</div>
+      <div class="demo" id="sc-cash-demo">Datos de ejemplo</div></div>
+  </div>
+</section>
+<section id="sc-control" class="clip scene dark" data-start="22.02" data-duration="3.8" data-track-index="1" style="z-index:16">
+  <div class="inner" id="sc-control-inner"><div class="bgfill"></div>
+    <div class="box" style="left:90px;top:250px;transform:scale(1)"><div class="abs h1" style="left:0;right:0;top:0;text-align:center;color:#f5f5f4;font-size:60px"><span id="sc-control-ha" style="display:inline-block">Quién te debe.</span> <span id="sc-control-hb" style="display:inline-block">Cuánto ganas.</span> <span id="sc-control-hc" style="display:inline-block;color:#3987e5">En cada sucursal.</span></div>
+      <div class="abs" style="left:0;right:0;top:170px;display:flex;gap:16px;justify-content:center">
+        <div id="sc-control-chipC" class="pill" style="background:#3987e5;color:#0b0b0b;border:2px solid #3987e5">Centro</div>
+        <div id="sc-control-chipN" class="pill" style="background:#1a1a19;color:#f5f5f4;border:2px solid #3987e5">Norte</div></div>
+      <div id="sc-control-debt" class="abs" style="left:0;right:0;top:270px;background:#1a1a19;border:2px solid #2c2c2a;border-radius:8px;padding:28px 34px;color:#f5f5f4">
+        <div style="font-size:30px;color:#b4b3ab">Te deben (fiado)</div>
+        <div class="row" style="margin-top:8px"><span id="sc-control-debtv" style="font-size:66px;font-weight:600;letter-spacing:-0.02em">$0</span><span class="pill" style="background:#12243d;color:#86b6ef;font-size:28px">4 clientes</span></div></div>
+      <div id="sc-control-sales" class="abs" style="left:0;right:0;top:520px;height:440px;background:#1a1a19;border:2px solid #2c2c2a;border-radius:8px;padding:28px 34px;color:#f5f5f4">
+        <div id="sc-control-suc" style="font-size:30px;color:#b4b3ab">Ventas de hoy · Centro</div>
+        <div id="sc-control-salesv" style="font-size:62px;font-weight:600;letter-spacing:-0.02em;margin-top:6px">$0</div>
+        <div class="abs" style="left:34px;right:34px;bottom:28px;height:200px;display:flex;gap:18px;align-items:flex-end;border-bottom:2px solid #2c2c2a">
+          <div id="sc-control-bar0" style="flex:1;height:200px;background:#3987e5;border-radius:6px 6px 0 0;transform-origin:50% 100%"></div><div id="sc-control-bar1" style="flex:1;height:200px;background:#3987e5;border-radius:6px 6px 0 0;transform-origin:50% 100%"></div><div id="sc-control-bar2" style="flex:1;height:200px;background:#3987e5;border-radius:6px 6px 0 0;transform-origin:50% 100%"></div><div id="sc-control-bar3" style="flex:1;height:200px;background:#3987e5;border-radius:6px 6px 0 0;transform-origin:50% 100%"></div><div id="sc-control-bar4" style="flex:1;height:200px;background:#3987e5;border-radius:6px 6px 0 0;transform-origin:50% 100%"></div><div id="sc-control-bar5" style="flex:1;height:200px;background:#3987e5;border-radius:6px 6px 0 0;transform-origin:50% 100%"></div><div id="sc-control-bar6" style="flex:1;height:200px;background:#3987e5;border-radius:6px 6px 0 0;transform-origin:50% 100%"></div><div id="sc-control-bar7" style="flex:1;height:200px;background:#3987e5;border-radius:6px 6px 0 0;transform-origin:50% 100%"></div></div></div>
+      <div class="demo" id="sc-control-demo">Datos de ejemplo</div></div>
+  </div>
+</section>
+<section id="sc-cta" class="clip scene brand" data-start="25.52" data-duration="4.48" data-track-index="2" style="z-index:17">
+  <div class="inner" id="sc-cta-inner"><div class="bgfill"></div>
+    <div class="box" style="left:90px;top:250px;transform:scale(1)"><div class="abs" style="left:0;right:0;top:110px;display:flex;justify-content:center"><div id="sc-cta-logo" style="display:flex;align-items:center;gap:36.400000000000006px">
+  <div style="width:130px;height:130px;border-radius:28.6px;background:#fff;display:flex;align-items:center;justify-content:center;color:#256abf;font-weight:900;font-size:80.6px;letter-spacing:-0.04em">M</div>
+  <div style="font-weight:700;font-size:85.8px;letter-spacing:-0.03em;color:#fff">Manager App</div></div></div>
+      <div id="sc-cta-tag" class="abs" style="left:0;right:0;top:320px;text-align:center;color:#fff;font-weight:700;font-size:78px;line-height:1.08;letter-spacing:-0.03em">Tu negocio, en control</div>
+      <div class="abs" style="left:0;right:0;top:560px;display:flex;justify-content:center">
+        <div id="sc-cta-btn" style="height:130px;padding:0 64px;background:#fff;color:#256abf;border-radius:8px;display:flex;align-items:center;font-size:66px;font-weight:700;letter-spacing:-0.02em;box-shadow:0 14px 40px rgba(0,0,0,0.22)">Pide tu demo</div></div>
+      <div id="sc-cta-contact" class="abs" style="left:0;right:0;top:760px;text-align:center;color:#fff">
+        <div style="font-size:44px;font-weight:600">WhatsApp <span data-wa>[WHATSAPP]</span></div>
+        <div data-url style="font-size:38px;font-weight:500;margin-top:16px;opacity:0.95">managerapp-eight.vercel.app</div></div></div>
+  </div>
+</section>
+<div id="flash"></div>
+<div id="cap0" class="clip cap" data-start="2.9" data-duration="1.402" data-track-index="30"><div class="cap-in" id="cap0-in"><span id="cap0-w0" class="w">Si</span> <span id="cap0-w1" class="w">todavía</span> <span id="cap0-w2" class="w">lo</span> <span id="cap0-w3" class="w">llevas</span> <span id="cap0-w4" class="w">en</span> <span id="cap0-w5" class="w">un</span></div></div>
+<div id="cap1" class="clip cap" data-start="4.322" data-duration="1.352" data-track-index="30"><div class="cap-in" id="cap1-in"><span id="cap1-w0" class="w">cuaderno,</span> <span id="cap1-w1" class="w">algo</span> <span id="cap1-w2" class="w">se</span> <span id="cap1-w3" class="w">te</span> <span id="cap1-w4" class="w">está</span></div></div>
+<div id="cap2" class="clip cap" data-start="5.694" data-duration="0.586" data-track-index="30"><div class="cap-in" id="cap2-in"><span id="cap2-w0" class="w">escapando:</span></div></div>
+<div id="cap3" class="clip cap" data-start="6.3" data-duration="1.574" data-track-index="30"><div class="cap-in" id="cap3-in"><span id="cap3-w0" class="w">el</span> <span id="cap3-w1" class="w">inventario</span> <span id="cap3-w2" class="w">no</span> <span id="cap3-w3" class="w">cuadra</span> <span id="cap3-w4" class="w">y</span></div></div>
+<div id="cap4" class="clip cap" data-start="7.894" data-duration="1.236" data-track-index="30"><div class="cap-in" id="cap4-in"><span id="cap4-w0" class="w">la</span> <span id="cap4-w1" class="w">caja</span> <span id="cap4-w2" class="w">nunca</span> <span id="cap4-w3" class="w">da.</span></div></div>
+<div id="cap5" class="clip cap" data-start="9.15" data-duration="1.124" data-track-index="30"><div class="cap-in" id="cap5-in"><span id="cap5-w0" class="w">Con</span> <span id="cap5-w1" class="w">Manager</span> <span id="cap5-w2" class="w">App,</span> <span id="cap5-w3" class="w">tu</span></div></div>
+<div id="cap6" class="clip cap" data-start="10.294" data-duration="1.004" data-track-index="30"><div class="cap-in" id="cap6-in"><span id="cap6-w0" class="w">negocio</span> <span id="cap6-w1" class="w">queda</span> <span id="cap6-w2" class="w">en</span> <span id="cap6-w3" class="w">tu</span></div></div>
+<div id="cap7" class="clip cap" data-start="11.318" data-duration="0.646" data-track-index="30"><div class="cap-in" id="cap7-in"><span id="cap7-w0" class="w">celular.</span></div></div>
+<div id="cap8" class="clip cap" data-start="12" data-duration="1.077" data-track-index="30"><div class="cap-in" id="cap8-in"><span id="cap8-w0" class="w">Vende</span> <span id="cap8-w1" class="w">escaneando</span> <span id="cap8-w2" class="w">el</span></div></div>
+<div id="cap9" class="clip cap" data-start="13.097" data-duration="1.371" data-track-index="30"><div class="cap-in" id="cap9-in"><span id="cap9-w0" class="w">código,</span> <span id="cap9-w1" class="w">en</span> <span id="cap9-w2" class="w">segundos.</span></div></div>
+<div id="cap10" class="clip cap" data-start="15.35" data-duration="1.259" data-track-index="30"><div class="cap-in" id="cap10-in"><span id="cap10-w0" class="w">Mira</span> <span id="cap10-w1" class="w">tu</span> <span id="cap10-w2" class="w">inventario</span> <span id="cap10-w3" class="w">al</span></div></div>
+<div id="cap11" class="clip cap" data-start="16.629" data-duration="1.414" data-track-index="30"><div class="cap-in" id="cap11-in"><span id="cap11-w0" class="w">instante</span> <span id="cap11-w1" class="w">y</span> <span id="cap11-w2" class="w">entérate</span> <span id="cap11-w3" class="w">antes</span></div></div>
+<div id="cap12" class="clip cap" data-start="18.063" data-duration="1.633" data-track-index="30"><div class="cap-in" id="cap12-in"><span id="cap12-w0" class="w">de</span> <span id="cap12-w1" class="w">quedarte</span> <span id="cap12-w2" class="w">sin</span> <span id="cap12-w3" class="w">producto.</span></div></div>
+<div id="cap13" class="clip cap" data-start="19.75" data-duration="1.462" data-track-index="30"><div class="cap-in" id="cap13-in"><span id="cap13-w0" class="w">Abre</span> <span id="cap13-w1" class="w">y</span> <span id="cap13-w2" class="w">cierra</span> <span id="cap13-w3" class="w">tu</span> <span id="cap13-w4" class="w">caja,</span> <span id="cap13-w5" class="w">y</span></div></div>
+<div id="cap14" class="clip cap" data-start="21.232" data-duration="1.051" data-track-index="30"><div class="cap-in" id="cap14-in"><span id="cap14-w0" class="w">sabe</span> <span id="cap14-w1" class="w">si</span> <span id="cap14-w2" class="w">cuadra.</span></div></div>
+<div id="cap15" class="clip cap" data-start="22.35" data-duration="1.547" data-track-index="30"><div class="cap-in" id="cap15-in"><span id="cap15-w0" class="w">Sabe</span> <span id="cap15-w1" class="w">quién</span> <span id="cap15-w2" class="w">te</span> <span id="cap15-w3" class="w">debe,</span> <span id="cap15-w4" class="w">cuánto</span></div></div>
+<div id="cap16" class="clip cap" data-start="23.917" data-duration="1.277" data-track-index="30"><div class="cap-in" id="cap16-in"><span id="cap16-w0" class="w">vendiste</span> <span id="cap16-w1" class="w">y</span> <span id="cap16-w2" class="w">cómo</span> <span id="cap16-w3" class="w">va</span> <span id="cap16-w4" class="w">cada</span></div></div>
+<div id="cap17" class="clip cap" data-start="25.213" data-duration="0.715" data-track-index="30"><div class="cap-in" id="cap17-in"><span id="cap17-w0" class="w">sucursal.</span></div></div>
+<div id="cap18" class="clip cap" data-start="25.95" data-duration="1.443" data-track-index="30"><div class="cap-in" id="cap18-in"><span id="cap18-w0" class="w">Manager</span> <span id="cap18-w1" class="w">App:</span> <span id="cap18-w2" class="w">tu</span> <span id="cap18-w3" class="w">negocio,</span></div></div>
+<div id="cap19" class="clip cap" data-start="27.413" data-duration="0.767" data-track-index="30"><div class="cap-in" id="cap19-in"><span id="cap19-w0" class="w">en</span> <span id="cap19-w1" class="w">control.</span></div></div>
+<div id="cap20" class="clip cap" data-start="28.2" data-duration="1.434" data-track-index="30"><div class="cap-in" id="cap20-in"><span id="cap20-w0" class="w">Pide</span> <span id="cap20-w1" class="w">tu</span> <span id="cap20-w2" class="w">demo</span> <span id="cap20-w3" class="w">hoy.</span></div></div>
+<audio id="vo-s1a" src="assets/audio/vo_s1a.wav" data-start="0.1" data-duration="1.268" data-track-index="20" data-volume="1"></audio>
+<audio id="vo-s1b" src="assets/audio/vo_s1b.wav" data-start="1.5" data-duration="1.152" data-track-index="20" data-volume="1"></audio>
+<audio id="vo-s2a" src="assets/audio/vo_s2a.wav" data-start="2.95" data-duration="3.338" data-track-index="20" data-volume="1"></audio>
+<audio id="vo-s2b" src="assets/audio/vo_s2b.wav" data-start="6.35" data-duration="2.574" data-track-index="20" data-volume="1"></audio>
+<audio id="vo-s3" src="assets/audio/vo_s3.wav" data-start="9.2" data-duration="2.514" data-track-index="20" data-volume="1"></audio>
+<audio id="vo-s4" src="assets/audio/vo_s4.wav" data-start="12.05" data-duration="2.168" data-track-index="20" data-volume="1"></audio>
+<audio id="vo-s5" src="assets/audio/vo_s5.wav" data-start="15.4" data-duration="4.046" data-track-index="20" data-volume="1"></audio>
+<audio id="vo-s6" src="assets/audio/vo_s6.wav" data-start="19.8" data-duration="2.233" data-track-index="20" data-volume="1"></audio>
+<audio id="vo-s7" src="assets/audio/vo_s7.wav" data-start="22.4" data-duration="3.278" data-track-index="20" data-volume="1"></audio>
+<audio id="vo-s8a" src="assets/audio/vo_s8a.wav" data-start="26" data-duration="1.978" data-track-index="20" data-volume="1"></audio>
+<audio id="vo-s8b" src="assets/audio/vo_s8b.wav" data-start="28.25" data-duration="1.134" data-track-index="20" data-volume="1"></audio>
+<audio id="sfx" src="assets/audio/sfx_v30.wav" data-start="0" data-duration="30" data-track-index="21" data-volume="1"></audio>
+<audio id="music" src="assets/audio/music_v30.wav" data-start="0" data-duration="30" data-track-index="22" data-volume="1"></audio>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+const vars = (window.__hyperframes && window.__hyperframes.getVariables) ? window.__hyperframes.getVariables() : {};
+if (vars.whatsapp) document.querySelectorAll("[data-wa]").forEach((el) => (el.textContent = vars.whatsapp));
+if (vars.url) document.querySelectorAll("[data-url]").forEach((el) => (el.textContent = vars.url));
+const fmt = (n) => "$" + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+const STATE = {"count":[["#sc-sell-total",12.38,0.45,0,159900],["#sc-sell-total",13.15,0.35,159900,183900],["#sc-cash-openv",19.85,0.5,0,200000],["#sc-cash-cnt",20.788,0.45,0,845000],["#sc-control-debtv",22.5,0.55,0,350000],["#sc-control-salesv",22.7,0.8,0,1245000],["#sc-control-salesv",24.47,0.45,1245000,980000]],"text":[["#sc-stock-n2",15.3,"3 und."],["#sc-stock-n2",16.6,"Quedan 2"],["#sc-stock-n3",15.3,"1 und."],["#sc-stock-n3",17.6,"Agotado"],["#sc-control-suc",22.3,"Ventas de hoy · Centro"],["#sc-control-suc",24.47,"Ventas de hoy · Norte"]],"hi":[["#hook-s1a-w0",0.1,0.562,"#ffe27a"],["#hook-s1a-w1",0.542,1.123,"#ffe27a"],["#hook-s1a-w2",1.103,1.388,"#ffe27a"],["#hook-s1b-w0",1.5,1.664,"#ffe27a"],["#hook-s1b-w1",1.644,2.096,"#ffe27a"],["#hook-s1b-w2",2.076,2.298,"#ffe27a"],["#hook-s1b-w3",2.278,2.672,"#ffe27a"],["#cap0-w0",2.95,3.11,"#256abf"],["#cap0-w1",3.11,3.499,"#256abf"],["#cap0-w2",3.499,3.659,"#256abf"],["#cap0-w3",3.659,4.002,"#256abf"],["#cap0-w4",4.002,4.162,"#256abf"],["#cap0-w5",4.162,5.322,"#256abf"],["#cap1-w0",4.322,4.87,"#256abf"],["#cap1-w1",4.87,5.122,"#256abf"],["#cap1-w2",5.122,5.282,"#256abf"],["#cap1-w3",5.282,5.442,"#256abf"],["#cap1-w4",5.442,6.694,"#256abf"],["#cap2-w0",5.694,7.538,"#256abf"],["#cap3-w0",6.35,6.54,"#256abf"],["#cap3-w1",6.54,7.163,"#256abf"],["#cap3-w2",7.163,7.353,"#256abf"],["#cap3-w3",7.353,7.759,"#256abf"],["#cap3-w4",7.759,8.894,"#256abf"],["#cap4-w0",7.894,8.084,"#256abf"],["#cap4-w1",8.084,8.382,"#256abf"],["#cap4-w2",8.382,8.734,"#256abf"],["#cap4-w3",8.734,10.174,"#256abf"],["#cap5-w0",9.2,9.409,"#256abf"],["#cap5-w1",9.409,9.805,"#256abf"],["#cap5-w2",9.805,10.131,"#256abf"],["#cap5-w3",10.131,11.294,"#256abf"],["#cap6-w0",10.294,10.69,"#256abf"],["#cap6-w1",10.69,10.992,"#256abf"],["#cap6-w2",10.992,11.155,"#256abf"],["#cap6-w3",11.155,12.318,"#256abf"],["#cap7-w0",11.318,12.964,"#256abf"],["#cap8-w0",12.05,12.367,"#256abf"],["#cap8-w1",12.367,12.927,"#256abf"],["#cap8-w2",12.927,14.097,"#256abf"],["#cap9-w0",13.097,13.585,"#256abf"],["#cap9-w1",13.585,13.755,"#256abf"],["#cap9-w2",13.755,15.468,"#256abf"],["#cap10-w0",15.4,15.682,"#256abf"],["#cap10-w1",15.682,15.861,"#256abf"],["#cap10-w2",15.861,16.45,"#256abf"],["#cap10-w3",16.45,17.629,"#256abf"],["#cap11-w0",16.629,17.116,"#256abf"],["#cap11-w1",17.116,17.244,"#256abf"],["#cap11-w2",17.244,17.73,"#256abf"],["#cap11-w3",17.73,19.063,"#256abf"],["#cap12-w0",18.063,18.242,"#256abf"],["#cap12-w1",18.242,18.729,"#256abf"],["#cap12-w2",18.729,18.959,"#256abf"],["#cap12-w3",18.959,20.696,"#256abf"],["#cap13-w0",19.8,20.067,"#256abf"],["#cap13-w1",20.067,20.188,"#256abf"],["#cap13-w2",20.188,20.552,"#256abf"],["#cap13-w3",20.552,20.722,"#256abf"],["#cap13-w4",20.722,21.111,"#256abf"],["#cap13-w5",21.111,22.232,"#256abf"],["#cap14-w0",21.232,21.499,"#256abf"],["#cap14-w1",21.499,21.669,"#256abf"],["#cap14-w2",21.669,23.283,"#256abf"],["#cap15-w0",22.4,22.669,"#256abf"],["#cap15-w1",22.669,22.987,"#256abf"],["#cap15-w2",22.987,23.158,"#256abf"],["#cap15-w3",23.158,23.55,"#256abf"],["#cap15-w4",23.55,24.917,"#256abf"],["#cap16-w0",23.917,24.381,"#256abf"],["#cap16-w1",24.381,24.504,"#256abf"],["#cap16-w2",24.504,24.773,"#256abf"],["#cap16-w3",24.773,24.944,"#256abf"],["#cap16-w4",24.944,26.213,"#256abf"],["#cap17-w0",25.213,26.928,"#256abf"],["#cap18-w0",26,26.4,"#256abf"],["#cap18-w1",26.4,26.73,"#256abf"],["#cap18-w2",26.73,26.895,"#256abf"],["#cap18-w3",26.895,28.413,"#256abf"],["#cap19-w0",27.413,27.578,"#256abf"],["#cap19-w1",27.578,29.228,"#256abf"],["#cap20-w0",28.25,28.578,"#256abf"],["#cap20-w1",28.578,28.787,"#256abf"],["#cap20-w2",28.787,29.115,"#256abf"],["#cap20-w3",29.115,30.634,"#256abf"]]};
+const $ = (s) => document.querySelector(s);
+function applyState(t) {
+  const cnt = {};
+  for (const [sel, t0, d, a, b] of STATE.count) {
+    if (!(sel in cnt)) cnt[sel] = a;
+    if (t >= t0) { const p = Math.min(1, (t - t0) / d); cnt[sel] = a + (b - a) * (1 - Math.pow(1 - p, 2)); }
+  }
+  for (const sel in cnt) $(sel).textContent = fmt(cnt[sel]);
+  const txt = {};
+  for (const [sel, t0, v] of STATE.text) { if (!(sel in txt) || t >= t0) txt[sel] = v; }
+  for (const sel in txt) $(sel).textContent = txt[sel];
+  for (const [sel, t0, t1, color] of STATE.hi) $(sel).style.backgroundColor = t >= t0 && t < t1 ? color : "transparent";
+}
+tl.fromTo("#sc-hook-q1", {"scale":1.6,"opacity":0.85,"rotation":-6}, {"scale":1,"opacity":1,"rotation":-3,"duration":0.42,"ease":"back.out(1.6)","immediateRender":true}, 0);
+tl.fromTo("#sc-hook-q1", {"y":0,"opacity":1,"scale":1}, {"y":-40,"opacity":0.18,"scale":0.86,"duration":0.3,"ease":"power3.in","immediateRender":false}, 1.32);
+tl.fromTo("#sc-hook-q2", {"scale":2.4,"opacity":0,"rotation":5}, {"scale":1,"opacity":1,"rotation":2,"duration":0.42,"ease":"back.out(1.6)","immediateRender":true}, 1.42);
+tl.fromTo("#sc-hook-shake", {"x":0}, {"x":0,"keyframes":{"x":[0,-14,12,-8,6,0]},"duration":0.3,"ease":"none","immediateRender":true}, 1.5);
+tl.fromTo("#sc-hook-inner", {"x":0,"skewX":0}, {"x":-378,"skewX":4,"duration":0.30000000000000004,"ease":"power3.in","immediateRender":true}, 2.62);
+tl.fromTo("#sc-chaos-nb", {"y":900,"rotation":8}, {"y":0,"rotation":-4,"duration":0.5,"ease":"power3.out","immediateRender":true}, 2.95);
+tl.fromTo("#sc-chaos-calc", {"x":500,"rotation":30}, {"x":0,"rotation":9,"duration":0.5,"ease":"back.out(1.2)","immediateRender":true}, 3.35);
+tl.fromTo("#sc-chaos-strike", {"scaleX":0}, {"scaleX":1,"duration":0.25,"ease":"power2.out","immediateRender":true}, 3.85);
+tl.fromTo("#sc-chaos-wrong", {"scale":0,"rotation":-20}, {"scale":1,"rotation":-8,"duration":0.3,"ease":"back.out(2)","immediateRender":true}, 4.05);
+tl.fromTo("#sc-chaos-calcd", {"opacity":1}, {"opacity":0.25,"duration":0.08,"repeat":5,"yoyo":true,"ease":"none","immediateRender":true}, 4);
+tl.fromTo("#sc-chaos-pa", {"scale":2.2,"opacity":0,"rotation":-14}, {"scale":1,"opacity":1,"rotation":-5,"duration":0.36,"ease":"back.out(1.4)","immediateRender":true}, 4.65);
+tl.fromTo("#sc-chaos-pb", {"scale":2.2,"opacity":0,"rotation":16}, {"scale":1,"opacity":1,"rotation":7,"duration":0.36,"ease":"back.out(1.4)","immediateRender":true}, 5.25);
+tl.fromTo("#sc-chaos-nbwrap", {"x":0,"rotation":0,"opacity":1}, {"x":-1100,"rotation":-25,"opacity":0,"duration":0.35,"ease":"power3.in","immediateRender":true}, 4.53);
+tl.fromTo("#sc-chaos-r0", {"x":-500,"y":-200,"rotation":-60,"opacity":0}, {"x":0,"y":0,"opacity":1,"rotation":-14,"duration":0.55,"ease":"power3.out","immediateRender":true}, 6.35);
+tl.fromTo("#sc-chaos-r1", {"x":1000,"y":100,"rotation":-20,"opacity":0}, {"x":0,"y":0,"opacity":1,"rotation":11,"duration":0.55,"ease":"power3.out","immediateRender":true}, 6.47);
+tl.fromTo("#sc-chaos-r2", {"x":-500,"y":700,"rotation":20,"opacity":0}, {"x":0,"y":0,"opacity":1,"rotation":-6,"duration":0.55,"ease":"power3.out","immediateRender":true}, 6.59);
+tl.fromTo("#sc-chaos-r3", {"x":1000,"y":900,"rotation":60,"opacity":0}, {"x":0,"y":0,"opacity":1,"rotation":18,"duration":0.55,"ease":"power3.out","immediateRender":true}, 6.71);
+tl.fromTo("#sc-chaos-falta", {"scale":2.6,"opacity":0,"rotation":-12}, {"scale":1,"opacity":1,"rotation":-4,"duration":0.4,"ease":"back.out(1.5)","immediateRender":true}, 7.05);
+tl.fromTo("#sc-chaos-shake", {"x":0,"y":0}, {"x":0,"y":0,"keyframes":{"x":[0,-16,14,-10,8,-4,0],"y":[0,8,-6,4,-2,0,0]},"duration":0.4,"ease":"none","immediateRender":true}, 7.13);
+tl.fromTo("#sc-chaos-pwrap", {"x":0,"rotation":0,"opacity":1}, {"x":1100,"rotation":25,"opacity":0,"duration":0.35,"ease":"power3.in","immediateRender":true}, 6.23);
+tl.fromTo("#sc-chaos-inner", {"x":1080,"skewX":-6}, {"x":0,"skewX":0,"duration":0.38,"ease":"power3.out","immediateRender":true}, 2.62);
+tl.fromTo("#sc-turn-logo", {"scale":0.3,"opacity":0}, {"scale":1,"opacity":1,"duration":0.6,"ease":"back.out(1.7)","immediateRender":true}, 9.15);
+tl.fromTo("#sc-turn-tag", {"y":60,"opacity":0}, {"y":0,"opacity":1,"duration":0.5,"ease":"power3.out","immediateRender":true}, 9.75);
+tl.fromTo("#sc-turn-ph", {"y":700}, {"y":0,"duration":0.8,"ease":"power3.out","immediateRender":true}, 10.2);
+tl.fromTo("#sc-turn-ph", {"y":0}, {"y":-20,"duration":0.9,"ease":"sine.inOut","immediateRender":false}, 11);
+tl.fromTo("#flash", {"opacity":0}, {"opacity":1,"duration":0.08,"ease":"power1.in","immediateRender":true}, 8.92);
+tl.fromTo("#flash", {"opacity":1}, {"opacity":0,"duration":0.55,"ease":"power2.out","immediateRender":false}, 9);
+tl.fromTo("#sc-turn-inner", {"scale":1.08}, {"scale":1,"duration":0.6,"ease":"power3.out","immediateRender":true}, 9);
+tl.fromTo("#sc-turn-inner", {"x":0,"skewX":0}, {"x":-378,"skewX":4,"duration":0.30000000000000004,"ease":"power3.in","immediateRender":false}, 11.62);
+tl.fromTo("#sc-sell-tag", {"x":420,"rotation":20}, {"x":0,"rotation":6,"duration":0.35,"ease":"power3.out","immediateRender":true}, 11.92);
+tl.fromTo("#sc-sell-laser", {"y":0,"opacity":1}, {"y":120,"opacity":1,"duration":0.3,"ease":"power1.inOut","immediateRender":true}, 12);
+tl.fromTo("#sc-sell-tag", {"scale":1,"opacity":1,"x":0,"y":0}, {"scale":0.3,"opacity":0,"x":-360,"y":180,"duration":0.3,"ease":"power3.in","immediateRender":false}, 12.35);
+tl.fromTo("#sc-sell-field", {"boxShadow":"0 0 0 0px rgba(26,127,55,0)"}, {"boxShadow":"0 0 0 10px rgba(26,127,55,0.35)","duration":0.12,"yoyo":true,"repeat":1,"immediateRender":true}, 12.3);
+tl.fromTo("#sc-sell-r1", {"opacity":0,"y":-30}, {"opacity":1,"y":0,"duration":0.3,"ease":"back.out(1.6)","immediateRender":true}, 12.38);
+tl.fromTo("#sc-sell-r2", {"opacity":0,"y":-30}, {"opacity":1,"y":0,"duration":0.3,"ease":"back.out(1.6)","immediateRender":true}, 13.15);
+tl.fromTo("#sc-sell-field", {"boxShadow":"0 0 0 0px rgba(26,127,55,0)"}, {"boxShadow":"0 0 0 10px rgba(26,127,55,0.35)","duration":0.12,"yoyo":true,"repeat":1,"immediateRender":false}, 13.15);
+tl.fromTo("#sc-sell-h0", {"opacity":0,"y":30}, {"opacity":1,"y":0,"duration":0.25,"ease":"power3.out","immediateRender":true}, 12.3);
+tl.fromTo("#sc-sell-h1", {"opacity":0,"y":30}, {"opacity":1,"y":0,"duration":0.25,"ease":"power3.out","immediateRender":true}, 14.3);
+tl.fromTo("#sc-sell-h2", {"opacity":0,"y":30}, {"opacity":1,"y":0,"duration":0.25,"ease":"power3.out","immediateRender":true}, 14.52);
+tl.fromTo("#sc-sell-tap", {"scale":0.2,"opacity":0}, {"scale":0.2,"opacity":0,"duration":0.01,"immediateRender":true}, 11.9);
+tl.fromTo("#sc-sell-tap", {"scale":0.2,"opacity":0.9}, {"scale":2.2,"opacity":0,"duration":0.45,"ease":"power2.out","immediateRender":false}, 14.3);
+tl.fromTo("#sc-sell-btn", {"scale":1}, {"scale":0.92,"duration":0.08,"yoyo":true,"repeat":1,"ease":"power1.inOut","immediateRender":true}, 14.3);
+tl.fromTo("#sc-sell-pay", {"opacity":1}, {"opacity":0,"duration":0.15,"immediateRender":true}, 14.52);
+tl.fromTo("#sc-sell-sold", {"opacity":0,"y":40}, {"opacity":1,"y":0,"duration":0.3,"ease":"back.out(1.5)","immediateRender":true}, 14.52);
+tl.fromTo("#sc-sell-sold-ck", {"scale":0}, {"scale":1,"duration":0.35,"ease":"back.out(3)","immediateRender":true}, 14.57);
+tl.fromTo("#sc-sell-inner", {"x":1080,"skewX":-6}, {"x":0,"skewX":0,"duration":0.38,"ease":"power3.out","immediateRender":true}, 11.62);
+tl.fromTo("#sc-sell-inner", {"x":0,"skewX":0}, {"x":-378,"skewX":4,"duration":0.30000000000000004,"ease":"power3.in","immediateRender":false}, 15.02);
+tl.fromTo("#sc-stock-h", {"opacity":0,"y":30}, {"opacity":1,"y":0,"duration":0.35,"ease":"power3.out","immediateRender":true}, 15.4);
+tl.fromTo("#sc-stock-row0", {"opacity":0,"x":60}, {"opacity":1,"x":0,"duration":0.35,"ease":"power3.out","immediateRender":true}, 15.45);
+tl.fromTo("#sc-stock-row1", {"opacity":0,"x":60}, {"opacity":1,"x":0,"duration":0.35,"ease":"power3.out","immediateRender":true}, 15.53);
+tl.fromTo("#sc-stock-row2", {"opacity":0,"x":60}, {"opacity":1,"x":0,"duration":0.35,"ease":"power3.out","immediateRender":true}, 15.61);
+tl.fromTo("#sc-stock-row3", {"opacity":0,"x":60}, {"opacity":1,"x":0,"duration":0.35,"ease":"power3.out","immediateRender":true}, 15.69);
+tl.fromTo("#sc-stock-p2", {"backgroundColor":"#efede7","color":"#0b0b0b","scale":1}, {"backgroundColor":"#fff6db","color":"#9a6700","scale":1.12,"duration":0.25,"ease":"back.out(2)","immediateRender":true}, 16.6);
+tl.fromTo("#sc-stock-row2", {"backgroundColor":"rgba(255,246,219,0)"}, {"backgroundColor":"#fff6db","duration":0.3,"immediateRender":false}, 16.6);
+tl.fromTo("#sc-stock-i2", {"scale":0}, {"scale":1,"duration":0.3,"ease":"back.out(3)","immediateRender":true}, 16.6);
+tl.fromTo("#sc-stock-p3", {"backgroundColor":"#efede7","color":"#0b0b0b","scale":1}, {"backgroundColor":"#fdecea","color":"#b8312c","scale":1.12,"duration":0.25,"ease":"back.out(2)","immediateRender":true}, 17.6);
+tl.fromTo("#sc-stock-row3", {"backgroundColor":"rgba(253,236,234,0)"}, {"backgroundColor":"#fdecea","duration":0.3,"immediateRender":false}, 17.6);
+tl.fromTo("#sc-stock-i3", {"scale":0}, {"scale":1,"duration":0.3,"ease":"back.out(3)","immediateRender":true}, 17.6);
+tl.fromTo("#sc-stock-inner", {"x":1080,"skewX":-6}, {"x":0,"skewX":0,"duration":0.38,"ease":"power3.out","immediateRender":true}, 15.02);
+tl.fromTo("#sc-stock-inner", {"x":0,"skewX":0}, {"x":-378,"skewX":4,"duration":0.30000000000000004,"ease":"power3.in","immediateRender":false}, 19.42);
+tl.fromTo("#sc-cash-h", {"opacity":0,"y":30}, {"opacity":1,"y":0,"duration":0.3,"ease":"power3.out","immediateRender":true}, 21.468);
+tl.fromTo("#sc-cash-open", {"opacity":0,"y":40}, {"opacity":1,"y":0,"duration":0.35,"ease":"power3.out","immediateRender":true}, 19.8);
+tl.fromTo("#sc-cash-close", {"opacity":0,"y":40}, {"opacity":1,"y":0,"duration":0.35,"ease":"power3.out","immediateRender":true}, 20.688);
+tl.fromTo("#sc-cash-diff", {"opacity":0,"scale":0.6}, {"opacity":1,"scale":1,"duration":0.4,"ease":"back.out(2.2)","immediateRender":true}, 21.468);
+tl.fromTo("#sc-cash-inner", {"x":1080,"skewX":-6}, {"x":0,"skewX":0,"duration":0.38,"ease":"power3.out","immediateRender":true}, 19.42);
+tl.fromTo("#sc-cash-inner", {"x":0,"skewX":0}, {"x":-378,"skewX":4,"duration":0.30000000000000004,"ease":"power3.in","immediateRender":false}, 22.02);
+tl.fromTo("#sc-control-ha", {"opacity":0,"y":24}, {"opacity":1,"y":0,"duration":0.3,"ease":"power3.out","immediateRender":true}, 22.4);
+tl.fromTo("#sc-control-hb", {"opacity":0,"y":24}, {"opacity":1,"y":0,"duration":0.3,"ease":"power3.out","immediateRender":true}, 23.345);
+tl.fromTo("#sc-control-hc", {"opacity":0,"y":24}, {"opacity":1,"y":0,"duration":0.3,"ease":"power3.out","immediateRender":true}, 24.29);
+tl.fromTo("#sc-control-debt", {"opacity":0,"y":40}, {"opacity":1,"y":0,"duration":0.35,"ease":"power3.out","immediateRender":true}, 22.45);
+tl.fromTo("#sc-control-sales", {"opacity":0,"y":40}, {"opacity":1,"y":0,"duration":0.35,"ease":"power3.out","immediateRender":true}, 22.6);
+tl.fromTo("#sc-control-bar0", {"scaleY":0}, {"scaleY":0.22,"duration":0.45,"ease":"power3.out","immediateRender":true}, 22.7);
+tl.fromTo("#sc-control-bar1", {"scaleY":0}, {"scaleY":0.35,"duration":0.45,"ease":"power3.out","immediateRender":true}, 22.75);
+tl.fromTo("#sc-control-bar2", {"scaleY":0}, {"scaleY":0.3,"duration":0.45,"ease":"power3.out","immediateRender":true}, 22.8);
+tl.fromTo("#sc-control-bar3", {"scaleY":0}, {"scaleY":0.48,"duration":0.45,"ease":"power3.out","immediateRender":true}, 22.85);
+tl.fromTo("#sc-control-bar4", {"scaleY":0}, {"scaleY":0.6,"duration":0.45,"ease":"power3.out","immediateRender":true}, 22.9);
+tl.fromTo("#sc-control-bar5", {"scaleY":0}, {"scaleY":0.54,"duration":0.45,"ease":"power3.out","immediateRender":true}, 22.95);
+tl.fromTo("#sc-control-bar6", {"scaleY":0}, {"scaleY":0.72,"duration":0.45,"ease":"power3.out","immediateRender":true}, 23);
+tl.fromTo("#sc-control-bar7", {"scaleY":0}, {"scaleY":0.88,"duration":0.45,"ease":"power3.out","immediateRender":true}, 23.05);
+tl.fromTo("#sc-control-chipN", {"backgroundColor":"#1a1a19","color":"#f5f5f4"}, {"backgroundColor":"#3987e5","color":"#0b0b0b","duration":0.2,"immediateRender":true}, 24.47);
+tl.fromTo("#sc-control-chipC", {"backgroundColor":"#3987e5","color":"#0b0b0b"}, {"backgroundColor":"#1a1a19","color":"#f5f5f4","duration":0.2,"immediateRender":true}, 24.47);
+tl.fromTo("#sc-control-bar0", {"scaleY":0.22}, {"scaleY":0.18,"duration":0.4,"ease":"power3.out","immediateRender":false}, 24.47);
+tl.fromTo("#sc-control-bar1", {"scaleY":0.35}, {"scaleY":0.26,"duration":0.4,"ease":"power3.out","immediateRender":false}, 24.5);
+tl.fromTo("#sc-control-bar2", {"scaleY":0.3}, {"scaleY":0.4,"duration":0.4,"ease":"power3.out","immediateRender":false}, 24.53);
+tl.fromTo("#sc-control-bar3", {"scaleY":0.48}, {"scaleY":0.34,"duration":0.4,"ease":"power3.out","immediateRender":false}, 24.56);
+tl.fromTo("#sc-control-bar4", {"scaleY":0.6}, {"scaleY":0.46,"duration":0.4,"ease":"power3.out","immediateRender":false}, 24.59);
+tl.fromTo("#sc-control-bar5", {"scaleY":0.54}, {"scaleY":0.58,"duration":0.4,"ease":"power3.out","immediateRender":false}, 24.62);
+tl.fromTo("#sc-control-bar6", {"scaleY":0.72}, {"scaleY":0.5,"duration":0.4,"ease":"power3.out","immediateRender":false}, 24.65);
+tl.fromTo("#sc-control-bar7", {"scaleY":0.88}, {"scaleY":0.64,"duration":0.4,"ease":"power3.out","immediateRender":false}, 24.68);
+tl.fromTo("#sc-control-inner", {"x":1080,"skewX":-6}, {"x":0,"skewX":0,"duration":0.38,"ease":"power3.out","immediateRender":true}, 22.02);
+tl.fromTo("#sc-control-inner", {"x":0,"skewX":0}, {"x":-378,"skewX":4,"duration":0.30000000000000004,"ease":"power3.in","immediateRender":false}, 25.52);
+tl.fromTo("#sc-cta-logo", {"scale":0.4,"opacity":0}, {"scale":1,"opacity":1,"duration":0.55,"ease":"back.out(1.7)","immediateRender":true}, 25.85);
+tl.fromTo("#sc-cta-tag", {"y":40,"opacity":0}, {"y":0,"opacity":1,"duration":0.45,"ease":"power3.out","immediateRender":true}, 26.3);
+tl.fromTo("#sc-cta-btn", {"y":60,"opacity":0,"scale":1}, {"y":0,"opacity":1,"scale":1,"duration":0.45,"ease":"back.out(1.6)","immediateRender":true}, 27);
+tl.fromTo("#sc-cta-btn", {"scale":1}, {"scale":1.05,"duration":0.45,"yoyo":true,"repeat":4,"ease":"sine.inOut","immediateRender":false}, 27.55);
+tl.fromTo("#sc-cta-contact", {"y":30,"opacity":0}, {"y":0,"opacity":1,"duration":0.4,"ease":"power3.out","immediateRender":true}, 27.4);
+tl.fromTo("#sc-cta-inner", {"x":1080,"skewX":-6}, {"x":0,"skewX":0,"duration":0.38,"ease":"power3.out","immediateRender":true}, 25.52);
+tl.fromTo("#cap0-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 2.9);
+tl.fromTo("#cap1-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 4.322);
+tl.fromTo("#cap2-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 5.694);
+tl.fromTo("#cap3-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 6.3);
+tl.fromTo("#cap4-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 7.894);
+tl.fromTo("#cap5-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 9.15);
+tl.fromTo("#cap6-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 10.294);
+tl.fromTo("#cap7-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 11.318);
+tl.fromTo("#cap8-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 12);
+tl.fromTo("#cap9-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 13.097);
+tl.fromTo("#cap10-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 15.35);
+tl.fromTo("#cap11-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 16.629);
+tl.fromTo("#cap12-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 18.063);
+tl.fromTo("#cap13-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 19.75);
+tl.fromTo("#cap14-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 21.232);
+tl.fromTo("#cap15-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 22.35);
+tl.fromTo("#cap16-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 23.917);
+tl.fromTo("#cap17-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 25.213);
+tl.fromTo("#cap18-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 25.95);
+tl.fromTo("#cap19-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 27.413);
+tl.fromTo("#cap20-in", {"y":14,"opacity":0.4}, {"y":0,"opacity":1,"duration":0.16,"ease":"power3.out","immediateRender":true}, 28.2);
+tl.to({}, { duration: 30 }, 0);
+tl.eventCallback("onUpdate", () => applyState(tl.time()));
+applyState(0);
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

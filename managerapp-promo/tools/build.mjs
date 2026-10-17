@@ -3,7 +3,7 @@
 //                              + tools/events_<variante>.json (efectos y música para tools/audio.py)
 //
 // ── CAMBIA AQUÍ ────────────────────────────────────────────────────────────────
-const WHATSAPP = "[WHATSAPP]"; // ej. "+57 300 123 4567"
+const WHATSAPP = "+57 318 632 7164";
 const URL_SITIO = "managerapp-eight.vercel.app";
 // ───────────────────────────────────────────────────────────────────────────────
 // (También son variables de la composición: npx hyperframes render --variables '{"whatsapp":"+57 ..."}')

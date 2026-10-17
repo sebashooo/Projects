@@ -1,0 +1,36 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Sub,DejaVu Sans,44,&H00FFFFFF,&H00FFFFFF,&H50301028,&H00000000,-1,0,0,0,100,100,0,0,3,12,0,2,180,180,44,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.35,0:00:04.87,Sub,,0,0,0,,{\fad(120,120)}¿Sabían que las matemáticas pueden ayudar a proteger nuestro planeta de un asteroide?
+Dialogue: 0,0:00:04.92,0:00:07.64,Sub,,0,0,0,,{\fad(120,120)}Esa fue la idea de la misión DART de la NASA.
+Dialogue: 0,0:00:08.44,0:00:14.07,Sub,,0,0,0,,{\fad(120,120)}El 26 de septiembre de 2022, la nave DART chocó a propósito contra Dimorphos,
+Dialogue: 0,0:00:14.12,0:00:17.67,Sub,,0,0,0,,{\fad(120,120)}un pequeño asteroide que orbita a otro más grande, Didymos.
+Dialogue: 0,0:00:17.72,0:00:24.82,Sub,,0,0,0,,{\fad(120,120)}La nave pesaba 579,4 kilos e iba a 6,1449 kilómetros por segundo.
+Dialogue: 0,0:00:24.87,0:00:26.02,Sub,,0,0,0,,{\fad(120,120)}¿El resultado?
+Dialogue: 0,0:00:26.07,0:00:30.58,Sub,,0,0,0,,{\fad(120,120)}Dimorphos, que tardaba 11 horas y 55 minutos en dar una vuelta,
+Dialogue: 0,0:00:30.63,0:00:33.49,Sub,,0,0,0,,{\fad(120,120)}ahora tarda unos 32 minutos menos.
+Dialogue: 0,0:00:34.29,0:00:38.14,Sub,,0,0,0,,{\fad(120,120)}Aquí entra la derivada: mide qué tan rápido cambia una cantidad.
+Dialogue: 0,0:00:38.19,0:00:43.97,Sub,,0,0,0,,{\fad(120,120)}Si la posición es s(t) = 6144,9t + s₀,
+Dialogue: 0,0:00:44.02,0:00:50.92,Sub,,0,0,0,,{\fad(120,120)}su derivada es la velocidad: s′(t) = 6144,9 metros por segundo.
+Dialogue: 0,0:00:50.97,0:00:52.93,Sub,,0,0,0,,{\fad(120,120)}Es la pendiente de esta recta.
+Dialogue: 0,0:00:53.73,0:01:01.81,Sub,,0,0,0,,{\fad(120,120)}Con la energía cinética, E = ½mv², obtenemos E(v) = 289,7v².
+Dialogue: 0,0:01:01.86,0:01:05.16,Sub,,0,0,0,,{\fad(120,120)}Al derivar sale 579,4v;
+Dialogue: 0,0:01:05.21,0:01:11.14,Sub,,0,0,0,,{\fad(120,120)}con la velocidad real da unos 3,56 millones de julios por cada metro por segundo.
+Dialogue: 0,0:01:11.19,0:01:16.21,Sub,,0,0,0,,{\fad(120,120)}Y como la velocidad está al cuadrado, si se duplica, la energía se multiplica por cuatro.
+Dialogue: 0,0:01:17.01,0:01:19.40,Sub,,0,0,0,,{\fad(120,120)}La probabilidad mide la incertidumbre.
+Dialogue: 0,0:01:19.45,0:01:26.63,Sub,,0,0,0,,{\fad(120,120)}Con el asteroide 2024 YR4, la NASA llegó a estimar un 3,1 % de probabilidad de impacto.
+Dialogue: 0,0:01:26.68,0:01:33.25,Sub,,0,0,0,,{\fad(120,120)}Con nuevas observaciones, bajó a 0,004 %: 775 veces menos.
+Dialogue: 0,0:01:34.05,0:01:37.18,Sub,,0,0,0,,{\fad(120,120)}La probabilidad condicional usa información nueva.
+Dialogue: 0,0:01:37.23,0:01:40.78,Sub,,0,0,0,,{\fad(120,120)}De 100 trayectorias que cumplen una condición, 4 impactan:
+Dialogue: 0,0:01:40.83,0:01:44.73,Sub,,0,0,0,,{\fad(120,120)}4 entre 100, un 4 %. Es un ejemplo hipotético.
+Dialogue: 0,0:01:45.53,0:01:48.77,Sub,,0,0,0,,{\fad(120,120)}Las derivadas y la probabilidad no se quedan en clase:
+Dialogue: 0,0:01:48.82,0:01:51.03,Sub,,0,0,0,,{\fad(120,120)}ayudan a proteger nuestro planeta.

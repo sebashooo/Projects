@@ -1,0 +1,33 @@
+[
+ {"start":0,"end":7,"lines":[
+  ["¿Sabían que las matemáticas pueden ayudar a proteger nuestro planeta de un asteroide?","¿Sabían que las matemáticas pueden ayudar a proteger nuestro planeta de un asteroide?"],
+  ["Esa fue la idea de la misión DART de la NASA.","Esa fue la idea de la misión Dart, de la Nasa."]]},
+ {"start":7,"end":20,"lines":[
+  ["El 26 de septiembre de 2022, la nave DART chocó a propósito contra Dimorphos,","El veintiséis de septiembre de dos mil veintidós, la nave Dart chocó a propósito contra Dimorfos,"],
+  ["un pequeño asteroide que orbita a otro más grande, Didymos.","un pequeño asteroide que orbita a otro más grande, Dídimos."],
+  ["La nave pesaba 579,4 kilos e iba a 6,1449 kilómetros por segundo.","La nave pesaba quinientos setenta y nueve coma cuatro kilos, e iba a seis coma uno cuatro cuatro nueve kilómetros por segundo."],
+  ["¿El resultado?","¿El resultado?"],
+  ["Dimorphos, que tardaba 11 horas y 55 minutos en dar una vuelta,","Dimorfos, que tardaba once horas y cincuenta y cinco minutos en dar una vuelta,"],
+  ["ahora tarda unos 32 minutos menos.","ahora tarda unos treinta y dos minutos menos."]]},
+ {"start":20,"end":31,"lines":[
+  ["Aquí entra la derivada: mide qué tan rápido cambia una cantidad.","Aquí entra la derivada: mide qué tan rápido cambia una cantidad."],
+  ["Si la posición es s(t) = 6144,9t + s₀,","Si la posición es, ese de te, igual a seis mil ciento cuarenta y cuatro coma nueve te, más ese sub cero,"],
+  ["su derivada es la velocidad: s′(t) = 6144,9 metros por segundo.","su derivada es la velocidad: ese prima de te, igual a seis mil ciento cuarenta y cuatro coma nueve metros por segundo."],
+  ["Es la pendiente de esta recta.","Es la pendiente de esta recta."]]},
+ {"start":31,"end":42,"lines":[
+  ["Con la energía cinética, E = ½mv², obtenemos E(v) = 289,7v².","Con la energía cinética, e, igual a un medio de eme ve al cuadrado, obtenemos, e de ve, igual a doscientos ochenta y nueve coma siete ve al cuadrado."],
+  ["Al derivar sale 579,4v;","Al derivar sale quinientos setenta y nueve coma cuatro ve;"],
+  ["con la velocidad real da unos 3,56 millones de julios por cada metro por segundo.","con la velocidad real da unos tres coma cincuenta y seis millones de julios por cada metro por segundo."],
+  ["Y como la velocidad está al cuadrado, si se duplica, la energía se multiplica por cuatro.","Y como la velocidad está al cuadrado, si se duplica, la energía se multiplica por cuatro."]]},
+ {"start":42,"end":53,"lines":[
+  ["La probabilidad mide la incertidumbre.","La probabilidad mide la incertidumbre."],
+  ["Con el asteroide 2024 YR4, la NASA llegó a estimar un 3,1 % de probabilidad de impacto.","Con el asteroide dos mil veinticuatro, ye erre cuatro, la Nasa llegó a estimar un tres coma uno por ciento de probabilidad de impacto."],
+  ["Con nuevas observaciones, bajó a 0,004 %: 775 veces menos.","Con nuevas observaciones, bajó a cero coma cero cero cuatro por ciento: setecientas setenta y cinco veces menos."]]},
+ {"start":53,"end":59,"lines":[
+  ["La probabilidad condicional usa información nueva.","La probabilidad condicional usa información nueva."],
+  ["De 100 trayectorias que cumplen una condición, 4 impactan:","De cien trayectorias que cumplen una condición, cuatro impactan:"],
+  ["4 entre 100, un 4 %. Es un ejemplo hipotético.","cuatro entre cien, un cuatro por ciento. Es un ejemplo hipotético."]]},
+ {"start":59,"end":64,"lines":[
+  ["Las derivadas y la probabilidad no se quedan en clase:","Las derivadas y la probabilidad no se quedan en clase:"],
+  ["ayudan a proteger nuestro planeta.","ayudan a proteger nuestro planeta."]]}
+]

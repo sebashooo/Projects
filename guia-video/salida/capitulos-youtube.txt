@@ -1,0 +1,12 @@
+00:00 Bienvenida
+01:03 Capítulo 1 · Cómo trabajo y con qué
+03:45 Capítulo 2 · Animación y motion graphics
+07:09 Capítulo 3 · Videos con tus fotos y productos
+09:53 Capítulo 4 · Edición de video con FFmpeg
+12:55 Capítulo 5 · Subtítulos y texto en pantalla
+15:14 Capítulo 6 · Audio: voz, música y efectos
+17:49 Capítulo 7 · Explicadores, interfaces y datos
+20:31 Capítulo 8 · Producción a escala: plantillas y versiones
+22:45 Capítulo 9 · Mis límites y cómo resolverlos
+25:23 Capítulo 10 · Cómo sacarme el mejor provecho
+28:16 Capítulo 11 · Cierre

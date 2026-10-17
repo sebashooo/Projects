@@ -70,9 +70,40 @@ function wordTimes(text, t0, dur) {
   return words.map((word, i) => { const s = t0 + (acc / total) * dur; acc += w[i]; return { word, s }; });
 }
 
+// Reparte las palabras usando las pausas reales de la voz: cada pausa larga se asigna al límite de frase
+// (coma, punto…) más cercano en el tiempo estimado; dentro de cada tramo, por peso de letras.
+function wordTimesP(text, t0, dur, pauses) {
+  const est = wordTimes(text, t0, dur);
+  if (!pauses || !pauses.length) return est;
+  const n = est.length, bnd = [];
+  est.forEach((w, k) => { if (k < n - 1 && /[,;:.!?…]$/.test(w.word)) bnd.push(k); });
+  if (!bnd.length) return est;
+  const estEnd = (k) => est[k + 1].s - t0;            // tiempo estimado del límite tras la palabra k
+  const P = [...pauses].sort((a, b) => (b[1] - b[0]) - (a[1] - a[0])).slice(0, bnd.length).sort((a, b) => a[0] - b[0]);
+  const anchors = []; let j0 = 0;
+  for (const pz of P) {                               // asignación monótona al límite más cercano
+    let best = -1, bd = 1e9;
+    for (let j = j0; j < bnd.length; j++) { const d = Math.abs(estEnd(bnd[j]) - (pz[0] + pz[1]) / 2); if (d < bd) { bd = d; best = j; } }
+    if (best < 0 || bd > 1.6) continue;
+    anchors.push([bnd[best], pz[0], pz[1]]); j0 = best + 1;
+  }
+  if (!anchors.length) return est;
+  const wgt = (x) => x.replace(/[^\p{L}\p{N}]/gu, "").length + 2;
+  const out = new Array(n);
+  let from = 0, ts = 0.02;
+  [...anchors, [n - 1, dur - 0.08, dur]].forEach(([k, ps, pe]) => {
+    const ws = est.slice(from, k + 1), tot = ws.reduce((a, w) => a + wgt(w.word), 0);
+    let acc = 0;
+    ws.forEach((w, i) => { out[from + i] = { word: w.word, s: t0 + ts + ((ps - ts) * acc) / tot }; acc += wgt(w.word); });
+    from = k + 1; ts = pe;
+  });
+  return out;
+}
+
 export function build(nn) {
   const spec = JSON.parse(fs.readFileSync(`cap/${nn}/spec.json`, "utf8"));
   const VO = JSON.parse(fs.readFileSync(`tools/vo_${nn}.json`, "utf8"));
+  const PZ = fs.existsSync(`tools/pauses_${nn}.json`) ? JSON.parse(fs.readFileSync(`tools/pauses_${nn}.json`, "utf8")) : [];
   seed = 7 + spec.chapter * 101;
   const js = [], sfx = [], sections = [], media = [];
   const STATE = { count: [], type: [], text: [] };
@@ -92,7 +123,7 @@ export function build(nn) {
     const voStart = cursor + lead;
     const isLast = i === spec.beats.length - 1;
     const end = voStart + vo + (isLast ? 1.6 : 0.55);
-    const o = { ...b, i, start: cursor, end, voStart, vo, wt: wordTimes(b.narration, voStart, vo) };
+    const o = { ...b, i, start: cursor, end, voStart, vo, wt: wordTimesP(b.narration, voStart, vo, PZ[i]) };
     cursor = end;
     return o;
   });
@@ -120,12 +151,15 @@ export function build(nn) {
     let cur = [];
     for (let k = 0; k < ws.length; k++) {
       const w = ws[k];
-      if (cur.length && L([...cur, w]) > 58) {
+      if (cur.length && L([...cur, w]) > 62) {
         // cortar en la última puntuación si deja un trozo razonable; si no, aquí, sin dejar palabras débiles al final
         let cut = -1;
         for (let j = cur.length - 1; j >= 2; j--) if (/[,.;:!?…]$/.test(cur[j].word)) { cut = j; break; }
         let head = cut >= 2 ? cur.slice(0, cut + 1) : cur.slice();
         while (head.length > 3 && WEAK.has(NRM(head[head.length - 1].word))) head.pop();
+        // no dejar la última palabra de una frase sola al inicio del siguiente subtítulo
+        const rest = cur.slice(head.length);
+        if (rest.length && rest.length <= 2 && /[.!?…]$/.test(rest[rest.length - 1].word) && L(cur) <= 70) head = cur.slice();
         bg.push(head); cur = cur.slice(head.length);
       }
       cur.push(w);
@@ -133,7 +167,8 @@ export function build(nn) {
     }
     if (cur.length) bg.push(cur);
     // sin grupos de 1–2 palabras: se pegan al anterior (puede quedar en dos líneas cortas)
-    for (let j = bg.length - 1; j > 0; j--) if (bg[j].length < 3 && L([...bg[j - 1], ...bg[j]]) <= 80) { bg[j - 1] = [...bg[j - 1], ...bg[j]]; bg.splice(j, 1); }
+    const span = (g, nx) => (nx ? nx[0].s : b.voStart + b.vo) - g[0].s;
+    for (let j = bg.length - 1; j > 0; j--) if ((bg[j].length < 3 || span(bg[j], bg[j + 1]) < 1.2) && L([...bg[j - 1], ...bg[j]]) <= 80) { bg[j - 1] = [...bg[j - 1], ...bg[j]]; bg.splice(j, 1); }
     bg.forEach((g, j) => groups.push({ words: g, end: j === bg.length - 1 ? b.voStart + b.vo + 0.3 : null }));
   });
   groups.forEach((g, k) => { g.s = g.words[0].s - 0.05; g.e = g.end ?? groups[k + 1]?.words[0].s - 0.05 ?? DUR; if (groups[k + 1] && g.e > groups[k + 1].words[0].s - 0.05) g.e = groups[k + 1].words[0].s - 0.05; });
@@ -261,14 +296,19 @@ function video(ctx, src, x, y, w, h, b, opts = {}) {
   const from = opts.from ?? 0, seg = Math.max(0.5, (opts.len ?? 999) - from);
   const end = b.last ? b.e : b.end;               // hasta el final nominal del bloque
   let t = b.s + 0.25, k = 0, last = null;
+  const segs = [];
   while (t < end - 0.05) {
-    const vid = `v${vidN++}`, du = Math.min(seg, end - t);
+    let du = Math.min(seg, end - t);
+    if (end - (t + du) < 1.0 && end - (t + du) > 0) du = end - t; // el último tramo corto se absorbe (mantiene el cuadro)
+    const vid = `v${vidN++}`;
     ctx.media.push(`<video id="${vid}" src="${src}" muted playsinline data-start="${T(t)}" data-duration="${T(du)}" data-media-start="${from}" data-track-index="${5 + (vidN % 3)}" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;border-radius:${opts.radius ?? 16}px;z-index:${opts.z ?? 150};${opts.style || ""}"></video>`);
     if (k === 0) ctx.tw(`#${vid}`, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, t);
-    last = { vid, t, du }; t += du; k++;
+    last = { vid, t, du }; segs.push(last); t += du; k++;
   }
-  // fundido de salida junto con el bloque (el video vive fuera de la sección)
-  if (last && !b.last) ctx.tw(`#${last.vid}`, { opacity: 1 }, { opacity: 0, duration: 0.33, ease: "power1.in" }, Math.max(last.t + 0.05, b.end - 0.4));
+  // fundido de salida junto con el bloque: lo aplica el tramo que está en pantalla en ese momento
+  const fo = b.end - 0.4;
+  const vis = segs.find((x) => fo >= x.t && fo < x.t + x.du) || last;
+  if (vis && !b.last) ctx.tw(`#${vis.vid}`, { opacity: 1 }, { opacity: 0, duration: 0.33, ease: "power1.in" }, Math.max(vis.t + 0.05, fo));
   return last && last.vid;
 }
 const SX = 120, SY = 110; // origen de la escena en coordenadas de pantalla
@@ -292,7 +332,7 @@ const RENDER = {
   statement(id, p, b, { tw }) {
     const words = String(p.text || b.narration).split(/\s+/);
     const acc = String(p.accent || "").toLowerCase().split(/\s+/).filter(Boolean);
-    words.forEach((_, k) => tw(`#${id}-w${k}`, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, b.voStart + 0.1 + k * 0.07));
+    words.forEach((_, k) => tw(`#${id}-w${k}`, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, b.s + 0.12 + k * 0.07));
     const size = words.join(" ").length > 60 ? 76 : 96;
     return `<div class="abs" style="inset:0;display:flex;align-items:center;justify-content:center;text-align:center"><div class="h1" style="font-size:${size}px;max-width:1500px;text-wrap:balance">${words
       .map((w, k) => `<span id="${id}-w${k}" style="display:inline-block;margin:0 0.13em;color:${acc.some((a) => w.toLowerCase().replace(/[^\p{L}\p{N}]/gu, "").startsWith(a.replace(/[^\p{L}\p{N}]/gu, ""))) ? C.amber : C.text}">${esc(w)}</span>`).join("")}</div></div>`;
@@ -301,8 +341,8 @@ const RENDER = {
   bullets(id, p, b, { tw }) {
     const items = (p.items || []).slice(0, 5);
     const ts = cues(b, items);
-    items.forEach((_, k) => tw(`#${id}-i${k}`, { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, ts[k]));
-    return `${head(id, p.heading, tw, b.s + 0.2)}<div class="abs" style="left:0;right:0;top:140px">${items
+    items.forEach((_, k) => { tw(`#${id}-i${k}`, { opacity: 0, x: 30 }, { opacity: 0.22, x: 0, duration: 0.4 }, b.s + 0.25 + k * 0.05); tw(`#${id}-i${k}`, { opacity: 0.22, x: 0 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, ts[k]); });
+    return `${head(id, p.heading, tw, b.s + 0.2)}<div class="abs" style="left:0;right:0;top:${Math.max(140, 400 - items.length * 50)}px">${items
       .map((it, k) => `<div id="${id}-i${k}" style="display:flex;align-items:center;gap:28px;margin-bottom:26px"><div style="width:64px;height:64px;border-radius:16px;background:${ACC[k % 5]}22;border:2px solid ${ACC[k % 5]};display:flex;align-items:center;justify-content:center;font-weight:900;font-size:30px;color:${ACC[k % 5]}">${k + 1}</div><div style="font-size:48px;font-weight:700;letter-spacing:-0.01em">${esc(it)}</div></div>`).join("")}</div>`;
   },
 
@@ -312,10 +352,10 @@ const RENDER = {
     const rows = Math.ceil(items.length / cols);
     const gw = 1680, cw = (gw - (cols - 1) * 30) / cols, ch = rows === 1 ? 380 : 280;
     const ts = cues(b, items.map((it) => `${it.title} ${it.text}`));
-    items.forEach((_, k) => tw(`#${id}-c${k}`, { opacity: 0, y: 50, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "back.out(1.4)" }, ts[k]));
+    items.forEach((_, k) => { tw(`#${id}-c${k}`, { opacity: 0, y: 30 }, { opacity: 0.25, y: 0, duration: 0.4 }, b.s + 0.25 + k * 0.05); tw(`#${id}-c${k}`, { opacity: 0.25, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.6)" }, ts[k]); });
     return `${head(id, p.heading, tw, b.s + 0.2)}${items
       .map((it, k) => `<div id="${id}-c${k}" class="abs panel" style="left:${(k % cols) * (cw + 30)}px;top:${130 + Math.floor(k / cols) * (ch + 30)}px;width:${cw}px;height:${ch}px;padding:34px;display:flex;flex-direction:column;gap:14px">
-        <div style="width:76px;height:76px;border-radius:18px;background:${ACC[k % 5]}1f;display:flex;align-items:center;justify-content:center">${icon(it.icon, 44, ACC[k % 5])}</div>
+        <div style="flex:none;width:76px;height:76px;border-radius:18px;background:${ACC[k % 5]}1f;display:flex;align-items:center;justify-content:center">${icon(it.icon, 44, ACC[k % 5])}</div>
         <div style="font-size:${cols === 3 ? 36 : 42}px;font-weight:800;letter-spacing:-0.02em">${esc(it.title)}</div>
         <div class="muted" style="font-size:${cols === 3 ? 27 : 30}px;line-height:1.3">${esc(it.text)}</div></div>`).join("")}`;
   },
@@ -323,14 +363,15 @@ const RENDER = {
   compare(id, p, b, { tw }) {
     const L = (p.left?.items || []).slice(0, 4), R = (p.right?.items || []).slice(0, 4);
     const all = [...L.map((_, k) => ["l", k]), ...R.map((_, k) => ["r", k])];
-    const ts = cues(b, all.map(([sd, k]) => (sd === "l" ? L : R)[k]));
-    all.forEach(([sd, k], j) => tw(`#${id}-${sd}${k}`, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, ts[j]));
-    const tone = (title, dflt) => /^(no\b|evit|descart|nunca|mal\b|sin\b|así no|esto no)/i.test(title || "") ? "bad" : /^(puedo|sí|si\b|hice|hago|bien|así sí|haz|mejor)/i.test(title || "") ? "good" : dflt;
+    const tl_ = cues(b, L), tr_ = cues(b, R);
+    all.forEach(([sd, k]) => { const t = (sd === "l" ? tl_ : tr_)[k]; tw(`#${id}-${sd}${k}`, { opacity: 0 }, { opacity: 0.22, duration: 0.4 }, b.s + 0.3); tw(`#${id}-${sd}${k}`, { opacity: 0.22, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, t); });
+    const tone = (title, dflt) => /^(no\b|evit|descart|nunca|mal\b|sin\b|así no|esto no)/i.test(title || "") ? "bad" : /^(puedo|sí|si\b|hice|hago|bien|así sí|así reviso|reviso|haz|mejor)/i.test(title || "") ? "good" : dflt;
     const tl0 = tone(p.left?.title, p.right?.title ? "neutral" : "good"), tr0 = tone(p.right?.title, tl0 === "neutral" ? "neutral" : tl0 === "good" ? "bad" : "good");
     const sty = (t, side) => t === "good" ? [C.green, "check"] : t === "bad" ? [C.coral, "x"] : [side === "l" ? C.cyan : C.violet, "text"];
-    const col = (side, title, items, color, ic) => `<div class="abs panel" style="left:${side === "l" ? 0 : 860}px;top:0;width:820px;height:740px;padding:40px">
+    const rows = Math.max(L.length, R.length), ph = Math.min(740, 170 + rows * 130);
+    const col = (side, title, items, color, ic) => `<div class="abs panel" style="left:${side === "l" ? 0 : 860}px;top:${Math.round((740 - ph) / 2)}px;width:820px;height:${ph}px;padding:40px">
       <div style="display:flex;align-items:center;gap:18px;font-size:50px;font-weight:900;color:${color}">${icon(ic, 52, color)}${esc(title)}</div>
-      ${items.map((it, k) => `<div id="${id}-${side}${k}" style="display:flex;gap:18px;align-items:flex-start;font-size:36px;font-weight:600;line-height:1.25;margin-top:34px">${icon(ic, 38, color)}<span>${esc(it)}</span></div>`).join("")}</div>`;
+      ${items.map((it, k) => `<div id="${id}-${side}${k}" style="display:flex;gap:18px;align-items:flex-start;font-size:40px;font-weight:600;line-height:1.25;margin-top:38px">${icon(ic, 38, color)}<span>${esc(it)}</span></div>`).join("")}</div>`;
     return col("l", p.left?.title || "Puedo", L, ...sty(tl0, "l")) + col("r", p.right?.title || "No puedo", R, ...sty(tr0, "r"));
   },
 
@@ -343,15 +384,16 @@ const RENDER = {
       tw(`#${id}-k${k}`, { strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, t + 0.05);
       tw(`#${id}-b${k}`, { backgroundColor: "rgba(52,211,153,0)" }, { backgroundColor: "rgba(52,211,153,0.18)", duration: 0.3 }, t);
     });
-    return `${head(id, p.heading, tw, b.s + 0.2)}<div class="abs" style="left:0;right:0;top:130px;columns:${items.length > 4 ? 2 : 1};column-gap:60px">${items
+    return `${head(id, p.heading, tw, b.s + 0.2)}<div class="abs" style="left:0;right:0;top:${items.length > 4 ? 170 : Math.max(140, 400 - items.length * 50)}px;columns:${items.length > 4 ? 2 : 1};column-gap:60px">${items
       .map((it, k) => `<div id="${id}-r${k}" style="display:flex;align-items:center;gap:26px;margin-bottom:30px;break-inside:avoid"><div id="${id}-b${k}" style="width:62px;height:62px;border-radius:14px;border:3px solid ${C.green};display:flex;align-items:center;justify-content:center;flex:none"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="${C.green}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path id="${id}-k${k}" pathLength="1000" stroke-dasharray="1000" d="M20 6 9 17l-5-5"/></svg></div><div style="font-size:42px;font-weight:700">${esc(it)}</div></div>`).join("")}</div>`;
   },
 
   terminal(id, p, b, { tw, STATE }) {
     const lines = (p.lines || []).slice(0, 4);
     tw(`#${id}-win`, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, b.s + 0.15);
+    const lt = cues(b, lines.map((l) => `${l.out || ""} ${l.cmd.split(/\s+/).slice(0, 2).join(" ")}`), 0.3, 3.0).map((t) => Math.min(t, b.end - 3.2));
     lines.forEach((l, k) => {
-      const t = reveal(lines.length, b, k, 0.3, 2.2);
+      const t = lt[k];
       STATE.type.push([`#${id}-c${k}`, T(t), Math.min(1.6, 0.03 * l.cmd.length + 0.3), l.cmd]);
       tw(`#${id}-o${k}`, { opacity: 0 }, { opacity: 1, duration: 0.25 }, t + Math.min(1.6, 0.03 * l.cmd.length + 0.3) + 0.2);
       tw(`#${id}-p${k}`, { opacity: 0 }, { opacity: 1, duration: 0.1 }, t);
@@ -365,7 +407,8 @@ const RENDER = {
   pipeline(id, p, b, { tw }) {
     const st = (p.steps || []).slice(0, 6), n = st.length, gap = 1680 / n;
     tw(`#${id}-ln`, { scaleX: 0 }, { scaleX: 1, duration: Math.max(1, b.vo - 0.5), ease: "none" }, b.voStart + 0.2);
-    st.forEach((_, k) => tw(`#${id}-n${k}`, { opacity: 0.25, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2)" }, reveal(n, b, k, 0.25, 0.8)));
+    const ts = cues(b, st, 0.25, 0.8);
+    st.forEach((_, k) => tw(`#${id}-n${k}`, { opacity: 0.25, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2)" }, ts[k]));
     return `<div id="${id}-ln" class="abs" style="left:${gap / 2}px;width:${1680 - gap}px;top:376px;height:6px;border-radius:3px;background:linear-gradient(90deg,${C.cyan},${C.violet});transform-origin:0 50%"></div>
       ${st.map((s, k) => `<div id="${id}-n${k}" class="abs" style="left:${k * gap}px;width:${gap}px;top:300px;display:flex;flex-direction:column;align-items:center;gap:24px">
         <div style="width:150px;height:150px;border-radius:50%;background:${C.panel};border:5px solid ${ACC[k % 5]};display:flex;align-items:center;justify-content:center;font-weight:900;font-size:58px;color:${ACC[k % 5]}">${k + 1}</div>
@@ -405,7 +448,7 @@ const RENDER = {
     ctx.tw(`#${id}-r`, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 }, b.s + 0.6);
     const lx = 30, rx = e.ar === "9:16" ? 1170 : 890;
     return `<div id="${id}-l" class="abs" style="left:${lx}px;top:60px;font-size:40px;font-weight:800">Antes <span class="muted" style="font-weight:500">· original</span></div>
-      <div id="${id}-r" class="abs" style="${e.ar === "9:16" ? "right:0;text-align:right;top:-14px" : `left:${rx}px;top:60px`};white-space:nowrap;font-size:40px;font-weight:800;color:${C.amber}">Después <span style="font-weight:500;color:${C.text}">· ${esc(p.label || e.name)}</span></div>`;
+      <div id="${id}-r" class="abs" style="${e.ar === "9:16" ? "left:1070px;width:560px;text-align:center;top:-14px" : `left:${rx}px;top:60px`};white-space:nowrap;font-size:40px;font-weight:800;color:${C.amber}">Después <span style="font-weight:500;color:${C.text}">· ${esc(p.label || e.name)}</span></div>`;
   },
 
   demo(id, p, b, ctx, spec) {
@@ -420,7 +463,8 @@ const DEMO = {
   kinetic(id, p, b, { tw }) {
     const ws = (p.words && p.words.length ? p.words : ["Movimiento", "Ritmo", "Impacto", "Estilo"]).slice(0, 6);
     const slot = (b.e - b.s - 0.6) / ws.length;
-    const at = cues(b, ws, 0.1, 0.6).map((t, k) => Math.min(t, b.s + 0.3 + k * slot + slot * 0.6));
+    const found = ws.map((w) => cue(b, w, null) !== null);
+    const at = cues(b, ws, 0.1, 0.6).map((t, k) => (found[k] ? t : Math.min(t, b.s + 0.3 + k * slot + slot * 0.6)));
     const styles = [
       [{ scale: 2.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(1.6)" }],
       [{ x: -500, opacity: 0, skewX: 20 }, { x: 0, opacity: 1, skewX: 0, duration: 0.5, ease: "power4.out" }],
@@ -433,7 +477,7 @@ const DEMO = {
       const [fr, to] = styles[k % styles.length];
       const { letterSpacing, ...fr2 } = fr;
       tw(`#${id}-w${k}`, fr2, to, t);
-      if (k < ws.length - 1) tw(`#${id}-w${k}`, { opacity: 1 }, { opacity: 0, duration: 0.2 }, at[k + 1] - 0.2);
+      if (k < ws.length - 1) tw(`#${id}-w${k}`, { opacity: 1 }, { opacity: 0, duration: 0.2 }, Math.max(at[k + 1] - 0.2, t + 0.66));
     });
     return ws.map((w, k) => `<div id="${id}-w${k}" class="abs h1" style="left:0;right:0;top:250px;text-align:center;font-size:170px;color:${ACC[k % 5]}">${esc(w)}</div>`).join("");
   },
@@ -457,7 +501,7 @@ const DEMO = {
       const t = at[k];
       const pid = `${id}-p${k}`;
       html += `<div id="${pid}" class="abs" style="inset:0;background:linear-gradient(135deg,${ACC[k]},${ACC[(k + 2) % 5]});display:flex;align-items:center;justify-content:center"><div class="h1" style="font-size:150px;color:#0b0d12">${n}</div></div>`;
-      if (k === 0) tw(`#${pid}`, { x: 1200, skewX: -10 }, { x: 0, skewX: 0, duration: 0.45, ease: "power3.out" }, t);
+      if (k === 0) tw(`#${pid}`, { x: 1500, skewX: 0 }, { x: 0, skewX: 0, duration: 0.45, ease: "power3.out" }, t);
       if (k === 1) tw(`#${pid}`, { scale: 2.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "power3.out" }, t);
       if (k === 2) { tw(`#${pid}`, { opacity: 0 }, { opacity: 1, duration: 0.05 }, t + 0.1); tw(`#${id}-fl`, { opacity: 0 }, { opacity: 1, duration: 0.08 }, t); tw(`#${id}-fl`, { opacity: 1 }, { opacity: 0, duration: 0.5 }, t + 0.1); }
       if (k === 3) tw(`#${pid}`, { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.6, ease: "power3.inOut" }, t);
@@ -465,7 +509,7 @@ const DEMO = {
       STATE.text.push([`#${id}-nm`, T(t), `${k + 1}/5 · ${n}`]);
     });
     tw(`#${id}-fr`, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.4 }, b.s + 0.1);
-    return `<div id="${id}-fr">${frame16(`<div class="abs" style="inset:0;background:${C.panel2}"></div>${html}<div id="${id}-fl" class="abs" style="inset:0;background:#fff;opacity:0"></div>`)}</div><div id="${id}-nm" class="abs" style="left:1470px;top:300px;width:230px;font-size:40px;font-weight:800;color:${C.amber};line-height:1.2"></div>`;
+    return `<div id="${id}-fr">${frame16(`<div class="abs" style="inset:0;background:${C.panel2};display:flex;align-items:center;justify-content:center"><div class="h1 muted" style="font-size:110px">Escena A</div></div>${html}<div id="${id}-fl" class="abs" style="inset:0;background:#fff;opacity:0"></div>`)}</div><div id="${id}-nm" class="abs" style="left:240px;top:715px;width:1200px;text-align:center;white-space:nowrap;font-size:40px;font-weight:800;color:${C.amber}"></div>`;
   },
 
   mask_reveal(id, p, b, { tw }) {
@@ -484,16 +528,17 @@ const DEMO = {
   },
 
   svg_draw(id, p, b, { tw }) {
-    const d = "M120 520 C 220 300, 420 260, 560 380 S 860 640, 1000 420 S 1260 160, 1480 300";
+    const d = "M120 520 C 220 300, 420 260, 560 380 S 860 640, 1000 420 S 1260 200, 1400 418";
     tw(`#${id}-p`, { strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: Math.min(3.5, b.vo), ease: "power2.inOut" }, b.voStart + 0.2);
     tw(`#${id}-s`, { strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 1.6, ease: "power2.out" }, b.voStart + 0.6);
     tw(`#${id}-dot`, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(3)" }, b.voStart + 0.2 + Math.min(3.5, b.vo));
+    tw(`#${id}-lab`, { opacity: 0 }, { opacity: 1, duration: 0.4 }, b.voStart + 2.2);
     return `<svg class="abs" style="left:0;top:0" width="1680" height="760" viewBox="0 0 1680 760" fill="none">
       <path id="${id}-p" d="${d}" pathLength="1000" stroke-dasharray="1000" stroke="url(#${id}-g)" stroke-width="16" stroke-linecap="round"/>
       <rect id="${id}-s" x="1250" y="430" width="300" height="220" rx="30" pathLength="1000" stroke-dasharray="1000" stroke="${C.amber}" stroke-width="10"/>
       <defs><linearGradient id="${id}-g" x1="0" x2="1"><stop offset="0" stop-color="${C.cyan}"/><stop offset="1" stop-color="${C.violet}"/></linearGradient></defs></svg>
-      <div id="${id}-dot" class="abs" style="left:1458px;top:278px;width:44px;height:44px;border-radius:50%;background:${C.violet};box-shadow:0 0 30px ${C.violet}"></div>
-      <div class="abs" style="left:1262px;top:500px;width:276px;text-align:center;font-size:34px;font-weight:800;color:${C.amber}">${esc(p.label || "Trazo SVG")}</div>`;
+      <svg id="${id}-dot" class="abs" style="left:1378px;top:396px" width="44" height="40" viewBox="0 0 44 40"><path d="M22 38 4 6h36z" fill="${C.violet}"/></svg>
+      <div id="${id}-lab" class="abs" style="left:1262px;top:500px;width:276px;text-align:center;font-size:34px;font-weight:800;color:${C.amber}">${esc(p.label || "Trazo SVG")}</div>`;
   },
 
   three_d(id, p, b, { tw }) {
@@ -516,16 +561,17 @@ const DEMO = {
       const x = 80 + rnd() * 1520, y = 60 + rnd() * 620, sz = 4 + rnd() * 7;
       html += `<div id="${id}-z${k}" class="abs" style="left:${x.toFixed(0)}px;top:${y.toFixed(0)}px;width:${sz.toFixed(1)}px;height:${sz.toFixed(1)}px;border-radius:50%;background:${ACC[k % 5]};box-shadow:0 0 10px ${ACC[k % 5]}"></div>`;
       const d = 2.5 + rnd() * 2, reps = Math.max(1, Math.floor((b.e - b.s) / d));
-      tw(`#${id}-z${k}`, { y: 0, opacity: 0 }, { y: -40 - rnd() * 60, opacity: 0.85, duration: d, ease: "sine.inOut", yoyo: true, repeat: reps - 1 }, b.s + 0.2 + rnd());
+      tw(`#${id}-z${k}`, { y: 0, opacity: 0.15 }, { y: -40 - rnd() * 60, opacity: 0.95, duration: d, ease: "sine.inOut", yoyo: true, repeat: reps - 1 }, b.s + 0.2 + rnd());
     }
     for (let k = 0; k < N; k++) {
-      const ang = rnd() * Math.PI * 2, dist = 250 + rnd() * 450, size = 10 + rnd() * 18;
+      const ang = rnd() * Math.PI * 2, dist = 250 + rnd() * 450, size = 10 + rnd() * 18, spark = k % 2 === 0;
       const col = ACC[k % 5], shape = k % 3 === 0 ? "50%" : "3px";
       html += `<div id="${id}-q${k}" class="abs" style="left:830px;top:360px;width:${size}px;height:${size * (k % 3 === 1 ? 2 : 1)}px;background:${col};border-radius:${shape};opacity:0"></div>`;
       for (let r = 0; r < bursts; r++) {
-        const t = bt[r];
-        tw(`#${id}-q${k}`, { x: 0, y: 0, opacity: 1, rotation: 0, scale: 1 },
-          { x: Math.cos(ang) * dist, y: Math.sin(ang) * dist * 0.75 + 260, opacity: 0, rotation: (rnd() - 0.5) * 720, scale: 0.6, duration: 2.6 + rnd() * 1.0, ease: "power2.out" }, t);
+        const t = bt[r], nxt = r + 1 < bursts ? bt[r + 1] : b.end;
+        const life = Math.max(0.6, Math.min(2.6 + rnd() * 1.0, nxt - t - 0.05));
+        tw(`#${id}-q${k}`, { x: 0, y: 0, opacity: 1, rotation: 0, scale: spark && r === 1 ? 0.5 : 1 },
+          { x: Math.cos(ang) * dist, y: Math.sin(ang) * dist * 0.75 + 260, opacity: 0, rotation: (rnd() - 0.5) * 720, scale: 0.4, duration: life, ease: "power2.out" }, t);
       }
     }
     tw(`#${id}-t`, { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" }, b.s + 0.5);
@@ -580,13 +626,14 @@ const DEMO = {
 
   logo_sting(id, p, b, { tw, sfx }) {
     const name = String(p.brand || p.text || p.label || p.title || "Tu marca").slice(0, 16);
-    const t = b.voStart + 0.2;
+    const t = cue(b, "logo", b.voStart + 0.2), tl2 = Math.max(t + 0.6, cue(b, "letra", t + 0.6, t)), tc = cue(b, "completa", null, tl2);
+    if (tc) { tw(`#${id}-all`, { scale: 1 }, { scale: 1.08, duration: 0.35, ease: "power2.out", yoyo: true, repeat: 1 }, tc); tw(`#${id}-sh`, { xPercent: -150 }, { xPercent: 350, duration: 0.9, ease: "power2.inOut" }, tc + 0.1); }
     tw(`#${id}-ring`, { strokeDashoffset: 1000, rotation: -90 }, { strokeDashoffset: 0, rotation: 0, duration: 1.0, ease: "power3.inOut" }, t);
-    name.split("").forEach((_, k) => tw(`#${id}-c${k}`, { y: 120, opacity: 0, rotation: 15 }, { y: 0, opacity: 1, rotation: 0, duration: 0.6, ease: "back.out(1.7)" }, t + 0.6 + k * 0.045));
-    tw(`#${id}-sh`, { xPercent: -150 }, { xPercent: 350, duration: 0.9, ease: "power2.inOut" }, t + 1.6);
+    name.split("").forEach((_, k) => tw(`#${id}-c${k}`, { y: 120, opacity: 0, rotation: 15 }, { y: 0, opacity: 1, rotation: 0, duration: 0.6, ease: "back.out(1.7)" }, tl2 + k * 0.06));
+    if (!tc) tw(`#${id}-sh`, { xPercent: -150 }, { xPercent: 350, duration: 0.9, ease: "power2.inOut" }, tl2 + 1.0);
     sfx.push({ t: t + 0.6, type: "impact" });
-    return `<svg class="abs" style="left:640px;top:60px" width="400" height="400" viewBox="0 0 400 400" fill="none"><circle id="${id}-ring" cx="200" cy="200" r="170" pathLength="1000" stroke-dasharray="1000" stroke="${C.violet}" stroke-width="14" style="transform-origin:200px 200px"/></svg>
-      <div class="abs" style="left:0;right:0;top:470px;text-align:center;overflow:hidden"><div class="h1" style="font-size:150px;display:inline-block;position:relative;overflow:hidden;padding:0 10px">${name.split("").map((c, k) => `<span id="${id}-c${k}" style="display:inline-block">${c === " " ? "&nbsp;" : esc(c)}</span>`).join("")}<div id="${id}-sh" class="abs" style="top:0;left:0;width:30%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.55),transparent);mix-blend-mode:overlay"></div></div></div>`;
+    return `<div id="${id}-all" class="abs" style="inset:0"><svg class="abs" style="left:640px;top:60px" width="400" height="400" viewBox="0 0 400 400" fill="none"><circle id="${id}-ring" cx="200" cy="200" r="170" pathLength="1000" stroke-dasharray="1000" stroke="${C.violet}" stroke-width="14" style="transform-origin:200px 200px"/></svg>
+      <div class="abs" style="left:0;right:0;top:470px;text-align:center;overflow:hidden"><div class="h1" style="font-size:150px;display:inline-block;position:relative;overflow:hidden;padding:0 10px">${name.split("").map((c, k) => `<span id="${id}-c${k}" style="display:inline-block">${c === " " ? "&nbsp;" : esc(c)}</span>`).join("")}<div id="${id}-sh" class="abs" style="top:0;left:0;width:30%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.55),transparent);mix-blend-mode:overlay"></div></div></div></div>`;
   },
 
   captions_word(id, p, b, { STATE, tw }) {
@@ -629,12 +676,13 @@ const DEMO = {
     const raw = kw.map((k, j) => cue(b, k, reveal(3, b, j)));
     return F.map(([n, w, h, use], k) => {
       const t = Math.min(raw[k], b.end - 0.9);
-      tw(`#${id}-f${k}`, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.4)" }, t);
+      tw(`#${id}-f${k}`, { opacity: 0 }, { opacity: 0.25, duration: 0.4 }, b.s + 0.3); tw(`#${id}-f${k}`, { opacity: 0.25, y: 20 }, { opacity: 1, y: 0, duration: 0.45, ease: "back.out(1.4)" }, t);
+      tw(`#${id}-lb${k}`, { opacity: 0.25 }, { opacity: 1, duration: 0.4 }, t);
       tw(`#${id}-s${k}`, { opacity: 0 }, { opacity: 1, duration: 0.4 }, t + 0.5);
       const html = `<div id="${id}-f${k}" class="abs" style="left:${x}px;top:${120 + (420 - h) / 2}px;width:${w}px;height:${h}px;border-radius:14px;overflow:hidden;border:3px solid ${ACC[k]}">
         <div class="abs" style="inset:0;background-image:url('${PHOTO.F4}');background-size:cover;background-position:center 70%"></div>
         ${k === 1 ? `<div id="${id}-s${k}" class="abs" style="inset:0"><div class="abs" style="left:0;right:0;top:0;height:12%;background:repeating-linear-gradient(45deg,rgba(251,113,133,0.55) 0 8px,transparent 8px 16px)"></div><div class="abs" style="left:0;right:0;bottom:0;height:22%;background:repeating-linear-gradient(45deg,rgba(251,113,133,0.55) 0 8px,transparent 8px 16px)"></div><div class="abs" style="right:0;top:45%;width:15%;height:33%;background:repeating-linear-gradient(45deg,rgba(251,113,133,0.55) 0 8px,transparent 8px 16px)"></div><div class="abs" style="left:10%;right:18%;top:64%;padding:4px;border-radius:4px;background:rgba(0,0,0,0.75);font-size:13px;font-weight:700;text-align:center">subtítulo aquí</div></div>` : `<div id="${id}-s${k}" class="abs" style="inset:6%;border:3px dashed rgba(255,255,255,0.8);border-radius:6px"></div>`}</div>
-        <div class="abs" style="left:${x}px;width:${w}px;top:600px;text-align:center"><div style="font-size:52px;font-weight:900;color:${ACC[k]}">${n}</div><div class="muted" style="font-size:28px;font-weight:600">${use}</div></div>`;
+        <div id="${id}-lb${k}" class="abs" style="left:${x}px;width:${w}px;top:600px;text-align:center"><div style="font-size:52px;font-weight:900;color:${ACC[k]}">${n}</div><div class="muted" style="font-size:28px;font-weight:600">${use}</div></div>`;
       x += w + 150;
       return html;
     }).join("") + `<div class="abs muted" style="left:40px;top:40px;font-size:28px">Rayado: zonas que tapa la interfaz de la app. Punteado: margen seguro.</div>`;
@@ -643,8 +691,9 @@ const DEMO = {
   color_grade(id, p, b, { tw }) {
     const src = PHOTO[p.photo] || PHOTO.F5;
     const V = [["Original", "none"], ["Cálido", "sepia(0.35) saturate(1.3) hue-rotate(-10deg)"], ["Frío", "saturate(1.1) hue-rotate(18deg) brightness(1.05)"], ["B/N", "grayscale(1) contrast(1.25)"], ["Contraste", "contrast(1.45) saturate(1.25)"]];
+    const gt = cues(b, ["original", "cálido calidez", "frío", "blanco negro", "contraste"], 0.3, 1.0);
     return V.map(([n, f], k) => {
-      tw(`#${id}-g${k}`, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, reveal(5, b, k));
+      tw(`#${id}-g${k}`, { opacity: 0 }, { opacity: 0.25, duration: 0.4 }, b.s + 0.3); tw(`#${id}-g${k}`, { opacity: 0.25, y: 20 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, gt[k]);
       return `<div id="${id}-g${k}" class="abs" style="left:${k * 336}px;top:140px;width:310px;height:430px;border-radius:16px;overflow:hidden;border:2px solid ${C.line}"><div class="abs" style="inset:0;background-image:url('${src}');background-size:cover;background-position:center;filter:${f}"></div>
         <div class="abs" style="left:0;right:0;bottom:0;padding:14px;background:rgba(0,0,0,0.65);text-align:center;font-size:32px;font-weight:800">${n}</div></div>`;
     }).join("") + `<div class="abs muted" style="left:0;top:620px;font-size:30px">Mismo producto, distinto ánimo. El color se ajusta sin cambiar el producto.</div>`;
@@ -678,6 +727,8 @@ const DEMO = {
       clips.forEach(([x, w, c, lab]) => {
         html += `<div id="${id}-k${k}" class="abs" style="left:${120 + x}px;top:${158 + r * 120}px;width:${w - 16}px;height:80px;border-radius:10px;background:${c}cc;border:2px solid ${c};display:flex;align-items:center;padding-left:18px;font-size:26px;font-weight:800;color:#0b0d12">${lab}</div>`;
         tw(`#${id}-k${k}`, { x: (k % 2 ? 1 : -1) * 200, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, b.s + 0.3 + k * 0.15);
+        const ck = r < 2 ? cue(b, lab, null) : null;
+        if (ck) tw(`#${id}-k${k}`, { scale: 1 }, { scale: 1.12, duration: 0.25, yoyo: true, repeat: 1, ease: "power2.out" }, ck);
         k++;
       });
     });
@@ -709,20 +760,20 @@ const DEMO = {
   code(id, p, b, { tw, STATE }) {
     const unent = (x) => x.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, "&");
     const snippet = unent(String(p.snippet || `<h1 id="t">Hola</h1>\ntl.from("#t", { y: 80, opacity: 0, ease: "power3.out" });`)).split("\n").slice(0, 8).join("\n");
-    const t = b.voStart + 0.3, d = Math.min(b.vo - 0.5, Math.max(1.5, snippet.length * 0.035));
+    const t = b.voStart + 0.3, d = Math.max(1.2, Math.min(b.end - 2.2 - t, Math.max(1.5, snippet.length * 0.03)));
     STATE.type.push([`#${id}-c`, T(t), d, snippet]);
     tw(`#${id}-win`, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, b.s + 0.15);
     return `<div id="${id}-win" class="abs panel" style="left:60px;right:60px;top:20px;bottom:30px;background:#0a0c10;overflow:hidden">
       <div style="height:60px;background:${C.panel2};display:flex;align-items:center;gap:12px;padding:0 26px"><i style="width:18px;height:18px;border-radius:50%;background:#ff5f57;display:block"></i><i style="width:18px;height:18px;border-radius:50%;background:#febc2e;display:block"></i><i style="width:18px;height:18px;border-radius:50%;background:#28c840;display:block"></i><span class="muted" style="margin-left:18px;font-size:24px;font-weight:600">${esc(p.lang || "html")}</span></div>
-      <pre id="${id}-c" class="mono" style="padding:34px 44px;font-size:32px;line-height:1.5;color:${C.cyan};white-space:pre-wrap"></pre></div>`;
+      <pre id="${id}-c" class="mono" style="padding:34px 44px;font-size:28px;line-height:1.5;color:${C.cyan};white-space:pre-wrap"></pre></div>`;
   },
 
   storyboard(id, p, b, { tw }) {
-    const P = ["F2", "F5", "F1", "F4", "F3", "F2"], L = ["0–3 s Gancho", "3–8 s Producto", "8–14 s Variedad", "14–20 s Detalle", "20–25 s Marca", "25–30 s Cierre"];
+    const P = ["F2", "F5", "F1", "F4", "F3", "BRAND"], L = ["0–3 s Gancho", "3–8 s Producto", "8–14 s Variedad", "14–20 s Detalle", "20–25 s Marca", "25–30 s Cierre"];
     return P.map((f, k) => {
-      tw(`#${id}-s${k}`, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.5)" }, reveal(6, b, k, 0.2, 0.6));
+      tw(`#${id}-s${k}`, { opacity: 0.2, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.5)" }, reveal(6, b, k, 0.2, 2.2));
       return `<div id="${id}-s${k}" class="abs panel" style="left:${(k % 3) * 560}px;top:${Math.floor(k / 3) * 370}px;width:520px;height:340px;overflow:hidden;padding:0">
-        <div class="abs" style="left:0;right:0;top:0;height:270px;background-image:url('${PHOTO[f]}');background-size:cover;background-position:center"></div>
+        ${f === "BRAND" ? `<div class="abs" style="left:0;right:0;top:0;height:270px;background:radial-gradient(circle at 50% 40%,#5b3a94,#0a090c);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:64px;letter-spacing:-0.04em">TRENDY</div>` : `<div class="abs" style="left:0;right:0;top:0;height:270px;background-image:url('${PHOTO[f]}');background-size:cover;background-position:center"></div>`}
         <div class="abs" style="left:0;right:0;bottom:0;height:70px;display:flex;align-items:center;padding:0 22px;font-size:28px;font-weight:800">${L[k]}</div></div>`;
     }).join("");
   },

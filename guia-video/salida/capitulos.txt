@@ -4,3 +4,7 @@
 07:09 Capítulo 3 · Videos con tus fotos y productos
 09:53 Capítulo 4 · Edición de video con FFmpeg
 12:55 Capítulo 5 · Subtítulos y texto en pantalla
+15:14 Capítulo 6 · Audio: voz, música y efectos
+17:49 Capítulo 7 · Explicadores, interfaces y datos
+20:31 Capítulo 8 · Producción a escala: plantillas y versiones
+22:45 Capítulo 9 · Mis límites y cómo resolverlos

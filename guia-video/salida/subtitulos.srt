@@ -305,3 +305,195 @@ Lo resuelvo así. Si la voz la genero yo con Kokoro, sé qué dice cada frase y 
 77
 00:15:02,751 --> 00:15:12,789
 Mi consejo: dime desde el pedido qué estilo quieres y dónde vas a publicar. Así decido tamaño, posición y ritmo del texto desde el principio, no como parche al final.
+
+78
+00:15:15,100 --> 00:15:25,416
+Ahora vamos con lo que se escucha. Un buen audio hace que un video se sienta profesional, aunque las imágenes sean sencillas. Te muestro cómo hago la voz, la música y los efectos.
+
+79
+00:15:26,116 --> 00:15:42,555
+La voz que oyes ahora es Kokoro, un sintetizador que corre aquí mismo, sin internet y sin costo. Es la misma voz masculina de la historia de Trendy. En español trae tres voces: una femenina y dos masculinas. La femenina no te convenció, y con tan pocas opciones, tu gusto decide.
+
+80
+00:15:43,255 --> 00:15:56,877
+Seamos honestos con los límites. Son pocas voces, el acento es neutro y la emoción es más plana que la de un locutor. A cambio, sale al instante y me dice cuánto dura cada frase. Para explicadores y anuncios sencillos, funciona muy bien.
+
+81
+00:15:57,577 --> 00:16:11,775
+Lo que sí controlo es cómo escribo para ella. Frases cortas, números en palabras y nada de símbolos, porque los lee mal. Pongo comas donde una persona respiraría. Y los nombres en inglés los escribo como suenan, para que no los lea letra por letra.
+
+82
+00:16:12,475 --> 00:16:27,569
+La música la compongo con código. Con NumPy creo cada nota como una onda y le doy forma para que arranque y se apague como un instrumento. Toda la música de esta guía la hice así. Es original y sin derechos de nadie, aunque más sencilla que una producción profesional.
+
+83
+00:16:28,269 --> 00:16:41,592
+Los efectos también los sintetizo. Un barrido de aire para las transiciones, un bip cuando aparece un dato y un golpe grave para rematar un logo. Los pongo justo en el fotograma del movimiento, para que lo que ves y lo que oyes coincidan.
+
+84
+00:16:42,292 --> 00:16:55,100
+Luego viene la mezcla, por pistas, como en un editor. La voz manda, los efectos acompañan y la música va bien por debajo. Si hace falta, hago que la música baje cuando hay voz y suba en las pausas. Eso se llama ducking.
+
+85
+00:16:55,800 --> 00:17:10,127
+Al final normalizo, es decir, ajusto el volumen general. Los LUFS miden qué tan fuerte percibimos un audio, y para redes apunto a menos catorce, un nivel de referencia muy usado. Así tu video no suena ni bajito ni reventado al lado de los demás.
+
+86
+00:17:10,827 --> 00:17:21,591
+Y como no escucho, mido. FFmpeg me da el volumen promedio, los picos y los silencios que no deberían estar. Así revisé el anuncio de Manager App, que quedó en menos catorce LUFS.
+
+87
+00:17:22,291 --> 00:17:35,038
+Mi recomendación: si la voz es lo más importante, grábala tú con el celular, cerca de la boca y en un cuarto sin eco. O tráela de otra herramienta. Yo le quito algo de ruido de fondo, la nivelo y armo el video alrededor de ella.
+
+88
+00:17:35,738 --> 00:17:48,345
+Para sincronizarla, pásame también el guion. Con las pausas que mido en tu grabación ubico cada frase, y si me das un archivo SRT, los tiempos quedan exactos. Así tienes una voz humana con una edición precisa.
+
+89
+00:17:50,667 --> 00:18:01,175
+Ahora vamos con los videos que enseñan. Explicadores, tutoriales, interfaces de apps y datos en movimiento. Aquí no basta con que se vea bonito. Tiene que entenderse a la primera.
+
+90
+00:18:01,875 --> 00:18:16,585
+Recuerda el caso DART. Tú me subiste una animación muda sobre la misión de la NASA, con derivadas y probabilidad. En el capítulo cuatro viste cómo resolví el tiempo. Escribí la narración escena por escena, para que la matemática se entendiera como una historia.
+
+91
+00:18:17,285 --> 00:18:28,390
+Mi receta para explicar es sencilla. Una idea por escena, un ejemplo concreto, una imagen que muestre lo mismo que dice la voz y un repaso corto al final. Esta guía sigue esa misma receta.
+
+92
+00:18:29,090 --> 00:18:42,990
+En el anuncio de Manager App no usé capturas de pantalla. Redibujé la app en HTML, el lenguaje de las páginas web, con los colores y la tipografía Geist que leí de su archivo de diseño. Ahí aparecen la venta, el inventario y la caja.
+
+93
+00:18:43,690 --> 00:18:53,750
+Y aquí tienes una interfaz de ejemplo animada en vivo. Ojo, es una recreación, no la app funcionando de verdad. Por eso necesito saber qué pantallas existen y cómo se ven.
+
+94
+00:18:54,450 --> 00:19:07,397
+¿Por qué no una captura? Porque lo redibujado queda nítido en cualquier tamaño, cada botón se anima por separado y, si cambia un precio, edito un texto y vuelvo a renderizar. Además, no se cuela información privada de tu negocio.
+
+95
+00:19:08,097 --> 00:19:18,647
+Los datos también se animan. Un contador que sube hasta un millón doscientos cincuenta mil pesos llama más la atención que una cifra quieta, y lo sincronizo con la frase que lo nombra.
+
+96
+00:19:19,347 --> 00:19:30,559
+En una gráfica de barras, cada barra puede crecer en el momento en que la voz la menciona. Me pasas una tabla, aunque sea copiada de una hoja de cálculo, y la convierto en animación con tus colores.
+
+97
+00:19:31,259 --> 00:19:40,658
+Las cifras que acabas de ver son de ejemplo. En tu video, los números deben ser tuyos y reales. Yo no invento estadísticas, y si falta un dato, te lo pregunto.
+
+98
+00:19:41,358 --> 00:19:51,140
+Con los diagramas pasa igual. Un proceso, como un pedido desde que el cliente compra hasta que lo recibe, se arma por partes, y cada paso aparece justo cuando lo explico.
+
+99
+00:19:51,840 --> 00:20:04,609
+Con todo esto armo tutoriales de producto. Marco cada toque, acerco la cámara al botón importante y nombro cada acción. Y si me subes una grabación de pantalla de tu app, también la edito con acercamientos y rótulos.
+
+100
+00:20:05,309 --> 00:20:17,054
+Y si tu tema es programación, también animo código, como si alguien lo tecleara. Este fragmento es GSAP real y hace un contador como el que viste. Sirve para cursos, documentación o proyectos técnicos.
+
+101
+00:20:17,754 --> 00:20:30,085
+Para estos videos, dame el tema, para quién es, tus colores o tu archivo de diseño, los datos reales en una tabla y la lista de pantallas que existen. Con eso, la primera versión sale mucho más cerca de lo que buscas.
+
+102
+00:20:32,400 --> 00:20:41,372
+Capítulo ocho. Una de mis ventajas más útiles es esta. Yo no hago un solo video, hago una plantilla que produce muchos videos con el mismo trabajo.
+
+103
+00:20:42,072 --> 00:20:51,534
+Como mis videos son código, cada escena, texto y color vive en archivos. Si cambio un dato y vuelvo a generar el video, sale con el cambio, sin rehacer nada a mano.
+
+104
+00:20:52,234 --> 00:21:00,075
+Mira el anuncio de Manager App. Esta es la versión principal, de treinta segundos en vertical, con voz, subtítulos, efectos y música.
+
+105
+00:21:00,775 --> 00:21:12,221
+Y esta es la cuadrada, para publicaciones. También hay una corta de quince segundos. Las tres salen del mismo programa, que define el tamaño y la duración de cada una. No son tres ediciones separadas.
+
+106
+00:21:12,921 --> 00:21:25,541
+Ojo, la versión corta no es la larga acelerada. De las ocho escenas, la de quince segundos usa solo cinco, con algunas frases de voz más cortas. Y en la cuadrada, la plantilla reacomoda el celular y los subtítulos.
+
+107
+00:21:26,241 --> 00:21:36,957
+El truco son las variables, datos con nombre como el número de WhatsApp o la dirección de la página. Los escribo una sola vez al inicio del archivo y todas las versiones los leen de ahí.
+
+108
+00:21:37,657 --> 00:21:50,661
+Eso pasó de verdad. El anuncio quedó listo con un espacio reservado para el WhatsApp. Cuando tuve el número, cambié esa sola línea, generé otra vez las tres versiones y en pocos minutos las tenía, idénticas en todo lo demás.
+
+109
+00:21:51,361 --> 00:22:07,784
+Cuando hay varias versiones, las genero en lote. HyperFrames también puede leer una lista, por ejemplo de productos con sus precios, y sacar un video por cada uno, si la plantilla tiene esos datos como variables. Eso sí, aquí cada video tarda en generarse unas tres o cuatro veces lo que dura.
+
+110
+00:22:08,484 --> 00:22:20,464
+Esto también protege tu marca. En Manager App tomé los colores y la tipografía Geist de su archivo de diseño, y las tres versiones los usan igual. Ni un azul distinto en la cuadrada, ni otra letra en la corta.
+
+111
+00:22:21,164 --> 00:22:34,516
+Por eso te conviene pedirme todo el paquete desde el principio, con formatos, duraciones y datos reales. Si sé de entrada que habrá versión cuadrada y corta, diseño las escenas pensando en ellas y no tengo que forzarlas después.
+
+112
+00:22:35,216 --> 00:22:44,252
+En resumen, con una buena plantilla, cambiar un precio, un texto o un formato ya no es rehacer el video. Es cambiar un dato y esperar a que se genere de nuevo.
+
+113
+00:22:46,567 --> 00:22:53,704
+Ahora quiero ser honesto contigo. Hay cosas que no puedo hacer desde aquí, pero casi todas tienen una solución práctica.
+
+114
+00:22:54,404 --> 00:23:05,786
+Este es el panorama. Puedo animar, editar, narrar y subtitular. No puedo generar imágenes ni video con inteligencia artificial, abrir enlaces bloqueados, escuchar el audio ni crear cuentas.
+
+115
+00:23:06,486 --> 00:23:15,458
+Empecemos por el más grande. Aquí no tengo modelos que generen imágenes ni video. Todo lo que ves en esta guía es código, o fotos y videos que tú me diste.
+
+116
+00:23:16,158 --> 00:23:27,029
+La solución es repartir el trabajo. Yo escribo el guion y describo cada toma. Tú generas los clips en otra herramienta y me los subes. Yo los corto y les pongo voz, subtítulos y música.
+
+117
+00:23:27,729 --> 00:23:38,215
+Segundo, los enlaces. La red aquí está restringida y no abro TikTok ni YouTube. Descarga la referencia y súbemela como archivo. Le saco un fotograma por segundo y los reviso.
+
+118
+00:23:38,915 --> 00:23:50,361
+Tercero, no escucho el audio ni reproduzco video en tiempo real. Mido el volumen y los picos, y miro fotogramas sueltos. Por eso tu revisión vale oro. Dime en qué segundo algo suena o se ve raro.
+
+119
+00:23:51,061 --> 00:24:06,312
+Cuarto, la voz. Tengo solo tres voces locales en español, y la femenina no te convenció. Graba tu voz o tráela de otra herramienta, y yo la sincronizo y la mezclo. Como aquí no tengo transcripción automática, para subtítulos exactos pásame también un SRT.
+
+120
+00:24:07,012 --> 00:24:21,466
+Quinto, la velocidad. Sin tarjeta gráfica, treinta segundos en alta definición tardan entre minuto y medio y dos minutos en renderizar. Por eso primero te muestro el storyboard y fotogramas de prueba, y el render completo va cuando apruebes.
+
+121
+00:24:22,166 --> 00:24:36,236
+Sexto, las instalaciones. Puedo instalar paquetes de JavaScript, librerías de Python y proyectos de GitHub, siempre pidiéndote permiso. Lo que vive en sitios bloqueados, como muchos modelos de inteligencia artificial, queda fuera de mi alcance.
+
+122
+00:24:36,936 --> 00:24:48,190
+Séptimo, no creo cuentas, no pago servicios y desde aquí no publico en tus redes. Te entrego los archivos listos para cada plataforma, con el texto de la publicación escrito, y tú publicas.
+
+123
+00:24:48,890 --> 00:24:58,395
+Octavo, no recuerdo nada de una conversación a otra. Lo que queda son los archivos. Por eso guardo el brief y las decisiones en el proyecto, y desde ahí retomamos.
+
+124
+00:24:59,095 --> 00:25:09,005
+Además, Claude Code puede correr en tu propio computador. Ahí podría usar tus programas y archivos, con tu permiso, y si tu equipo es más potente, renderizar más rápido.
+
+125
+00:25:09,705 --> 00:25:22,496
+En resumen. Súbeme archivos, no enlaces. Genera los clips afuera y yo los edito. Graba tu voz. Dame permisos claros. Guardemos todo en el proyecto. Y dime el segundo exacto. Lo que me falta, lo completamos juntos.

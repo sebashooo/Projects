@@ -1,0 +1,197 @@
+{
+ "chapter": 10,
+ "title": "Cómo sacarme el mejor provecho",
+ "beats": [
+  {
+   "narration": "Ya viste lo que puedo hacer. Ahora viene lo más importante, cómo pedírmelo. El resultado depende muchísimo de la calidad del pedido, así que aquí te enseño a hacerlo bien desde el primer mensaje.",
+   "visual": {
+    "type": "title",
+    "params": {
+     "kicker": "Capítulo 10",
+     "title": "Cómo sacarme el mejor provecho",
+     "subtitle": "Pedidos claros, videos mejores"
+    }
+   }
+  },
+  {
+   "narration": "Todo empieza con un brief, que es un resumen corto de lo que necesitas. Dime el objetivo, a quién le hablas, el formato, la duración, el tono y qué quieres que haga la gente al final, por ejemplo escribirte por WhatsApp.",
+   "visual": {
+    "type": "cards",
+    "params": {
+     "heading": "Un buen brief",
+     "items": [
+      {
+       "icon": "star",
+       "title": "Objetivo",
+       "text": "Vender, informar o enseñar"
+      },
+      {
+       "icon": "eye",
+       "title": "Público",
+       "text": "A quién le hablas"
+      },
+      {
+       "icon": "phone",
+       "title": "Formato",
+       "text": "Vertical, cuadrado u horizontal"
+      },
+      {
+       "icon": "clock",
+       "title": "Duración",
+       "text": "15, 30 o 60 segundos"
+      },
+      {
+       "icon": "mic",
+       "title": "Tono",
+       "text": "Divertido, elegante o serio"
+      },
+      {
+       "icon": "bolt",
+       "title": "Llamado a la acción",
+       "text": "Qué debe hacer la gente"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Y dame los datos reales desde el principio. Precios, dirección, horarios y número de contacto. Si no los tengo, pongo datos de ejemplo, y eso significa otra ronda de cambios después.",
+   "visual": {
+    "type": "statement",
+    "params": {
+     "text": "Datos reales, no de relleno",
+     "accent": "reales"
+    }
+   }
+  },
+  {
+   "narration": "Luego, el material. Fotos nítidas, tu logo en buena calidad y los colores de tu marca. Si tienes una guía de diseño, como el archivo de Manager App, de ahí saco colores y tipografía exactos. Y las referencias súbelas como archivo, porque los enlaces de TikTok o YouTube no los puedo abrir desde aquí.",
+   "visual": {
+    "type": "checklist",
+    "params": {
+     "heading": "Material que me ayuda",
+     "items": [
+      "Fotos nítidas y con buena luz",
+      "Logo en buena calidad, PNG o SVG",
+      "Colores, tipografía o guía de marca",
+      "Referencias como archivo, no enlace"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Un consejo que ahorra tiempo. Pídeme primero el storyboard, las escenas en viñetas con sus tiempos y textos, y apruébalo antes del render. Cambiar una escena en el boceto es inmediato. Cambiarla después implica rehacer la animación y volver a renderizar.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "storyboard"
+    }
+   }
+  },
+  {
+   "narration": "Cuando revises, sé concreto. Si me dices solo que no te gusta, no sé qué cambiar. Pero si me dices que en el segundo doce el texto pasa muy rápido, o que la música tapa la voz al final, sé exactamente dónde y qué arreglar.",
+   "visual": {
+    "type": "compare",
+    "params": {
+     "left": {
+      "title": "Feedback vago",
+      "items": [
+       "No me gusta",
+       "Hazlo más bonito",
+       "Le falta algo"
+      ]
+     },
+     "right": {
+      "title": "Feedback concreto",
+      "items": [
+       "Segundo 12: texto muy rápido",
+       "La música tapa la voz al final",
+       "Logo más grande en el cierre"
+      ]
+     }
+    }
+   }
+  },
+  {
+   "narration": "Y el feedback más poderoso trae un ejemplo. Como viste con Trendy Sneakers, el primer anuncio no convenció, pero con un video de referencia entendí el estilo que buscaban. Una referencia vale más que diez adjetivos.",
+   "visual": {
+    "type": "video",
+    "params": {
+     "clip": "trendy_historia",
+     "label": "Rehecho a partir de una referencia",
+     "mode": "side"
+    }
+   }
+  },
+  {
+   "narration": "Igual de útil es decirme lo que no quieres, como la voz femenina que no te convenció. Frases como sin colores neón, o nada de música electrónica, me ahorran caminos que ibas a descartar. Y como no guardo memoria entre sesiones, deja esas preferencias escritas en un archivo del proyecto.",
+   "visual": {
+    "type": "statement",
+    "params": {
+     "text": "Dime también lo que NO quieres",
+     "accent": "NO"
+    }
+   }
+  },
+  {
+   "narration": "Aclárame también los permisos. Dime si puedo instalar un paquete puntual, usar tus fotos y tu logo, o guardar cambios en tu repositorio. Yo siempre pregunto antes de instalar algo nuevo, pero con reglas claras desde el inicio avanzamos con menos pausas.",
+   "visual": {
+    "type": "bullets",
+    "params": {
+     "heading": "Permisos claros desde el inicio",
+     "items": [
+      "Instalar un paquete puntual",
+      "Usar tus fotos y logo",
+      "Guardar cambios en el repositorio"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Mira la diferencia. Si me pides solo un video para tu tienda, tengo que adivinar casi todo. Pero si me pides un anuncio vertical de quince segundos para jóvenes, con tono divertido, tus cinco fotos y cierre con tu WhatsApp, puedo empezar de inmediato.",
+   "visual": {
+    "type": "compare",
+    "params": {
+     "left": {
+      "title": "Pedido mal hecho",
+      "items": [
+       "Hazme un video para mi tienda",
+       "Algo bonito, tú sabrás"
+      ]
+     },
+     "right": {
+      "title": "Pedido bien hecho",
+      "items": [
+       "Anuncio vertical 9:16 de 15 s",
+       "Para jóvenes de 18 a 25",
+       "Tono divertido, cierre con WhatsApp",
+       "Con mis 5 fotos adjuntas"
+      ]
+     }
+    }
+   }
+  },
+  {
+   "narration": "Aquí tienes una plantilla corta, ya llena con un ejemplo. Objetivo, público, formato, tono, cierre, datos, material y lo que no quieres. Pausa el video si quieres copiarla. Con estas ocho líneas, el primer borrador sale mucho más cerca de lo que imaginas.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "code",
+     "lang": "pedido.txt",
+     "snippet": "Objetivo: vender más tenis este mes\nPúblico: jóvenes de 18 a 25 años\nFormato: vertical 9:16, 15 segundos\nTono: divertido, como la referencia adjunta\nCierre: escríbenos al WhatsApp\nDatos: precios y número reales\nMaterial: 5 fotos, logo y colores\nNo quiero: voz femenina ni colores neón"
+    }
+   }
+  },
+  {
+   "narration": "En resumen, un buen pedido vale más que tres rondas de correcciones. Tú pones la claridad y el material. Yo pongo el guion, la animación y la paciencia para ajustar hasta que quede como lo quieres.",
+   "visual": {
+    "type": "statement",
+    "params": {
+     "text": "Un buen pedido vale más que tres correcciones",
+     "accent": "pedido"
+    }
+   }
+  }
+ ],
+ "word_count": 497
+}

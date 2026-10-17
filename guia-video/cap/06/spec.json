@@ -1,0 +1,180 @@
+{
+ "chapter": 6,
+ "title": "Audio: voz, música y efectos",
+ "beats": [
+  {
+   "narration": "Ahora vamos con lo que se escucha. Un buen audio hace que un video se sienta profesional, aunque las imágenes sean sencillas. Te muestro cómo hago la voz, la música y los efectos.",
+   "visual": {
+    "type": "title",
+    "params": {
+     "kicker": "Capítulo 6",
+     "title": "Audio: voz, música y efectos",
+     "subtitle": "La mitad de un video se escucha"
+    }
+   }
+  },
+  {
+   "narration": "La voz que oyes ahora es Kokoro, un sintetizador que corre aquí mismo, sin internet y sin costo. Es la misma voz masculina de la historia de Trendy. En español trae tres voces: una femenina y dos masculinas. La femenina no te convenció, y con tan pocas opciones, tu gusto decide.",
+   "visual": {
+    "type": "video",
+    "params": {
+     "clip": "trendy_historia",
+     "label": "Trendy: la misma voz masculina de Kokoro",
+     "mode": "phone"
+    }
+   }
+  },
+  {
+   "narration": "Seamos honestos con los límites. Son pocas voces, el acento es neutro y la emoción es más plana que la de un locutor. A cambio, sale al instante y me dice cuánto dura cada frase. Para explicadores y anuncios sencillos, funciona muy bien.",
+   "visual": {
+    "type": "compare",
+    "params": {
+     "left": {
+      "title": "Lo que Kokoro da",
+      "items": [
+       "Voz al instante",
+       "Gratis y sin internet",
+       "Se regenera al cambiar el texto",
+       "Duración exacta por frase"
+      ]
+     },
+     "right": {
+      "title": "Lo que no da",
+      "items": [
+       "Muchas voces para elegir",
+       "Acentos regionales",
+       "Emoción de locutor",
+       "Imitar tu voz"
+      ]
+     }
+    }
+   }
+  },
+  {
+   "narration": "Lo que sí controlo es cómo escribo para ella. Frases cortas, números en palabras y nada de símbolos, porque los lee mal. Pongo comas donde una persona respiraría. Y los nombres en inglés los escribo como suenan, para que no los lea letra por letra.",
+   "visual": {
+    "type": "checklist",
+    "params": {
+     "heading": "Escribir para que suene bien",
+     "items": [
+      "Frases cortas y claras",
+      "Números escritos en palabras",
+      "Sin símbolos ni abreviaturas",
+      "Comas donde se respira",
+      "Inglés como suena: Jáiper Freims"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "La música la compongo con código. Con NumPy creo cada nota como una onda y le doy forma para que arranque y se apague como un instrumento. Toda la música de esta guía la hice así. Es original y sin derechos de nadie, aunque más sencilla que una producción profesional.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "code",
+     "lang": "python",
+     "snippet": "import numpy as np, soundfile as sf\nsr = 48000\nt = np.arange(int(sr * 0.6)) / sr\nforma = np.minimum(t / 0.02, 1) * np.exp(-4 * t)\nnotas = (220, 277.2, 329.6)  # la, do sostenido, mi\nacorde = sum(np.sin(2 * np.pi * f * t) for f in notas) * forma / 3\nsf.write(\"acorde.wav\", acorde, sr)"
+    }
+   }
+  },
+  {
+   "narration": "Los efectos también los sintetizo. Un barrido de aire para las transiciones, un bip cuando aparece un dato y un golpe grave para rematar un logo. Los pongo justo en el fotograma del movimiento, para que lo que ves y lo que oyes coincidan.",
+   "visual": {
+    "type": "cards",
+    "params": {
+     "heading": "Efectos hechos con código",
+     "items": [
+      {
+       "icon": "wand",
+       "title": "Barrido (whoosh)",
+       "text": "Acompaña transiciones y movimientos rápidos"
+      },
+      {
+       "icon": "bolt",
+       "title": "Bip",
+       "text": "Marca cada dato o texto nuevo"
+      },
+      {
+       "icon": "star",
+       "title": "Golpe grave",
+       "text": "Remata el logo o la frase final"
+      },
+      {
+       "icon": "clock",
+       "title": "Sincronía",
+       "text": "Cae en el fotograma exacto"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Luego viene la mezcla, por pistas, como en un editor. La voz manda, los efectos acompañan y la música va bien por debajo. Si hace falta, hago que la música baje cuando hay voz y suba en las pausas. Eso se llama ducking.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "timeline_editor"
+    }
+   }
+  },
+  {
+   "narration": "Al final normalizo, es decir, ajusto el volumen general. Los LUFS miden qué tan fuerte percibimos un audio, y para redes apunto a menos catorce, un nivel de referencia muy usado. Así tu video no suena ni bajito ni reventado al lado de los demás.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "waveform"
+    }
+   }
+  },
+  {
+   "narration": "Y como no escucho, mido. FFmpeg me da el volumen promedio, los picos y los silencios que no deberían estar. Así revisé el anuncio de Manager App, que quedó en menos catorce LUFS.",
+   "visual": {
+    "type": "terminal",
+    "params": {
+     "title": "Medir en vez de escuchar",
+     "lines": [
+      {
+       "cmd": "ffmpeg -i mezcla.wav -af loudnorm=I=-14:TP=-1.5:LRA=11 -ar 48000 final.wav",
+       "out": "volumen ajustado a -14 LUFS"
+      },
+      {
+       "cmd": "ffmpeg -i final.wav -af ebur128=peak=true -f null -",
+       "out": "I: -14.0 LUFS   Peak: -1.6 dBFS"
+      },
+      {
+       "cmd": "ffmpeg -i final.wav -af silencedetect=noise=-45dB:d=1 -f null -",
+       "out": "sin silencios largos inesperados"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Mi recomendación: si la voz es lo más importante, grábala tú con el celular, cerca de la boca y en un cuarto sin eco. O tráela de otra herramienta. Yo le quito algo de ruido de fondo, la nivelo y armo el video alrededor de ella.",
+   "visual": {
+    "type": "statement",
+    "params": {
+     "text": "¿Quieres una voz mejor? Grábala tú.",
+     "accent": "Grábala tú"
+    }
+   }
+  },
+  {
+   "narration": "Para sincronizarla, pásame también el guion. Con las pausas que mido en tu grabación ubico cada frase, y si me das un archivo SRT, los tiempos quedan exactos. Así tienes una voz humana con una edición precisa.",
+   "visual": {
+    "type": "pipeline",
+    "params": {
+     "steps": [
+      "Tu grabación",
+      "Limpieza y nivel",
+      "Frases por pausas",
+      "Subtítulos y efectos",
+      "Música debajo",
+      "-14 LUFS"
+     ]
+    }
+   }
+  }
+ ],
+ "word_count": 470
+}

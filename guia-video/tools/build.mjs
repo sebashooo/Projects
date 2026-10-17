@@ -642,7 +642,8 @@ const DEMO = {
   },
 
   code(id, p, b, { tw, STATE }) {
-    const snippet = String(p.snippet || `<h1 id="t">Hola</h1>\ntl.from("#t", { y: 80, opacity: 0, ease: "power3.out" });`).split("\n").slice(0, 8).join("\n");
+    const unent = (x) => x.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, "&");
+    const snippet = unent(String(p.snippet || `<h1 id="t">Hola</h1>\ntl.from("#t", { y: 80, opacity: 0, ease: "power3.out" });`)).split("\n").slice(0, 8).join("\n");
     const t = b.voStart + 0.3, d = Math.min(b.vo - 0.5, Math.max(1.5, snippet.length * 0.035));
     STATE.type.push([`#${id}-c`, T(t), d, snippet]);
     tw(`#${id}-win`, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, b.s + 0.15);

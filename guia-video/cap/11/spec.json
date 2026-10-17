@@ -1,0 +1,69 @@
+{
+ "chapter": 11,
+ "title": "Cierre",
+ "beats": [
+  {
+   "narration": "Llegamos al final de esta guía. Antes de despedirme, repasemos rápido lo más importante que viste hoy.",
+   "visual": {
+    "type": "title",
+    "params": {
+     "kicker": "Capítulo 11",
+     "title": "Cierre",
+     "subtitle": "Lo que aprendiste y tu próximo video"
+    }
+   }
+  },
+  {
+   "narration": "Viste que animo con código, edito con FFmpeg el video que me des y convierto tus fotos en anuncios. Agrego subtítulos, voz y música original, y saco muchas versiones de un mismo proyecto. Y conociste mis límites, cada uno con su solución práctica.",
+   "visual": {
+    "type": "checklist",
+    "params": {
+     "heading": "Lo que aprendiste",
+     "items": [
+      "Animación y motion graphics",
+      "Edición de video con FFmpeg",
+      "Anuncios con tus fotos",
+      "Subtítulos, voz y música",
+      "Muchas versiones, un código",
+      "Límites y cómo resolverlos"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Ahora te toca a ti. Pídeme tu próximo video con un buen brief: para qué es, a quién le hablas, formato, duración, tono y qué debe hacer la gente al final. Súmale tu material real, y mientras más claro, mejor sale la primera versión.",
+   "visual": {
+    "type": "bullets",
+    "params": {
+     "heading": "Tu próximo brief",
+     "items": [
+      "Objetivo y público",
+      "Formato y duración",
+      "Tono y llamado a la acción",
+      "Fotos, logo y referencias"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Y recuerda: esta guía completa, con sus pistas de animación, voz, música y subtítulos, la hice yo con las mismas herramientas que te mostré.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "timeline_editor"
+    }
+   }
+  },
+  {
+   "narration": "Gracias de verdad por quedarte conmigo esta media hora. Estoy listo cuando tú lo estés, así que hagamos juntos tu próximo video. ¡Hasta pronto!",
+   "visual": {
+    "type": "statement",
+    "params": {
+     "text": "Hagamos juntos tu próximo video",
+     "accent": "juntos"
+    }
+   }
+  }
+ ],
+ "word_count": 152
+}

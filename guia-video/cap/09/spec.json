@@ -1,0 +1,208 @@
+{
+ "chapter": 9,
+ "title": "Mis límites y cómo resolverlos",
+ "beats": [
+  {
+   "narration": "Ahora quiero ser honesto contigo. Hay cosas que no puedo hacer desde aquí, pero casi todas tienen una solución práctica.",
+   "visual": {
+    "type": "title",
+    "params": {
+     "kicker": "Capítulo 9",
+     "title": "Mis límites y cómo resolverlos",
+     "subtitle": "Lo que no puedo hacer, y la salida para cada cosa"
+    }
+   }
+  },
+  {
+   "narration": "Este es el panorama. Puedo animar, editar, narrar y subtitular. No puedo generar imágenes ni video con inteligencia artificial, abrir enlaces bloqueados, escuchar el audio ni crear cuentas.",
+   "visual": {
+    "type": "compare",
+    "params": {
+     "left": {
+      "title": "Puedo",
+      "items": [
+       "Animar con código",
+       "Editar tus videos",
+       "Narrar y subtitular",
+       "Medir audio e imagen"
+      ]
+     },
+     "right": {
+      "title": "No puedo",
+      "items": [
+       "Generar video o fotos con IA",
+       "Abrir TikTok o YouTube",
+       "Escuchar el audio",
+       "Crear cuentas o pagar"
+      ]
+     }
+    }
+   }
+  },
+  {
+   "narration": "Empecemos por el más grande. Aquí no tengo modelos que generen imágenes ni video. Todo lo que ves en esta guía es código, o fotos y videos que tú me diste.",
+   "visual": {
+    "type": "statement",
+    "params": {
+     "text": "No genero imágenes ni video con IA",
+     "accent": "IA"
+    }
+   }
+  },
+  {
+   "narration": "La solución es repartir el trabajo. Yo escribo el guion y describo cada toma. Tú generas los clips en otra herramienta y me los subes. Yo los corto y les pongo voz, subtítulos y música.",
+   "visual": {
+    "type": "pipeline",
+    "params": {
+     "steps": [
+      "Guion y tomas",
+      "Generas los clips",
+      "Me los subes",
+      "Corto y ordeno",
+      "Voz y subtítulos",
+      "Entrega"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Segundo, los enlaces. La red aquí está restringida y no abro TikTok ni YouTube. Descarga la referencia y súbemela como archivo. Le saco un fotograma por segundo y los reviso.",
+   "visual": {
+    "type": "terminal",
+    "params": {
+     "title": "Tu referencia, subida como archivo",
+     "lines": [
+      {
+       "cmd": "ffprobe -v error -show_entries format=duration -of csv=p=0 referencia.mp4",
+       "out": "30.000000"
+      },
+      {
+       "cmd": "ffmpeg -i referencia.mp4 -vf fps=1 cuadro_%02d.png",
+       "out": "cuadro_01.png … cuadro_30.png"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Tercero, no escucho el audio ni reproduzco video en tiempo real. Mido el volumen y los picos, y miro fotogramas sueltos. Por eso tu revisión vale oro. Dime en qué segundo algo suena o se ve raro.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "waveform"
+    }
+   }
+  },
+  {
+   "narration": "Cuarto, la voz. Tengo solo tres voces locales en español, y la femenina no te convenció. Graba tu voz o tráela de otra herramienta, y yo la sincronizo y la mezclo. Como aquí no tengo transcripción automática, para subtítulos exactos pásame también un SRT.",
+   "visual": {
+    "type": "bullets",
+    "params": {
+     "heading": "¿Quieres una voz mejor?",
+     "items": [
+      "Graba tu propia voz",
+      "Tráela de otra herramienta",
+      "Yo la sincronizo y mezclo",
+      "Pásame un archivo SRT"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Quinto, la velocidad. Sin tarjeta gráfica, treinta segundos en alta definición tardan entre minuto y medio y dos minutos en renderizar. Por eso primero te muestro el storyboard y fotogramas de prueba, y el render completo va cuando apruebes.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "storyboard"
+    }
+   }
+  },
+  {
+   "narration": "Sexto, las instalaciones. Puedo instalar paquetes de JavaScript, librerías de Python y proyectos de GitHub, siempre pidiéndote permiso. Lo que vive en sitios bloqueados, como muchos modelos de inteligencia artificial, queda fuera de mi alcance.",
+   "visual": {
+    "type": "cards",
+    "params": {
+     "heading": "Instalo solo con tu permiso",
+     "items": [
+      {
+       "icon": "box",
+       "title": "Paquetes de JavaScript",
+       "text": "Librerías de animación y video"
+      },
+      {
+       "icon": "code",
+       "title": "Librerías de Python",
+       "text": "Análisis de audio e imagen"
+      },
+      {
+       "icon": "globe",
+       "title": "Proyectos de GitHub",
+       "text": "Herramientas de código abierto"
+      },
+      {
+       "icon": "x",
+       "title": "Sitios bloqueados",
+       "text": "Muchos modelos de IA quedan fuera"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Séptimo, no creo cuentas, no pago servicios y desde aquí no publico en tus redes. Te entrego los archivos listos para cada plataforma, con el texto de la publicación escrito, y tú publicas.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "formats"
+    }
+   }
+  },
+  {
+   "narration": "Octavo, no recuerdo nada de una conversación a otra. Lo que queda son los archivos. Por eso guardo el brief y las decisiones en el proyecto, y desde ahí retomamos.",
+   "visual": {
+    "type": "terminal",
+    "params": {
+     "title": "Lo que queda entre conversaciones",
+     "lines": [
+      {
+       "cmd": "ls mi-proyecto",
+       "out": "brief.md  guion.md  index.html  final.mp4"
+      },
+      {
+       "cmd": "git log --oneline -1",
+       "out": "a1b2c3d Versión aprobada"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Además, Claude Code puede correr en tu propio computador. Ahí podría usar tus programas y archivos, con tu permiso, y si tu equipo es más potente, renderizar más rápido.",
+   "visual": {
+    "type": "statement",
+    "params": {
+     "text": "Claude Code también corre en tu computador",
+     "accent": "tu computador"
+    }
+   }
+  },
+  {
+   "narration": "En resumen. Súbeme archivos, no enlaces. Genera los clips afuera y yo los edito. Graba tu voz. Dame permisos claros. Guardemos todo en el proyecto. Y dime el segundo exacto. Lo que me falta, lo completamos juntos.",
+   "visual": {
+    "type": "checklist",
+    "params": {
+     "heading": "Cada límite tiene salida",
+     "items": [
+      "Súbeme archivos, no enlaces",
+      "Genera clips, yo los edito",
+      "Graba tu voz o tráela",
+      "Dame permisos claros",
+      "Guardemos todo en el proyecto",
+      "Dime el segundo exacto"
+     ]
+    }
+   }
+  }
+ ],
+ "word_count": 428
+}

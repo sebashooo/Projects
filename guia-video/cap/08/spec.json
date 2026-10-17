@@ -1,0 +1,165 @@
+{
+ "chapter": 8,
+ "title": "Producción a escala: plantillas y versiones",
+ "beats": [
+  {
+   "narration": "Capítulo ocho. Una de mis ventajas más útiles es esta. Yo no hago un solo video, hago una plantilla que produce muchos videos con el mismo trabajo.",
+   "visual": {
+    "type": "title",
+    "params": {
+     "kicker": "Capítulo 8",
+     "title": "Producción a escala",
+     "subtitle": "Plantillas, variables y renders por lote"
+    }
+   }
+  },
+  {
+   "narration": "Como mis videos son código, cada escena, texto y color vive en archivos. Si cambio un dato y vuelvo a generar el video, sale con el cambio, sin rehacer nada a mano.",
+   "visual": {
+    "type": "statement",
+    "params": {
+     "text": "Un código, muchas versiones",
+     "accent": "muchas versiones"
+    }
+   }
+  },
+  {
+   "narration": "Mira el anuncio de Manager App. Esta es la versión principal, de treinta segundos en vertical, con voz, subtítulos, efectos y música.",
+   "visual": {
+    "type": "video",
+    "params": {
+     "clip": "manager_30s",
+     "label": "Manager App · 30 s vertical",
+     "mode": "phone"
+    }
+   }
+  },
+  {
+   "narration": "Y esta es la cuadrada, para publicaciones. También hay una corta de quince segundos. Las tres salen del mismo programa, que define el tamaño y la duración de cada una. No son tres ediciones separadas.",
+   "visual": {
+    "type": "video",
+    "params": {
+     "clip": "manager_cuadrado",
+     "label": "Mismo código · versión 1:1",
+     "mode": "side"
+    }
+   }
+  },
+  {
+   "narration": "Ojo, la versión corta no es la larga acelerada. De las ocho escenas, la de quince segundos usa solo cinco, con algunas frases de voz más cortas. Y en la cuadrada, la plantilla reacomoda el celular y los subtítulos.",
+   "visual": {
+    "type": "bullets",
+    "params": {
+     "heading": "Cada versión, a su medida",
+     "items": [
+      "30 s: ocho escenas",
+      "15 s: solo cinco escenas",
+      "Frases de voz más cortas",
+      "1:1: celular y subtítulos reacomodados"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "El truco son las variables, datos con nombre como el número de WhatsApp o la dirección de la página. Los escribo una sola vez al inicio del archivo y todas las versiones los leen de ahí.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "code",
+     "lang": "js",
+     "snippet": "// tools/build.mjs · CAMBIA AQUÍ\nconst WHATSAPP = \"+57 300 000 0000\";\nconst URL_SITIO = \"managerapp-eight.vercel.app\";\nconst VARIANTS = {\n  v30:  { W: 1080, H: 1920, dur: 30 },\n  v15:  { W: 1080, H: 1920, dur: 15 },\n  sq30: { W: 1080, H: 1080, dur: 30 },\n};"
+    }
+   }
+  },
+  {
+   "narration": "Eso pasó de verdad. El anuncio quedó listo con un espacio reservado para el WhatsApp. Cuando tuve el número, cambié esa sola línea, generé otra vez las tres versiones y en pocos minutos las tenía, idénticas en todo lo demás.",
+   "visual": {
+    "type": "statement",
+    "params": {
+     "text": "Nuevo WhatsApp en minutos",
+     "accent": "minutos"
+    }
+   }
+  },
+  {
+   "narration": "Cuando hay varias versiones, las genero en lote. HyperFrames también puede leer una lista, por ejemplo de productos con sus precios, y sacar un video por cada uno, si la plantilla tiene esos datos como variables. Eso sí, aquí cada video tarda en generarse unas tres o cuatro veces lo que dura.",
+   "visual": {
+    "type": "terminal",
+    "params": {
+     "title": "Versiones y renders por lote",
+     "lines": [
+      {
+       "cmd": "node tools/build.mjs",
+       "out": "ok index.html · corto-15s · cuadrado-30s"
+      },
+      {
+       "cmd": "npx hyperframes render variantes/corto-15s -o renders/managerapp-15s-vertical.mp4",
+       "out": "Listo: managerapp-15s-vertical.mp4"
+      },
+      {
+       "cmd": "npx hyperframes render variantes/cuadrado-30s -o renders/managerapp-30s-cuadrado.mp4",
+       "out": "Listo: managerapp-30s-cuadrado.mp4"
+      },
+      {
+       "cmd": "npx hyperframes render . --batch productos.json",
+       "out": "Un video por cada fila de la lista"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Esto también protege tu marca. En Manager App tomé los colores y la tipografía Geist de su archivo de diseño, y las tres versiones los usan igual. Ni un azul distinto en la cuadrada, ni otra letra en la corta.",
+   "visual": {
+    "type": "cards",
+    "params": {
+     "heading": "Consistencia de marca",
+     "items": [
+      {
+       "icon": "palette",
+       "title": "Colores de la marca",
+       "text": "Leídos del DESIGN.md, iguales en todo"
+      },
+      {
+       "icon": "text",
+       "title": "Tipografía Geist",
+       "text": "La misma letra en cada versión"
+      },
+      {
+       "icon": "layers",
+       "title": "Mismas escenas",
+       "text": "Mismo diseño, distinto tamaño y duración"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Por eso te conviene pedirme todo el paquete desde el principio, con formatos, duraciones y datos reales. Si sé de entrada que habrá versión cuadrada y corta, diseño las escenas pensando en ellas y no tengo que forzarlas después.",
+   "visual": {
+    "type": "checklist",
+    "params": {
+     "heading": "Pídeme el paquete completo",
+     "items": [
+      "Vertical 9:16 para Reels y TikTok",
+      "Cuadrado 1:1 para publicaciones",
+      "Horizontal 16:9 si usas YouTube",
+      "Versiones de 30 y 15 segundos",
+      "Precios, teléfonos y enlaces reales"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "En resumen, con una buena plantilla, cambiar un precio, un texto o un formato ya no es rehacer el video. Es cambiar un dato y esperar a que se genere de nuevo.",
+   "visual": {
+    "type": "statement",
+    "params": {
+     "text": "Cambia un dato, no el video",
+     "accent": "un dato"
+    }
+   }
+  }
+ ],
+ "word_count": 394
+}

@@ -1,0 +1,210 @@
+{
+ "chapter": 7,
+ "title": "Explicadores, interfaces y datos",
+ "beats": [
+  {
+   "narration": "Ahora vamos con los videos que enseñan. Explicadores, tutoriales, interfaces de apps y datos en movimiento. Aquí no basta con que se vea bonito. Tiene que entenderse a la primera.",
+   "visual": {
+    "type": "title",
+    "params": {
+     "kicker": "Capítulo 7",
+     "title": "Explicadores, interfaces y datos",
+     "subtitle": "Videos que enseñan, muestran y convencen"
+    }
+   }
+  },
+  {
+   "narration": "Recuerda el caso DART. Tú me subiste una animación muda sobre la misión de la NASA, con derivadas y probabilidad. En el capítulo cuatro viste cómo resolví el tiempo. Escribí la narración escena por escena, para que la matemática se entendiera como una historia.",
+   "visual": {
+    "type": "video",
+    "params": {
+     "clip": "dart_narrado",
+     "label": "DART: explicador narrado",
+     "mode": "side"
+    }
+   }
+  },
+  {
+   "narration": "Mi receta para explicar es sencilla. Una idea por escena, un ejemplo concreto, una imagen que muestre lo mismo que dice la voz y un repaso corto al final. Esta guía sigue esa misma receta.",
+   "visual": {
+    "type": "bullets",
+    "params": {
+     "heading": "Receta de un buen explicador",
+     "items": [
+      "Una idea por escena",
+      "Un ejemplo concreto",
+      "Imagen igual a la voz",
+      "Repaso corto al final"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "En el anuncio de Manager App no usé capturas de pantalla. Redibujé la app en HTML, el lenguaje de las páginas web, con los colores y la tipografía Geist que leí de su archivo de diseño. Ahí aparecen la venta, el inventario y la caja.",
+   "visual": {
+    "type": "video",
+    "params": {
+     "clip": "manager_30s",
+     "label": "Manager App: interfaz en HTML",
+     "mode": "phone"
+    }
+   }
+  },
+  {
+   "narration": "Y aquí tienes una interfaz de ejemplo animada en vivo. Ojo, es una recreación, no la app funcionando de verdad. Por eso necesito saber qué pantallas existen y cómo se ven.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "phone_ui"
+    }
+   }
+  },
+  {
+   "narration": "¿Por qué no una captura? Porque lo redibujado queda nítido en cualquier tamaño, cada botón se anima por separado y, si cambia un precio, edito un texto y vuelvo a renderizar. Además, no se cuela información privada de tu negocio.",
+   "visual": {
+    "type": "compare",
+    "params": {
+     "left": {
+      "title": "Interfaz redibujada",
+      "items": [
+       "Nítida en cualquier tamaño",
+       "Cada elemento se anima",
+       "Cambios en minutos",
+       "Sin datos privados"
+      ]
+     },
+     "right": {
+      "title": "Captura de pantalla",
+      "items": [
+       "Se pixela al ampliar",
+       "Imagen quieta",
+       "Hay que repetirla",
+       "Puede exponer datos privados"
+      ]
+     }
+    }
+   }
+  },
+  {
+   "narration": "Los datos también se animan. Un contador que sube hasta un millón doscientos cincuenta mil pesos llama más la atención que una cifra quieta, y lo sincronizo con la frase que lo nombra.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "counter",
+     "from": 0,
+     "to": 1250000,
+     "prefix": "$",
+     "label": "Ventas del mes (ejemplo)"
+    }
+   }
+  },
+  {
+   "narration": "En una gráfica de barras, cada barra puede crecer en el momento en que la voz la menciona. Me pasas una tabla, aunque sea copiada de una hoja de cálculo, y la convierto en animación con tus colores.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "bar_chart",
+     "title": "Ventas por mes (ejemplo)",
+     "labels": [
+      "Ene",
+      "Feb",
+      "Mar",
+      "Abr",
+      "May"
+     ],
+     "values": [
+      18,
+      24,
+      21,
+      30,
+      37
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Las cifras que acabas de ver son de ejemplo. En tu video, los números deben ser tuyos y reales. Yo no invento estadísticas, y si falta un dato, te lo pregunto.",
+   "visual": {
+    "type": "statement",
+    "params": {
+     "text": "Datos reales, nunca inventados",
+     "accent": "reales"
+    }
+   }
+  },
+  {
+   "narration": "Con los diagramas pasa igual. Un proceso, como un pedido desde que el cliente compra hasta que lo recibe, se arma por partes, y cada paso aparece justo cuando lo explico.",
+   "visual": {
+    "type": "pipeline",
+    "params": {
+     "steps": [
+      "Pedido",
+      "Pago",
+      "Preparación",
+      "Envío",
+      "Entrega"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Con todo esto armo tutoriales de producto. Marco cada toque, acerco la cámara al botón importante y nombro cada acción. Y si me subes una grabación de pantalla de tu app, también la edito con acercamientos y rótulos.",
+   "visual": {
+    "type": "cards",
+    "params": {
+     "heading": "Tutoriales de producto",
+     "items": [
+      {
+       "icon": "phone",
+       "title": "Paso a paso",
+       "text": "Cada toque señalado en pantalla"
+      },
+      {
+       "icon": "eye",
+       "title": "Zoom al detalle",
+       "text": "La cámara se acerca al botón"
+      },
+      {
+       "icon": "text",
+       "title": "Rótulos claros",
+       "text": "Nombre corto para cada acción"
+      },
+      {
+       "icon": "film",
+       "title": "Tu grabación",
+       "text": "Edito la grabación de tu pantalla"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Y si tu tema es programación, también animo código, como si alguien lo tecleara. Este fragmento es GSAP real y hace un contador como el que viste. Sirve para cursos, documentación o proyectos técnicos.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "code",
+     "lang": "html",
+     "snippet": "<div id=\"precio\">0</div>\n<script>\n  const tl = gsap.timeline({ paused: true });\n  tl.to(\"#precio\", {\n    innerText: 1250000, duration: 2,\n    snap: { innerText: 1 }\n  });\n</script>"
+    }
+   }
+  },
+  {
+   "narration": "Para estos videos, dame el tema, para quién es, tus colores o tu archivo de diseño, los datos reales en una tabla y la lista de pantallas que existen. Con eso, la primera versión sale mucho más cerca de lo que buscas.",
+   "visual": {
+    "type": "checklist",
+    "params": {
+     "heading": "Lo que necesito de ti",
+     "items": [
+      "Tema o guion base",
+      "Para quién es el video",
+      "Colores, logo o archivo de diseño",
+      "Datos reales en una tabla",
+      "Lista de pantallas que existen"
+     ]
+    }
+   }
+  }
+ ],
+ "word_count": 472
+}

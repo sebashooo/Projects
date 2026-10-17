@@ -1,0 +1,307 @@
+1
+00:00:00,900 --> 00:00:08,656
+Hola, qué bueno tenerte aquí. Este video de media hora lo hice yo, de principio a fin, con las mismas herramientas que te voy a mostrar.
+
+2
+00:00:09,356 --> 00:00:19,992
+Soy Claude, tu asistente. Yo escribí el guion y el código de cada animación, generé esta voz con Kokoro y sinteticé la música con código. Un computador en la nube lo convirtió en video.
+
+3
+00:00:20,692 --> 00:00:29,749
+No te voy a hablar en abstracto. Vas a ver ejemplos reales que hicimos juntos, como la misión DART, el anuncio de Manager App y la historia de Trendy Sneakers.
+
+4
+00:00:30,449 --> 00:00:39,961
+Primero te cuento dónde y cómo trabajo, y con qué herramientas. Luego vienen la animación, los videos con tus fotos, la edición con FFmpeg y los subtítulos.
+
+5
+00:00:40,661 --> 00:00:51,104
+Después, el audio, los videos explicativos con datos, cómo hacer muchas versiones de un mismo video, mis límites contados sin rodeos y, al final, cómo sacarme el mejor provecho.
+
+6
+00:00:51,804 --> 00:01:01,757
+Mi promesa es sencilla. Te voy a mostrar las cosas funcionando en pantalla, no solo a nombrarlas, y te diré con honestidad hasta dónde llego. Acomódate, que ya arrancamos.
+
+7
+00:01:04,067 --> 00:01:11,545
+Antes de los trucos, te cuento cómo trabajo. Dónde corro, qué herramientas uso, cuál es mi proceso y cómo reviso cada video.
+
+8
+00:01:12,245 --> 00:01:22,902
+Trabajo en Claude Code, en un contenedor Linux en la nube, que es como un computador prestado, no el tuyo. Tiene cuatro núcleos y quince gigas de memoria, pero no tiene tarjeta gráfica.
+
+9
+00:01:23,602 --> 00:01:33,939
+Ahí tengo mis herramientas, cada una con su papel. Una aclaración honesta. Remotion, que hace video con React, ya está instalado, pero todavía no lo he usado en tus proyectos.
+
+10
+00:01:34,639 --> 00:01:44,966
+La pieza central es HyperFrames. Diseño cada escena como una página web, y HyperFrames la abre en un navegador y la graba cuadro por cuadro hasta convertirla en video.
+
+11
+00:01:45,666 --> 00:01:54,659
+El movimiento lo pongo con GSAP, sobre una línea de tiempo como la de un editor. Le digo que el título entra en el segundo dos y la tarjeta gira en el tres.
+
+12
+00:01:55,359 --> 00:02:06,059
+FFmpeg es mi navaja suiza para video que ya existe. Leo los datos de un archivo, le pego la voz a la imagen y convierto formatos. Lo vemos a fondo en el capítulo cuatro.
+
+13
+00:02:06,759 --> 00:02:19,080
+Con Python y NumPy compongo música original, sencilla pero sin derechos de terceros, y sintetizo efectos como whoosh o bip. Con Kokoro genero voz en español aquí mismo, con tres voces para escoger.
+
+14
+00:02:19,780 --> 00:02:30,693
+Siempre sigo el mismo camino. Primero tu brief, o sea, tu pedido con objetivo, público y formato. Luego guion, storyboard, render, que es fabricar el archivo final, revisión y entrega.
+
+15
+00:02:31,393 --> 00:02:42,498
+El storyboard es el plan del video, escena por escena, con sus tiempos. Lo apruebas antes del render, y eso ahorra mucho. Cambiar una viñeta es rápido. Rehacer un video terminado, no tanto.
+
+16
+00:02:43,198 --> 00:02:54,623
+El render es el paso lento. Sin tarjeta gráfica, un video en alta definición tarda tres o cuatro veces su duración. Un anuncio de treinta segundos toma entre minuto y medio y dos minutos.
+
+17
+00:02:55,323 --> 00:03:05,682
+No reproduzco el video en tiempo real ni escucho el sonido. Saco fotogramas sueltos y los miro como fotos, buscando textos cortados, colores raros o cosas fuera de lugar.
+
+18
+00:03:06,382 --> 00:03:18,916
+Los fotogramas los saco con FFmpeg. El sonido lo reviso con números. Mido el volumen en LUFS, la unidad con que las redes nivelan el audio, y también picos y silencios. Si algo falla, corrijo y vuelvo a medir.
+
+19
+00:03:19,616 --> 00:03:32,321
+Antes de entregarte algo paso una lista. Textos legibles y en zonas seguras, donde los botones de las redes no los tapan. Voz y subtítulos sincronizados, volumen a menos catorce LUFS y el formato que pediste.
+
+20
+00:03:33,021 --> 00:03:43,571
+Un último detalle. No guardo memoria entre conversaciones. Lo que queda son los archivos y el repositorio, y con eso retomo un video sin empezar de cero. Ahora sí, vamos a animar.
+
+21
+00:03:45,900 --> 00:03:56,778
+Capítulo dos. Animación y motion graphics, o sea, gráficos en movimiento. Aquí no te lo cuento, te lo muestro. Cada movimiento de este capítulo lo escribí yo, en código, para este video.
+
+22
+00:03:57,478 --> 00:04:06,457
+Primero, la idea clave, la línea de tiempo. Funciona como las pistas de un editor de video. Define qué elemento se mueve, en qué segundo empieza y cuánto dura.
+
+23
+00:04:07,157 --> 00:04:16,428
+Así se escribe con GSAP. Esta línea sube el título desde abajo al medio segundo. Esta otra agranda el logo en el segundo uno coma dos, con un pequeño rebote.
+
+24
+00:04:17,128 --> 00:04:28,553
+El truco es que esa línea de tiempo está en pausa. HyperFrames salta a cada fotograma exacto y lo captura con Chromium. Por eso es determinista, el mismo código da el mismo video en cada render.
+
+25
+00:04:29,253 --> 00:04:38,502
+Empecemos con tipografía cinética, palabras que entran, crecen y cambian al ritmo de la voz. Es ideal para el gancho de los primeros tres segundos en redes.
+
+26
+00:04:39,202 --> 00:04:52,055
+Mira estos cuatro movimientos. Misma distancia, mismo tiempo, pero distinta curva, lo que se llama easing. El lineal se ve mecánico. El suave frena al llegar y se siente natural. Los otros dos rebotan, para algo juguetón.
+
+27
+00:04:52,755 --> 00:05:00,777
+¿Por qué importa? Porque en la vida real nada arranca ni frena de golpe. Una buena curva hace que tu video se sienta profesional y no barato.
+
+28
+00:05:01,477 --> 00:05:11,708
+Las transiciones unen escenas. Aquí tienes un whip, que es un giro rápido de cámara, luego un zoom, un destello, un barrido y una máscara. Mi regla es usar pocas y con intención.
+
+29
+00:05:12,408 --> 00:05:21,892
+Una máscara es una forma que decide qué parte se ve. Así el texto aparece tras una barra de luz o sale de una ranura, y una foto se descubre en un círculo que crece.
+
+30
+00:05:22,592 --> 00:05:32,480
+Ahora, los trazos. Un SVG es un dibujo descrito con matemáticas, por eso se ve nítido a cualquier tamaño. Y como está hecho de líneas, puedo dibujarlas frente a ti.
+
+31
+00:05:33,180 --> 00:05:40,808
+Así. Sirve para una flecha que señala tu producto, una firma, un diagrama o la ruta de un domicilio sobre un mapa sencillo.
+
+32
+00:05:41,508 --> 00:05:52,442
+También manejo profundidad. Estas tarjetas y este cubo giran en tres dimensiones. Te soy honesto, es un efecto ligero para productos o pantallas, no para modelar personajes animados.
+
+33
+00:05:53,142 --> 00:06:03,607
+Otro clásico son los rótulos, que en inglés llaman lower thirds porque van en el tercio inferior. Sirven para nombre y cargo, producto y precio, un dato clave o tu usuario de redes.
+
+34
+00:06:04,307 --> 00:06:12,980
+Entra rápido, se queda lo justo para leerlo y no tapa lo importante. Lo adapto a tus colores y tipografía, como hice con la identidad de Manager App.
+
+35
+00:06:13,680 --> 00:06:24,923
+Para abrir o cerrar, una animación de logo de dos o tres segundos, aquí letra por letra. Si me das tu logo en SVG, animo cada pieza por separado. Si es una imagen plana, la animo completa.
+
+36
+00:06:25,623 --> 00:06:35,000
+Un detalle sobre las partículas. Parecen moverse al azar, pero ese azar sale de una semilla fija, un número de partida. Por eso se mueven igual en cada render.
+
+37
+00:06:35,700 --> 00:06:45,823
+Como este confeti para un lanzamiento, chispas para una oferta o polvo de luz de fondo. Eso sí, con moderación, porque demasiadas partículas distraen y alargan el render.
+
+38
+00:06:46,523 --> 00:06:56,114
+Los contadores también funcionan muy bien, porque una cifra que sube pega más que una quieta. Este número es de ejemplo. En tu video solo uso datos reales que tú me des.
+
+39
+00:06:56,814 --> 00:07:07,877
+La magia está en combinar. Un anuncio de treinta segundos puede usar varias de estas técnicas. Y como todo es código, cambiar un color, un texto o un tiempo es editar y volver a renderizar.
+
+40
+00:07:10,200 --> 00:07:18,873
+Capítulo tres. Aquí te muestro cómo convierto las fotos de tus productos en anuncios con movimiento, y te cuento un caso real de una tienda de tenis.
+
+41
+00:07:19,573 --> 00:07:32,086
+Una foto quieta dentro de un video se siente plana. Por eso le pongo una cámara virtual, un acercamiento lento o un desplazamiento suave de lado. Se llama efecto Ken Burns, y le da vida a este tenis aunque es una sola foto.
+
+42
+00:07:32,786 --> 00:07:47,667
+Muchas veces la foto no tiene la forma del video. Como veo la imagen, elijo un recorte que deje el producto completo, o la pongo entera sobre una copia difuminada de sí misma. Lo que nunca hago es estirarla, porque un producto deformado se nota al instante.
+
+43
+00:07:48,367 --> 00:08:00,409
+También ajusto el color, más cálido, más frío o con más contraste, y emparejo el tono de todas para que se vean como un solo anuncio. Eso sí, corrijo luz y color, no invento detalles que la foto no tiene.
+
+44
+00:08:01,109 --> 00:08:14,872
+Luego pienso en dónde se va a ver. Vertical para TikTok e historias, cuadrado para publicaciones, horizontal para YouTube. Y dejo lo importante en las zonas seguras, las partes de la pantalla que no tapan los botones ni los textos de la red.
+
+45
+00:08:15,572 --> 00:08:26,720
+Ahora, el caso real. Para Trendy Sneakers hice primero este anuncio con sus fotos, en versiones de veintiocho y quince segundos. Tenía movimiento y textos claros, pero al cliente no le gustó.
+
+46
+00:08:27,420 --> 00:08:39,655
+Y aquí viene lo valioso. En vez de solo decir que no, me mostró un video de referencia, una historia narrada con subtítulo palabra por palabra. Eso me explicó lo que buscaba mucho mejor que cualquier descripción.
+
+47
+00:08:40,355 --> 00:08:57,774
+Entonces cambié el enfoque. Armé un panel de agentes, varios ayudantes de inteligencia artificial. Unos escribieron guiones y otros los calificaron como jueces. Ganó una historia de misterio, El secreto del barrio. Le puse voz masculina y monté las fotos a pantalla completa con una cámara continua.
+
+48
+00:08:58,474 --> 00:09:09,579
+Este es el resultado. Usé las fotos de la misma tienda, pero ahora cuentan una historia, siguiendo el estilo de su referencia. La lección es que la forma de contar importa tanto como el material.
+
+49
+00:09:10,279 --> 00:09:23,240
+¿Y qué fotos me sirven más? Las que tienen buena luz, ojalá natural, el producto bien enfocado y un fondo limpio. Mándame varios ángulos y detalles de cerca, en el archivo original y sin filtros, porque el color lo ajusto yo.
+
+50
+00:09:23,940 --> 00:09:41,040
+Un truco al tomarlas es dejar aire alrededor del producto y hacer cada foto en vertical y en horizontal, así la encuadro en cualquier formato. Evita capturas de pantalla y marcas de agua de otros. En Trendy quité una recortando, pero no siempre se puede, y la foto debe ser tuya o tener permiso.
+
+51
+00:09:41,740 --> 00:09:51,651
+En resumen, tú pones buenas fotos y yo les doy movimiento, color, formato y, si quieres, una historia. En el siguiente capítulo pasamos a editar video que ya existe.
+
+52
+00:09:53,967 --> 00:10:06,075
+Hasta ahora te mostré cómo creo videos desde cero. Pero muchas veces ya tienes un video y solo necesitas editarlo. Para eso uso FFmpeg, un programa sin ventanas que manejo con instrucciones escritas.
+
+53
+00:10:06,775 --> 00:10:20,546
+Con FFmpeg corto, junto clips, cambio la velocidad, reencuadro, corrijo el color, quemo subtítulos, comprimo y saco fotogramas o GIF. Cada edición es una instrucción exacta, así que la puedo repetir igual cuantas veces quieras.
+
+54
+00:10:21,246 --> 00:10:31,242
+Empecemos por cortar. Aquí tomo la animación de la misión DART y le indico el segundo donde empieza el fragmento y cuánto dura. FFmpeg saca exactamente esa parte.
+
+55
+00:10:31,942 --> 00:10:44,230
+Por dentro se ve así. La primera línea recorta. Las otras dos arman una lista y unen los clips en ese orden. Si comparten tamaño y formato, los pego sin volver a procesar la imagen, y eso toma segundos.
+
+56
+00:10:44,930 --> 00:10:57,912
+Cambiar la velocidad es igual de sencillo: aquí va al doble. Si hay sonido, ajusto el audio aparte para que las voces no suenen agudas. Y la cámara lenta se ve más fluida si el video se grabó con muchos cuadros por segundo.
+
+57
+00:10:58,612 --> 00:11:09,631
+Uno de los más útiles: pasar de horizontal a vertical, de dieciséis por nueve a nueve por dieciséis, para TikTok o Reels. Elijo qué parte del cuadro conservar, sin estirar ni deformar nada.
+
+58
+00:11:10,331 --> 00:11:22,481
+Estos son los comandos, y al final compruebo el tamaño. Ojo: lo que queda por fuera se pierde, y al ampliar solo una parte baja un poco la nitidez. Si hay algo importante a los lados, uso un fondo difuminado.
+
+59
+00:11:23,181 --> 00:11:34,861
+También corrijo el color: aquí, un tono más cálido. Ajusto brillo, contraste, saturación y balance, o lo paso a blanco y negro. Es una corrección general, no el retoque fino de un programa profesional.
+
+60
+00:11:35,561 --> 00:11:46,858
+Y quemo subtítulos desde un archivo con textos y tiempos, como un SRT. Quemados quiere decir que hacen parte de la imagen: se ven en cualquier red, aunque la persona tenga los subtítulos apagados.
+
+61
+00:11:47,558 --> 00:11:59,666
+Para completar: comprimo para que pese menos y lo puedas mandar por WhatsApp, extraigo fotogramas como imágenes y convierto fragmentos en GIF. Esos fotogramas, además, son la forma en que reviso cada edición.
+
+62
+00:12:00,366 --> 00:12:12,965
+Ahora, un caso real. Me subiste esta animación sobre la misión DART de la NASA: sesenta y cuatro segundos, sin sonido. Había que narrarla en español con subtítulos, pero la explicación no cabía en tan poco tiempo.
+
+63
+00:12:13,665 --> 00:12:27,404
+Tenía dos caminos malos: acelerar la voz o recortar la explicación. Elegí un tercero: dividí la animación por escenas, medí cuánto duraba la narración de cada una y puse más lenta cada escena que no alcanzaba, justo hasta ese largo.
+
+64
+00:12:28,104 --> 00:12:40,905
+Todo eso, junto con la voz y los subtítulos quemados, lo armé en un solo comando de FFmpeg. Pasó de un minuto y cuatro segundos a un minuto y cincuenta y dos: la voz respira y los subtítulos se alcanzan a leer.
+
+65
+00:12:41,605 --> 00:12:54,404
+Para sacarle provecho: súbeme el archivo original, en la mejor calidad, y dime los segundos exactos que quieres cambiar. Como cada edición queda escrita, si cambias de idea, la repito con un ajuste, sin empezar de cero.
+
+66
+00:12:56,733 --> 00:13:05,043
+Capítulo cinco, subtítulos y texto en pantalla. Mucha gente ve videos en el celular sin sonido, y ahí el texto es lo único que le llega.
+
+67
+00:13:05,743 --> 00:13:20,410
+Trabajo con tres estilos. Frase completa, la clásica. Palabra por palabra, el estilo rápido de TikTok. Y karaoke, donde ves la frase entera y se resalta la palabra que va sonando. Los animo en HyperFrames, con la letra y los colores de tu marca.
+
+68
+00:13:21,110 --> 00:13:32,215
+Así se ve palabra por palabra: cada una sale grande, centrada y al ritmo de la voz. Es el estilo que tomé del video de referencia para la historia de Trendy Sneakers, porque engancha la mirada.
+
+69
+00:13:32,915 --> 00:13:41,972
+Y este es el karaoke, el que usé en el anuncio de Manager App. La frase completa da contexto, y la palabra resaltada va guiando el ojo al ritmo de la voz.
+
+70
+00:13:42,672 --> 00:13:51,921
+Hay dos formas de entregarlos. En la animación de DART van quemados, es decir, el texto queda pegado a la imagen y se ve en cualquier reproductor, sin activar nada.
+
+71
+00:13:52,621 --> 00:14:02,169
+La otra es un archivo SRT, un texto con el inicio y el fin de cada frase. Te lo entrego aparte, lo subes con el video, y quien lo ve puede prenderlo o apagarlo.
+
+72
+00:14:02,869 --> 00:14:14,469
+Para que se lea bien sigo reglas sencillas. Letra grande y buen contraste, con borde o franja oscura. Máximo dos líneas cortas. Y cortes donde la voz hace pausa, nunca a mitad de una idea.
+
+73
+00:14:15,169 --> 00:14:24,802
+Y cuido las zonas seguras. En TikTok y Reels, la descripción y los botones tapan la parte de abajo y el lado derecho, así que subo el texto para que nada lo esconda.
+
+74
+00:14:25,502 --> 00:14:38,441
+También traduzco. Si necesitas el video en inglés o portugués, traduzco los subtítulos y ajusto los cortes, porque cada idioma ocupa distinto espacio. Si el texto es delicado, conviene que lo revise un hablante nativo.
+
+75
+00:14:39,141 --> 00:14:47,857
+Ahora, un límite honesto. Aquí no tengo instalado un modelo de transcripción como Whisper, así que no puedo convertir tu audio en texto por mi cuenta.
+
+76
+00:14:48,557 --> 00:15:02,051
+Lo resuelvo así. Si la voz la genero yo con Kokoro, sé qué dice cada frase y cuánto dura, y estimo el momento de cada palabra. Si traes tu propia voz, pásame su SRT, sacado de otra herramienta, y lo convierto al estilo que elijas.
+
+77
+00:15:02,751 --> 00:15:12,789
+Mi consejo: dime desde el pedido qué estilo quieres y dónde vas a publicar. Así decido tamaño, posición y ritmo del texto desde el principio, no como parche al final.

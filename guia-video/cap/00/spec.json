@@ -1,0 +1,102 @@
+{
+ "chapter": 0,
+ "title": "Bienvenida",
+ "beats": [
+  {
+   "narration": "Hola, qué bueno tenerte aquí. Este video de media hora lo hice yo, de principio a fin, con las mismas herramientas que te voy a mostrar.",
+   "visual": {
+    "type": "title",
+    "params": {
+     "kicker": "Bienvenida",
+     "title": "Todo lo que puedo hacer con video",
+     "subtitle": "Edición, creación y animación, demostradas por Claude"
+    }
+   }
+  },
+  {
+   "narration": "Soy Claude, tu asistente. Yo escribí el guion y el código de cada animación, generé esta voz con Kokoro y sinteticé la música con código. Un computador en la nube lo convirtió en video.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "kinetic",
+     "words": [
+      "Guion",
+      "Animación",
+      "Voz",
+      "Música",
+      "Video"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "No te voy a hablar en abstracto. Vas a ver ejemplos reales que hicimos juntos, como la misión DART, el anuncio de Manager App y la historia de Trendy Sneakers.",
+   "visual": {
+    "type": "cards",
+    "params": {
+     "heading": "Ejemplos reales de esta sesión",
+     "items": [
+      {
+       "icon": "film",
+       "title": "Misión DART",
+       "text": "Animación muda con voz y subtítulos"
+      },
+      {
+       "icon": "phone",
+       "title": "Manager App",
+       "text": "Anuncio vertical de 30 segundos"
+      },
+      {
+       "icon": "star",
+       "title": "Trendy Sneakers",
+       "text": "De fotos a historia de misterio"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Primero te cuento dónde y cómo trabajo, y con qué herramientas. Luego vienen la animación, los videos con tus fotos, la edición con FFmpeg y los subtítulos.",
+   "visual": {
+    "type": "bullets",
+    "params": {
+     "heading": "El recorrido, parte uno",
+     "items": [
+      "Cómo trabajo y con qué",
+      "Animación y motion graphics",
+      "Videos con tus fotos",
+      "Edición de video con FFmpeg",
+      "Subtítulos y texto en pantalla"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Después, el audio, los videos explicativos con datos, cómo hacer muchas versiones de un mismo video, mis límites contados sin rodeos y, al final, cómo sacarme el mejor provecho.",
+   "visual": {
+    "type": "checklist",
+    "params": {
+     "heading": "El recorrido, parte dos",
+     "items": [
+      "Audio: voz, música y efectos",
+      "Explicadores, interfaces y datos",
+      "Producción a escala",
+      "Mis límites, sin rodeos",
+      "Cómo sacarme el mejor provecho"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Mi promesa es sencilla. Te voy a mostrar las cosas funcionando en pantalla, no solo a nombrarlas, y te diré con honestidad hasta dónde llego. Acomódate, que ya arrancamos.",
+   "visual": {
+    "type": "statement",
+    "params": {
+     "text": "Demostrar, no solo nombrar",
+     "accent": "Demostrar"
+    }
+   }
+  }
+ ],
+ "word_count": 175
+}

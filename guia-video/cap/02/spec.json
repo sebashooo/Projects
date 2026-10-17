@@ -1,0 +1,244 @@
+{
+ "chapter": 2,
+ "title": "Animación y motion graphics",
+ "beats": [
+  {
+   "narration": "Capítulo dos. Animación y motion graphics, o sea, gráficos en movimiento. Aquí no te lo cuento, te lo muestro. Cada movimiento de este capítulo lo escribí yo, en código, para este video.",
+   "visual": {
+    "type": "title",
+    "params": {
+     "kicker": "Capítulo 2",
+     "title": "Animación y motion graphics",
+     "subtitle": "Movimiento escrito en código, idéntico en cada render"
+    }
+   }
+  },
+  {
+   "narration": "Primero, la idea clave, la línea de tiempo. Funciona como las pistas de un editor de video. Define qué elemento se mueve, en qué segundo empieza y cuánto dura.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "timeline_editor"
+    }
+   }
+  },
+  {
+   "narration": "Así se escribe con GSAP. Esta línea sube el título desde abajo al medio segundo. Esta otra agranda el logo en el segundo uno coma dos, con un pequeño rebote.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "code",
+     "lang": "js",
+     "snippet": "const tl = gsap.timeline({ paused: true });\ntl.from(\"#titulo\", { y: 80, opacity: 0, duration: 0.6 }, 0.5);\ntl.to(\"#logo\", { scale: 1.2, duration: 0.5, ease: \"back.out(2)\" }, 1.2);"
+    }
+   }
+  },
+  {
+   "narration": "El truco es que esa línea de tiempo está en pausa. HyperFrames salta a cada fotograma exacto y lo captura con Chromium. Por eso es determinista, el mismo código da el mismo video en cada render.",
+   "visual": {
+    "type": "checklist",
+    "params": {
+     "heading": "Por qué es determinista",
+     "items": [
+      "Línea de tiempo en pausa",
+      "Salto a cada fotograma exacto",
+      "Captura con Chromium",
+      "Mismo código, mismo video"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Empecemos con tipografía cinética, palabras que entran, crecen y cambian al ritmo de la voz. Es ideal para el gancho de los primeros tres segundos en redes.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "kinetic",
+     "words": [
+      "Tu",
+      "idea",
+      "en",
+      "movimiento"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Mira estos cuatro movimientos. Misma distancia, mismo tiempo, pero distinta curva, lo que se llama easing. El lineal se ve mecánico. El suave frena al llegar y se siente natural. Los otros dos rebotan, para algo juguetón.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "easing"
+    }
+   }
+  },
+  {
+   "narration": "¿Por qué importa? Porque en la vida real nada arranca ni frena de golpe. Una buena curva hace que tu video se sienta profesional y no barato.",
+   "visual": {
+    "type": "statement",
+    "params": {
+     "text": "En la vida real nada frena de golpe",
+     "accent": "de golpe"
+    }
+   }
+  },
+  {
+   "narration": "Las transiciones unen escenas. Aquí tienes un whip, que es un giro rápido de cámara, luego un zoom, un destello, un barrido y una máscara. Mi regla es usar pocas y con intención.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "transitions"
+    }
+   }
+  },
+  {
+   "narration": "Una máscara es una forma que decide qué parte se ve. Así el texto aparece tras una barra de luz o sale de una ranura, y una foto se descubre en un círculo que crece.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "mask_reveal",
+     "text": "Ahora me ves"
+    }
+   }
+  },
+  {
+   "narration": "Ahora, los trazos. Un SVG es un dibujo descrito con matemáticas, por eso se ve nítido a cualquier tamaño. Y como está hecho de líneas, puedo dibujarlas frente a ti.",
+   "visual": {
+    "type": "statement",
+    "params": {
+     "text": "Un SVG es un dibujo hecho de trazos",
+     "accent": "trazos"
+    }
+   }
+  },
+  {
+   "narration": "Así. Sirve para una flecha que señala tu producto, una firma, un diagrama o la ruta de un domicilio sobre un mapa sencillo.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "svg_draw",
+     "label": "Ruta de entrega"
+    }
+   }
+  },
+  {
+   "narration": "También manejo profundidad. Estas tarjetas y este cubo giran en tres dimensiones. Te soy honesto, es un efecto ligero para productos o pantallas, no para modelar personajes animados.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "three_d"
+    }
+   }
+  },
+  {
+   "narration": "Otro clásico son los rótulos, que en inglés llaman lower thirds porque van en el tercio inferior. Sirven para nombre y cargo, producto y precio, un dato clave o tu usuario de redes.",
+   "visual": {
+    "type": "bullets",
+    "params": {
+     "heading": "Rótulos o lower thirds",
+     "items": [
+      "Nombre y cargo",
+      "Producto y precio",
+      "Dato clave",
+      "Usuario de redes"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Entra rápido, se queda lo justo para leerlo y no tapa lo importante. Lo adapto a tus colores y tipografía, como hice con la identidad de Manager App.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "lower_third",
+     "person": "Tu nombre aquí",
+     "role": "Tu cargo o tu marca"
+    }
+   }
+  },
+  {
+   "narration": "Para abrir o cerrar, una animación de logo de dos o tres segundos, aquí letra por letra. Si me das tu logo en SVG, animo cada pieza por separado. Si es una imagen plana, la animo completa.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "logo_sting",
+     "brand": "Trendy Sneakers"
+    }
+   }
+  },
+  {
+   "narration": "Un detalle sobre las partículas. Parecen moverse al azar, pero ese azar sale de una semilla fija, un número de partida. Por eso se mueven igual en cada render.",
+   "visual": {
+    "type": "statement",
+    "params": {
+     "text": "Hasta el azar tiene semilla",
+     "accent": "semilla"
+    }
+   }
+  },
+  {
+   "narration": "Como este confeti para un lanzamiento, chispas para una oferta o polvo de luz de fondo. Eso sí, con moderación, porque demasiadas partículas distraen y alargan el render.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "particles"
+    }
+   }
+  },
+  {
+   "narration": "Los contadores también funcionan muy bien, porque una cifra que sube pega más que una quieta. Este número es de ejemplo. En tu video solo uso datos reales que tú me des.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "counter",
+     "from": 0,
+     "to": 1250000,
+     "prefix": "$",
+     "label": "Ventas del mes (ejemplo)"
+    }
+   }
+  },
+  {
+   "narration": "La magia está en combinar. Un anuncio de treinta segundos puede usar varias de estas técnicas. Y como todo es código, cambiar un color, un texto o un tiempo es editar y volver a renderizar.",
+   "visual": {
+    "type": "cards",
+    "params": {
+     "heading": "Tu caja de herramientas de movimiento",
+     "items": [
+      {
+       "icon": "text",
+       "title": "Tipografía cinética",
+       "text": "Ganchos que se leen en segundos"
+      },
+      {
+       "icon": "clock",
+       "title": "Easing",
+       "text": "Movimiento natural, nunca robótico"
+      },
+      {
+       "icon": "layers",
+       "title": "Transiciones y máscaras",
+       "text": "Escenas que fluyen con intención"
+      },
+      {
+       "icon": "palette",
+       "title": "Trazos SVG y 3D",
+       "text": "Dibujos nítidos y profundidad ligera"
+      },
+      {
+       "icon": "chart",
+       "title": "Contadores y partículas",
+       "text": "Cifras que suben, momentos que celebran"
+      },
+      {
+       "icon": "star",
+       "title": "Rótulos y logo",
+       "text": "Tu marca en cada escena"
+      }
+     ]
+    }
+   }
+  }
+ ],
+ "word_count": 589
+}

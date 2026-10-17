@@ -1,0 +1,238 @@
+{
+ "chapter": 4,
+ "title": "Edición de video con FFmpeg",
+ "beats": [
+  {
+   "narration": "Hasta ahora te mostré cómo creo videos desde cero. Pero muchas veces ya tienes un video y solo necesitas editarlo. Para eso uso FFmpeg, un programa sin ventanas que manejo con instrucciones escritas.",
+   "visual": {
+    "type": "title",
+    "params": {
+     "kicker": "Capítulo 4",
+     "title": "Edición de video con FFmpeg",
+     "subtitle": "Cortar, unir, reencuadrar y pulir el video que ya tienes"
+    }
+   }
+  },
+  {
+   "narration": "Con FFmpeg corto, junto clips, cambio la velocidad, reencuadro, corrijo el color, quemo subtítulos, comprimo y saco fotogramas o GIF. Cada edición es una instrucción exacta, así que la puedo repetir igual cuantas veces quieras.",
+   "visual": {
+    "type": "cards",
+    "params": {
+     "heading": "Lo que hago con FFmpeg",
+     "items": [
+      {
+       "icon": "scissors",
+       "title": "Cortar y unir",
+       "text": "Fragmentos exactos y clips en orden"
+      },
+      {
+       "icon": "clock",
+       "title": "Velocidad",
+       "text": "Acelerar o cámara lenta"
+      },
+      {
+       "icon": "phone",
+       "title": "Reencuadre",
+       "text": "De horizontal a vertical sin deformar"
+      },
+      {
+       "icon": "palette",
+       "title": "Color",
+       "text": "Calidez, contraste y blanco y negro"
+      },
+      {
+       "icon": "text",
+       "title": "Subtítulos",
+       "text": "Quemados dentro de la imagen"
+      },
+      {
+       "icon": "box",
+       "title": "Exportar",
+       "text": "Comprimir, fotogramas y GIF"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Empecemos por cortar. Aquí tomo la animación de la misión DART y le indico el segundo donde empieza el fragmento y cuánto dura. FFmpeg saca exactamente esa parte.",
+   "visual": {
+    "type": "before_after",
+    "params": {
+     "edit": "recorte",
+     "label": "Recorte: solo un fragmento"
+    }
+   }
+  },
+  {
+   "narration": "Por dentro se ve así. La primera línea recorta. Las otras dos arman una lista y unen los clips en ese orden. Si comparten tamaño y formato, los pego sin volver a procesar la imagen, y eso toma segundos.",
+   "visual": {
+    "type": "terminal",
+    "params": {
+     "title": "Cortar y unir",
+     "lines": [
+      {
+       "cmd": "ffmpeg -ss 12 -i dart.mp4 -t 8 -c:v libx264 -crf 18 recorte.mp4",
+       "out": "recorte.mp4 · 8 s"
+      },
+      {
+       "cmd": "printf \"file '%s'\\n\" intro.mp4 recorte.mp4 cierre.mp4 > lista.txt",
+       "out": "lista.txt · 3 clips en orden"
+      },
+      {
+       "cmd": "ffmpeg -f concat -safe 0 -i lista.txt -c copy unido.mp4",
+       "out": "unido.mp4 · sin recodificar"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Cambiar la velocidad es igual de sencillo: aquí va al doble. Si hay sonido, ajusto el audio aparte para que las voces no suenen agudas. Y la cámara lenta se ve más fluida si el video se grabó con muchos cuadros por segundo.",
+   "visual": {
+    "type": "before_after",
+    "params": {
+     "edit": "rapido",
+     "label": "Velocidad al doble"
+    }
+   }
+  },
+  {
+   "narration": "Uno de los más útiles: pasar de horizontal a vertical, de dieciséis por nueve a nueve por dieciséis, para TikTok o Reels. Elijo qué parte del cuadro conservar, sin estirar ni deformar nada.",
+   "visual": {
+    "type": "before_after",
+    "params": {
+     "edit": "vertical",
+     "label": "De horizontal a vertical"
+    }
+   }
+  },
+  {
+   "narration": "Estos son los comandos, y al final compruebo el tamaño. Ojo: lo que queda por fuera se pierde, y al ampliar solo una parte baja un poco la nitidez. Si hay algo importante a los lados, uso un fondo difuminado.",
+   "visual": {
+    "type": "terminal",
+    "params": {
+     "title": "Velocidad y reencuadre",
+     "lines": [
+      {
+       "cmd": "ffmpeg -i dart.mp4 -vf \"setpts=0.5*PTS\" -an rapido.mp4",
+       "out": "rapido.mp4 · la mitad de duración"
+      },
+      {
+       "cmd": "ffmpeg -i dart.mp4 -vf \"crop=ih*9/16:ih,scale=1080:1920\" vertical.mp4",
+       "out": "vertical.mp4"
+      },
+      {
+       "cmd": "ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 vertical.mp4",
+       "out": "1080,1920"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "narration": "También corrijo el color: aquí, un tono más cálido. Ajusto brillo, contraste, saturación y balance, o lo paso a blanco y negro. Es una corrección general, no el retoque fino de un programa profesional.",
+   "visual": {
+    "type": "before_after",
+    "params": {
+     "edit": "calido",
+     "label": "Corrección de color cálida"
+    }
+   }
+  },
+  {
+   "narration": "Y quemo subtítulos desde un archivo con textos y tiempos, como un SRT. Quemados quiere decir que hacen parte de la imagen: se ven en cualquier red, aunque la persona tenga los subtítulos apagados.",
+   "visual": {
+    "type": "before_after",
+    "params": {
+     "edit": "subtitulos",
+     "label": "Subtítulos quemados"
+    }
+   }
+  },
+  {
+   "narration": "Para completar: comprimo para que pese menos y lo puedas mandar por WhatsApp, extraigo fotogramas como imágenes y convierto fragmentos en GIF. Esos fotogramas, además, son la forma en que reviso cada edición.",
+   "visual": {
+    "type": "terminal",
+    "params": {
+     "title": "Comprimir, fotogramas y GIF",
+     "lines": [
+      {
+       "cmd": "ffmpeg -i final.mp4 -c:v libx264 -crf 26 -preset slow -c:a aac -b:a 128k liviano.mp4",
+       "out": "liviano.mp4 · menos peso"
+      },
+      {
+       "cmd": "ffmpeg -i dart.mp4 -vf fps=1 fotograma_%03d.png",
+       "out": "un PNG por cada segundo"
+      },
+      {
+       "cmd": "ffmpeg -i recorte.mp4 -vf \"fps=12,scale=480:-1:flags=lanczos,split[a][b];[a]palettegen[p];[b][p]paletteuse\" dart.gif",
+       "out": "dart.gif"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Ahora, un caso real. Me subiste esta animación sobre la misión DART de la NASA: sesenta y cuatro segundos, sin sonido. Había que narrarla en español con subtítulos, pero la explicación no cabía en tan poco tiempo.",
+   "visual": {
+    "type": "video",
+    "params": {
+     "clip": "dart_original",
+     "label": "DART original · 64 s, sin sonido",
+     "mode": "full"
+    }
+   }
+  },
+  {
+   "narration": "Tenía dos caminos malos: acelerar la voz o recortar la explicación. Elegí un tercero: dividí la animación por escenas, medí cuánto duraba la narración de cada una y puse más lenta cada escena que no alcanzaba, justo hasta ese largo.",
+   "visual": {
+    "type": "compare",
+    "params": {
+     "left": {
+      "title": "Descarté",
+      "items": [
+       "Acelerar la voz",
+       "Recortar la explicación"
+      ]
+     },
+     "right": {
+      "title": "Hice",
+      "items": [
+       "Dividir por escenas",
+       "Medir cada narración",
+       "Ralentizar solo lo necesario"
+      ]
+     }
+    }
+   }
+  },
+  {
+   "narration": "Todo eso, junto con la voz y los subtítulos quemados, lo armé en un solo comando de FFmpeg. Pasó de un minuto y cuatro segundos a un minuto y cincuenta y dos: la voz respira y los subtítulos se alcanzan a leer.",
+   "visual": {
+    "type": "video",
+    "params": {
+     "clip": "dart_narrado",
+     "label": "DART narrado · 1:52",
+     "mode": "full"
+    }
+   }
+  },
+  {
+   "narration": "Para sacarle provecho: súbeme el archivo original, en la mejor calidad, y dime los segundos exactos que quieres cambiar. Como cada edición queda escrita, si cambias de idea, la repito con un ajuste, sin empezar de cero.",
+   "visual": {
+    "type": "checklist",
+    "params": {
+     "heading": "Para editar conmigo",
+     "items": [
+      "Archivo original, buena calidad",
+      "Segundos exactos del cambio",
+      "Cada edición queda escrita",
+      "Cambios sin empezar de cero"
+     ]
+    }
+   }
+  }
+ ],
+ "word_count": 508
+}

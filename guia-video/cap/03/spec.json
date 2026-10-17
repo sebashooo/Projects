@@ -1,0 +1,172 @@
+{
+ "chapter": 3,
+ "title": "Videos con tus fotos y productos",
+ "beats": [
+  {
+   "narration": "Capítulo tres. Aquí te muestro cómo convierto las fotos de tus productos en anuncios con movimiento, y te cuento un caso real de una tienda de tenis.",
+   "visual": {
+    "type": "title",
+    "params": {
+     "kicker": "Capítulo 3",
+     "title": "Videos con tus fotos y productos",
+     "subtitle": "De una foto quieta a un anuncio con movimiento"
+    }
+   }
+  },
+  {
+   "narration": "Una foto quieta dentro de un video se siente plana. Por eso le pongo una cámara virtual, un acercamiento lento o un desplazamiento suave de lado. Se llama efecto Ken Burns, y le da vida a este tenis aunque es una sola foto.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "ken_burns",
+     "photo": "F2"
+    }
+   }
+  },
+  {
+   "narration": "Muchas veces la foto no tiene la forma del video. Como veo la imagen, elijo un recorte que deje el producto completo, o la pongo entera sobre una copia difuminada de sí misma. Lo que nunca hago es estirarla, porque un producto deformado se nota al instante.",
+   "visual": {
+    "type": "cards",
+    "params": {
+     "heading": "Encajar sin deformar",
+     "items": [
+      {
+       "icon": "scissors",
+       "title": "Recorte con criterio",
+       "text": "El producto completo y bien encuadrado"
+      },
+      {
+       "icon": "layers",
+       "title": "Fondo difuminado",
+       "text": "La foto entera, sin bordes vacíos"
+      },
+      {
+       "icon": "x",
+       "title": "Nunca estirar",
+       "text": "Un producto deformado se nota"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "narration": "También ajusto el color, más cálido, más frío o con más contraste, y emparejo el tono de todas para que se vean como un solo anuncio. Eso sí, corrijo luz y color, no invento detalles que la foto no tiene.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "color_grade",
+     "photo": "F4"
+    }
+   }
+  },
+  {
+   "narration": "Luego pienso en dónde se va a ver. Vertical para TikTok e historias, cuadrado para publicaciones, horizontal para YouTube. Y dejo lo importante en las zonas seguras, las partes de la pantalla que no tapan los botones ni los textos de la red.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "formats"
+    }
+   }
+  },
+  {
+   "narration": "Ahora, el caso real. Para Trendy Sneakers hice primero este anuncio con sus fotos, en versiones de veintiocho y quince segundos. Tenía movimiento y textos claros, pero al cliente no le gustó.",
+   "visual": {
+    "type": "video",
+    "params": {
+     "clip": "trendy_anuncio",
+     "label": "Trendy, primera versión",
+     "mode": "phone"
+    }
+   }
+  },
+  {
+   "narration": "Y aquí viene lo valioso. En vez de solo decir que no, me mostró un video de referencia, una historia narrada con subtítulo palabra por palabra. Eso me explicó lo que buscaba mucho mejor que cualquier descripción.",
+   "visual": {
+    "type": "statement",
+    "params": {
+     "text": "Una referencia vale más que mil palabras",
+     "accent": "referencia"
+    }
+   }
+  },
+  {
+   "narration": "Entonces cambié el enfoque. Armé un panel de agentes, varios ayudantes de inteligencia artificial. Unos escribieron guiones y otros los calificaron como jueces. Ganó una historia de misterio, El secreto del barrio. Le puse voz masculina y monté las fotos a pantalla completa con una cámara continua.",
+   "visual": {
+    "type": "pipeline",
+    "params": {
+     "steps": [
+      "Referencia",
+      "Guionistas",
+      "Jueces",
+      "Voz",
+      "Fotos con cámara",
+      "Historia"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Este es el resultado. Usé las fotos de la misma tienda, pero ahora cuentan una historia, siguiendo el estilo de su referencia. La lección es que la forma de contar importa tanto como el material.",
+   "visual": {
+    "type": "video",
+    "params": {
+     "clip": "trendy_historia",
+     "label": "El secreto del barrio",
+     "mode": "phone"
+    }
+   }
+  },
+  {
+   "narration": "¿Y qué fotos me sirven más? Las que tienen buena luz, ojalá natural, el producto bien enfocado y un fondo limpio. Mándame varios ángulos y detalles de cerca, en el archivo original y sin filtros, porque el color lo ajusto yo.",
+   "visual": {
+    "type": "checklist",
+    "params": {
+     "heading": "Fotos que funcionan",
+     "items": [
+      "Buena luz, ojalá natural",
+      "Producto bien enfocado",
+      "Fondo limpio",
+      "Varios ángulos y detalles",
+      "Archivo original, sin filtros"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Un truco al tomarlas es dejar aire alrededor del producto y hacer cada foto en vertical y en horizontal, así la encuadro en cualquier formato. Evita capturas de pantalla y marcas de agua de otros. En Trendy quité una recortando, pero no siempre se puede, y la foto debe ser tuya o tener permiso.",
+   "visual": {
+    "type": "compare",
+    "params": {
+     "left": {
+      "title": "Así sí",
+      "items": [
+       "Aire alrededor del producto",
+       "Vertical y horizontal",
+       "Archivo original",
+       "Fotos tuyas o con permiso"
+      ]
+     },
+     "right": {
+      "title": "Evítalo",
+      "items": [
+       "Capturas de pantalla",
+       "Marcas de agua de otros",
+       "Producto cortado en el borde"
+      ]
+     }
+    }
+   }
+  },
+  {
+   "narration": "En resumen, tú pones buenas fotos y yo les doy movimiento, color, formato y, si quieres, una historia. En el siguiente capítulo pasamos a editar video que ya existe.",
+   "visual": {
+    "type": "statement",
+    "params": {
+     "text": "Tú pones las fotos, yo el movimiento",
+     "accent": "movimiento"
+    }
+   }
+  }
+ ],
+ "word_count": 475
+}

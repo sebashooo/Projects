@@ -663,7 +663,7 @@ const DEMO = {
 
   split_screen(id, p, b, ctx) {
     video(ctx, CLIP.dart_original.src, 150, 250, 800, 450, b, { from: 20, len: 64 });
-    video(ctx, CLIP.dart_narrado.src, 1010, 250, 800, 450, b, { from: 30, len: 112 });
+    video(ctx, CLIP.dart_narrado.src, 1010, 250, 800, 450, b, { from: 14, len: 112 });
     ctx.tw(`#${id}-t`, { opacity: 0 }, { opacity: 1, duration: 0.5 }, b.s + 0.3);
     return `<div id="${id}-t"><div class="abs" style="left:30px;top:60px;font-size:40px;font-weight:800">Original</div><div class="abs" style="left:890px;top:60px;font-size:40px;font-weight:800;color:${C.amber}">Con narración y subtítulos</div></div>`;
   },

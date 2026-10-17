@@ -1,0 +1,236 @@
+{
+ "chapter": 1,
+ "title": "Cómo trabajo y con qué",
+ "beats": [
+  {
+   "narration": "Antes de los trucos, te cuento cómo trabajo. Dónde corro, qué herramientas uso, cuál es mi proceso y cómo reviso cada video.",
+   "visual": {
+    "type": "title",
+    "params": {
+     "kicker": "Capítulo 1",
+     "title": "Cómo trabajo y con qué",
+     "subtitle": "Dónde corro, mis herramientas y mi proceso"
+    }
+   }
+  },
+  {
+   "narration": "Trabajo en Claude Code, en un contenedor Linux en la nube, que es como un computador prestado, no el tuyo. Tiene cuatro núcleos y quince gigas de memoria, pero no tiene tarjeta gráfica.",
+   "visual": {
+    "type": "statement",
+    "params": {
+     "text": "Trabajo en un computador en la nube",
+     "accent": "nube"
+    }
+   }
+  },
+  {
+   "narration": "Ahí tengo mis herramientas, cada una con su papel. Una aclaración honesta. Remotion, que hace video con React, ya está instalado, pero todavía no lo he usado en tus proyectos.",
+   "visual": {
+    "type": "cards",
+    "params": {
+     "heading": "Mi caja de herramientas",
+     "items": [
+      {
+       "icon": "film",
+       "title": "HyperFrames",
+       "text": "Convierte páginas HTML en video"
+      },
+      {
+       "icon": "wand",
+       "title": "GSAP",
+       "text": "Mueve todo en una línea de tiempo"
+      },
+      {
+       "icon": "code",
+       "title": "Remotion",
+       "text": "Video con React, instalado, sin estrenar"
+      },
+      {
+       "icon": "scissors",
+       "title": "FFmpeg",
+       "text": "Corta, une, convierte y comprime video"
+      },
+      {
+       "icon": "chart",
+       "title": "Python",
+       "text": "Música, efectos y mediciones con código"
+      },
+      {
+       "icon": "mic",
+       "title": "Kokoro",
+       "text": "Voz en español, generada aquí"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "narration": "La pieza central es HyperFrames. Diseño cada escena como una página web, y HyperFrames la abre en un navegador y la graba cuadro por cuadro hasta convertirla en video.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "code",
+     "lang": "html",
+     "snippet": "<div id=\"root\" data-composition-id=\"main\" data-width=\"1920\" data-height=\"1080\">\n  <h1 id=\"titulo\" class=\"clip\" data-start=\"0\" data-duration=\"4\" data-track-index=\"1\">Hola</h1>\n</div>\n<script>\n  const tl = gsap.timeline({ paused: true });\n  tl.from(\"#titulo\", { y: 80, opacity: 0, duration: 0.8 });\n  window.__timelines[\"main\"] = tl;\n</script>"
+    }
+   }
+  },
+  {
+   "narration": "El movimiento lo pongo con GSAP, sobre una línea de tiempo como la de un editor. Le digo que el título entra en el segundo dos y la tarjeta gira en el tres.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "timeline_editor"
+    }
+   }
+  },
+  {
+   "narration": "FFmpeg es mi navaja suiza para video que ya existe. Leo los datos de un archivo, le pego la voz a la imagen y convierto formatos. Lo vemos a fondo en el capítulo cuatro.",
+   "visual": {
+    "type": "terminal",
+    "params": {
+     "title": "FFmpeg en acción",
+     "lines": [
+      {
+       "cmd": "ffprobe -v error -show_entries format=duration -of csv=p=0 dart_original.mp4",
+       "out": "64.000000"
+      },
+      {
+       "cmd": "ffmpeg -i video.mp4 -i voz.wav -map 0:v -map 1:a -c:v copy -c:a aac -shortest con_voz.mp4",
+       "out": "con_voz.mp4 listo"
+      },
+      {
+       "cmd": "ffmpeg -i con_voz.mp4 -c:v libvpx-vp9 -crf 32 -b:v 0 -c:a libopus con_voz.webm",
+       "out": "con_voz.webm listo"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Con Python y NumPy compongo música original, sencilla pero sin derechos de terceros, y sintetizo efectos como whoosh o bip. Con Kokoro genero voz en español aquí mismo, con tres voces para escoger.",
+   "visual": {
+    "type": "bullets",
+    "params": {
+     "heading": "Python y Kokoro",
+     "items": [
+      "Música original con código",
+      "Efectos: whoosh, bip, impacto",
+      "Voz en español, local",
+      "Tres voces para escoger"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Siempre sigo el mismo camino. Primero tu brief, o sea, tu pedido con objetivo, público y formato. Luego guion, storyboard, render, que es fabricar el archivo final, revisión y entrega.",
+   "visual": {
+    "type": "pipeline",
+    "params": {
+     "steps": [
+      "Brief",
+      "Guion",
+      "Storyboard",
+      "Render",
+      "Revisión",
+      "Entrega"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "El storyboard es el plan del video, escena por escena, con sus tiempos. Lo apruebas antes del render, y eso ahorra mucho. Cambiar una viñeta es rápido. Rehacer un video terminado, no tanto.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "storyboard"
+    }
+   }
+  },
+  {
+   "narration": "El render es el paso lento. Sin tarjeta gráfica, un video en alta definición tarda tres o cuatro veces su duración. Un anuncio de treinta segundos toma entre minuto y medio y dos minutos.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "counter",
+     "from": 0,
+     "to": 120,
+     "label": "segundos de render, como máximo, para 30 s de video"
+    }
+   }
+  },
+  {
+   "narration": "No reproduzco el video en tiempo real ni escucho el sonido. Saco fotogramas sueltos y los miro como fotos, buscando textos cortados, colores raros o cosas fuera de lugar.",
+   "visual": {
+    "type": "compare",
+    "params": {
+     "left": {
+      "title": "Así reviso",
+      "items": [
+       "Fotogramas sueltos, como fotos",
+       "Textos cortados o fuera de lugar",
+       "Mediciones de volumen y picos"
+      ]
+     },
+     "right": {
+      "title": "Esto no hago",
+      "items": [
+       "Ver el video en tiempo real",
+       "Escuchar el audio"
+      ]
+     }
+    }
+   }
+  },
+  {
+   "narration": "Los fotogramas los saco con FFmpeg. El sonido lo reviso con números. Mido el volumen en LUFS, la unidad con que las redes nivelan el audio, y también picos y silencios. Si algo falla, corrijo y vuelvo a medir.",
+   "visual": {
+    "type": "terminal",
+    "params": {
+     "title": "Revisión con mediciones",
+     "lines": [
+      {
+       "cmd": "ffmpeg -ss 12 -i anuncio.mp4 -frames:v 1 cuadro_12s.png",
+       "out": "cuadro_12s.png guardado"
+      },
+      {
+       "cmd": "ffmpeg -i anuncio.mp4 -af ebur128=peak=true -f null -",
+       "out": "I: -14.0 LUFS   Peak: -1.5 dBFS"
+      },
+      {
+       "cmd": "ffmpeg -i anuncio.mp4 -af silencedetect=noise=-50dB:d=1 -f null -",
+       "out": "ningún silencio mayor a 1 s"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Antes de entregarte algo paso una lista. Textos legibles y en zonas seguras, donde los botones de las redes no los tapan. Voz y subtítulos sincronizados, volumen a menos catorce LUFS y el formato que pediste.",
+   "visual": {
+    "type": "checklist",
+    "params": {
+     "heading": "Antes de entregar",
+     "items": [
+      "Textos legibles",
+      "Zonas seguras respetadas",
+      "Voz y subtítulos sincronizados",
+      "Volumen a -14 LUFS",
+      "Formato y tamaño correctos"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Un último detalle. No guardo memoria entre conversaciones. Lo que queda son los archivos y el repositorio, y con eso retomo un video sin empezar de cero. Ahora sí, vamos a animar.",
+   "visual": {
+    "type": "statement",
+    "params": {
+     "text": "Lo que queda son los archivos",
+     "accent": "archivos"
+    }
+   }
+  }
+ ],
+ "word_count": 447
+}

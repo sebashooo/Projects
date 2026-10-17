@@ -1,0 +1,185 @@
+{
+ "chapter": 5,
+ "title": "Subtítulos y texto en pantalla",
+ "word_count": 406,
+ "beats": [
+  {
+   "narration": "Capítulo cinco, subtítulos y texto en pantalla. Mucha gente ve videos en el celular sin sonido, y ahí el texto es lo único que le llega.",
+   "visual": {
+    "type": "title",
+    "params": {
+     "kicker": "Capítulo 5",
+     "title": "Subtítulos y texto en pantalla",
+     "subtitle": "Que se entienda aunque no haya sonido"
+    }
+   }
+  },
+  {
+   "narration": "Trabajo con tres estilos. Frase completa, la clásica. Palabra por palabra, el estilo rápido de TikTok. Y karaoke, donde ves la frase entera y se resalta la palabra que va sonando. Los animo en HyperFrames, con la letra y los colores de tu marca.",
+   "visual": {
+    "type": "cards",
+    "params": {
+     "heading": "Tres estilos de subtítulo",
+     "items": [
+      {
+       "icon": "text",
+       "title": "Frase completa",
+       "text": "Una o dos líneas por frase"
+      },
+      {
+       "icon": "phone",
+       "title": "Palabra por palabra",
+       "text": "Ritmo rápido, estilo TikTok"
+      },
+      {
+       "icon": "star",
+       "title": "Karaoke",
+       "text": "Se resalta la palabra que suena"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Así se ve palabra por palabra: cada una sale grande, centrada y al ritmo de la voz. Es el estilo que tomé del video de referencia para la historia de Trendy Sneakers, porque engancha la mirada.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "captions_word",
+     "text": "Nadie sabía el secreto del barrio"
+    }
+   }
+  },
+  {
+   "narration": "Y este es el karaoke, el que usé en el anuncio de Manager App. La frase completa da contexto, y la palabra resaltada va guiando el ojo al ritmo de la voz.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "captions_karaoke",
+     "text": "Tu inventario y tu caja en un solo lugar"
+    }
+   }
+  },
+  {
+   "narration": "Hay dos formas de entregarlos. En la animación de DART van quemados, es decir, el texto queda pegado a la imagen y se ve en cualquier reproductor, sin activar nada.",
+   "visual": {
+    "type": "video",
+    "params": {
+     "clip": "dart_narrado",
+     "label": "Subtítulos quemados",
+     "mode": "side"
+    }
+   }
+  },
+  {
+   "narration": "La otra es un archivo SRT, un texto con el inicio y el fin de cada frase. Te lo entrego aparte, lo subes con el video, y quien lo ve puede prenderlo o apagarlo.",
+   "visual": {
+    "type": "terminal",
+    "params": {
+     "title": "Archivo SRT: quemado o como pista",
+     "lines": [
+      {
+       "cmd": "head -3 subtitulos.srt",
+       "out": "1\n00:00:01,200 --> 00:00:03,800\nMucha gente ve videos sin sonido"
+      },
+      {
+       "cmd": "ffmpeg -i video.mp4 -vf subtitles=subtitulos.srt quemado.mp4",
+       "out": "quemado.mp4 listo, texto pegado a la imagen"
+      },
+      {
+       "cmd": "ffmpeg -i video.mp4 -i subtitulos.srt -c copy -c:s mov_text con_pista.mp4",
+       "out": "con_pista.mp4 listo, subtítulos activables"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Para que se lea bien sigo reglas sencillas. Letra grande y buen contraste, con borde o franja oscura. Máximo dos líneas cortas. Y cortes donde la voz hace pausa, nunca a mitad de una idea.",
+   "visual": {
+    "type": "checklist",
+    "params": {
+     "heading": "Reglas de legibilidad",
+     "items": [
+      "Letra grande, pensada para celular",
+      "Contraste alto, borde o franja",
+      "Máximo dos líneas cortas",
+      "Cortes en pausas naturales",
+      "Fuera de las zonas tapadas"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Y cuido las zonas seguras. En TikTok y Reels, la descripción y los botones tapan la parte de abajo y el lado derecho, así que subo el texto para que nada lo esconda.",
+   "visual": {
+    "type": "demo",
+    "params": {
+     "name": "formats"
+    }
+   }
+  },
+  {
+   "narration": "También traduzco. Si necesitas el video en inglés o portugués, traduzco los subtítulos y ajusto los cortes, porque cada idioma ocupa distinto espacio. Si el texto es delicado, conviene que lo revise un hablante nativo.",
+   "visual": {
+    "type": "compare",
+    "params": {
+     "left": {
+      "title": "Español",
+      "items": [
+       "Nadie sabía el secreto del barrio",
+       "Pide los tuyos hoy"
+      ]
+     },
+     "right": {
+      "title": "English",
+      "items": [
+       "Nobody knew the neighborhood's secret",
+       "Get yours today"
+      ]
+     }
+    }
+   }
+  },
+  {
+   "narration": "Ahora, un límite honesto. Aquí no tengo instalado un modelo de transcripción como Whisper, así que no puedo convertir tu audio en texto por mi cuenta.",
+   "visual": {
+    "type": "statement",
+    "params": {
+     "text": "Sin Whisper aquí, no transcribo tu audio",
+     "accent": "Whisper"
+    }
+   }
+  },
+  {
+   "narration": "Lo resuelvo así. Si la voz la genero yo con Kokoro, sé qué dice cada frase y cuánto dura, y estimo el momento de cada palabra. Si traes tu propia voz, pásame su SRT, sacado de otra herramienta, y lo convierto al estilo que elijas.",
+   "visual": {
+    "type": "pipeline",
+    "params": {
+     "steps": [
+      "Guion",
+      "Voz con Kokoro",
+      "Duración de cada frase",
+      "Tiempo estimado por palabra",
+      "Subtítulos"
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Mi consejo: dime desde el pedido qué estilo quieres y dónde vas a publicar. Así decido tamaño, posición y ritmo del texto desde el principio, no como parche al final.",
+   "visual": {
+    "type": "bullets",
+    "params": {
+     "heading": "Dímelo desde el inicio",
+     "items": [
+      "Estilo de subtítulo",
+      "Red donde se publica",
+      "Idiomas que necesitas",
+      "SRT si traes tu voz"
+     ]
+    }
+   }
+  }
+ ]
+}

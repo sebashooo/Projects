@@ -1,0 +1,6 @@
+node_modules/
+renders/
+.hyperframes/
+salida/*.mp4
+cap/99/
+assets/audio/

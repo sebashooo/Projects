@@ -80,7 +80,17 @@
    "visual": {
     "type": "demo",
     "params": {
-     "name": "timeline_editor"
+     "name": "timeline_editor",
+     "v2": [
+      [
+       "Título",
+       2
+      ],
+      [
+       "Tarjeta",
+       3
+      ]
+     ]
     }
    }
   },

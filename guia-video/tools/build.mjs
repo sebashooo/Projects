@@ -55,6 +55,7 @@ const ICON = {
 const icon = (name, size, color) =>
   `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none">${ICON[name] || ICON.star}</svg>`;
 
+const J = (o) => JSON.stringify(o).replace(/</g, "\\u003c");
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const T = (n) => +(+n).toFixed(3);
 let seed = 7;
@@ -78,7 +79,7 @@ export function build(nn) {
   const seen = new Set();
   const tw = (sel, from, to, t) => {
     const first = !seen.has(sel); seen.add(sel);
-    js.push(`tl.fromTo(${JSON.stringify(sel)}, ${JSON.stringify(from)}, ${JSON.stringify({ ...to, immediateRender: first })}, ${T(t)});`);
+    js.push(`tl.fromTo(${J(sel)}, ${J(from)}, ${J({ ...to, immediateRender: first })}, ${T(t)});`);
   };
   const ctx = { tw, sfx, media, STATE };
 
@@ -91,7 +92,7 @@ export function build(nn) {
     const voStart = cursor + lead;
     const isLast = i === spec.beats.length - 1;
     const end = voStart + vo + (isLast ? 1.6 : 0.55);
-    const o = { ...b, i, start: cursor, end, voStart, vo };
+    const o = { ...b, i, start: cursor, end, voStart, vo, wt: wordTimes(b.narration, voStart, vo) };
     cursor = end;
     return o;
   });
@@ -101,8 +102,9 @@ export function build(nn) {
     const id = `b${b.i}`;
     const start = b.i === 0 ? 0 : b.start - XF;
     const end = b.i === beats.length - 1 ? b.end : b.end + 0.02;
-    const r = (RENDER[b.visual.type] || RENDER.statement)(id, b.visual.params || {}, { ...b, s: start, e: end, d: end - start }, ctx, spec);
+    const r = (RENDER[b.visual.type] || RENDER.statement)(id, b.visual.params || {}, { ...b, s: start, e: end, d: end - start, last: b.i === beats.length - 1 }, ctx, spec);
     sections.push(`<section id="${id}" class="clip beat" data-start="${T(start)}" data-duration="${T(end - start)}" data-track-index="${1 + (b.i % 2)}" style="z-index:${10 + b.i}"><div class="stage" id="${id}-st">${r}</div></section>`);
+    if (b.i < beats.length - 1) tw(`#${id}-st`, { opacity: 1 }, { opacity: 0, duration: XF - 0.05, ease: "power1.in" }, b.end - XF);
     if (b.i > 0) {
       tw(`#${id}-st`, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: XF + 0.15, ease: "power3.out" }, start);
       sfx.push({ t: start, type: b.visual.type === "title" ? "chime" : "swish" });
@@ -111,15 +113,28 @@ export function build(nn) {
 
   // subtítulos: grupos de ≤ 78 caracteres, corte preferente en puntuación; palabra actual resaltada
   const groups = [];
+  const WEAK = new Set(["de", "la", "el", "los", "las", "un", "una", "y", "o", "a", "en", "con", "por", "para", "que", "del", "al", "su", "tu", "mi", "se", "lo", "le", "no", "es", "sin", "tus", "sus", "mis"]);
+  const L = (ws) => ws.map((x) => x.word).join(" ").length;
   beats.forEach((b) => {
-    const ws = wordTimes(b.narration, b.voStart, b.vo);
+    const ws = b.wt, bg = [];
     let cur = [];
-    ws.forEach((w, k) => {
+    for (let k = 0; k < ws.length; k++) {
+      const w = ws[k];
+      if (cur.length && L([...cur, w]) > 58) {
+        // cortar en la última puntuación si deja un trozo razonable; si no, aquí, sin dejar palabras débiles al final
+        let cut = -1;
+        for (let j = cur.length - 1; j >= 2; j--) if (/[,.;:!?…]$/.test(cur[j].word)) { cut = j; break; }
+        let head = cut >= 2 ? cur.slice(0, cut + 1) : cur.slice();
+        while (head.length > 3 && WEAK.has(NRM(head[head.length - 1].word))) head.pop();
+        bg.push(head); cur = cur.slice(head.length);
+      }
       cur.push(w);
-      const len = cur.map((x) => x.word).join(" ").length;
-      const punct = /[.!?…:;]$/.test(w.word) || (/,$/.test(w.word) && len > 45);
-      if (k === ws.length - 1 || (punct && len > 22) || len > 70) { groups.push({ words: cur, end: k === ws.length - 1 ? b.voStart + b.vo + 0.3 : null }); cur = []; }
-    });
+      if (/[.!?…]$/.test(w.word) && L(cur) >= 24 && k < ws.length - 1) { bg.push(cur); cur = []; }
+    }
+    if (cur.length) bg.push(cur);
+    // sin grupos de 1–2 palabras: se pegan al anterior (puede quedar en dos líneas cortas)
+    for (let j = bg.length - 1; j > 0; j--) if (bg[j].length < 3 && L([...bg[j - 1], ...bg[j]]) <= 80) { bg[j - 1] = [...bg[j - 1], ...bg[j]]; bg.splice(j, 1); }
+    bg.forEach((g, j) => groups.push({ words: g, end: j === bg.length - 1 ? b.voStart + b.vo + 0.3 : null }));
   });
   groups.forEach((g, k) => { g.s = g.words[0].s - 0.05; g.e = g.end ?? groups[k + 1]?.words[0].s - 0.05 ?? DUR; if (groups[k + 1] && g.e > groups[k + 1].words[0].s - 0.05) g.e = groups[k + 1].words[0].s - 0.05; });
   const CAPS = groups.map((g) => [T(g.s), T(g.e), g.words.map((w) => [T(w.s), w.word])]);
@@ -137,6 +152,7 @@ export function build(nn) {
 <meta name="viewport" content="width=${W}, height=${H}" />
 <script src="assets/js/gsap.min.js"></script>
 <style>
+@font-face{font-family:"Geist Mono";src:url("assets/fonts/GeistMono-Regular.woff2") format("woff2");font-weight:400;font-style:normal;}
 ${font(400, "Geist-Regular")}${font(500, "Geist-Medium")}${font(600, "Geist-SemiBold")}${font(700, "Geist-Bold")}${font(900, "Geist-Black")}
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{margin:0;width:${W}px;height:${H}px;overflow:hidden;background:${C.bg}}
@@ -150,15 +166,15 @@ html,body{margin:0;width:${W}px;height:${H}px;overflow:hidden;background:${C.bg}
 .h2{font-weight:800;font-weight:900;font-size:58px;letter-spacing:-0.03em;line-height:1.05}
 .muted{color:${C.muted}}
 .panel{background:${C.panel};border:2px solid ${C.line};border-radius:18px}
-.mono{font-family:monospace}
+.mono{font-family:"Geist Mono",monospace;font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0}
 #hdr{position:absolute;left:80px;top:42px;display:flex;align-items:center;gap:16px;font-weight:600;font-size:26px;color:${C.muted};z-index:200}
 #hdr b{color:${C.text};font-weight:700}
 #cap{position:absolute;left:210px;right:210px;top:900px;height:130px;display:flex;align-items:center;justify-content:center;z-index:300}
-#capin{text-align:center;font-weight:600;font-size:42px;line-height:1.28;color:#fff;background:rgba(8,10,14,0.78);border:2px solid rgba(255,255,255,0.08);padding:12px 30px;border-radius:14px;max-width:1500px}
+#capin{text-wrap:balance;text-align:center;font-weight:600;font-size:42px;line-height:1.28;color:#fff;background:rgba(8,10,14,0.78);border:2px solid rgba(255,255,255,0.08);padding:12px 30px;border-radius:14px;max-width:1500px}
 #capin:empty{display:none}
 #capin .w{border-radius:6px;padding:0 4px;margin:0 -4px}
 #capin .on{color:#0b0d12;background:${C.amber}}
-#prog{position:absolute;left:0;bottom:0;height:6px;background:linear-gradient(90deg,${C.cyan},${C.violet});z-index:300;transform-origin:0 50%}
+#prog{position:absolute;left:0;right:0;bottom:0;height:6px;background:linear-gradient(90deg,${C.cyan},${C.violet});z-index:300;transform-origin:0 50%}
 video{position:absolute;object-fit:cover;background:#000}
 </style>
 </head>
@@ -176,8 +192,8 @@ ${audio}
 </div>
 <script>
 const tl = gsap.timeline({ paused: true });
-const CAPS = ${JSON.stringify(CAPS)};
-const STATE = ${JSON.stringify(STATE)};
+const CAPS = ${J(CAPS)};
+const STATE = ${J(STATE)};
 const capin = document.getElementById("capin");
 const $ = (s) => document.querySelector(s);
 const fmt = (n, p, s) => (p || "") + Math.round(n).toString().replace(/\\B(?=(\\d{3})+(?!\\d))/g, ".") + (s || "");
@@ -208,6 +224,28 @@ window.__timelines["main"] = tl;
 }
 
 // ── utilidades de escena ──
+const NRM = (x) => String(x).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, "");
+const STOP = new Set(["para", "como", "pero", "esta", "este", "esto", "cada", "todo", "toda", "todos", "sobre", "entre", "desde", "hasta", "donde", "cuando", "porque", "tiene", "hace", "puedo", "video", "videos"]);
+// segundo en que la narración dice algo parecido a `text` (después de `after`); si no aparece, `fb`
+function cue(b, text, fb, after = -1) {
+  const toks = String(text || "").split(/\s+/).map(NRM).filter((x) => x.length >= 4 && !STOP.has(x));
+  for (const w of b.wt || []) {
+    if (w.s <= after) continue;
+    const n = NRM(w.word);
+    if (n.length >= 3 && toks.some((k) => n.startsWith(k.slice(0, Math.max(4, Math.min(k.length, 6)))) || k.startsWith(n.slice(0, 5)) && n.length >= 5)) return Math.max(b.s + 0.2, w.s - 0.15);
+  }
+  return fb;
+}
+// tiempos de aparición de una lista: anclados a la voz cuando se puede, siempre crecientes y dentro del bloque
+function cues(b, texts, from = 0.35, tail = 1.2) {
+  let prev = b.s; const out = [];
+  texts.forEach((tx, k) => {
+    let t = cue(b, tx, reveal(texts.length, b, k, from, tail), prev);
+    t = Math.max(t, prev + 0.3); t = Math.min(t, b.end - 0.9);
+    out.push(t); prev = t;
+  });
+  return out;
+}
 const reveal = (n, b, k, spanFrom = 0.35, tail = 1.2) => {
   // reparte n apariciones a lo largo de la narración del bloque
   const a = b.voStart + spanFrom, z = Math.max(a + 0.5, b.voStart + b.vo - tail);
@@ -220,12 +258,18 @@ const head = (id, text, tw, t) => {
 // medios a nivel raíz (un <video> no puede ir dentro de un elemento con data-start)
 let vidN = 0;
 function video(ctx, src, x, y, w, h, b, opts = {}) {
-  const vid = `v${vidN++}`;
-  const st = b.s + 0.25, du = Math.max(0.5, Math.min(b.e - st, (opts.len ?? 999) - (opts.from ?? 0)));
-  ctx.media.push(`<video id="${vid}" src="${src}" muted playsinline data-start="${T(st)}" data-duration="${T(du)}" data-media-start="${opts.from ?? 0}" data-track-index="${5 + (vidN % 3)}" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;border-radius:${opts.radius ?? 16}px;z-index:${opts.z ?? 150};${opts.style || ""}"></video>`);
-  ctx.tw(`#${vid}`, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, st);
-  if (b.e - st > du + 0.05) ctx.tw(`#${vid}`, { opacity: 1 }, { opacity: 1, duration: 0.01 }, st + du - 0.02);
-  return vid;
+  const from = opts.from ?? 0, seg = Math.max(0.5, (opts.len ?? 999) - from);
+  const end = b.last ? b.e : b.end;               // hasta el final nominal del bloque
+  let t = b.s + 0.25, k = 0, last = null;
+  while (t < end - 0.05) {
+    const vid = `v${vidN++}`, du = Math.min(seg, end - t);
+    ctx.media.push(`<video id="${vid}" src="${src}" muted playsinline data-start="${T(t)}" data-duration="${T(du)}" data-media-start="${from}" data-track-index="${5 + (vidN % 3)}" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;border-radius:${opts.radius ?? 16}px;z-index:${opts.z ?? 150};${opts.style || ""}"></video>`);
+    if (k === 0) ctx.tw(`#${vid}`, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, t);
+    last = { vid, t, du }; t += du; k++;
+  }
+  // fundido de salida junto con el bloque (el video vive fuera de la sección)
+  if (last && !b.last) ctx.tw(`#${last.vid}`, { opacity: 1 }, { opacity: 0, duration: 0.33, ease: "power1.in" }, Math.max(last.t + 0.05, b.end - 0.4));
+  return last && last.vid;
 }
 const SX = 120, SY = 110; // origen de la escena en coordenadas de pantalla
 
@@ -250,13 +294,14 @@ const RENDER = {
     const acc = String(p.accent || "").toLowerCase().split(/\s+/).filter(Boolean);
     words.forEach((_, k) => tw(`#${id}-w${k}`, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, b.voStart + 0.1 + k * 0.07));
     const size = words.join(" ").length > 60 ? 76 : 96;
-    return `<div class="abs" style="inset:0;display:flex;align-items:center;justify-content:center;text-align:center"><div class="h1" style="font-size:${size}px;max-width:1500px">${words
+    return `<div class="abs" style="inset:0;display:flex;align-items:center;justify-content:center;text-align:center"><div class="h1" style="font-size:${size}px;max-width:1500px;text-wrap:balance">${words
       .map((w, k) => `<span id="${id}-w${k}" style="display:inline-block;margin:0 0.13em;color:${acc.some((a) => w.toLowerCase().replace(/[^\p{L}\p{N}]/gu, "").startsWith(a.replace(/[^\p{L}\p{N}]/gu, ""))) ? C.amber : C.text}">${esc(w)}</span>`).join("")}</div></div>`;
   },
 
   bullets(id, p, b, { tw }) {
     const items = (p.items || []).slice(0, 5);
-    items.forEach((_, k) => tw(`#${id}-i${k}`, { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, reveal(items.length, b, k)));
+    const ts = cues(b, items);
+    items.forEach((_, k) => tw(`#${id}-i${k}`, { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, ts[k]));
     return `${head(id, p.heading, tw, b.s + 0.2)}<div class="abs" style="left:0;right:0;top:140px">${items
       .map((it, k) => `<div id="${id}-i${k}" style="display:flex;align-items:center;gap:28px;margin-bottom:26px"><div style="width:64px;height:64px;border-radius:16px;background:${ACC[k % 5]}22;border:2px solid ${ACC[k % 5]};display:flex;align-items:center;justify-content:center;font-weight:900;font-size:30px;color:${ACC[k % 5]}">${k + 1}</div><div style="font-size:48px;font-weight:700;letter-spacing:-0.01em">${esc(it)}</div></div>`).join("")}</div>`;
   },
@@ -265,8 +310,9 @@ const RENDER = {
     const items = (p.items || []).slice(0, 6);
     const cols = items.length <= 3 ? items.length : items.length === 4 ? 2 : 3;
     const rows = Math.ceil(items.length / cols);
-    const gw = 1680, cw = (gw - (cols - 1) * 30) / cols, ch = rows === 1 ? 420 : 280;
-    items.forEach((_, k) => tw(`#${id}-c${k}`, { opacity: 0, y: 50, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "back.out(1.4)" }, reveal(items.length, b, k)));
+    const gw = 1680, cw = (gw - (cols - 1) * 30) / cols, ch = rows === 1 ? 380 : 280;
+    const ts = cues(b, items.map((it) => `${it.title} ${it.text}`));
+    items.forEach((_, k) => tw(`#${id}-c${k}`, { opacity: 0, y: 50, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "back.out(1.4)" }, ts[k]));
     return `${head(id, p.heading, tw, b.s + 0.2)}${items
       .map((it, k) => `<div id="${id}-c${k}" class="abs panel" style="left:${(k % cols) * (cw + 30)}px;top:${130 + Math.floor(k / cols) * (ch + 30)}px;width:${cw}px;height:${ch}px;padding:34px;display:flex;flex-direction:column;gap:14px">
         <div style="width:76px;height:76px;border-radius:18px;background:${ACC[k % 5]}1f;display:flex;align-items:center;justify-content:center">${icon(it.icon, 44, ACC[k % 5])}</div>
@@ -276,25 +322,29 @@ const RENDER = {
 
   compare(id, p, b, { tw }) {
     const L = (p.left?.items || []).slice(0, 4), R = (p.right?.items || []).slice(0, 4);
-    const all = [];
-    for (let k = 0; k < Math.max(L.length, R.length); k++) { if (L[k]) all.push(["l", k]); if (R[k]) all.push(["r", k]); }
-    all.forEach(([s, k], j) => tw(`#${id}-${s}${k}`, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, reveal(all.length, b, j)));
+    const all = [...L.map((_, k) => ["l", k]), ...R.map((_, k) => ["r", k])];
+    const ts = cues(b, all.map(([sd, k]) => (sd === "l" ? L : R)[k]));
+    all.forEach(([sd, k], j) => tw(`#${id}-${sd}${k}`, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, ts[j]));
+    const tone = (title, dflt) => /^(no\b|evit|descart|nunca|mal\b|sin\b|así no|esto no)/i.test(title || "") ? "bad" : /^(puedo|sí|si\b|hice|hago|bien|así sí|haz|mejor)/i.test(title || "") ? "good" : dflt;
+    const tl0 = tone(p.left?.title, p.right?.title ? "neutral" : "good"), tr0 = tone(p.right?.title, tl0 === "neutral" ? "neutral" : tl0 === "good" ? "bad" : "good");
+    const sty = (t, side) => t === "good" ? [C.green, "check"] : t === "bad" ? [C.coral, "x"] : [side === "l" ? C.cyan : C.violet, "text"];
     const col = (side, title, items, color, ic) => `<div class="abs panel" style="left:${side === "l" ? 0 : 860}px;top:0;width:820px;height:740px;padding:40px">
       <div style="display:flex;align-items:center;gap:18px;font-size:50px;font-weight:900;color:${color}">${icon(ic, 52, color)}${esc(title)}</div>
       ${items.map((it, k) => `<div id="${id}-${side}${k}" style="display:flex;gap:18px;align-items:flex-start;font-size:36px;font-weight:600;line-height:1.25;margin-top:34px">${icon(ic, 38, color)}<span>${esc(it)}</span></div>`).join("")}</div>`;
-    return col("l", p.left?.title || "Puedo", L, C.green, "check") + col("r", p.right?.title || "No puedo", R, C.coral, "x");
+    return col("l", p.left?.title || "Puedo", L, ...sty(tl0, "l")) + col("r", p.right?.title || "No puedo", R, ...sty(tr0, "r"));
   },
 
   checklist(id, p, b, { tw }) {
     const items = (p.items || []).slice(0, 6);
+    const ts = cues(b, items);
     items.forEach((_, k) => {
-      const t = reveal(items.length, b, k);
+      const t = ts[k];
       tw(`#${id}-r${k}`, { opacity: 0.25 }, { opacity: 1, duration: 0.3 }, t);
-      tw(`#${id}-k${k}`, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, t + 0.05);
+      tw(`#${id}-k${k}`, { strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, t + 0.05);
       tw(`#${id}-b${k}`, { backgroundColor: "rgba(52,211,153,0)" }, { backgroundColor: "rgba(52,211,153,0.18)", duration: 0.3 }, t);
     });
     return `${head(id, p.heading, tw, b.s + 0.2)}<div class="abs" style="left:0;right:0;top:130px;columns:${items.length > 4 ? 2 : 1};column-gap:60px">${items
-      .map((it, k) => `<div id="${id}-r${k}" style="display:flex;align-items:center;gap:26px;margin-bottom:30px;break-inside:avoid"><div id="${id}-b${k}" style="width:62px;height:62px;border-radius:14px;border:3px solid ${C.green};display:flex;align-items:center;justify-content:center;flex:none"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="${C.green}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path id="${id}-k${k}" pathLength="1" stroke-dasharray="1" d="M20 6 9 17l-5-5"/></svg></div><div style="font-size:42px;font-weight:700">${esc(it)}</div></div>`).join("")}</div>`;
+      .map((it, k) => `<div id="${id}-r${k}" style="display:flex;align-items:center;gap:26px;margin-bottom:30px;break-inside:avoid"><div id="${id}-b${k}" style="width:62px;height:62px;border-radius:14px;border:3px solid ${C.green};display:flex;align-items:center;justify-content:center;flex:none"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="${C.green}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path id="${id}-k${k}" pathLength="1000" stroke-dasharray="1000" d="M20 6 9 17l-5-5"/></svg></div><div style="font-size:42px;font-weight:700">${esc(it)}</div></div>`).join("")}</div>`;
   },
 
   terminal(id, p, b, { tw, STATE }) {
@@ -319,7 +369,7 @@ const RENDER = {
     return `<div id="${id}-ln" class="abs" style="left:${gap / 2}px;width:${1680 - gap}px;top:376px;height:6px;border-radius:3px;background:linear-gradient(90deg,${C.cyan},${C.violet});transform-origin:0 50%"></div>
       ${st.map((s, k) => `<div id="${id}-n${k}" class="abs" style="left:${k * gap}px;width:${gap}px;top:300px;display:flex;flex-direction:column;align-items:center;gap:24px">
         <div style="width:150px;height:150px;border-radius:50%;background:${C.panel};border:5px solid ${ACC[k % 5]};display:flex;align-items:center;justify-content:center;font-weight:900;font-size:58px;color:${ACC[k % 5]}">${k + 1}</div>
-        <div style="font-size:${n > 5 ? 32 : 38}px;font-weight:800;text-align:center">${esc(s)}</div></div>`).join("")}`;
+        <div style="font-size:${n >= 5 ? 31 : 38}px;font-weight:800;text-align:center;padding:0 16px;line-height:1.15">${esc(s)}</div></div>`).join("")}`;
   },
 
   video(id, p, b, ctx) {
@@ -328,7 +378,7 @@ const RENDER = {
     const opts = { from: c.from, len: c.len };
     let txt = "";
     if (mode === "full") {
-      video(ctx, c.src, 330, 140, 1260, 709, b, opts);
+      video(ctx, c.src, 352, 160, 1216, 684, b, opts);
       txt = `<div class="abs" style="left:0;right:0;top:-6px;text-align:center;font-size:34px;font-weight:700;color:${C.muted}">${esc(p.label)}</div>`;
     } else if (c.ar === "16:9") {
       video(ctx, c.src, 120, 190, 1040, 585, b, opts);
@@ -355,7 +405,7 @@ const RENDER = {
     ctx.tw(`#${id}-r`, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 }, b.s + 0.6);
     const lx = 30, rx = e.ar === "9:16" ? 1170 : 890;
     return `<div id="${id}-l" class="abs" style="left:${lx}px;top:60px;font-size:40px;font-weight:800">Antes <span class="muted" style="font-weight:500">· original</span></div>
-      <div id="${id}-r" class="abs" style="left:${rx}px;top:${e.ar === "9:16" ? -10 : 60}px;font-size:40px;font-weight:800;color:${C.amber}">Después <span style="font-weight:500;color:${C.text}">· ${esc(p.label || e.name)}</span></div>`;
+      <div id="${id}-r" class="abs" style="${e.ar === "9:16" ? "right:0;text-align:right;top:-14px" : `left:${rx}px;top:60px`};white-space:nowrap;font-size:40px;font-weight:800;color:${C.amber}">Después <span style="font-weight:500;color:${C.text}">· ${esc(p.label || e.name)}</span></div>`;
   },
 
   demo(id, p, b, ctx, spec) {
@@ -370,6 +420,7 @@ const DEMO = {
   kinetic(id, p, b, { tw }) {
     const ws = (p.words && p.words.length ? p.words : ["Movimiento", "Ritmo", "Impacto", "Estilo"]).slice(0, 6);
     const slot = (b.e - b.s - 0.6) / ws.length;
+    const at = cues(b, ws, 0.1, 0.6).map((t, k) => Math.min(t, b.s + 0.3 + k * slot + slot * 0.6));
     const styles = [
       [{ scale: 2.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(1.6)" }],
       [{ x: -500, opacity: 0, skewX: 20 }, { x: 0, opacity: 1, skewX: 0, duration: 0.5, ease: "power4.out" }],
@@ -378,11 +429,11 @@ const DEMO = {
       [{ letterSpacing: "0px", opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "expo.out" }],
     ];
     ws.forEach((_, k) => {
-      const t = b.s + 0.3 + k * slot;
+      const t = at[k];
       const [fr, to] = styles[k % styles.length];
       const { letterSpacing, ...fr2 } = fr;
       tw(`#${id}-w${k}`, fr2, to, t);
-      if (k < ws.length - 1) tw(`#${id}-w${k}`, { opacity: 1 }, { opacity: 0, duration: 0.2 }, t + slot - 0.2);
+      if (k < ws.length - 1) tw(`#${id}-w${k}`, { opacity: 1 }, { opacity: 0, duration: 0.2 }, at[k + 1] - 0.2);
     });
     return ws.map((w, k) => `<div id="${id}-w${k}" class="abs h1" style="left:0;right:0;top:250px;text-align:center;font-size:170px;color:${ACC[k % 5]}">${esc(w)}</div>`).join("");
   },
@@ -399,11 +450,11 @@ const DEMO = {
   },
 
   transitions(id, p, b, { tw, STATE }) {
-    const names = ["Whip", "Zoom", "Flash", "Barrido", "Máscara"];
-    const slot = Math.max(1.3, (b.e - b.s - 0.8) / names.length);
+    const names = ["Whip", "Zoom", "Destello", "Barrido", "Máscara"];
+    const at = cues(b, ["whip giro", "zoom acercamiento", "destello flash", "barrido cortina", "máscara círculo"], 0.3, 1.0);
     let html = "";
     names.forEach((n, k) => {
-      const t = b.s + 0.4 + k * slot;
+      const t = at[k];
       const pid = `${id}-p${k}`;
       html += `<div id="${pid}" class="abs" style="inset:0;background:linear-gradient(135deg,${ACC[k]},${ACC[(k + 2) % 5]});display:flex;align-items:center;justify-content:center"><div class="h1" style="font-size:150px;color:#0b0d12">${n}</div></div>`;
       if (k === 0) tw(`#${pid}`, { x: 1200, skewX: -10 }, { x: 0, skewX: 0, duration: 0.45, ease: "power3.out" }, t);
@@ -419,10 +470,12 @@ const DEMO = {
 
   mask_reveal(id, p, b, { tw }) {
     const text = p.text || "Revelar con máscara";
-    tw(`#${id}-a`, { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.0, ease: "power3.inOut" }, b.voStart + 0.2);
-    tw(`#${id}-bar`, { x: 0 }, { x: 1500, duration: 1.0, ease: "power3.inOut" }, b.voStart + 0.2);
-    tw(`#${id}-b`, { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: "power4.out" }, b.voStart + 1.3);
-    tw(`#${id}-c`, { clipPath: "circle(0% at 50% 50%)" }, { clipPath: "circle(70% at 50% 50%)", duration: 1.1, ease: "power2.inOut" }, b.voStart + 2.4);
+    const [t1, t2, t3] = cues(b, ["barra cortina texto", "ranura línea", "círculo foto"], 0.2, 1.4);
+    tw(`#${id}-a`, { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.0, ease: "power3.inOut" }, t1);
+    tw(`#${id}-bar`, { x: 0, opacity: 1 }, { x: 1500, opacity: 1, duration: 1.0, ease: "power3.inOut" }, t1);
+    tw(`#${id}-bar`, { opacity: 1 }, { opacity: 0, duration: 0.3 }, t1 + 1.0);
+    tw(`#${id}-b`, { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: "power4.out" }, t2);
+    tw(`#${id}-c`, { clipPath: "circle(0% at 50% 50%)" }, { clipPath: "circle(70% at 50% 50%)", duration: 1.1, ease: "power2.inOut" }, t3);
     return `<div id="${id}-a" class="abs h1" style="left:60px;top:80px;font-size:130px">${esc(text)}</div>
       <div id="${id}-bar" class="abs" style="left:60px;top:80px;width:16px;height:150px;background:${C.cyan};box-shadow:0 0 30px ${C.cyan}"></div>
       <div class="abs" style="left:60px;top:290px;overflow:hidden"><div id="${id}-b" class="h1" style="font-size:80px;color:${C.violet}">línea por línea</div></div>
@@ -432,12 +485,12 @@ const DEMO = {
 
   svg_draw(id, p, b, { tw }) {
     const d = "M120 520 C 220 300, 420 260, 560 380 S 860 640, 1000 420 S 1260 160, 1480 300";
-    tw(`#${id}-p`, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: Math.min(3.5, b.vo), ease: "power2.inOut" }, b.voStart + 0.2);
-    tw(`#${id}-s`, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.6, ease: "power2.out" }, b.voStart + 0.6);
+    tw(`#${id}-p`, { strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: Math.min(3.5, b.vo), ease: "power2.inOut" }, b.voStart + 0.2);
+    tw(`#${id}-s`, { strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 1.6, ease: "power2.out" }, b.voStart + 0.6);
     tw(`#${id}-dot`, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(3)" }, b.voStart + 0.2 + Math.min(3.5, b.vo));
     return `<svg class="abs" style="left:0;top:0" width="1680" height="760" viewBox="0 0 1680 760" fill="none">
-      <path id="${id}-p" d="${d}" pathLength="1" stroke-dasharray="1" stroke="url(#${id}-g)" stroke-width="16" stroke-linecap="round"/>
-      <rect id="${id}-s" x="1250" y="430" width="300" height="220" rx="30" pathLength="1" stroke-dasharray="1" stroke="${C.amber}" stroke-width="10"/>
+      <path id="${id}-p" d="${d}" pathLength="1000" stroke-dasharray="1000" stroke="url(#${id}-g)" stroke-width="16" stroke-linecap="round"/>
+      <rect id="${id}-s" x="1250" y="430" width="300" height="220" rx="30" pathLength="1000" stroke-dasharray="1000" stroke="${C.amber}" stroke-width="10"/>
       <defs><linearGradient id="${id}-g" x1="0" x2="1"><stop offset="0" stop-color="${C.cyan}"/><stop offset="1" stop-color="${C.violet}"/></linearGradient></defs></svg>
       <div id="${id}-dot" class="abs" style="left:1458px;top:278px;width:44px;height:44px;border-radius:50%;background:${C.violet};box-shadow:0 0 30px ${C.violet}"></div>
       <div class="abs" style="left:1262px;top:500px;width:276px;text-align:center;font-size:34px;font-weight:800;color:${C.amber}">${esc(p.label || "Trazo SVG")}</div>`;
@@ -457,15 +510,22 @@ const DEMO = {
 
   particles(id, p, b, { tw }) {
     const N = 70, bursts = Math.max(1, Math.min(3, Math.floor((b.e - b.s) / 4)));
+    const bt = cues(b, ["confeti", "chispas", "polvo luz"].slice(0, bursts), 0.3, 1.5);
     let html = "";
+    for (let k = 0; k < 36; k++) {
+      const x = 80 + rnd() * 1520, y = 60 + rnd() * 620, sz = 4 + rnd() * 7;
+      html += `<div id="${id}-z${k}" class="abs" style="left:${x.toFixed(0)}px;top:${y.toFixed(0)}px;width:${sz.toFixed(1)}px;height:${sz.toFixed(1)}px;border-radius:50%;background:${ACC[k % 5]};box-shadow:0 0 10px ${ACC[k % 5]}"></div>`;
+      const d = 2.5 + rnd() * 2, reps = Math.max(1, Math.floor((b.e - b.s) / d));
+      tw(`#${id}-z${k}`, { y: 0, opacity: 0 }, { y: -40 - rnd() * 60, opacity: 0.85, duration: d, ease: "sine.inOut", yoyo: true, repeat: reps - 1 }, b.s + 0.2 + rnd());
+    }
     for (let k = 0; k < N; k++) {
       const ang = rnd() * Math.PI * 2, dist = 250 + rnd() * 450, size = 10 + rnd() * 18;
       const col = ACC[k % 5], shape = k % 3 === 0 ? "50%" : "3px";
       html += `<div id="${id}-q${k}" class="abs" style="left:830px;top:360px;width:${size}px;height:${size * (k % 3 === 1 ? 2 : 1)}px;background:${col};border-radius:${shape};opacity:0"></div>`;
       for (let r = 0; r < bursts; r++) {
-        const t = b.s + 0.5 + r * ((b.e - b.s - 1) / bursts);
+        const t = bt[r];
         tw(`#${id}-q${k}`, { x: 0, y: 0, opacity: 1, rotation: 0, scale: 1 },
-          { x: Math.cos(ang) * dist, y: Math.sin(ang) * dist * 0.75 + 160, opacity: 0, rotation: (rnd() - 0.5) * 720, scale: 0.6, duration: 1.6 + rnd() * 0.6, ease: "power3.out" }, t);
+          { x: Math.cos(ang) * dist, y: Math.sin(ang) * dist * 0.75 + 260, opacity: 0, rotation: (rnd() - 0.5) * 720, scale: 0.6, duration: 2.6 + rnd() * 1.0, ease: "power2.out" }, t);
       }
     }
     tw(`#${id}-t`, { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" }, b.s + 0.5);
@@ -498,11 +558,11 @@ const DEMO = {
     const vals = (p.values || [2, 4, 3, 6, 5, 8, 9]).slice(0, 12), mx = Math.max(...vals), mn = Math.min(...vals, 0);
     const pts = vals.map((v, k) => [100 + (k * 1400) / (vals.length - 1), 640 - ((v - mn) / (mx - mn || 1)) * 460]);
     const d = pts.map((q, k) => `${k ? "L" : "M"}${q[0].toFixed(1)} ${q[1].toFixed(1)}`).join(" ");
-    tw(`#${id}-l`, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: Math.min(3, b.vo), ease: "power2.inOut" }, b.voStart + 0.2);
+    tw(`#${id}-l`, { strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: Math.min(3, b.vo), ease: "power2.inOut" }, b.voStart + 0.2);
     pts.forEach((_, k) => tw(`#${id}-p${k}`, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(3)" }, b.voStart + 0.2 + (Math.min(3, b.vo) * k) / (pts.length - 1)));
     return `${head(`${id}x`, p.title || "", tw, b.s + 0.2)}<svg class="abs" style="left:0;top:0" width="1680" height="760" viewBox="0 0 1680 760" fill="none">
       ${[0, 1, 2, 3].map((k) => `<line x1="100" x2="1500" y1="${180 + k * 153}" y2="${180 + k * 153}" stroke="${C.line}" stroke-width="2"/>`).join("")}
-      <path id="${id}-l" d="${d}" pathLength="1" stroke-dasharray="1" stroke="${C.cyan}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <path id="${id}-l" d="${d}" pathLength="1000" stroke-dasharray="1000" stroke="${C.cyan}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
       ${pts.map((q, k) => `<div id="${id}-p${k}" class="abs" style="left:${q[0] - 14}px;top:${q[1] - 14}px;width:28px;height:28px;border-radius:50%;background:${C.violet};border:4px solid #fff"></div>`).join("")}`;
   },
 
@@ -512,7 +572,7 @@ const DEMO = {
     tw(`#${id}-r`, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4 }, b.voStart + 0.95);
     tw(`#${id}-img`, { scale: 1.0 }, { scale: 1.12, duration: b.e - b.s, ease: "none" }, b.s);
     return frame16(`<div id="${id}-img" class="abs" style="inset:0;background-image:url('${PHOTO.F1}');background-size:cover;background-position:center 60%"></div><div class="abs" style="inset:0;background:linear-gradient(0deg,rgba(0,0,0,0.6),transparent 50%)"></div>
-      <div class="abs" style="left:60px;bottom:70px"><div id="${id}-bar" style="width:12px;height:110px;background:${C.amber};position:absolute;left:0;top:0;transform-origin:50% 100%"></div>
+      <div class="abs" style="left:40px;bottom:50px;padding:20px 40px 20px 20px;border-radius:12px;background:rgba(8,10,14,0.72)"><div id="${id}-bar" style="width:12px;height:110px;background:${C.amber};position:absolute;left:0;top:0;transform-origin:50% 100%"></div>
       <div style="padding-left:34px;overflow:hidden"><div id="${id}-n" style="font-size:58px;font-weight:900">${esc(p.person || p.title || p.label || "Nombre Apellido")}</div></div>
       <div id="${id}-r" style="padding-left:34px;font-size:32px;font-weight:600;color:${C.amber}">${esc(p.role || "Cargo o descripción")}</div></div>`) +
       `<div class="abs muted" style="left:1470px;top:260px;width:230px;font-size:30px;line-height:1.35">Rótulo inferior: quién habla o qué se ve.</div>`;
@@ -521,19 +581,19 @@ const DEMO = {
   logo_sting(id, p, b, { tw, sfx }) {
     const name = String(p.brand || p.text || p.label || p.title || "Tu marca").slice(0, 16);
     const t = b.voStart + 0.2;
-    tw(`#${id}-ring`, { strokeDashoffset: 1, rotation: -90 }, { strokeDashoffset: 0, rotation: 0, duration: 1.0, ease: "power3.inOut" }, t);
+    tw(`#${id}-ring`, { strokeDashoffset: 1000, rotation: -90 }, { strokeDashoffset: 0, rotation: 0, duration: 1.0, ease: "power3.inOut" }, t);
     name.split("").forEach((_, k) => tw(`#${id}-c${k}`, { y: 120, opacity: 0, rotation: 15 }, { y: 0, opacity: 1, rotation: 0, duration: 0.6, ease: "back.out(1.7)" }, t + 0.6 + k * 0.045));
     tw(`#${id}-sh`, { xPercent: -150 }, { xPercent: 350, duration: 0.9, ease: "power2.inOut" }, t + 1.6);
     sfx.push({ t: t + 0.6, type: "impact" });
-    return `<svg class="abs" style="left:640px;top:60px" width="400" height="400" viewBox="0 0 400 400" fill="none"><circle id="${id}-ring" cx="200" cy="200" r="170" pathLength="1" stroke-dasharray="1" stroke="${C.violet}" stroke-width="14" style="transform-origin:200px 200px"/></svg>
+    return `<svg class="abs" style="left:640px;top:60px" width="400" height="400" viewBox="0 0 400 400" fill="none"><circle id="${id}-ring" cx="200" cy="200" r="170" pathLength="1000" stroke-dasharray="1000" stroke="${C.violet}" stroke-width="14" style="transform-origin:200px 200px"/></svg>
       <div class="abs" style="left:0;right:0;top:470px;text-align:center;overflow:hidden"><div class="h1" style="font-size:150px;display:inline-block;position:relative;overflow:hidden;padding:0 10px">${name.split("").map((c, k) => `<span id="${id}-c${k}" style="display:inline-block">${c === " " ? "&nbsp;" : esc(c)}</span>`).join("")}<div id="${id}-sh" class="abs" style="top:0;left:0;width:30%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.55),transparent);mix-blend-mode:overlay"></div></div></div>`;
   },
 
   captions_word(id, p, b, { STATE, tw }) {
     const words = String(p.text || "Así se ven los subtítulos palabra por palabra").split(/\s+/);
-    const t0 = b.voStart + 0.4, step = Math.min(0.42, Math.max(0.25, (b.e - t0 - 1) / words.length));
-    words.forEach((w, k) => STATE.text.push([`#${id}-w`, T(t0 + k * step), w]));
+    const t0 = b.voStart + 0.4, step = Math.min(0.9, Math.max(0.25, (b.end - t0 - 1) / words.length));
     STATE.text.push([`#${id}-w`, T(b.s), ""]);
+    words.forEach((w, k) => STATE.text.push([`#${id}-w`, T(t0 + k * step), w]));
     tw(`#${id}-ph`, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, b.s + 0.1);
     tw(`#${id}-img`, { scale: 1.15 }, { scale: 1.35, duration: b.e - b.s, ease: "none" }, b.s);
     return `<div id="${id}-ph" class="abs" style="left:560px;top:10px;width:420px;height:746px;border-radius:52px;border:14px solid #050608;overflow:hidden;background:#000;box-shadow:0 30px 80px rgba(0,0,0,0.6)">
@@ -544,7 +604,7 @@ const DEMO = {
 
   captions_karaoke(id, p, b, { STATE, tw }) {
     const words = String(p.text || "La palabra que suena se resalta en color").split(/\s+/).slice(0, 14);
-    const t0 = b.voStart + 0.4, step = Math.min(0.5, Math.max(0.25, (b.e - t0 - 1) / words.length));
+    const t0 = b.voStart + 0.4, step = Math.min(0.9, Math.max(0.25, (b.end - t0 - 1) / words.length));
     words.forEach((_, k) => {
       tw(`#${id}-w${k}`, { backgroundColor: "rgba(251,191,36,0)", color: "#ffffff" }, { backgroundColor: "rgba(251,191,36,1)", color: "#0b0d12", duration: 0.08 }, t0 + k * step);
       if (k < words.length - 1) tw(`#${id}-w${k}`, { backgroundColor: "rgba(251,191,36,1)", color: "#0b0d12" }, { backgroundColor: "rgba(251,191,36,0)", color: "#ffffff", duration: 0.08 }, t0 + (k + 1) * step);
@@ -565,12 +625,15 @@ const DEMO = {
   formats(id, p, b, { tw }) {
     const F = [["16:9", 560, 315, "YouTube · web"], ["9:16", 236, 420, "TikTok · Reels"], ["1:1", 340, 340, "Feed"]];
     let x = 40;
+    const kw = ["horizontal youtube dieciséis", "vertical tiktok reels", "cuadrado feed"];
+    const raw = kw.map((k, j) => cue(b, k, reveal(3, b, j)));
     return F.map(([n, w, h, use], k) => {
-      tw(`#${id}-f${k}`, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.4)" }, reveal(3, b, k));
-      tw(`#${id}-s${k}`, { opacity: 0 }, { opacity: 1, duration: 0.4 }, reveal(3, b, k) + 0.5);
+      const t = Math.min(raw[k], b.end - 0.9);
+      tw(`#${id}-f${k}`, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.4)" }, t);
+      tw(`#${id}-s${k}`, { opacity: 0 }, { opacity: 1, duration: 0.4 }, t + 0.5);
       const html = `<div id="${id}-f${k}" class="abs" style="left:${x}px;top:${120 + (420 - h) / 2}px;width:${w}px;height:${h}px;border-radius:14px;overflow:hidden;border:3px solid ${ACC[k]}">
         <div class="abs" style="inset:0;background-image:url('${PHOTO.F4}');background-size:cover;background-position:center 70%"></div>
-        ${k === 1 ? `<div id="${id}-s${k}" class="abs" style="inset:0"><div class="abs" style="left:0;right:0;top:0;height:12%;background:repeating-linear-gradient(45deg,rgba(251,113,133,0.55) 0 8px,transparent 8px 16px)"></div><div class="abs" style="left:0;right:0;bottom:0;height:22%;background:repeating-linear-gradient(45deg,rgba(251,113,133,0.55) 0 8px,transparent 8px 16px)"></div></div>` : `<div id="${id}-s${k}" class="abs" style="inset:6%;border:3px dashed rgba(255,255,255,0.8);border-radius:6px"></div>`}</div>
+        ${k === 1 ? `<div id="${id}-s${k}" class="abs" style="inset:0"><div class="abs" style="left:0;right:0;top:0;height:12%;background:repeating-linear-gradient(45deg,rgba(251,113,133,0.55) 0 8px,transparent 8px 16px)"></div><div class="abs" style="left:0;right:0;bottom:0;height:22%;background:repeating-linear-gradient(45deg,rgba(251,113,133,0.55) 0 8px,transparent 8px 16px)"></div><div class="abs" style="right:0;top:45%;width:15%;height:33%;background:repeating-linear-gradient(45deg,rgba(251,113,133,0.55) 0 8px,transparent 8px 16px)"></div><div class="abs" style="left:10%;right:18%;top:64%;padding:4px;border-radius:4px;background:rgba(0,0,0,0.75);font-size:13px;font-weight:700;text-align:center">subtítulo aquí</div></div>` : `<div id="${id}-s${k}" class="abs" style="inset:6%;border:3px dashed rgba(255,255,255,0.8);border-radius:6px"></div>`}</div>
         <div class="abs" style="left:${x}px;width:${w}px;top:600px;text-align:center"><div style="font-size:52px;font-weight:900;color:${ACC[k]}">${n}</div><div class="muted" style="font-size:28px;font-weight:600">${use}</div></div>`;
       x += w + 150;
       return html;
@@ -606,7 +669,9 @@ const DEMO = {
   },
 
   timeline_editor(id, p, b, { tw }) {
-    const tracks = [["V2", [[300, 260, C.violet, "Texto"], [820, 300, C.violet, "Logo"]]], ["V1", [[0, 520, C.cyan, "Clip 1"], [540, 420, C.cyan, "Clip 2"], [980, 520, C.cyan, "Clip 3"]]], ["A1", [[0, 1500, C.green, "Voz"]]], ["A2", [[0, 1500, C.amber, "Música"]]]];
+    const v2 = Array.isArray(p.v2) && p.v2.length ? p.v2.slice(0, 3).map(([lab, sec], j) => [Math.round((+sec / 30) * 1500), 230, j ? C.amber : C.violet, String(lab)]) : [[300, 260, C.violet, "Texto"], [820, 300, C.violet, "Logo"]];
+    const tracks = Array.isArray(p.v2) && p.v2.length > 1 ? [["V3", [v2[1]]], ["V2", [v2[0]]],
+      ["V1", [[0, 520, C.cyan, "Clip 1"], [540, 420, C.cyan, "Clip 2"], [980, 520, C.cyan, "Clip 3"]]], ["A1", [[0, 1500, C.green, "Voz"]]]] : [["V2", v2], ["V1", [[0, 520, C.cyan, "Clip 1"], [540, 420, C.cyan, "Clip 2"], [980, 520, C.cyan, "Clip 3"]]], ["A1", [[0, 1500, C.green, "Voz"]]], ["A2", [[0, 1500, C.amber, "Música"]]]];
     let html = "", k = 0;
     tracks.forEach(([n, clips], r) => {
       html += `<div class="abs" style="left:0;top:${150 + r * 120}px;width:90px;height:96px;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:800;color:${C.muted}">${n}</div><div class="abs" style="left:110px;top:${150 + r * 120}px;width:1520px;height:96px;border-radius:10px;background:${C.panel}"></div>`;

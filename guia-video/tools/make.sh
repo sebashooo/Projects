@@ -41,4 +41,5 @@ open("salida/subtitulos.srt", "w").write("\n".join(srt))
 open("salida/capitulos.txt", "w").write("\n".join(idx) + "\n")
 print("duración total", round(off/60, 2), "min ·", len(caps), "capítulos")
 PY
+python3 tools/srt.py   # subtítulos cortos, iguales a los del video
 echo FIN

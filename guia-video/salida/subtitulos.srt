@@ -43,44 +43,44 @@ como la misión DART,
 el anuncio de Manager App y la historia de Trendy Sneakers.
 
 12
-00:00:30,419 --> 00:00:32,589
-Primero te cuento dónde y cómo trabajo,
+00:00:30,419 --> 00:00:34,099
+Primero te cuento dónde y cómo trabajo, y con qué herramientas.
 
 13
-00:00:32,589 --> 00:00:35,484
-y con qué herramientas. Luego vienen la animación,
+00:00:34,099 --> 00:00:37,089
+Luego vienen la animación, los videos con tus fotos,
 
 14
-00:00:35,484 --> 00:00:37,089
-los videos con tus fotos,
-
-15
 00:00:37,089 --> 00:00:40,061
 la edición con FFmpeg y los subtítulos.
 
-16
+15
 00:00:40,631 --> 00:00:43,492
 Después, el audio, los videos explicativos con datos,
 
-17
+16
 00:00:43,492 --> 00:00:46,451
 cómo hacer muchas versiones de un mismo video,
 
-18
+17
 00:00:46,451 --> 00:00:48,995
 mis límites contados sin rodeos y, al final,
 
-19
+18
 00:00:48,995 --> 00:00:51,204
 cómo sacarme el mejor provecho.
 
-20
+19
 00:00:51,774 --> 00:00:53,464
 Mi promesa es sencilla.
 
+20
+00:00:53,464 --> 00:00:56,076
+Te voy a mostrar las cosas funcionando en pantalla,
+
 21
-00:00:53,464 --> 00:00:57,164
-Te voy a mostrar las cosas funcionando en pantalla, no solo a nombrarlas,
+00:00:56,076 --> 00:00:57,164
+no solo a nombrarlas,
 
 22
 00:00:57,164 --> 00:00:59,774
@@ -123,12 +123,12 @@ pero no tiene tarjeta gráfica.
 Ahí tengo mis herramientas, cada una con su papel.
 
 32
-00:01:26,562 --> 00:01:30,172
-Una aclaración honesta. Remotion, que hace video con React,
+00:01:26,562 --> 00:01:28,252
+Una aclaración honesta.
 
 33
-00:01:30,172 --> 00:01:31,382
-ya está instalado,
+00:01:28,252 --> 00:01:31,382
+Remotion, que hace video con React, ya está instalado,
 
 34
 00:01:31,382 --> 00:01:34,039
@@ -139,12 +139,12 @@ pero todavía no lo he usado en tus proyectos.
 La pieza central es HyperFrames.
 
 36
-00:01:37,129 --> 00:01:39,599
-Diseño cada escena como una página web,
+00:01:37,129 --> 00:01:40,779
+Diseño cada escena como una página web, y HyperFrames la abre
 
 37
-00:01:39,599 --> 00:01:42,639
-y HyperFrames la abre en un navegador y la graba cuadro
+00:01:40,779 --> 00:01:42,639
+en un navegador y la graba cuadro
 
 38
 00:01:42,639 --> 00:01:45,066
@@ -159,36 +159,36 @@ El movimiento lo pongo con GSAP,
 sobre una línea de tiempo como la de un editor.
 
 41
-00:01:50,316 --> 00:01:54,759
-Le digo que el título entra en el segundo dos y la tarjeta gira en el tres.
+00:01:50,316 --> 00:01:52,541
+Le digo que el título entra en el segundo
 
 42
+00:01:52,541 --> 00:01:54,759
+dos y la tarjeta gira en el tres.
+
+43
 00:01:55,329 --> 00:01:59,119
 FFmpeg es mi navaja suiza para video que ya existe.
 
-43
+44
 00:01:59,119 --> 00:02:00,689
 Leo los datos de un archivo,
 
-44
+45
 00:02:00,689 --> 00:02:03,679
 le pego la voz a la imagen y convierto formatos.
 
-45
+46
 00:02:03,679 --> 00:02:06,159
 Lo vemos a fondo en el capítulo cuatro.
 
-46
-00:02:06,729 --> 00:02:09,599
-Con Python y NumPy compongo música original,
-
 47
-00:02:09,599 --> 00:02:11,869
-sencilla pero sin derechos de terceros,
+00:02:06,729 --> 00:02:10,310
+Con Python y NumPy compongo música original, sencilla pero
 
 48
-00:02:11,869 --> 00:02:14,669
-y sintetizo efectos como whoosh o bip.
+00:02:10,310 --> 00:02:14,669
+sin derechos de terceros, y sintetizo efectos como whoosh o bip.
 
 49
 00:02:14,669 --> 00:02:17,309
@@ -203,2261 +203,2425 @@ con tres voces para escoger.
 Siempre sigo el mismo camino.
 
 52
-00:02:21,570 --> 00:02:24,290
-Primero tu brief, o sea, tu pedido con objetivo,
+00:02:21,570 --> 00:02:22,894
+Primero tu brief, o sea,
 
 53
-00:02:24,290 --> 00:02:27,670
-público y formato. Luego guion, storyboard, render,
+00:02:22,894 --> 00:02:25,700
+tu pedido con objetivo, público y formato.
 
 54
+00:02:25,700 --> 00:02:27,670
+Luego guion, storyboard, render,
+
+55
 00:02:27,670 --> 00:02:30,793
 que es fabricar el archivo final, revisión y entrega.
 
-55
-00:02:31,363 --> 00:02:34,236
-El storyboard es el plan del video, escena por escena,
-
 56
-00:02:34,236 --> 00:02:36,982
-con sus tiempos. Lo apruebas antes del render,
+00:02:31,363 --> 00:02:33,279
+El storyboard es el plan del video,
 
 57
-00:02:36,982 --> 00:02:40,143
-y eso ahorra mucho. Cambiar una viñeta es rápido.
+00:02:33,279 --> 00:02:35,413
+escena por escena, con sus tiempos.
 
 58
+00:02:35,413 --> 00:02:38,323
+Lo apruebas antes del render, y eso ahorra mucho.
+
+59
+00:02:38,323 --> 00:02:40,143
+Cambiar una viñeta es rápido.
+
+60
 00:02:40,143 --> 00:02:42,598
 Rehacer un video terminado, no tanto.
 
-59
+61
 00:02:43,168 --> 00:02:44,938
 El render es el paso lento.
 
-60
-00:02:44,938 --> 00:02:46,298
-Sin tarjeta gráfica,
-
-61
-00:02:46,298 --> 00:02:49,268
-un video en alta definición tarda tres o cuatro veces
-
 62
-00:02:49,268 --> 00:02:53,044
-su duración. Un anuncio de treinta segundos toma entre minuto
+00:02:44,938 --> 00:02:47,830
+Sin tarjeta gráfica, un video en alta definición
 
 63
-00:02:53,044 --> 00:02:54,723
-y medio y dos minutos.
+00:02:47,830 --> 00:02:50,408
+tarda tres o cuatro veces su duración.
 
 64
+00:02:50,408 --> 00:02:52,350
+Un anuncio de treinta segundos toma
+
+65
+00:02:52,350 --> 00:02:54,723
+entre minuto y medio y dos minutos.
+
+66
 00:02:55,293 --> 00:02:58,783
 No reproduzco el video en tiempo real ni escucho el sonido.
 
-65
+67
 00:02:58,783 --> 00:03:01,653
 Saco fotogramas sueltos y los miro como fotos,
 
-66
-00:03:01,653 --> 00:03:03,353
-buscando textos cortados,
-
-67
-00:03:03,353 --> 00:03:05,782
-colores raros o cosas fuera de lugar.
-
 68
+00:03:01,653 --> 00:03:05,782
+buscando textos cortados, colores raros o cosas fuera de lugar.
+
+69
 00:03:06,352 --> 00:03:08,842
 Los fotogramas los saco con FFmpeg.
 
-69
-00:03:08,842 --> 00:03:11,979
-El sonido lo reviso con números. Mido el volumen en LUFS,
-
 70
-00:03:11,979 --> 00:03:14,302
-la unidad con que las redes nivelan el audio,
+00:03:08,842 --> 00:03:10,812
+El sonido lo reviso con números.
 
 71
-00:03:14,302 --> 00:03:16,292
-y también picos y silencios.
+00:03:10,812 --> 00:03:13,347
+Mido el volumen en LUFS, la unidad con que las redes
 
 72
+00:03:13,347 --> 00:03:16,292
+nivelan el audio, y también picos y silencios.
+
+73
 00:03:16,292 --> 00:03:19,016
 Si algo falla, corrijo y vuelvo a medir.
 
-73
+74
 00:03:19,586 --> 00:03:22,226
 Antes de entregarte algo paso una lista.
 
-74
+75
 00:03:22,226 --> 00:03:24,084
 Textos legibles y en zonas seguras,
 
-75
+76
 00:03:24,084 --> 00:03:26,926
 donde los botones de las redes no los tapan.
 
-76
+77
 00:03:26,926 --> 00:03:29,006
 Voz y subtítulos sincronizados,
 
-77
+78
 00:03:29,006 --> 00:03:32,421
 volumen a menos catorce LUFS y el formato que pediste.
 
-78
-00:03:32,991 --> 00:03:36,491
-Un último detalle. No guardo memoria entre conversaciones.
-
 79
+00:03:32,991 --> 00:03:34,111
+Un último detalle.
+
+80
+00:03:34,111 --> 00:03:36,491
+No guardo memoria entre conversaciones.
+
+81
 00:03:36,491 --> 00:03:38,941
 Lo que queda son los archivos y el repositorio,
 
-80
+82
 00:03:38,941 --> 00:03:41,811
 y con eso retomo un video sin empezar de cero.
 
-81
+83
 00:03:41,811 --> 00:03:43,671
 Ahora sí, vamos a animar.
 
-82
-00:03:45,870 --> 00:03:48,837
-Capítulo dos. Animación y motion graphics, o sea,
-
-83
-00:03:48,837 --> 00:03:52,220
-gráficos en movimiento. Aquí no te lo cuento, te lo muestro.
-
 84
-00:03:52,220 --> 00:03:56,878
-Cada movimiento de este capítulo lo escribí yo, en código, para este video.
+00:03:45,870 --> 00:03:46,679
+Capítulo dos.
 
 85
+00:03:46,679 --> 00:03:50,620
+Animación y motion graphics, o sea, gráficos en movimiento.
+
+86
+00:03:50,620 --> 00:03:52,740
+Aquí no te lo cuento, te lo muestro.
+
+87
+00:03:52,740 --> 00:03:55,111
+Cada movimiento de este capítulo lo escribí yo,
+
+88
+00:03:55,111 --> 00:03:56,878
+en código, para este video.
+
+89
 00:03:57,448 --> 00:04:00,068
 Primero, la idea clave, la línea de tiempo.
 
-86
+90
 00:04:00,068 --> 00:04:02,688
 Funciona como las pistas de un editor de video.
 
-87
+91
 00:04:02,688 --> 00:04:04,328
 Define qué elemento se mueve,
 
-88
+92
 00:04:04,328 --> 00:04:06,557
 en qué segundo empieza y cuánto dura.
 
-89
+93
 00:04:07,127 --> 00:04:08,867
 Así se escribe con GSAP.
 
-90
+94
 00:04:08,867 --> 00:04:12,167
 Esta línea sube el título desde abajo al medio segundo.
 
-91
+95
 00:04:12,167 --> 00:04:14,962
 Esta otra agranda el logo en el segundo uno coma dos,
 
-92
+96
 00:04:14,962 --> 00:04:16,528
 con un pequeño rebote.
 
-93
+97
 00:04:17,098 --> 00:04:20,048
 El truco es que esa línea de tiempo está en pausa.
 
-94
-00:04:20,048 --> 00:04:23,135
-HyperFrames salta a cada fotograma exacto y lo captura
+98
+00:04:20,048 --> 00:04:21,977
+HyperFrames salta a cada fotograma
 
-95
-00:04:23,135 --> 00:04:25,678
-con Chromium. Por eso es determinista,
+99
+00:04:21,977 --> 00:04:24,338
+exacto y lo captura con Chromium.
 
-96
+100
+00:04:24,338 --> 00:04:25,678
+Por eso es determinista,
+
+101
 00:04:25,678 --> 00:04:28,653
 el mismo código da el mismo video en cada render.
 
-97
+102
 00:04:29,223 --> 00:04:32,475
 Empecemos con tipografía cinética, palabras que entran,
 
-98
+103
 00:04:32,475 --> 00:04:35,013
 crecen y cambian al ritmo de la voz.
 
-99
+104
 00:04:35,013 --> 00:04:38,602
 Es ideal para el gancho de los primeros tres segundos en redes.
 
-100
+105
 00:04:39,172 --> 00:04:40,942
 Mira estos cuatro movimientos.
 
-101
-00:04:40,942 --> 00:04:43,662
-Misma distancia, mismo tiempo, pero distinta curva,
+106
+00:04:40,942 --> 00:04:42,545
+Misma distancia, mismo tiempo,
 
-102
-00:04:43,662 --> 00:04:46,952
-lo que se llama easing. El lineal se ve mecánico.
+107
+00:04:42,545 --> 00:04:45,302
+pero distinta curva, lo que se llama easing.
 
-103
+108
+00:04:45,302 --> 00:04:46,952
+El lineal se ve mecánico.
+
+109
 00:04:46,952 --> 00:04:49,552
 El suave frena al llegar y se siente natural.
 
-104
+110
 00:04:49,552 --> 00:04:52,155
 Los otros dos rebotan, para algo juguetón.
 
-105
+111
 00:04:52,725 --> 00:04:53,625
 ¿Por qué importa?
 
-106
+112
 00:04:53,625 --> 00:04:56,725
 Porque en la vida real nada arranca ni frena de golpe.
 
-107
-00:04:56,725 --> 00:05:00,877
-Una buena curva hace que tu video se sienta profesional y no barato.
+113
+00:04:56,725 --> 00:04:58,609
+Una buena curva hace que tu video
 
-108
+114
+00:04:58,609 --> 00:05:00,877
+se sienta profesional y no barato.
+
+115
 00:05:01,447 --> 00:05:03,307
 Las transiciones unen escenas.
 
-109
+116
 00:05:03,307 --> 00:05:05,977
 Aquí tienes un whip, que es un giro rápido de cámara,
 
-110
+117
 00:05:05,977 --> 00:05:09,207
 luego un zoom, un destello, un barrido y una máscara.
 
-111
+118
 00:05:09,207 --> 00:05:11,808
 Mi regla es usar pocas y con intención.
 
-112
+119
 00:05:12,378 --> 00:05:15,498
 Una máscara es una forma que decide qué parte se ve.
 
-113
-00:05:15,498 --> 00:05:18,134
-Así el texto aparece tras una barra de luz o sale
+120
+00:05:15,498 --> 00:05:19,168
+Así el texto aparece tras una barra de luz o sale de una ranura,
 
-114
-00:05:18,134 --> 00:05:21,992
-de una ranura, y una foto se descubre en un círculo que crece.
+121
+00:05:19,168 --> 00:05:21,992
+y una foto se descubre en un círculo que crece.
 
-115
+122
 00:05:22,562 --> 00:05:23,982
 Ahora, los trazos.
 
-116
+123
 00:05:23,982 --> 00:05:26,564
 Un SVG es un dibujo descrito con matemáticas,
 
-117
+124
 00:05:26,564 --> 00:05:29,292
 por eso se ve nítido a cualquier tamaño.
 
-118
+125
 00:05:29,292 --> 00:05:32,580
 Y como está hecho de líneas, puedo dibujarlas frente a ti.
 
-119
-00:05:33,150 --> 00:05:36,280
+126
+00:05:33,150 --> 00:05:37,230
 Así. Sirve para una flecha que señala tu producto, una firma,
 
-120
-00:05:36,280 --> 00:05:40,908
+127
+00:05:37,230 --> 00:05:40,908
 un diagrama o la ruta de un domicilio sobre un mapa sencillo.
 
-121
+128
 00:05:41,478 --> 00:05:43,238
 También manejo profundidad.
 
-122
-00:05:43,238 --> 00:05:47,432
-Estas tarjetas y este cubo giran en tres dimensiones. Te soy honesto,
+129
+00:05:43,238 --> 00:05:46,608
+Estas tarjetas y este cubo giran en tres dimensiones.
 
-123
-00:05:47,432 --> 00:05:50,148
-es un efecto ligero para productos o pantallas,
+130
+00:05:46,608 --> 00:05:50,148
+Te soy honesto, es un efecto ligero para productos o pantallas,
 
-124
+131
 00:05:50,148 --> 00:05:52,542
 no para modelar personajes animados.
 
-125
-00:05:53,112 --> 00:05:54,932
-Otro clásico son los rótulos,
+132
+00:05:53,112 --> 00:05:55,891
+Otro clásico son los rótulos, que en inglés llaman
 
-126
-00:05:54,932 --> 00:05:57,578
-que en inglés llaman lower thirds porque van en el tercio
+133
+00:05:55,891 --> 00:05:58,482
+lower thirds porque van en el tercio inferior.
 
-127
-00:05:57,578 --> 00:06:01,292
-inferior. Sirven para nombre y cargo, producto y precio,
+134
+00:05:58,482 --> 00:06:01,292
+Sirven para nombre y cargo, producto y precio,
 
-128
+135
 00:06:01,292 --> 00:06:03,707
 un dato clave o tu usuario de redes.
 
-129
-00:06:04,277 --> 00:06:07,085
-Entra rápido, se queda lo justo para leerlo y no tapa
+136
+00:06:04,277 --> 00:06:04,935
+Entra rápido,
 
-130
-00:06:07,085 --> 00:06:10,597
-lo importante. Lo adapto a tus colores y tipografía,
+137
+00:06:04,935 --> 00:06:08,227
+se queda lo justo para leerlo y no tapa lo importante.
 
-131
+138
+00:06:08,227 --> 00:06:10,597
+Lo adapto a tus colores y tipografía,
+
+139
 00:06:10,597 --> 00:06:13,080
 como hice con la identidad de Manager App.
 
-132
-00:06:13,650 --> 00:06:14,715
-Para abrir o cerrar,
+140
+00:06:13,650 --> 00:06:15,868
+Para abrir o cerrar, una animación de logo
 
-133
-00:06:14,715 --> 00:06:17,111
-una animación de logo de dos o tres segundos,
+141
+00:06:15,868 --> 00:06:18,590
+de dos o tres segundos, aquí letra por letra.
 
-134
-00:06:17,111 --> 00:06:20,195
-aquí letra por letra. Si me das tu logo en SVG,
+142
+00:06:18,590 --> 00:06:22,340
+Si me das tu logo en SVG, animo cada pieza por separado.
 
-135
-00:06:20,195 --> 00:06:22,340
-animo cada pieza por separado.
-
-136
+143
 00:06:22,340 --> 00:06:25,023
 Si es una imagen plana, la animo completa.
 
-137
+144
 00:06:25,593 --> 00:06:27,573
 Un detalle sobre las partículas.
 
-138
-00:06:27,573 --> 00:06:28,850
-Parecen moverse al azar,
+145
+00:06:27,573 --> 00:06:29,899
+Parecen moverse al azar, pero ese azar sale
 
-139
-00:06:28,850 --> 00:06:31,943
-pero ese azar sale de una semilla fija, un número de partida.
+146
+00:06:29,899 --> 00:06:31,943
+de una semilla fija, un número de partida.
 
-140
+147
 00:06:31,943 --> 00:06:35,100
 Por eso se mueven igual en cada render.
 
-141
+148
 00:06:35,670 --> 00:06:37,700
 Como este confeti para un lanzamiento,
 
-142
+149
 00:06:37,700 --> 00:06:40,710
 chispas para una oferta o polvo de luz de fondo.
 
-143
+150
 00:06:40,710 --> 00:06:42,350
 Eso sí, con moderación,
 
-144
+151
 00:06:42,350 --> 00:06:45,923
 porque demasiadas partículas distraen y alargan el render.
 
-145
+152
 00:06:46,493 --> 00:06:48,873
 Los contadores también funcionan muy bien,
 
-146
+153
 00:06:48,873 --> 00:06:51,583
 porque una cifra que sube pega más que una quieta.
 
-147
+154
 00:06:51,583 --> 00:06:53,233
 Este número es de ejemplo.
 
-148
+155
 00:06:53,233 --> 00:06:56,214
 En tu video solo uso datos reales que tú me des.
 
-149
+156
 00:06:56,784 --> 00:06:58,524
 La magia está en combinar.
 
-150
-00:06:58,524 --> 00:07:01,497
-Un anuncio de treinta segundos puede usar varias de estas
+157
+00:06:58,524 --> 00:07:00,404
+Un anuncio de treinta segundos puede
 
-151
-00:07:01,497 --> 00:07:04,504
-técnicas. Y como todo es código, cambiar un color,
+158
+00:07:00,404 --> 00:07:02,264
+usar varias de estas técnicas.
 
-152
+159
+00:07:02,264 --> 00:07:04,504
+Y como todo es código, cambiar un color,
+
+160
 00:07:04,504 --> 00:07:07,977
 un texto o un tiempo es editar y volver a renderizar.
 
-153
-00:07:10,170 --> 00:07:13,477
-Capítulo tres. Aquí te muestro cómo convierto las fotos
+161
+00:07:10,170 --> 00:07:11,300
+Capítulo tres.
 
-154
+162
+00:07:11,300 --> 00:07:13,477
+Aquí te muestro cómo convierto las fotos
+
+163
 00:07:13,477 --> 00:07:16,130
 de tus productos en anuncios con movimiento,
 
-155
+164
 00:07:16,130 --> 00:07:18,973
 y te cuento un caso real de una tienda de tenis.
 
-156
+165
 00:07:19,543 --> 00:07:22,513
 Una foto quieta dentro de un video se siente plana.
 
-157
+166
 00:07:22,513 --> 00:07:24,443
 Por eso le pongo una cámara virtual,
 
-158
+167
 00:07:24,443 --> 00:07:27,683
 un acercamiento lento o un desplazamiento suave de lado.
 
-159
+168
 00:07:27,683 --> 00:07:29,293
 Se llama efecto Ken Burns,
 
-160
+169
 00:07:29,293 --> 00:07:32,186
 y le da vida a este tenis aunque es una sola foto.
 
-161
-00:07:32,756 --> 00:07:36,986
-Muchas veces la foto no tiene la forma del video. Como veo la imagen,
+170
+00:07:32,756 --> 00:07:35,846
+Muchas veces la foto no tiene la forma del video.
 
-162
+171
+00:07:35,846 --> 00:07:36,986
+Como veo la imagen,
+
+172
 00:07:36,986 --> 00:07:39,716
 elijo un recorte que deje el producto completo,
 
-163
+173
 00:07:39,716 --> 00:07:43,056
 o la pongo entera sobre una copia difuminada de sí misma.
 
-164
+174
 00:07:43,056 --> 00:07:44,916
 Lo que nunca hago es estirarla,
 
-165
+175
 00:07:44,916 --> 00:07:47,767
 porque un producto deformado se nota al instante.
 
-166
+176
 00:07:48,337 --> 00:07:50,224
 También ajusto el color, más cálido,
 
-167
+177
 00:07:50,224 --> 00:07:52,247
 más frío o con más contraste,
 
-168
-00:07:52,247 --> 00:07:55,060
-y emparejo el tono de todas para que se vean como un solo
+178
+00:07:52,247 --> 00:07:53,594
+y emparejo el tono de todas
 
-169
-00:07:55,060 --> 00:07:58,017
-anuncio. Eso sí, corrijo luz y color,
+179
+00:07:53,594 --> 00:07:56,007
+para que se vean como un solo anuncio.
 
-170
+180
+00:07:56,007 --> 00:07:58,017
+Eso sí, corrijo luz y color,
+
+181
 00:07:58,017 --> 00:08:00,509
 no invento detalles que la foto no tiene.
 
-171
+182
 00:08:01,079 --> 00:08:03,139
 Luego pienso en dónde se va a ver.
 
-172
-00:08:03,139 --> 00:08:06,248
-Vertical para TikTok e historias, cuadrado para publicaciones,
+183
+00:08:03,139 --> 00:08:04,169
+Vertical para TikTok e historias,
 
-173
-00:08:06,248 --> 00:08:08,539
-horizontal para YouTube.
+184
+00:08:04,169 --> 00:08:08,539
+cuadrado para publicaciones, horizontal para YouTube.
 
-174
-00:08:08,539 --> 00:08:10,919
-Y dejo lo importante en las zonas seguras,
+185
+00:08:08,539 --> 00:08:11,437
+Y dejo lo importante en las zonas seguras, las partes
 
-175
-00:08:10,919 --> 00:08:14,972
-las partes de la pantalla que no tapan los botones ni los textos de la red.
+186
+00:08:11,437 --> 00:08:14,972
+de la pantalla que no tapan los botones ni los textos de la red.
 
-176
+187
 00:08:15,542 --> 00:08:17,102
 Ahora, el caso real.
 
-177
+188
 00:08:17,102 --> 00:08:20,352
 Para Trendy Sneakers hice primero este anuncio con sus fotos,
 
-178
+189
 00:08:20,352 --> 00:08:23,242
 en versiones de veintiocho y quince segundos.
 
-179
+190
 00:08:23,242 --> 00:08:26,820
 Tenía movimiento y textos claros, pero al cliente no le gustó.
 
-180
+191
 00:08:27,390 --> 00:08:28,970
 Y aquí viene lo valioso.
 
-181
+192
 00:08:28,970 --> 00:08:32,340
 En vez de solo decir que no, me mostró un video de referencia,
 
-182
+193
 00:08:32,340 --> 00:08:35,730
 una historia narrada con subtítulo palabra por palabra.
 
-183
-00:08:35,730 --> 00:08:39,755
-Eso me explicó lo que buscaba mucho mejor que cualquier descripción.
+194
+00:08:35,730 --> 00:08:37,687
+Eso me explicó lo que buscaba mucho
 
-184
+195
+00:08:37,687 --> 00:08:39,755
+mejor que cualquier descripción.
+
+196
 00:08:40,325 --> 00:08:42,085
 Entonces cambié el enfoque.
 
-185
+197
 00:08:42,085 --> 00:08:43,475
 Armé un panel de agentes,
 
-186
+198
 00:08:43,475 --> 00:08:46,115
 varios ayudantes de inteligencia artificial.
 
-187
+199
 00:08:46,115 --> 00:08:49,705
 Unos escribieron guiones y otros los calificaron como jueces.
 
-188
+200
 00:08:49,705 --> 00:08:52,655
 Ganó una historia de misterio, El secreto del barrio.
 
-189
-00:08:52,655 --> 00:08:56,090
-Le puse voz masculina y monté las fotos a pantalla completa
+201
+00:08:52,655 --> 00:08:54,977
+Le puse voz masculina y monté las fotos
 
-190
-00:08:56,090 --> 00:08:57,874
-con una cámara continua.
+202
+00:08:54,977 --> 00:08:57,874
+a pantalla completa con una cámara continua.
 
-191
-00:08:58,444 --> 00:09:01,794
-Este es el resultado. Usé las fotos de la misma tienda,
+203
+00:08:58,444 --> 00:08:59,954
+Este es el resultado.
 
-192
-00:09:01,794 --> 00:09:03,454
-pero ahora cuentan una historia,
+204
+00:08:59,954 --> 00:09:02,692
+Usé las fotos de la misma tienda, pero ahora cuentan
 
-193
-00:09:03,454 --> 00:09:05,744
-siguiendo el estilo de su referencia.
+205
+00:09:02,692 --> 00:09:05,744
+una historia, siguiendo el estilo de su referencia.
 
-194
-00:09:05,744 --> 00:09:09,679
-La lección es que la forma de contar importa tanto como el material.
+206
+00:09:05,744 --> 00:09:07,691
+La lección es que la forma de contar
 
-195
+207
+00:09:07,691 --> 00:09:09,679
+importa tanto como el material.
+
+208
 00:09:10,249 --> 00:09:11,969
 ¿Y qué fotos me sirven más?
 
-196
+209
 00:09:11,969 --> 00:09:14,053
 Las que tienen buena luz, ojalá natural,
 
-197
+210
 00:09:14,053 --> 00:09:16,879
 el producto bien enfocado y un fondo limpio.
 
-198
-00:09:16,879 --> 00:09:19,279
-Mándame varios ángulos y detalles de cerca,
+211
+00:09:16,879 --> 00:09:20,094
+Mándame varios ángulos y detalles de cerca, en el archivo
 
-199
-00:09:19,279 --> 00:09:21,559
-en el archivo original y sin filtros,
+212
+00:09:20,094 --> 00:09:23,340
+original y sin filtros, porque el color lo ajusto yo.
 
-200
-00:09:21,559 --> 00:09:23,340
-porque el color lo ajusto yo.
+213
+00:09:23,910 --> 00:09:25,737
+Un truco al tomarlas es dejar aire
 
-201
-00:09:23,910 --> 00:09:26,868
-Un truco al tomarlas es dejar aire alrededor del producto
+214
+00:09:25,737 --> 00:09:27,564
+alrededor del producto y hacer cada
 
-202
-00:09:26,868 --> 00:09:29,590
-y hacer cada foto en vertical y en horizontal,
+215
+00:09:27,564 --> 00:09:29,590
+foto en vertical y en horizontal,
 
-203
+216
 00:09:29,590 --> 00:09:31,850
 así la encuadro en cualquier formato.
 
-204
+217
 00:09:31,850 --> 00:09:35,050
 Evita capturas de pantalla y marcas de agua de otros.
 
-205
+218
 00:09:35,050 --> 00:09:38,340
 En Trendy quité una recortando, pero no siempre se puede,
 
-206
+219
 00:09:38,340 --> 00:09:41,140
 y la foto debe ser tuya o tener permiso.
 
-207
+220
 00:09:41,710 --> 00:09:45,140
 En resumen, tú pones buenas fotos y yo les doy movimiento,
 
-208
+221
 00:09:45,140 --> 00:09:48,000
 color, formato y, si quieres, una historia.
 
-209
+222
 00:09:48,000 --> 00:09:51,751
 En el siguiente capítulo pasamos a editar video que ya existe.
 
-210
+223
 00:09:53,937 --> 00:09:56,947
 Hasta ahora te mostré cómo creo videos desde cero.
 
-211
-00:09:56,947 --> 00:09:59,965
-Pero muchas veces ya tienes un video y solo necesitas
+224
+00:09:56,947 --> 00:10:00,917
+Pero muchas veces ya tienes un video y solo necesitas editarlo.
 
-212
-00:09:59,965 --> 00:10:02,537
-editarlo. Para eso uso FFmpeg,
+225
+00:10:00,917 --> 00:10:03,829
+Para eso uso FFmpeg, un programa sin ventanas
 
-213
-00:10:02,537 --> 00:10:06,175
-un programa sin ventanas que manejo con instrucciones escritas.
+226
+00:10:03,829 --> 00:10:06,175
+que manejo con instrucciones escritas.
 
-214
-00:10:06,745 --> 00:10:10,264
-Con FFmpeg corto, junto clips, cambio la velocidad,
+227
+00:10:06,745 --> 00:10:10,954
+Con FFmpeg corto, junto clips, cambio la velocidad, reencuadro,
 
-215
-00:10:10,264 --> 00:10:13,008
-reencuadro, corrijo el color, quemo subtítulos,
+228
+00:10:10,954 --> 00:10:13,008
+corrijo el color, quemo subtítulos,
 
-216
+229
 00:10:13,008 --> 00:10:15,235
 comprimo y saco fotogramas o GIF.
 
-217
-00:10:15,235 --> 00:10:17,085
+230
+00:10:15,235 --> 00:10:17,545
 Cada edición es una instrucción exacta,
 
-218
-00:10:17,085 --> 00:10:20,646
+231
+00:10:17,545 --> 00:10:20,646
 así que la puedo repetir igual cuantas veces quieras.
 
-219
+232
 00:10:21,216 --> 00:10:22,696
 Empecemos por cortar.
 
-220
+233
 00:10:22,696 --> 00:10:25,369
 Aquí tomo la animación de la misión DART y le indico
 
-221
+234
 00:10:25,369 --> 00:10:28,336
 el segundo donde empieza el fragmento y cuánto dura.
 
-222
+235
 00:10:28,336 --> 00:10:31,342
 FFmpeg saca exactamente esa parte.
 
-223
-00:10:31,912 --> 00:10:35,122
-Por dentro se ve así. La primera línea recorta.
+236
+00:10:31,912 --> 00:10:33,312
+Por dentro se ve así.
 
-224
+237
+00:10:33,312 --> 00:10:35,122
+La primera línea recorta.
+
+238
 00:10:35,122 --> 00:10:38,672
 Las otras dos arman una lista y unen los clips en ese orden.
 
-225
+239
 00:10:38,672 --> 00:10:40,592
 Si comparten tamaño y formato,
 
-226
+240
 00:10:40,592 --> 00:10:44,330
 los pego sin volver a procesar la imagen, y eso toma segundos.
 
-227
-00:10:44,900 --> 00:10:49,486
-Cambiar la velocidad es igual de sencillo: aquí va al doble. Si hay sonido,
+241
+00:10:44,900 --> 00:10:48,720
+Cambiar la velocidad es igual de sencillo: aquí va al doble.
 
-228
-00:10:49,486 --> 00:10:52,980
-ajusto el audio aparte para que las voces no suenen agudas.
+242
+00:10:48,720 --> 00:10:50,703
+Si hay sonido, ajusto el audio aparte
 
-229
-00:10:52,980 --> 00:10:56,004
-Y la cámara lenta se ve más fluida si el video se grabó
+243
+00:10:50,703 --> 00:10:52,980
+para que las voces no suenen agudas.
 
-230
-00:10:56,004 --> 00:10:58,012
-con muchos cuadros por segundo.
+244
+00:10:52,980 --> 00:10:55,522
+Y la cámara lenta se ve más fluida si el video
 
-231
+245
+00:10:55,522 --> 00:10:58,012
+se grabó con muchos cuadros por segundo.
+
+246
 00:10:58,582 --> 00:11:01,766
 Uno de los más útiles: pasar de horizontal a vertical,
 
-232
+247
 00:11:01,766 --> 00:11:04,492
 de dieciséis por nueve a nueve por dieciséis,
 
-233
-00:11:04,492 --> 00:11:07,732
-para TikTok o Reels. Elijo qué parte del cuadro conservar,
+248
+00:11:04,492 --> 00:11:05,732
+para TikTok o Reels.
 
-234
+249
+00:11:05,732 --> 00:11:07,732
+Elijo qué parte del cuadro conservar,
+
+250
 00:11:07,732 --> 00:11:09,731
 sin estirar ni deformar nada.
 
-235
+251
 00:11:10,301 --> 00:11:13,721
 Estos son los comandos, y al final compruebo el tamaño.
 
-236
+252
 00:11:13,721 --> 00:11:15,881
 Ojo: lo que queda por fuera se pierde,
 
-237
+253
 00:11:15,881 --> 00:11:19,041
 y al ampliar solo una parte baja un poco la nitidez.
 
-238
+254
 00:11:19,041 --> 00:11:22,581
 Si hay algo importante a los lados, uso un fondo difuminado.
 
-239
+255
 00:11:23,151 --> 00:11:26,281
 También corrijo el color: aquí, un tono más cálido.
 
-240
+256
 00:11:26,281 --> 00:11:28,801
 Ajusto brillo, contraste, saturación y balance,
 
-241
+257
 00:11:28,801 --> 00:11:30,961
 o lo paso a blanco y negro.
 
-242
+258
 00:11:30,961 --> 00:11:32,236
 Es una corrección general,
 
-243
+259
 00:11:32,236 --> 00:11:34,961
 no el retoque fino de un programa profesional.
 
-244
-00:11:35,531 --> 00:11:40,041
-Y quemo subtítulos desde un archivo con textos y tiempos, como un SRT.
+260
+00:11:35,531 --> 00:11:37,631
+Y quemo subtítulos desde un archivo
 
-245
+261
+00:11:37,631 --> 00:11:40,041
+con textos y tiempos, como un SRT.
+
+262
 00:11:40,041 --> 00:11:42,771
 Quemados quiere decir que hacen parte de la imagen:
 
-246
+263
 00:11:42,771 --> 00:11:44,141
 se ven en cualquier red,
 
-247
+264
 00:11:44,141 --> 00:11:46,958
 aunque la persona tenga los subtítulos apagados.
 
-248
-00:11:47,528 --> 00:11:50,416
-Para completar: comprimo para que pese menos y lo puedas
+265
+00:11:47,528 --> 00:11:49,497
+Para completar: comprimo para que pese
 
-249
-00:11:50,416 --> 00:11:51,738
-mandar por WhatsApp,
+266
+00:11:49,497 --> 00:11:51,738
+menos y lo puedas mandar por WhatsApp,
 
-250
-00:11:51,738 --> 00:11:54,675
-extraigo fotogramas como imágenes y convierto fragmentos
+267
+00:11:51,738 --> 00:11:55,698
+extraigo fotogramas como imágenes y convierto fragmentos en GIF.
 
-251
-00:11:54,675 --> 00:11:57,398
-en GIF. Esos fotogramas, además,
+268
+00:11:55,698 --> 00:11:57,398
+Esos fotogramas, además,
 
-252
+269
 00:11:57,398 --> 00:11:59,766
 son la forma en que reviso cada edición.
 
-253
+270
 00:12:00,336 --> 00:12:01,886
 Ahora, un caso real.
 
-254
+271
 00:12:01,886 --> 00:12:05,056
 Me subiste esta animación sobre la misión DART de la NASA:
 
-255
+272
 00:12:05,056 --> 00:12:07,676
 sesenta y cuatro segundos, sin sonido.
 
-256
+273
 00:12:07,676 --> 00:12:09,606
 Había que narrarla en español con subtítulos,
 
-257
+274
 00:12:09,606 --> 00:12:13,065
 pero la explicación no cabía en tan poco tiempo.
 
-258
+275
 00:12:13,635 --> 00:12:15,225
 Tenía dos caminos malos:
 
-259
+276
 00:12:15,225 --> 00:12:18,015
 acelerar la voz o recortar la explicación.
 
-260
+277
 00:12:18,015 --> 00:12:21,085
 Elegí un tercero: dividí la animación por escenas,
 
-261
-00:12:21,085 --> 00:12:24,257
-medí cuánto duraba la narración de cada una y puse más lenta
+278
+00:12:21,085 --> 00:12:22,693
+medí cuánto duraba la narración
 
-262
-00:12:24,257 --> 00:12:27,504
-cada escena que no alcanzaba, justo hasta ese largo.
+279
+00:12:22,693 --> 00:12:26,015
+de cada una y puse más lenta cada escena que no alcanzaba,
 
-263
+280
+00:12:26,015 --> 00:12:27,504
+justo hasta ese largo.
+
+281
 00:12:28,074 --> 00:12:31,204
 Todo eso, junto con la voz y los subtítulos quemados,
 
-264
+282
 00:12:31,204 --> 00:12:33,864
 lo armé en un solo comando de FFmpeg.
 
-265
-00:12:33,864 --> 00:12:37,122
-Pasó de un minuto y cuatro segundos a un minuto y cincuenta
+283
+00:12:33,864 --> 00:12:35,810
+Pasó de un minuto y cuatro segundos
 
-266
-00:12:37,122 --> 00:12:41,005
-y dos: la voz respira y los subtítulos se alcanzan a leer.
+284
+00:12:35,810 --> 00:12:37,814
+a un minuto y cincuenta y dos:
 
-267
+285
+00:12:37,814 --> 00:12:41,005
+la voz respira y los subtítulos se alcanzan a leer.
+
+286
 00:12:41,575 --> 00:12:44,396
 Para sacarle provecho: súbeme el archivo original,
 
-268
+287
 00:12:44,396 --> 00:12:45,665
 en la mejor calidad,
 
-269
+288
 00:12:45,665 --> 00:12:48,575
 y dime los segundos exactos que quieres cambiar.
 
-270
+289
 00:12:48,575 --> 00:12:51,550
 Como cada edición queda escrita, si cambias de idea,
 
-271
+290
 00:12:51,550 --> 00:12:54,504
 la repito con un ajuste, sin empezar de cero.
 
-272
+291
 00:12:56,703 --> 00:12:59,983
 Capítulo cinco, subtítulos y texto en pantalla.
 
-273
+292
 00:12:59,983 --> 00:13:02,693
 Mucha gente ve videos en el celular sin sonido,
 
-274
+293
 00:13:02,693 --> 00:13:05,143
 y ahí el texto es lo único que le llega.
 
-275
+294
 00:13:05,713 --> 00:13:07,543
 Trabajo con tres estilos.
 
-276
+295
 00:13:07,543 --> 00:13:09,443
 Frase completa, la clásica.
 
-277
-00:13:09,443 --> 00:13:11,753
+296
+00:13:09,443 --> 00:13:12,263
 Palabra por palabra, el estilo rápido de TikTok.
 
-278
-00:13:11,753 --> 00:13:15,294
-Y karaoke, donde ves la frase entera y se resalta la palabra
+297
+00:13:12,263 --> 00:13:14,145
+Y karaoke, donde ves la frase entera
 
-279
-00:13:15,294 --> 00:13:17,925
-que va sonando. Los animo en HyperFrames,
+298
+00:13:14,145 --> 00:13:16,623
+y se resalta la palabra que va sonando.
 
-280
+299
+00:13:16,623 --> 00:13:17,925
+Los animo en HyperFrames,
+
+300
 00:13:17,925 --> 00:13:20,510
 con la letra y los colores de tu marca.
 
-281
+301
 00:13:21,080 --> 00:13:24,262
 Así se ve palabra por palabra: cada una sale grande,
 
-282
+302
 00:13:24,262 --> 00:13:26,490
 centrada y al ritmo de la voz.
 
-283
+303
 00:13:26,490 --> 00:13:29,676
 Es el estilo que tomé del video de referencia para la historia
 
-284
+304
 00:13:29,676 --> 00:13:32,315
 de Trendy Sneakers, porque engancha la mirada.
 
-285
+305
 00:13:32,885 --> 00:13:36,615
 Y este es el karaoke, el que usé en el anuncio de Manager App.
 
-286
+306
 00:13:36,615 --> 00:13:38,595
 La frase completa da contexto,
 
-287
+307
 00:13:38,595 --> 00:13:42,072
 y la palabra resaltada va guiando el ojo al ritmo de la voz.
 
-288
+308
 00:13:42,642 --> 00:13:44,542
 Hay dos formas de entregarlos.
 
-289
+309
 00:13:44,542 --> 00:13:47,052
 En la animación de DART van quemados, es decir,
 
-290
-00:13:47,052 --> 00:13:49,657
-el texto queda pegado a la imagen y se ve en cualquier
+310
+00:13:47,052 --> 00:13:49,074
+el texto queda pegado a la imagen y se ve
 
-291
-00:13:49,657 --> 00:13:52,021
-reproductor, sin activar nada.
+311
+00:13:49,074 --> 00:13:52,021
+en cualquier reproductor, sin activar nada.
 
-292
+312
 00:13:52,591 --> 00:13:54,431
 La otra es un archivo SRT,
 
-293
+313
 00:13:54,431 --> 00:13:57,451
 un texto con el inicio y el fin de cada frase.
 
-294
+314
 00:13:57,451 --> 00:13:59,821
 Te lo entrego aparte, lo subes con el video,
 
-295
+315
 00:13:59,821 --> 00:14:02,269
 y quien lo ve puede prenderlo o apagarlo.
 
-296
+316
 00:14:02,839 --> 00:14:05,399
 Para que se lea bien sigo reglas sencillas.
 
-297
+317
 00:14:05,399 --> 00:14:09,049
 Letra grande y buen contraste, con borde o franja oscura.
 
-298
+318
 00:14:09,049 --> 00:14:10,949
 Máximo dos líneas cortas.
 
-299
+319
 00:14:10,949 --> 00:14:14,569
 Y cortes donde la voz hace pausa, nunca a mitad de una idea.
 
-300
+320
 00:14:15,139 --> 00:14:16,849
 Y cuido las zonas seguras.
 
-301
+321
 00:14:16,849 --> 00:14:18,089
 En TikTok y Reels,
 
-302
-00:14:18,089 --> 00:14:21,361
-la descripción y los botones tapan la parte de abajo y el lado
+322
+00:14:18,089 --> 00:14:20,802
+la descripción y los botones tapan la parte de abajo
 
-303
-00:14:21,361 --> 00:14:24,902
-derecho, así que subo el texto para que nada lo esconda.
+323
+00:14:20,802 --> 00:14:22,089
+y el lado derecho,
 
-304
-00:14:25,472 --> 00:14:29,322
-También traduzco. Si necesitas el video en inglés o portugués,
+324
+00:14:22,089 --> 00:14:24,902
+así que subo el texto para que nada lo esconda.
 
-305
-00:14:29,322 --> 00:14:31,902
-traduzco los subtítulos y ajusto los cortes,
+325
+00:14:25,472 --> 00:14:26,702
+También traduzco.
 
-306
-00:14:31,902 --> 00:14:34,682
-porque cada idioma ocupa distinto espacio.
+326
+00:14:26,702 --> 00:14:29,322
+Si necesitas el video en inglés o portugués,
 
-307
+327
+00:14:29,322 --> 00:14:30,556
+traduzco los subtítulos
+
+328
+00:14:30,556 --> 00:14:34,682
+y ajusto los cortes, porque cada idioma ocupa distinto espacio.
+
+329
 00:14:34,682 --> 00:14:36,052
 Si el texto es delicado,
 
-308
+330
 00:14:36,052 --> 00:14:38,541
 conviene que lo revise un hablante nativo.
 
-309
+331
 00:14:39,111 --> 00:14:40,891
 Ahora, un límite honesto.
 
-310
-00:14:40,891 --> 00:14:43,711
-Aquí no tengo instalado un modelo de transcripción como
+332
+00:14:40,891 --> 00:14:44,411
+Aquí no tengo instalado un modelo de transcripción como Whisper,
 
-311
-00:14:43,711 --> 00:14:47,957
-Whisper, así que no puedo convertir tu audio en texto por mi cuenta.
+333
+00:14:44,411 --> 00:14:47,957
+así que no puedo convertir tu audio en texto por mi cuenta.
 
-312
-00:14:48,527 --> 00:14:51,687
-Lo resuelvo así. Si la voz la genero yo con Kokoro,
+334
+00:14:48,527 --> 00:14:49,877
+Lo resuelvo así.
 
-313
-00:14:51,687 --> 00:14:53,777
-sé qué dice cada frase y cuánto dura,
+335
+00:14:49,877 --> 00:14:52,894
+Si la voz la genero yo con Kokoro, sé qué dice cada frase
 
-314
-00:14:53,777 --> 00:14:55,947
-y estimo el momento de cada palabra.
+336
+00:14:52,894 --> 00:14:55,947
+y cuánto dura, y estimo el momento de cada palabra.
 
-315
+337
 00:14:55,947 --> 00:14:58,280
 Si traes tu propia voz, pásame su SRT,
 
-316
-00:14:58,280 --> 00:15:00,027
-sacado de otra herramienta,
+338
+00:14:58,280 --> 00:15:02,151
+sacado de otra herramienta, y lo convierto al estilo que elijas.
 
-317
-00:15:00,027 --> 00:15:02,151
-y lo convierto al estilo que elijas.
+339
+00:15:02,721 --> 00:15:04,453
+Mi consejo: dime desde el pedido
 
-318
-00:15:02,721 --> 00:15:05,911
-Mi consejo: dime desde el pedido qué estilo quieres y dónde
+340
+00:15:04,453 --> 00:15:07,291
+qué estilo quieres y dónde vas a publicar.
 
-319
-00:15:05,911 --> 00:15:08,316
-vas a publicar. Así decido tamaño,
+341
+00:15:07,291 --> 00:15:09,877
+Así decido tamaño, posición y ritmo del texto
 
-320
-00:15:08,316 --> 00:15:11,221
-posición y ritmo del texto desde el principio,
+342
+00:15:09,877 --> 00:15:12,889
+desde el principio, no como parche al final.
 
-321
-00:15:11,221 --> 00:15:12,889
-no como parche al final.
-
-322
+343
 00:15:15,070 --> 00:15:17,130
 Ahora vamos con lo que se escucha.
 
-323
+344
 00:15:17,130 --> 00:15:19,970
 Un buen audio hace que un video se sienta profesional,
 
-324
+345
 00:15:19,970 --> 00:15:22,230
 aunque las imágenes sean sencillas.
 
-325
+346
 00:15:22,230 --> 00:15:25,516
 Te muestro cómo hago la voz, la música y los efectos.
 
-326
+347
 00:15:26,086 --> 00:15:27,872
 La voz que oyes ahora es Kokoro,
 
-327
-00:15:27,872 --> 00:15:29,842
-un sintetizador que corre aquí mismo,
+348
+00:15:27,872 --> 00:15:31,626
+un sintetizador que corre aquí mismo, sin internet y sin costo.
 
-328
-00:15:29,842 --> 00:15:31,626
-sin internet y sin costo.
-
-329
+349
 00:15:31,626 --> 00:15:34,466
 Es la misma voz masculina de la historia de Trendy.
 
-330
+350
 00:15:34,466 --> 00:15:38,266
 En español trae tres voces: una femenina y dos masculinas.
 
-331
-00:15:38,266 --> 00:15:42,655
-La femenina no te convenció, y con tan pocas opciones, tu gusto decide.
+351
+00:15:38,266 --> 00:15:39,859
+La femenina no te convenció,
 
-332
-00:15:43,225 --> 00:15:46,041
-Seamos honestos con los límites. Son pocas voces,
+352
+00:15:39,859 --> 00:15:42,655
+y con tan pocas opciones, tu gusto decide.
 
-333
-00:15:46,041 --> 00:15:48,359
-el acento es neutro y la emoción es más plana
+353
+00:15:43,225 --> 00:15:45,255
+Seamos honestos con los límites.
 
-334
-00:15:48,359 --> 00:15:50,321
-que la de un locutor. A cambio,
+354
+00:15:45,255 --> 00:15:47,035
+Son pocas voces, el acento es neutro
 
-335
-00:15:50,321 --> 00:15:53,355
-sale al instante y me dice cuánto dura cada frase.
+355
+00:15:47,035 --> 00:15:49,835
+y la emoción es más plana que la de un locutor.
 
-336
+356
+00:15:49,835 --> 00:15:53,355
+A cambio, sale al instante y me dice cuánto dura cada frase.
+
+357
 00:15:53,355 --> 00:15:56,977
 Para explicadores y anuncios sencillos, funciona muy bien.
 
-337
+358
 00:15:57,547 --> 00:16:00,247
 Lo que sí controlo es cómo escribo para ella.
 
-338
+359
 00:16:00,247 --> 00:16:03,099
 Frases cortas, números en palabras y nada de símbolos,
 
-339
-00:16:03,099 --> 00:16:07,147
-porque los lee mal. Pongo comas donde una persona respiraría.
+360
+00:16:03,099 --> 00:16:04,557
+porque los lee mal.
 
-340
+361
+00:16:04,557 --> 00:16:07,147
+Pongo comas donde una persona respiraría.
+
+362
 00:16:07,147 --> 00:16:09,777
 Y los nombres en inglés los escribo como suenan,
 
-341
+363
 00:16:09,777 --> 00:16:11,875
 para que no los lea letra por letra.
 
-342
+364
 00:16:12,445 --> 00:16:14,485
 La música la compongo con código.
 
-343
+365
 00:16:14,485 --> 00:16:17,225
 Con NumPy creo cada nota como una onda y le doy forma
 
-344
+366
 00:16:17,225 --> 00:16:20,125
 para que arranque y se apague como un instrumento.
 
-345
+367
 00:16:20,125 --> 00:16:22,555
 Toda la música de esta guía la hice así.
 
-346
+368
 00:16:22,555 --> 00:16:24,795
 Es original y sin derechos de nadie,
 
-347
+369
 00:16:24,795 --> 00:16:27,669
 aunque más sencilla que una producción profesional.
 
-348
+370
 00:16:28,239 --> 00:16:30,479
 Los efectos también los sintetizo.
 
-349
-00:16:30,479 --> 00:16:32,749
-Un barrido de aire para las transiciones,
+371
+00:16:30,479 --> 00:16:33,479
+Un barrido de aire para las transiciones, un bip cuando
 
-350
-00:16:32,749 --> 00:16:35,840
-un bip cuando aparece un dato y un golpe grave para rematar
+372
+00:16:33,479 --> 00:16:36,749
+aparece un dato y un golpe grave para rematar un logo.
 
-351
-00:16:35,840 --> 00:16:39,159
-un logo. Los pongo justo en el fotograma del movimiento,
+373
+00:16:36,749 --> 00:16:39,159
+Los pongo justo en el fotograma del movimiento,
 
-352
+374
 00:16:39,159 --> 00:16:41,692
 para que lo que ves y lo que oyes coincidan.
 
-353
-00:16:42,262 --> 00:16:46,133
-Luego viene la mezcla, por pistas, como en un editor. La voz manda,
+375
+00:16:42,262 --> 00:16:45,382
+Luego viene la mezcla, por pistas, como en un editor.
 
-354
-00:16:46,133 --> 00:16:50,186
-los efectos acompañan y la música va bien por debajo. Si hace falta,
+376
+00:16:45,382 --> 00:16:47,307
+La voz manda, los efectos acompañan
 
-355
-00:16:50,186 --> 00:16:53,722
-hago que la música baje cuando hay voz y suba en las pausas.
+377
+00:16:47,307 --> 00:16:49,442
+y la música va bien por debajo.
 
-356
+378
+00:16:49,442 --> 00:16:51,456
+Si hace falta, hago que la música baje
+
+379
+00:16:51,456 --> 00:16:53,722
+cuando hay voz y suba en las pausas.
+
+380
 00:16:53,722 --> 00:16:55,200
 Eso se llama ducking.
 
-357
+381
 00:16:55,770 --> 00:16:59,320
 Al final normalizo, es decir, ajusto el volumen general.
 
-358
+382
 00:16:59,320 --> 00:17:02,100
 Los LUFS miden qué tan fuerte percibimos un audio,
 
-359
+383
 00:17:02,100 --> 00:17:04,190
 y para redes apunto a menos catorce,
 
-360
+384
 00:17:04,190 --> 00:17:06,360
 un nivel de referencia muy usado.
 
-361
-00:17:06,360 --> 00:17:10,227
-Así tu video no suena ni bajito ni reventado al lado de los demás.
+385
+00:17:06,360 --> 00:17:08,036
+Así tu video no suena ni bajito
 
-362
+386
+00:17:08,036 --> 00:17:10,227
+ni reventado al lado de los demás.
+
+387
 00:17:10,797 --> 00:17:12,377
 Y como no escucho, mido.
 
-363
+388
 00:17:12,377 --> 00:17:14,577
 FFmpeg me da el volumen promedio,
 
-364
+389
 00:17:14,577 --> 00:17:17,517
 los picos y los silencios que no deberían estar.
 
-365
+390
 00:17:17,517 --> 00:17:19,637
 Así revisé el anuncio de Manager App,
 
-366
+391
 00:17:19,637 --> 00:17:21,691
 que quedó en menos catorce LUFS.
 
-367
+392
 00:17:22,261 --> 00:17:25,012
 Mi recomendación: si la voz es lo más importante,
 
-368
+393
 00:17:25,012 --> 00:17:26,294
 grábala tú con el celular,
 
-369
+394
 00:17:26,294 --> 00:17:28,751
 cerca de la boca y en un cuarto sin eco.
 
-370
+395
 00:17:28,751 --> 00:17:30,591
 O tráela de otra herramienta.
 
-371
+396
 00:17:30,591 --> 00:17:32,435
 Yo le quito algo de ruido de fondo,
 
-372
+397
 00:17:32,435 --> 00:17:35,138
 la nivelo y armo el video alrededor de ella.
 
-373
+398
 00:17:35,708 --> 00:17:38,568
 Para sincronizarla, pásame también el guion.
 
-374
+399
 00:17:38,568 --> 00:17:41,668
 Con las pausas que mido en tu grabación ubico cada frase,
 
-375
-00:17:41,668 --> 00:17:44,848
+400
+00:17:41,668 --> 00:17:45,388
 y si me das un archivo SRT, los tiempos quedan exactos.
 
-376
-00:17:44,848 --> 00:17:48,445
+401
+00:17:45,388 --> 00:17:48,445
 Así tienes una voz humana con una edición precisa.
 
-377
+402
 00:17:50,637 --> 00:17:52,917
 Ahora vamos con los videos que enseñan.
 
-378
-00:17:52,917 --> 00:17:56,327
-Explicadores, tutoriales, interfaces de apps y datos
+403
+00:17:52,917 --> 00:17:55,467
+Explicadores, tutoriales,
 
-379
-00:17:56,327 --> 00:17:59,247
-en movimiento. Aquí no basta con que se vea bonito.
+404
+00:17:55,467 --> 00:17:57,037
+interfaces de apps y datos en movimiento.
 
-380
+405
+00:17:57,037 --> 00:17:59,247
+Aquí no basta con que se vea bonito.
+
+406
 00:17:59,247 --> 00:18:01,275
 Tiene que entenderse a la primera.
 
-381
+407
 00:18:01,845 --> 00:18:03,265
 Recuerda el caso DART.
 
-382
+408
 00:18:03,265 --> 00:18:06,385
 Tú me subiste una animación muda sobre la misión de la NASA,
 
-383
+409
 00:18:06,385 --> 00:18:08,435
 con derivadas y probabilidad.
 
-384
+410
 00:18:08,435 --> 00:18:11,525
 En el capítulo cuatro viste cómo resolví el tiempo.
 
-385
+411
 00:18:11,525 --> 00:18:13,825
 Escribí la narración escena por escena,
 
-386
+412
 00:18:13,825 --> 00:18:16,685
 para que la matemática se entendiera como una historia.
 
-387
+413
 00:18:17,255 --> 00:18:19,645
 Mi receta para explicar es sencilla.
 
-388
-00:18:19,645 --> 00:18:22,075
-Una idea por escena, un ejemplo concreto,
+414
+00:18:19,645 --> 00:18:23,200
+Una idea por escena, un ejemplo concreto, una imagen que muestre
 
-389
-00:18:22,075 --> 00:18:25,115
-una imagen que muestre lo mismo que dice la voz y un repaso
+415
+00:18:23,200 --> 00:18:26,275
+lo mismo que dice la voz y un repaso corto al final.
 
-390
-00:18:25,115 --> 00:18:28,490
-corto al final. Esta guía sigue esa misma receta.
+416
+00:18:26,275 --> 00:18:28,490
+Esta guía sigue esa misma receta.
 
-391
+417
 00:18:29,060 --> 00:18:32,410
 En el anuncio de Manager App no usé capturas de pantalla.
 
-392
+418
 00:18:32,410 --> 00:18:36,030
 Redibujé la app en HTML, el lenguaje de las páginas web,
 
-393
-00:18:36,030 --> 00:18:39,081
-con los colores y la tipografía Geist que leí de su archivo
+419
+00:18:36,030 --> 00:18:37,937
+con los colores y la tipografía Geist
 
-394
-00:18:39,081 --> 00:18:43,090
-de diseño. Ahí aparecen la venta, el inventario y la caja.
+420
+00:18:37,937 --> 00:18:40,110
+que leí de su archivo de diseño.
 
-395
+421
+00:18:40,110 --> 00:18:43,090
+Ahí aparecen la venta, el inventario y la caja.
+
+422
 00:18:43,660 --> 00:18:46,650
 Y aquí tienes una interfaz de ejemplo animada en vivo.
 
-396
+423
 00:18:46,650 --> 00:18:50,200
 Ojo, es una recreación, no la app funcionando de verdad.
 
-397
+424
 00:18:50,200 --> 00:18:53,850
 Por eso necesito saber qué pantallas existen y cómo se ven.
 
-398
+425
 00:18:54,420 --> 00:18:55,690
 ¿Por qué no una captura?
 
-399
+426
 00:18:55,690 --> 00:18:58,470
 Porque lo redibujado queda nítido en cualquier tamaño,
 
-400
-00:18:58,470 --> 00:19:01,690
-cada botón se anima por separado y, si cambia un precio,
+427
+00:18:58,470 --> 00:18:59,476
+cada botón se anima
 
-401
+428
+00:18:59,476 --> 00:19:01,690
+por separado y, si cambia un precio,
+
+429
 00:19:01,690 --> 00:19:04,250
 edito un texto y vuelvo a renderizar.
 
-402
+430
 00:19:04,250 --> 00:19:07,497
 Además, no se cuela información privada de tu negocio.
 
-403
+431
 00:19:08,067 --> 00:19:09,977
 Los datos también se animan.
 
-404
-00:19:09,977 --> 00:19:13,239
-Un contador que sube hasta un millón doscientos cincuenta mil
+432
+00:19:09,977 --> 00:19:11,971
+Un contador que sube hasta un millón
 
-405
-00:19:13,239 --> 00:19:16,197
-pesos llama más la atención que una cifra quieta,
+433
+00:19:11,971 --> 00:19:14,100
+doscientos cincuenta mil pesos llama más
 
-406
+434
+00:19:14,100 --> 00:19:16,197
+la atención que una cifra quieta,
+
+435
 00:19:16,197 --> 00:19:18,747
 y lo sincronizo con la frase que lo nombra.
 
-407
+436
 00:19:19,317 --> 00:19:20,707
 En una gráfica de barras,
 
-408
-00:19:20,707 --> 00:19:23,292
-cada barra puede crecer en el momento en que la voz
+437
+00:19:20,707 --> 00:19:24,407
+cada barra puede crecer en el momento en que la voz la menciona.
 
-409
-00:19:23,292 --> 00:19:25,428
-la menciona. Me pasas una tabla,
+438
+00:19:24,407 --> 00:19:27,917
+Me pasas una tabla, aunque sea copiada de una hoja de cálculo,
 
-410
-00:19:25,428 --> 00:19:27,917
-aunque sea copiada de una hoja de cálculo,
-
-411
+439
 00:19:27,917 --> 00:19:30,659
 y la convierto en animación con tus colores.
 
-412
+440
 00:19:31,229 --> 00:19:33,669
 Las cifras que acabas de ver son de ejemplo.
 
-413
+441
 00:19:33,669 --> 00:19:35,689
 En tu video, los números deben ser tuyos y reales.
 
-414
-00:19:35,689 --> 00:19:38,893
-Yo no invento estadísticas, y si falta un dato,
+442
+00:19:35,689 --> 00:19:40,758
+Yo no invento estadísticas, y si falta un dato, te lo pregunto.
 
-415
-00:19:38,893 --> 00:19:40,758
-te lo pregunto.
-
-416
+443
 00:19:41,328 --> 00:19:43,258
 Con los diagramas pasa igual.
 
-417
-00:19:43,258 --> 00:19:46,243
-Un proceso, como un pedido desde que el cliente compra hasta
+444
+00:19:43,258 --> 00:19:44,856
+Un proceso, como un pedido desde
 
-418
-00:19:46,243 --> 00:19:48,478
-que lo recibe, se arma por partes,
+445
+00:19:44,856 --> 00:19:47,198
+que el cliente compra hasta que lo recibe,
 
-419
-00:19:48,478 --> 00:19:51,240
-y cada paso aparece justo cuando lo explico.
+446
+00:19:47,198 --> 00:19:51,240
+se arma por partes, y cada paso aparece justo cuando lo explico.
 
-420
+447
 00:19:51,810 --> 00:19:54,440
-Con todo esto armo tutoriales de producto. Marco cada toque,
+Con todo esto armo tutoriales de producto.
 
-421
-00:19:54,440 --> 00:19:59,270
+448
+00:19:54,440 --> 00:19:55,570
+Marco cada toque,
+
+449
+00:19:55,570 --> 00:19:59,270
 acerco la cámara al botón importante y nombro cada acción.
 
-422
+450
 00:19:59,270 --> 00:20:01,880
 Y si me subes una grabación de pantalla de tu app,
 
-423
+451
 00:20:01,880 --> 00:20:04,709
 también la edito con acercamientos y rótulos.
 
-424
-00:20:05,279 --> 00:20:07,939
-Y si tu tema es programación, también animo código,
+452
+00:20:05,279 --> 00:20:06,899
+Y si tu tema es programación,
 
-425
-00:20:07,939 --> 00:20:09,789
-como si alguien lo tecleara.
+453
+00:20:06,899 --> 00:20:09,789
+también animo código, como si alguien lo tecleara.
 
-426
-00:20:09,789 --> 00:20:12,476
-Este fragmento es GSAP real y hace un contador como
+454
+00:20:09,789 --> 00:20:11,609
+Este fragmento es GSAP real y hace
 
-427
-00:20:12,476 --> 00:20:14,667
-el que viste. Sirve para cursos,
+455
+00:20:11,609 --> 00:20:13,559
+un contador como el que viste.
 
-428
-00:20:14,667 --> 00:20:17,154
-documentación o proyectos técnicos.
+456
+00:20:13,559 --> 00:20:17,154
+Sirve para cursos, documentación o proyectos técnicos.
 
-429
-00:20:17,724 --> 00:20:20,057
-Para estos videos, dame el tema, para quién
+457
+00:20:17,724 --> 00:20:19,451
+Para estos videos, dame el tema,
 
-430
-00:20:20,057 --> 00:20:22,554
-es, tus colores o tu archivo de diseño,
+458
+00:20:19,451 --> 00:20:22,554
+para quién es, tus colores o tu archivo de diseño,
 
-431
-00:20:22,554 --> 00:20:25,212
-los datos reales en una tabla y la lista de pantallas
+459
+00:20:22,554 --> 00:20:24,026
+los datos reales en una tabla
 
-432
-00:20:25,212 --> 00:20:26,914
-que existen. Con eso,
+460
+00:20:24,026 --> 00:20:26,294
+y la lista de pantallas que existen.
 
-433
-00:20:26,914 --> 00:20:30,185
-la primera versión sale mucho más cerca de lo que buscas.
+461
+00:20:26,294 --> 00:20:28,084
+Con eso, la primera versión sale
 
-434
-00:20:32,370 --> 00:20:36,120
-Capítulo ocho. Una de mis ventajas más útiles es esta.
+462
+00:20:28,084 --> 00:20:30,185
+mucho más cerca de lo que buscas.
 
-435
-00:20:36,120 --> 00:20:37,610
-Yo no hago un solo video,
+463
+00:20:32,370 --> 00:20:33,510
+Capítulo ocho.
 
-436
-00:20:37,610 --> 00:20:41,472
-hago una plantilla que produce muchos videos con el mismo trabajo.
+464
+00:20:33,510 --> 00:20:36,120
+Una de mis ventajas más útiles es esta.
 
-437
+465
+00:20:36,120 --> 00:20:38,591
+Yo no hago un solo video, hago una plantilla
+
+466
+00:20:38,591 --> 00:20:41,472
+que produce muchos videos con el mismo trabajo.
+
+467
 00:20:42,042 --> 00:20:44,352
 Como mis videos son código, cada escena,
 
-438
+468
 00:20:44,352 --> 00:20:46,512
 texto y color vive en archivos.
 
-439
+469
 00:20:46,512 --> 00:20:48,992
 Si cambio un dato y vuelvo a generar el video,
 
-440
+470
 00:20:48,992 --> 00:20:51,634
 sale con el cambio, sin rehacer nada a mano.
 
-441
+471
 00:20:52,204 --> 00:20:54,064
 Mira el anuncio de Manager App.
 
-442
+472
 00:20:54,064 --> 00:20:57,334
 Esta es la versión principal, de treinta segundos en vertical,
 
-443
+473
 00:20:57,334 --> 00:21:00,175
 con voz, subtítulos, efectos y música.
 
-444
+474
 00:21:00,745 --> 00:21:03,125
 Y esta es la cuadrada, para publicaciones.
 
-445
+475
 00:21:03,125 --> 00:21:05,385
 También hay una corta de quince segundos.
 
-446
+476
 00:21:05,385 --> 00:21:07,305
 Las tres salen del mismo programa,
 
-447
+477
 00:21:07,305 --> 00:21:10,085
 que define el tamaño y la duración de cada una.
 
-448
+478
 00:21:10,085 --> 00:21:12,321
 No son tres ediciones separadas.
 
-449
+479
 00:21:12,891 --> 00:21:15,901
 Ojo, la versión corta no es la larga acelerada.
 
-450
+480
 00:21:15,901 --> 00:21:19,181
 De las ocho escenas, la de quince segundos usa solo cinco,
 
-451
-00:21:19,181 --> 00:21:22,391
-con algunas frases de voz más cortas. Y en la cuadrada,
+481
+00:21:19,181 --> 00:21:21,491
+con algunas frases de voz más cortas.
 
-452
+482
+00:21:21,491 --> 00:21:22,391
+Y en la cuadrada,
+
+483
 00:21:22,391 --> 00:21:25,641
 la plantilla reacomoda el celular y los subtítulos.
 
-453
-00:21:26,211 --> 00:21:27,891
-El truco son las variables,
+484
+00:21:26,211 --> 00:21:28,744
+El truco son las variables, datos con nombre
 
-454
-00:21:27,891 --> 00:21:30,878
-datos con nombre como el número de WhatsApp o la dirección
+485
+00:21:28,744 --> 00:21:32,101
+como el número de WhatsApp o la dirección de la página.
 
-455
-00:21:30,878 --> 00:21:32,101
-de la página.
+486
+00:21:32,101 --> 00:21:34,586
+Los escribo una sola vez al inicio del archivo
 
-456
-00:21:32,101 --> 00:21:35,030
-Los escribo una sola vez al inicio del archivo y todas
+487
+00:21:34,586 --> 00:21:37,057
+y todas las versiones los leen de ahí.
 
-457
-00:21:35,030 --> 00:21:37,057
-las versiones los leen de ahí.
-
-458
+488
 00:21:37,627 --> 00:21:39,037
 Eso pasó de verdad.
 
-459
-00:21:39,037 --> 00:21:41,380
-El anuncio quedó listo con un espacio reservado
+489
+00:21:39,037 --> 00:21:40,920
+El anuncio quedó listo con un espacio
 
-460
-00:21:41,380 --> 00:21:43,847
-para el WhatsApp. Cuando tuve el número,
+490
+00:21:40,920 --> 00:21:42,747
+reservado para el WhatsApp.
 
-461
-00:21:43,847 --> 00:21:45,177
-cambié esa sola línea,
+491
+00:21:42,747 --> 00:21:45,177
+Cuando tuve el número, cambié esa sola línea,
 
-462
-00:21:45,177 --> 00:21:48,049
-generé otra vez las tres versiones y en pocos minutos
+492
+00:21:45,177 --> 00:21:46,523
+generé otra vez las tres
 
-463
-00:21:48,049 --> 00:21:50,761
-las tenía, idénticas en todo lo demás.
+493
+00:21:46,523 --> 00:21:48,867
+versiones y en pocos minutos las tenía,
 
-464
+494
+00:21:48,867 --> 00:21:50,761
+idénticas en todo lo demás.
+
+495
 00:21:51,331 --> 00:21:54,091
 Cuando hay varias versiones, las genero en lote.
 
-465
+496
 00:21:54,091 --> 00:21:56,139
 HyperFrames también puede leer una lista,
 
-466
+497
 00:21:56,139 --> 00:21:58,501
 por ejemplo de productos con sus precios,
 
-467
+498
 00:21:58,501 --> 00:22:00,251
 y sacar un video por cada uno,
 
-468
+499
 00:22:00,251 --> 00:22:03,131
 si la plantilla tiene esos datos como variables.
 
-469
-00:22:03,131 --> 00:22:07,884
-Eso sí, aquí cada video tarda en generarse unas tres o cuatro veces lo que dura.
+500
+00:22:03,131 --> 00:22:05,406
+Eso sí, aquí cada video tarda en generarse
 
-470
+501
+00:22:05,406 --> 00:22:07,884
+unas tres o cuatro veces lo que dura.
+
+502
 00:22:08,454 --> 00:22:10,464
 Esto también protege tu marca.
 
-471
+503
 00:22:10,464 --> 00:22:13,217
 En Manager App tomé los colores y la tipografía Geist
 
-472
+504
 00:22:13,217 --> 00:22:17,014
 de su archivo de diseño, y las tres versiones los usan igual.
 
-473
+505
 00:22:17,014 --> 00:22:20,564
 Ni un azul distinto en la cuadrada, ni otra letra en la corta.
 
-474
-00:22:21,134 --> 00:22:23,582
-Por eso te conviene pedirme todo el paquete desde
+506
+00:22:21,134 --> 00:22:24,484
+Por eso te conviene pedirme todo el paquete desde el principio,
 
-475
-00:22:23,582 --> 00:22:27,504
-el principio, con formatos, duraciones y datos reales.
+507
+00:22:24,484 --> 00:22:27,504
+con formatos, duraciones y datos reales.
 
-476
+508
 00:22:27,504 --> 00:22:30,414
 Si sé de entrada que habrá versión cuadrada y corta,
 
-477
-00:22:30,414 --> 00:22:34,616
-diseño las escenas pensando en ellas y no tengo que forzarlas después.
+509
+00:22:30,414 --> 00:22:32,392
+diseño las escenas pensando en ellas
 
-478
+510
+00:22:32,392 --> 00:22:34,616
+y no tengo que forzarlas después.
+
+511
 00:22:35,186 --> 00:22:38,203
 En resumen, con una buena plantilla, cambiar un precio,
 
-479
+512
 00:22:38,203 --> 00:22:41,326
 un texto o un formato ya no es rehacer el video.
 
-480
+513
 00:22:41,326 --> 00:22:44,352
 Es cambiar un dato y esperar a que se genere de nuevo.
 
-481
+514
 00:22:46,537 --> 00:22:48,727
 Ahora quiero ser honesto contigo.
 
-482
+515
 00:22:48,727 --> 00:22:50,947
 Hay cosas que no puedo hacer desde aquí,
 
-483
+516
 00:22:50,947 --> 00:22:53,804
 pero casi todas tienen una solución práctica.
 
-484
-00:22:54,374 --> 00:22:56,864
-Este es el panorama. Puedo animar, editar,
+517
+00:22:54,374 --> 00:22:55,694
+Este es el panorama.
 
-485
-00:22:56,864 --> 00:22:58,474
-narrar y subtitular.
+518
+00:22:55,694 --> 00:22:58,474
+Puedo animar, editar, narrar y subtitular.
 
-486
-00:22:58,474 --> 00:23:01,232
-No puedo generar imágenes ni video con inteligencia
+519
+00:22:58,474 --> 00:23:01,994
+No puedo generar imágenes ni video con inteligencia artificial,
 
-487
-00:23:01,232 --> 00:23:03,534
-artificial, abrir enlaces bloqueados,
+520
+00:23:01,994 --> 00:23:05,886
+abrir enlaces bloqueados, escuchar el audio ni crear cuentas.
 
-488
-00:23:03,534 --> 00:23:05,886
-escuchar el audio ni crear cuentas.
-
-489
+521
 00:23:06,456 --> 00:23:08,156
 Empecemos por el más grande.
 
-490
+522
 00:23:08,156 --> 00:23:11,256
 Aquí no tengo modelos que generen imágenes ni video.
 
-491
+523
 00:23:11,256 --> 00:23:13,216
 Todo lo que ves en esta guía es código,
 
-492
+524
 00:23:13,216 --> 00:23:15,558
 o fotos y videos que tú me diste.
 
-493
+525
 00:23:16,128 --> 00:23:18,288
 La solución es repartir el trabajo.
 
-494
+526
 00:23:18,288 --> 00:23:20,778
 Yo escribo el guion y describo cada toma.
 
-495
+527
 00:23:20,778 --> 00:23:23,908
 Tú generas los clips en otra herramienta y me los subes.
 
-496
+528
 00:23:23,908 --> 00:23:27,129
 Yo los corto y les pongo voz, subtítulos y música.
 
-497
+529
 00:23:27,699 --> 00:23:29,139
 Segundo, los enlaces.
 
-498
+530
 00:23:29,139 --> 00:23:31,429
 La red aquí está restringida y no abro TikTok ni YouTube.
 
-499
+531
 00:23:31,429 --> 00:23:35,429
 Descarga la referencia y súbemela como archivo.
 
-500
+532
 00:23:35,429 --> 00:23:38,315
 Le saco un fotograma por segundo y los reviso.
 
-501
-00:23:38,885 --> 00:23:41,826
-Tercero, no escucho el audio ni reproduzco video en tiempo
+533
+00:23:38,885 --> 00:23:42,415
+Tercero, no escucho el audio ni reproduzco video en tiempo real.
 
-502
-00:23:41,826 --> 00:23:45,695
-real. Mido el volumen y los picos, y miro fotogramas sueltos.
+534
+00:23:42,415 --> 00:23:45,695
+Mido el volumen y los picos, y miro fotogramas sueltos.
 
-503
+535
 00:23:45,695 --> 00:23:47,735
 Por eso tu revisión vale oro.
 
-504
+536
 00:23:47,735 --> 00:23:50,461
 Dime en qué segundo algo suena o se ve raro.
 
-505
-00:23:51,031 --> 00:23:54,391
-Cuarto, la voz. Tengo solo tres voces locales en español,
+537
+00:23:51,031 --> 00:23:52,021
+Cuarto, la voz.
 
-506
+538
+00:23:52,021 --> 00:23:54,391
+Tengo solo tres voces locales en español,
+
+539
 00:23:54,391 --> 00:23:56,381
 y la femenina no te convenció.
 
-507
+540
 00:23:56,381 --> 00:23:58,571
 Graba tu voz o tráela de otra herramienta,
 
-508
+541
 00:23:58,571 --> 00:24:00,661
 y yo la sincronizo y la mezclo.
 
-509
+542
 00:24:00,661 --> 00:24:03,121
 Como aquí no tengo transcripción automática,
 
-510
+543
 00:24:03,121 --> 00:24:06,412
 para subtítulos exactos pásame también un SRT.
 
-511
-00:24:06,982 --> 00:24:09,862
-Quinto, la velocidad. Sin tarjeta gráfica,
+544
+00:24:06,982 --> 00:24:08,522
+Quinto, la velocidad.
 
-512
-00:24:09,862 --> 00:24:11,932
-treinta segundos en alta definición tardan entre minuto
+545
+00:24:08,522 --> 00:24:11,188
+Sin tarjeta gráfica, treinta segundos en alta definición
 
-513
-00:24:11,932 --> 00:24:13,532
-y medio y dos minutos en renderizar.
+546
+00:24:11,188 --> 00:24:13,532
+tardan entre minuto y medio y dos minutos en renderizar.
 
-514
-00:24:13,532 --> 00:24:17,967
-Por eso primero te muestro el storyboard y fotogramas
+547
+00:24:13,532 --> 00:24:19,092
+Por eso primero te muestro el storyboard y fotogramas de prueba,
 
-515
-00:24:17,967 --> 00:24:21,566
-de prueba, y el render completo va cuando apruebes.
+548
+00:24:19,092 --> 00:24:21,566
+y el render completo va cuando apruebes.
 
-516
+549
 00:24:22,136 --> 00:24:23,906
 Sexto, las instalaciones.
 
-517
-00:24:23,906 --> 00:24:25,856
-Puedo instalar paquetes de JavaScript,
+550
+00:24:23,906 --> 00:24:26,922
+Puedo instalar paquetes de JavaScript, librerías de Python
 
-518
-00:24:25,856 --> 00:24:28,316
-librerías de Python y proyectos de GitHub,
+551
+00:24:26,922 --> 00:24:30,216
+y proyectos de GitHub, siempre pidiéndote permiso.
 
-519
-00:24:28,316 --> 00:24:30,216
-siempre pidiéndote permiso.
+552
+00:24:30,216 --> 00:24:33,040
+Lo que vive en sitios bloqueados, como muchos modelos
 
-520
-00:24:30,216 --> 00:24:31,992
-Lo que vive en sitios bloqueados,
+553
+00:24:33,040 --> 00:24:36,336
+de inteligencia artificial, queda fuera de mi alcance.
 
-521
-00:24:31,992 --> 00:24:34,656
-como muchos modelos de inteligencia artificial,
-
-522
-00:24:34,656 --> 00:24:36,336
-queda fuera de mi alcance.
-
-523
+554
 00:24:36,906 --> 00:24:38,656
 Séptimo, no creo cuentas,
 
-524
+555
 00:24:38,656 --> 00:24:42,036
 no pago servicios y desde aquí no publico en tus redes.
 
-525
+556
 00:24:42,036 --> 00:24:45,046
 Te entrego los archivos listos para cada plataforma,
 
-526
+557
 00:24:45,046 --> 00:24:48,290
 con el texto de la publicación escrito, y tú publicas.
 
-527
+558
 00:24:48,860 --> 00:24:51,980
 Octavo, no recuerdo nada de una conversación a otra.
 
-528
+559
 00:24:51,980 --> 00:24:53,950
 Lo que queda son los archivos.
 
-529
-00:24:53,950 --> 00:24:56,600
+560
+00:24:53,950 --> 00:24:56,920
 Por eso guardo el brief y las decisiones en el proyecto,
 
-530
-00:24:56,600 --> 00:24:58,495
+561
+00:24:56,920 --> 00:24:58,495
 y desde ahí retomamos.
 
-531
+562
 00:24:59,065 --> 00:25:02,235
 Además, Claude Code puede correr en tu propio computador.
 
-532
+563
 00:25:02,235 --> 00:25:05,745
 Ahí podría usar tus programas y archivos, con tu permiso,
 
-533
+564
 00:25:05,745 --> 00:25:09,105
 y si tu equipo es más potente, renderizar más rápido.
 
-534
+565
 00:25:09,675 --> 00:25:12,305
 En resumen. Súbeme archivos, no enlaces.
 
-535
+566
 00:25:12,305 --> 00:25:14,645
 Genera los clips afuera y yo los edito.
 
-536
+567
 00:25:14,645 --> 00:25:16,485
 Graba tu voz. Dame permisos claros.
 
-537
+568
 00:25:16,485 --> 00:25:18,525
-Guardemos todo en el proyecto. Y dime el segundo exacto.
+Guardemos todo en el proyecto.
 
-538
-00:25:18,525 --> 00:25:22,596
+569
+00:25:18,525 --> 00:25:20,225
+Y dime el segundo exacto.
+
+570
+00:25:20,225 --> 00:25:22,596
 Lo que me falta, lo completamos juntos.
 
-539
+571
 00:25:24,770 --> 00:25:26,460
 Ya viste lo que puedo hacer.
 
-540
+572
 00:25:26,460 --> 00:25:29,410
 Ahora viene lo más importante, cómo pedírmelo.
 
-541
+573
 00:25:29,410 --> 00:25:32,650
 El resultado depende muchísimo de la calidad del pedido,
 
-542
+574
 00:25:32,650 --> 00:25:36,346
 así que aquí te enseño a hacerlo bien desde el primer mensaje.
 
-543
+575
 00:25:36,916 --> 00:25:38,376
 Todo empieza con un brief,
 
-544
+576
 00:25:38,376 --> 00:25:40,976
 que es un resumen corto de lo que necesitas.
 
-545
+577
 00:25:40,976 --> 00:25:44,456
 Dime el objetivo, a quién le hablas, el formato, la duración,
 
-546
+578
 00:25:44,456 --> 00:25:47,116
 el tono y qué quieres que haga la gente al final,
 
-547
+579
 00:25:47,116 --> 00:25:49,222
 por ejemplo escribirte por WhatsApp.
 
-548
+580
 00:25:49,792 --> 00:25:52,282
 Y dame los datos reales desde el principio.
 
-549
-00:25:52,282 --> 00:25:55,032
+581
+00:25:52,282 --> 00:25:55,562
 Precios, dirección, horarios y número de contacto.
 
-550
-00:25:55,032 --> 00:25:57,872
+582
+00:25:55,562 --> 00:25:57,872
 Si no los tengo, pongo datos de ejemplo,
 
-551
+583
 00:25:57,872 --> 00:26:00,899
 y eso significa otra ronda de cambios después.
 
-552
-00:26:01,469 --> 00:26:03,480
-Luego, el material. Fotos nítidas,
+584
+00:26:01,469 --> 00:26:02,799
+Luego, el material.
 
-553
+585
+00:26:02,799 --> 00:26:03,480
+Fotos nítidas,
+
+586
 00:26:03,480 --> 00:26:06,569
 tu logo en buena calidad y los colores de tu marca.
 
-554
+587
 00:26:06,569 --> 00:26:09,639
 Si tienes una guía de diseño, como el archivo de Manager App,
 
-555
-00:26:09,639 --> 00:26:11,789
+588
+00:26:09,639 --> 00:26:12,369
 de ahí saco colores y tipografía exactos.
 
-556
-00:26:11,789 --> 00:26:14,599
-Y las referencias súbelas como archivo,
+589
+00:26:12,369 --> 00:26:15,508
+Y las referencias súbelas como archivo, porque los enlaces
 
-557
-00:26:14,599 --> 00:26:18,417
-porque los enlaces de TikTok o YouTube no los puedo abrir desde aquí.
+590
+00:26:15,508 --> 00:26:18,417
+de TikTok o YouTube no los puedo abrir desde aquí.
 
-558
+591
 00:26:18,987 --> 00:26:20,867
 Un consejo que ahorra tiempo.
 
-559
-00:26:20,867 --> 00:26:22,337
-Pídeme primero el storyboard,
+592
+00:26:20,867 --> 00:26:23,602
+Pídeme primero el storyboard, las escenas en viñetas
 
-560
-00:26:22,337 --> 00:26:25,247
-las escenas en viñetas con sus tiempos y textos,
+593
+00:26:23,602 --> 00:26:27,077
+con sus tiempos y textos, y apruébalo antes del render.
 
-561
-00:26:25,247 --> 00:26:27,077
-y apruébalo antes del render.
-
-562
+594
 00:26:27,077 --> 00:26:29,687
 Cambiar una escena en el boceto es inmediato.
 
-563
-00:26:29,687 --> 00:26:33,806
-Cambiarla después implica rehacer la animación y volver a renderizar.
+595
+00:26:29,687 --> 00:26:31,461
+Cambiarla después implica rehacer
 
-564
+596
+00:26:31,461 --> 00:26:33,806
+la animación y volver a renderizar.
+
+597
 00:26:34,376 --> 00:26:36,356
 Cuando revises, sé concreto.
 
-565
+598
 00:26:36,356 --> 00:26:39,236
 Si me dices solo que no te gusta, no sé qué cambiar.
 
-566
-00:26:39,236 --> 00:26:42,166
-Pero si me dices que en el segundo doce el texto pasa muy
+599
+00:26:39,236 --> 00:26:41,010
+Pero si me dices que en el segundo
 
-567
-00:26:42,166 --> 00:26:44,746
-rápido, o que la música tapa la voz al final,
+600
+00:26:41,010 --> 00:26:42,786
+doce el texto pasa muy rápido,
 
-568
+601
+00:26:42,786 --> 00:26:44,746
+o que la música tapa la voz al final,
+
+602
 00:26:44,746 --> 00:26:47,168
 sé exactamente dónde y qué arreglar.
 
-569
+603
 00:26:47,738 --> 00:26:50,328
 Y el feedback más poderoso trae un ejemplo.
 
-570
-00:26:50,328 --> 00:26:52,098
-Como viste con Trendy Sneakers,
+604
+00:26:50,328 --> 00:26:54,048
+Como viste con Trendy Sneakers, el primer anuncio no convenció,
 
-571
-00:26:52,098 --> 00:26:54,048
-el primer anuncio no convenció,
+605
+00:26:54,048 --> 00:26:57,598
+pero con un video de referencia entendí el estilo que buscaban.
 
-572
-00:26:54,048 --> 00:26:56,520
-pero con un video de referencia entendí el estilo
+606
+00:26:57,598 --> 00:27:00,423
+Una referencia vale más que diez adjetivos.
 
-573
-00:26:56,520 --> 00:27:00,423
-que buscaban. Una referencia vale más que diez adjetivos.
-
-574
+607
 00:27:00,993 --> 00:27:03,253
 Igual de útil es decirme lo que no quieres,
 
-575
+608
 00:27:03,253 --> 00:27:05,843
 como la voz femenina que no te convenció.
 
-576
+609
 00:27:05,843 --> 00:27:09,263
 Frases como sin colores neón, o nada de música electrónica,
 
-577
+610
 00:27:09,263 --> 00:27:11,783
 me ahorran caminos que ibas a descartar.
 
-578
+611
 00:27:11,783 --> 00:27:14,093
 Y como no guardo memoria entre sesiones,
 
-579
+612
 00:27:14,093 --> 00:27:17,711
 deja esas preferencias escritas en un archivo del proyecto.
 
-580
+613
 00:27:18,281 --> 00:27:20,261
 Aclárame también los permisos.
 
-581
+614
 00:27:20,261 --> 00:27:22,491
 Dime si puedo instalar un paquete puntual,
 
-582
+615
 00:27:22,491 --> 00:27:26,711
 usar tus fotos y tu logo, o guardar cambios en tu repositorio.
 
-583
+616
 00:27:26,711 --> 00:27:29,631
 Yo siempre pregunto antes de instalar algo nuevo,
 
-584
-00:27:29,631 --> 00:27:33,356
-pero con reglas claras desde el inicio avanzamos con menos pausas.
+617
+00:27:29,631 --> 00:27:31,086
+pero con reglas claras desde
 
-585
-00:27:33,926 --> 00:27:37,566
-Mira la diferencia. Si me pides solo un video para tu tienda,
+618
+00:27:31,086 --> 00:27:33,356
+el inicio avanzamos con menos pausas.
 
-586
+619
+00:27:33,926 --> 00:27:35,296
+Mira la diferencia.
+
+620
+00:27:35,296 --> 00:27:37,566
+Si me pides solo un video para tu tienda,
+
+621
 00:27:37,566 --> 00:27:39,486
 tengo que adivinar casi todo.
 
-587
-00:27:39,486 --> 00:27:42,389
-Pero si me pides un anuncio vertical de quince segundos
+622
+00:27:39,486 --> 00:27:41,949
+Pero si me pides un anuncio vertical de quince
 
-588
-00:27:42,389 --> 00:27:44,236
-para jóvenes, con tono divertido,
+623
+00:27:41,949 --> 00:27:44,236
+segundos para jóvenes, con tono divertido,
 
-589
+624
 00:27:44,236 --> 00:27:46,696
 tus cinco fotos y cierre con tu WhatsApp,
 
-590
+625
 00:27:46,696 --> 00:27:48,318
 puedo empezar de inmediato.
 
-591
+626
 00:27:48,888 --> 00:27:52,118
 Aquí tienes una plantilla corta, ya llena con un ejemplo.
 
-592
-00:27:52,118 --> 00:27:54,720
-Objetivo, público, formato, tono, cierre, datos,
+627
+00:27:52,118 --> 00:27:54,348
+Objetivo, público, formato, tono, cierre,
 
-593
-00:27:54,720 --> 00:27:56,948
-material y lo que no quieres.
+628
+00:27:54,348 --> 00:27:56,948
+datos, material y lo que no quieres.
 
-594
-00:27:56,948 --> 00:28:00,211
-Pausa el video si quieres copiarla. Con estas ocho líneas,
+629
+00:27:56,948 --> 00:27:59,088
+Pausa el video si quieres copiarla.
 
-595
-00:28:00,211 --> 00:28:03,664
-el primer borrador sale mucho más cerca de lo que imaginas.
+630
+00:27:59,088 --> 00:28:01,161
+Con estas ocho líneas, el primer borrador
 
-596
-00:28:04,234 --> 00:28:06,967
-En resumen, un buen pedido vale más que tres rondas
+631
+00:28:01,161 --> 00:28:03,664
+sale mucho más cerca de lo que imaginas.
 
-597
-00:28:06,967 --> 00:28:11,464
-de correcciones. Tú pones la claridad y el material. Yo pongo el guion,
+632
+00:28:04,234 --> 00:28:06,116
+En resumen, un buen pedido vale más
 
-598
-00:28:11,464 --> 00:28:15,448
-la animación y la paciencia para ajustar hasta que quede como lo quieres.
+633
+00:28:06,116 --> 00:28:08,154
+que tres rondas de correcciones.
 
-599
-00:28:17,637 --> 00:28:20,676
-Llegamos al final de esta guía. Antes de despedirme,
+634
+00:28:08,154 --> 00:28:10,314
+Tú pones la claridad y el material.
 
-600
+635
+00:28:10,314 --> 00:28:12,828
+Yo pongo el guion, la animación y la paciencia
+
+636
+00:28:12,828 --> 00:28:15,448
+para ajustar hasta que quede como lo quieres.
+
+637
+00:28:17,637 --> 00:28:19,557
+Llegamos al final de esta guía.
+
+638
+00:28:19,557 --> 00:28:20,676
+Antes de despedirme,
+
+639
 00:28:20,676 --> 00:28:23,880
 repasemos rápido lo más importante que viste hoy.
 
-601
-00:28:24,450 --> 00:28:25,980
-Viste que animo con código,
+640
+00:28:24,450 --> 00:28:27,497
+Viste que animo con código, edito con FFmpeg el video
 
-602
-00:28:25,980 --> 00:28:29,455
-edito con FFmpeg el video que me des y convierto tus fotos
+641
+00:28:27,497 --> 00:28:30,550
+que me des y convierto tus fotos en anuncios.
 
-603
-00:28:29,455 --> 00:28:33,340
-en anuncios. Agrego subtítulos, voz y música original,
+642
+00:28:30,550 --> 00:28:33,340
+Agrego subtítulos, voz y música original,
 
-604
-00:28:33,340 --> 00:28:35,700
+643
+00:28:33,340 --> 00:28:36,210
 y saco muchas versiones de un mismo proyecto.
 
-605
-00:28:35,700 --> 00:28:39,951
+644
+00:28:36,210 --> 00:28:39,951
 Y conociste mis límites, cada uno con su solución práctica.
 
-606
-00:28:40,521 --> 00:28:44,121
-Ahora te toca a ti. Pídeme tu próximo video con un buen brief:
+645
+00:28:40,521 --> 00:28:41,901
+Ahora te toca a ti.
 
-607
-00:28:44,121 --> 00:28:46,457
-para qué es, a quién le hablas, formato, duración,
+646
+00:28:41,901 --> 00:28:44,121
+Pídeme tu próximo video con un buen brief:
 
-608
-00:28:46,457 --> 00:28:49,001
-tono y qué debe hacer la gente al final.
+647
+00:28:44,121 --> 00:28:45,664
+para qué es, a quién le hablas,
 
-609
+648
+00:28:45,664 --> 00:28:49,001
+formato, duración, tono y qué debe hacer la gente al final.
+
+649
 00:28:49,001 --> 00:28:51,481
 Súmale tu material real, y mientras más claro,
 
-610
+650
 00:28:51,481 --> 00:28:53,548
 mejor sale la primera versión.
 
-611
-00:28:54,118 --> 00:28:57,521
-Y recuerda: esta guía completa, con sus pistas de animación,
+651
+00:28:54,118 --> 00:28:55,959
+Y recuerda: esta guía completa,
 
-612
-00:28:57,521 --> 00:28:58,718
-voz, música y subtítulos,
+652
+00:28:55,959 --> 00:28:58,718
+con sus pistas de animación, voz, música y subtítulos,
 
-613
+653
 00:28:58,718 --> 00:29:02,516
 la hice yo con las mismas herramientas que te mostré.
 
-614
+654
 00:29:03,086 --> 00:29:06,166
 Gracias de verdad por quedarte conmigo esta media hora.
 
-615
+655
 00:29:06,166 --> 00:29:07,849
 Estoy listo cuando tú lo estés,
 
-616
-00:29:07,849 --> 00:29:11,441
-así que hagamos juntos tu próximo video. ¡Hasta pronto!
+656
+00:29:07,849 --> 00:29:10,326
+así que hagamos juntos tu próximo video.
+
+657
+00:29:10,326 --> 00:29:11,441
+¡Hasta pronto!

@@ -80,7 +80,10 @@ function wordTimesP(text, t0, dur, pauses) {
   est.forEach((w, k) => { if (k < n - 1 && /[,;:.!?…]$/.test(w.word)) bnd.push(k); });
   if (!bnd.length) return est;
   const estEnd = (k) => est[k + 1].s - t0;            // tiempo estimado del límite tras la palabra k
-  const P = [...pauses].sort((a, b) => (b[1] - b[0]) - (a[1] - a[0])).slice(0, bnd.length).sort((a, b) => a[0] - b[0]);
+  // pausas casi pegadas (Kokoro a veces parte una pausa en dos) cuentan como una sola
+  const merged = [];
+  for (const pz of pauses) { const last = merged[merged.length - 1]; if (last && pz[0] - last[1] < 0.2) last[1] = pz[1]; else merged.push([pz[0], pz[1]]); }
+  const P = merged.sort((a, b) => (b[1] - b[0]) - (a[1] - a[0])).slice(0, bnd.length).sort((a, b) => a[0] - b[0]);
   const anchors = []; let j0 = 0;
   for (const pz of P) {                               // asignación monótona al límite más cercano
     let best = -1, bd = 1e9;
@@ -98,6 +101,11 @@ function wordTimesP(text, t0, dur, pauses) {
     ws.forEach((w, i) => { out[from + i] = { word: w.word, s: t0 + ts + ((ps - ts) * acc) / tot }; acc += wgt(w.word); });
     from = k + 1; ts = pe;
   });
+  // control: si algún tramo quedó con menos del 45 % del tiempo estimado, se usa la estimación
+  for (let k = 0; k < n - 1; k++) {
+    const real = out[k + 1].s - out[k].s, guess = est[k + 1].s - est[k].s;
+    if (real < 0.45 * guess && guess > 0.12) return est;
+  }
   return out;
 }
 
@@ -145,31 +153,33 @@ export function build(nn) {
 
   // subtítulos: grupos de ≤ 78 caracteres, corte preferente en puntuación; palabra actual resaltada
   const groups = [];
-  const WEAK = new Set(["de", "la", "el", "los", "las", "un", "una", "y", "o", "a", "en", "con", "por", "para", "que", "del", "al", "su", "tu", "mi", "se", "lo", "le", "no", "es", "sin", "tus", "sus", "mis"]);
+  const WEAK = new Set(["de", "la", "el", "los", "las", "un", "una", "y", "o", "a", "en", "con", "por", "para", "que", "del", "al", "su", "tu", "mi", "se", "lo", "le", "no", "es", "sin", "tus", "sus", "mis", "ni", "como", "muy", "más"]);
   const L = (ws) => ws.map((x) => x.word).join(" ").length;
-  beats.forEach((b) => {
-    const ws = b.wt, bg = [];
-    let cur = [];
-    for (let k = 0; k < ws.length; k++) {
-      const w = ws[k];
-      if (cur.length && L([...cur, w]) > 62) {
-        // cortar en la última puntuación si deja un trozo razonable; si no, aquí, sin dejar palabras débiles al final
-        let cut = -1;
-        for (let j = cur.length - 1; j >= 2; j--) if (/[,.;:!?…]$/.test(cur[j].word)) { cut = j; break; }
-        let head = cut >= 2 ? cur.slice(0, cut + 1) : cur.slice();
-        while (head.length > 3 && WEAK.has(NRM(head[head.length - 1].word))) head.pop();
-        // no dejar la última palabra de una frase sola al inicio del siguiente subtítulo
-        const rest = cur.slice(head.length);
-        if (rest.length && rest.length <= 2 && /[.!?…]$/.test(rest[rest.length - 1].word) && L(cur) <= 70) head = cur.slice();
-        bg.push(head); cur = cur.slice(head.length);
-      }
-      cur.push(w);
-      if (/[.!?…]$/.test(w.word) && L(cur) >= 24 && k < ws.length - 1) { bg.push(cur); cur = []; }
+  const MAX = 64;
+  const split = (ws) => {
+    if (L(ws) <= MAX || ws.length < 4) return [ws];
+    const mid = L(ws) / 2; let best = -1, score = 1e9;
+    for (let k = 1; k < ws.length - 1; k++) {        // cortar después de ws[k]
+      const left = L(ws.slice(0, k + 1)), right = L(ws.slice(k + 1));
+      if (k + 1 < 2 || ws.length - k - 1 < 2) continue;
+      let sc = Math.abs(left - mid);
+      if (/[,;:]$/.test(ws[k].word)) sc -= 18;        // preferir comas
+      if (WEAK.has(NRM(ws[k].word))) sc += 40;         // nunca terminar en palabra débil
+      if (Math.max(left, right) > MAX) sc += 8;
+      if (sc < score) { score = sc; best = k; }
     }
-    if (cur.length) bg.push(cur);
-    // sin grupos de 1–2 palabras: se pegan al anterior (puede quedar en dos líneas cortas)
-    const span = (g, nx) => (nx ? nx[0].s : b.voStart + b.vo) - g[0].s;
-    for (let j = bg.length - 1; j > 0; j--) if ((bg[j].length < 3 || span(bg[j], bg[j + 1]) < 1.2) && L([...bg[j - 1], ...bg[j]]) <= 80) { bg[j - 1] = [...bg[j - 1], ...bg[j]]; bg.splice(j, 1); }
+    return best < 0 ? [ws] : [...split(ws.slice(0, best + 1)), ...split(ws.slice(best + 1))];
+  };
+  beats.forEach((b) => {
+    const ws = b.wt, sent = [];
+    let cur = [];
+    ws.forEach((w, k) => { cur.push(w); if (/[.!?…]$/.test(w.word) || k === ws.length - 1) { sent.push(cur); cur = []; } });
+    let bg = sent.flatMap(split);
+    // trozos muy cortos (< 1 s) se unen al vecino de la misma oración si cabe en una línea
+    const dur = (g, nx) => (nx ? nx[0].s : b.voStart + b.vo) - g[0].s;
+    for (let j = bg.length - 1; j > 0; j--) if (dur(bg[j], bg[j + 1]) < 1.0 && L([...bg[j - 1], ...bg[j]]) <= MAX && !/[.!?…]$/.test(bg[j - 1][bg[j - 1].length - 1].word)) { bg[j - 1] = [...bg[j - 1], ...bg[j]]; bg.splice(j, 1); }
+    // trozos de < 0,8 s (aunque sean una oración corta, como «Así.») se pegan al siguiente si cabe
+    for (let j = 0; j < bg.length - 1; j++) if (dur(bg[j], bg[j + 1]) < 0.8 && L([...bg[j], ...bg[j + 1]]) <= MAX) { bg[j] = [...bg[j], ...bg[j + 1]]; bg.splice(j + 1, 1); j--; }
     bg.forEach((g, j) => groups.push({ words: g, end: j === bg.length - 1 ? b.voStart + b.vo + 0.3 : null }));
   });
   groups.forEach((g, k) => { g.s = g.words[0].s - 0.05; g.e = g.end ?? groups[k + 1]?.words[0].s - 0.05 ?? DUR; if (groups[k + 1] && g.e > groups[k + 1].words[0].s - 0.05) g.e = groups[k + 1].words[0].s - 0.05; });
@@ -241,7 +251,12 @@ function apply(t) {
   if (gi !== lastG) { capin.innerHTML = gi < 0 ? "" : CAPS[gi][2].map((w) => '<span class="w">' + w[1].replace(/&/g, "&amp;").replace(/</g, "&lt;") + "</span>").join(" "); lastG = gi; }
   if (gi >= 0) { const ws = CAPS[gi][2]; const spans = capin.children; let on = -1; for (let k = 0; k < ws.length; k++) if (t >= ws[k][0]) on = k; for (let k = 0; k < spans.length; k++) spans[k].className = k === on ? "w on" : "w"; }
   // contadores, texto tecleado y textos que cambian
-  for (const [sel, t0, d, a, b, p, s] of STATE.count) { const el = $(sel); if (!el) continue; const q = Math.max(0, Math.min(1, (t - t0) / d)); el.textContent = fmt(a + (b - a) * (1 - Math.pow(1 - q, 3)), p, s); }
+  const cv = {};
+  for (const [sel, t0, d, a, b, p, s] of STATE.count) {
+    if (!(sel in cv)) cv[sel] = fmt(a, p, s);
+    if (t >= t0) { const q = Math.min(1, (t - t0) / d); cv[sel] = fmt(a + (b - a) * (1 - Math.pow(1 - q, 3)), p, s); }
+  }
+  for (const sel in cv) { const el = $(sel); if (el) el.textContent = cv[sel]; }
   for (const [sel, t0, d, full] of STATE.type) { const el = $(sel); if (!el) continue; const q = Math.max(0, Math.min(1, (t - t0) / d)); el.textContent = full.slice(0, Math.round(full.length * q)); }
   const txt = {};
   for (const [sel, t0, v] of STATE.text) if (!(sel in txt) || t >= t0) txt[sel] = v;
@@ -393,8 +408,11 @@ const RENDER = {
     const lines = (p.lines || []).slice(0, 4);
     tw(`#${id}-win`, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, b.s + 0.15);
     const lt = cues(b, lines.map((l) => `${l.out || ""} ${l.cmd.split(/\s+/).slice(0, 2).join(" ")}`), 0.3, 3.0).map((t) => Math.min(t, b.end - 3.2));
+    let busy = b.s + 0.3;
     lines.forEach((l, k) => {
-      const t = lt[k];
+      const typ = Math.min(1.6, 0.03 * l.cmd.length + 0.3);
+      const t = Math.max(k === 0 ? Math.min(lt[0], b.voStart + 1.0) : lt[k], busy);
+      busy = t + typ + 0.75;
       STATE.type.push([`#${id}-c${k}`, T(t), Math.min(1.6, 0.03 * l.cmd.length + 0.3), l.cmd]);
       tw(`#${id}-o${k}`, { opacity: 0 }, { opacity: 1, duration: 0.25 }, t + Math.min(1.6, 0.03 * l.cmd.length + 0.3) + 0.2);
       tw(`#${id}-p${k}`, { opacity: 0 }, { opacity: 1, duration: 0.1 }, t);
@@ -411,6 +429,7 @@ const RENDER = {
     const ts = cues(b, st, 0.25, 0.8);
     st.forEach((_, k) => tw(`#${id}-n${k}`, { opacity: 0.25, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2)" }, ts[k]));
     return `<div id="${id}-ln" class="abs" style="left:${gap / 2}px;width:${1680 - gap}px;top:376px;height:6px;border-radius:3px;background:linear-gradient(90deg,${C.cyan},${C.violet});transform-origin:0 50%"></div>
+      ${st.map((_, k) => `<div class="abs" style="left:${k * gap + gap / 2 - 78}px;top:298px;width:156px;height:156px;border-radius:50%;background:${C.bg}"></div>`).join("")}
       ${st.map((s, k) => `<div id="${id}-n${k}" class="abs" style="left:${k * gap}px;width:${gap}px;top:300px;display:flex;flex-direction:column;align-items:center;gap:24px">
         <div style="width:150px;height:150px;border-radius:50%;background:${C.panel};border:5px solid ${ACC[k % 5]};display:flex;align-items:center;justify-content:center;font-weight:900;font-size:58px;color:${ACC[k % 5]}">${k + 1}</div>
         <div style="font-size:${n >= 5 ? 31 : 38}px;font-weight:800;text-align:center;padding:0 16px;line-height:1.15">${esc(s)}</div></div>`).join("")}`;
@@ -419,7 +438,7 @@ const RENDER = {
   video(id, p, b, ctx) {
     const c = CLIP[p.clip] || CLIP.dart_original;
     const mode = c.ar === "16:9" ? (p.mode === "side" ? "side" : "full") : p.mode === "full" ? "phone" : p.mode || "phone";
-    const opts = { from: c.from, len: c.len };
+    const opts = { from: p.from != null ? +p.from : c.from, len: c.len };
     let txt = "";
     if (mode === "full") {
       video(ctx, c.src, 352, 160, 1216, 684, b, opts);
@@ -580,7 +599,9 @@ const DEMO = {
   },
 
   counter(id, p, b, { tw, STATE }) {
-    const t = b.voStart + 0.3, d = Math.min(2.6, Math.max(1.2, b.vo * 0.5));
+    const t = cue(b, "sube hasta llega cuenta suma", b.voStart + 0.3);
+    const te = cue(b, "millón millones mil cien segundos veces", t + 1.8, t + 0.5);
+    const d = Math.min(3.2, Math.max(1.0, te - t + 0.5));
     STATE.count.push([`#${id}-n`, T(t), d, +p.from || 0, +p.to || 1000, p.prefix || "", p.suffix || ""]);
     tw(`#${id}-bar`, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power3.out" }, t);
     return `<div class="abs" style="left:0;right:0;top:140px;text-align:center"><div id="${id}-n" class="h1" style="font-size:190px;font-variant-numeric:tabular-nums">0</div>

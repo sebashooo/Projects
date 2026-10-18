@@ -46,7 +46,8 @@
     "params": {
      "clip": "manager_30s",
      "label": "Manager App: interfaz en HTML",
-     "mode": "phone"
+     "mode": "phone",
+     "from": 8
     }
    }
   },

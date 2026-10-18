@@ -51,9 +51,10 @@ const ICON = {
   star: '<path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/>',
   eye: '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
   bolt: '<path d="M13 2 3 14h9l-1 8 10-12h-9z"/>',
+  dot: '<circle cx="12" cy="12" r="5" fill="currentColor"/>',
 };
 const icon = (name, size, color) =>
-  `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none">${ICON[name] || ICON.star}</svg>`;
+  `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" color="${color}" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none">${ICON[name] || ICON.star}</svg>`;
 
 const J = (o) => JSON.stringify(o).replace(/</g, "\\u003c");
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -367,7 +368,7 @@ const RENDER = {
     all.forEach(([sd, k]) => { const t = (sd === "l" ? tl_ : tr_)[k]; tw(`#${id}-${sd}${k}`, { opacity: 0 }, { opacity: 0.22, duration: 0.4 }, b.s + 0.3); tw(`#${id}-${sd}${k}`, { opacity: 0.22, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, t); });
     const tone = (title, dflt) => /^(no\b|evit|descart|nunca|mal\b|sin\b|así no|esto no)/i.test(title || "") ? "bad" : /^(puedo|sí|si\b|hice|hago|bien|así sí|así reviso|reviso|haz|mejor)/i.test(title || "") ? "good" : dflt;
     const tl0 = tone(p.left?.title, p.right?.title ? "neutral" : "good"), tr0 = tone(p.right?.title, tl0 === "neutral" ? "neutral" : tl0 === "good" ? "bad" : "good");
-    const sty = (t, side) => t === "good" ? [C.green, "check"] : t === "bad" ? [C.coral, "x"] : [side === "l" ? C.cyan : C.violet, "text"];
+    const sty = (t, side) => t === "good" ? [C.green, "check"] : t === "bad" ? [C.coral, "x"] : [side === "l" ? C.cyan : C.violet, "dot"];
     const rows = Math.max(L.length, R.length), ph = Math.min(740, 170 + rows * 130);
     const col = (side, title, items, color, ic) => `<div class="abs panel" style="left:${side === "l" ? 0 : 860}px;top:${Math.round((740 - ph) / 2)}px;width:820px;height:${ph}px;padding:40px">
       <div style="display:flex;align-items:center;gap:18px;font-size:50px;font-weight:900;color:${color}">${icon(ic, 52, color)}${esc(title)}</div>
@@ -593,6 +594,7 @@ const DEMO = {
     vals.forEach((v, k) => {
       const t = b.voStart + 0.3 + k * 0.18;
       tw(`#${id}-b${k}`, { scaleY: 0 }, { scaleY: 1, duration: 0.8, ease: "power3.out" }, t);
+      tw(`#${id}-v${k}`, { opacity: 0, y: (vals[k] / mx) * 420 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, t);
       STATE.count.push([`#${id}-v${k}`, T(t), 0.8, 0, v, "", ""]);
     });
     return `${head(`${id}x`, p.title || "", tw, b.s + 0.2)}<div class="abs" style="left:100px;right:100px;top:150px;height:520px;display:flex;align-items:flex-end;justify-content:space-around;border-bottom:3px solid ${C.line}">${vals
@@ -713,7 +715,7 @@ const DEMO = {
     return `<div class="abs panel" style="left:0;top:100px;width:1120px;height:440px;display:flex;align-items:center;justify-content:center;gap:4px">${bars}</div>
       <div class="abs panel" style="left:1180px;top:100px;width:500px;height:440px;display:flex;flex-direction:column;align-items:center;justify-content:center">
         <div style="position:relative;width:300px;height:160px;overflow:hidden"><div style="position:absolute;left:0;top:0;width:300px;height:300px;border-radius:50%;border:14px solid ${C.line};border-top-color:${C.green};border-right-color:${C.amber}"></div><div id="${id}-needle" style="position:absolute;left:146px;top:20px;width:8px;height:140px;background:${C.text};border-radius:4px;transform-origin:50% 100%"></div></div>
-        <div id="${id}-l" style="font-size:72px;font-weight:900;font-variant-numeric:tabular-nums;margin-top:20px">-28 LUFS</div><div class="muted" style="font-size:28px;font-weight:600">volumen estándar para redes</div></div>
+        <div id="${id}-l" style="font-size:72px;font-weight:900;font-variant-numeric:tabular-nums;margin-top:20px">-28 LUFS</div><div class="muted" style="font-size:28px;font-weight:600">objetivo para redes: −14 LUFS</div></div>
       <div class="abs muted" style="left:0;top:580px;font-size:30px">No escucho: mido. Volumen, picos, silencios y forma de onda.</div>`;
   },
 

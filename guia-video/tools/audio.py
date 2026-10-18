@@ -55,7 +55,8 @@ if __name__ == "__main__":
         ev = json.load(open(f"tools/events_{nn}.json")); dur = ev["dur"]; n = int(dur * SR)
         vo = [sf.read(f"assets/audio/vo/{nn}_{i:02d}.wav")[0] for i in range(len(json.load(open(f"tools/vo_{nn}.json"))))]
         allv = np.concatenate(vo); vr = np.sqrt(np.mean(allv[np.abs(allv) > 0.02] ** 2)) if np.any(np.abs(allv) > 0.02) else 0.08
-        m = music(dur, ev["chapter"]); m *= vr * 10 ** (-24 / 20) / np.sqrt(np.mean(m[np.abs(m) > 1e-5] ** 2))
+        rel = -18 if ev["chapter"] == 6 else -24   # en el capítulo de audio la música se oye más, como ejemplo
+        m = music(dur, ev["chapter"]); m *= vr * 10 ** (rel / 20) / np.sqrt(np.mean(m[np.abs(m) > 1e-5] ** 2))
         s = np.zeros(n)
         for e in ev["sfx"]:
             x = FX[e["type"]](); i = max(0, int(e["t"] * SR)); x = x[: n - i]; s[i:i + len(x)] += x

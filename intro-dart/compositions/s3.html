@@ -14,8 +14,8 @@
 .cyan{color:#4fe0ff}.pink{color:#ff5fa8}.yel{color:#ffd257}
 .pill{position:absolute;display:flex;align-items:center;gap:14px;padding:14px 30px;border-radius:999px;font-weight:800;font-size:38px;white-space:nowrap}
 .pill.amarilla{background:#ffd257;color:#1b1340}
-.pill.borde{border:4px solid currentColor;background:rgba(20,11,43,.55)}
-.chip{position:absolute;display:block;padding:12px 26px;border-radius:18px;font-size:34px;white-space:nowrap}
+.pill.borde{border:4px solid currentColor;background:rgba(20,11,43,.92)}
+.chip{position:absolute;display:block;padding:12px 26px;border-radius:18px;font-size:34px;white-space:nowrap;background:rgba(20,11,43,.92)}
 .pt{position:absolute;display:block;width:16px;height:16px;border-radius:50%;opacity:0}
 .titulo{font-weight:900;letter-spacing:-0.04em;line-height:1.02}
 
@@ -32,6 +32,7 @@
 #s3-read .b{font-size:52px;font-weight:700;font-variant-numeric:tabular-nums;margin-top:4px}
 #s3-c1{left:80px;top:1580px;color:#4fe0ff;border:4px solid #4fe0ff}
 #s3-c2{left:420px;top:1580px;color:#ffd257;border:4px solid #ffd257}
+#s3-c2 sup{font-size:.72em;line-height:0;vertical-align:.5em}
 
 </style>
 <div id="root" data-composition-id="s3" data-width="1080" data-height="1920">
@@ -47,12 +48,13 @@
       <text x="880" y="690" text-anchor="end" font-family="Space Mono" font-size="28" fill="#cbbff0">tiempo t</text>
       <text x="130" y="250" font-family="Space Mono" font-size="28" fill="#cbbff0">posición s(t)</text>
       <path id="s3-curva" d="" fill="none" stroke="#4fe0ff" stroke-width="9" stroke-linecap="round"/>
-      <line id="s3-tan" x1="0" y1="0" x2="0" y2="0" stroke="#ffd257" stroke-width="6" stroke-linecap="round" opacity="0"/>
+      <defs><clipPath id="s3-clip"><rect x="112" y="90" width="790" height="548"/></clipPath></defs>
+      <line id="s3-tan" x1="0" y1="0" x2="0" y2="0" stroke="#ffd257" stroke-width="6" stroke-linecap="round" opacity="0" clip-path="url(#s3-clip)"/>
       <circle id="s3-mark" cx="0" cy="0" r="14" fill="#ff5fa8" stroke="#fff" stroke-width="4" opacity="0"/>
     </svg>
-    <div id="s3-read" class="abs mono"><div class="a">pendiente = v = ds/dt</div><div class="b" id="s3-val">0,00 km/s</div></div>
+    <div id="s3-read" class="abs mono"><div class="a">pendiente de s(t) = v = ds/dt</div><div class="b"><span id="s3-val">la velocidad</span></div></div>
     <div id="s3-c1" class="chip">movimiento</div>
-    <div id="s3-c2" class="chip">energía · <span class="mono">E = ½·m·v²</span></div>
+    <div id="s3-c2" class="chip">energía · <span class="mono">E = m·v<sup>2</sup>/2</span></div>
   </div>
 </div>
 <script>
@@ -73,9 +75,9 @@ function pop(sel, t, d = 0.6, extra = {}) { tl.fromTo(sel, { scale: 0, opacity: 
 cascada("#s3-q .w3", T.s3 + 0.2, [70, 70]);
 pop("#s3-lupa", T.s3 + 0.8, 0.6, { from: { rotation: -30 }, to: { rotation: 0 } });
 tl.fromTo("#s3-lupa", { y: 0 }, { y: -12, duration: 1, ease: "sine.inOut", yoyo: true, repeat: 6, immediateRender: false }, T.s3 + 1.4);
-tl.fromTo("#s3-big", { opacity: 0, scale: 1.5 }, { opacity: 1, scale: 1, duration: 0.28, ease: "power4.out" }, T.s3 + 2.6);
-pop("#s3-ddt", T.s3 + 3.1, 0.45);
-tl.fromTo("#s3-ddt2", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, T.s3 + 3.4);
+tl.fromTo("#s3-big", { opacity: 0, scale: 1.5 }, { opacity: 1, scale: 1, duration: 0.28, ease: "power4.out" }, T.s3 + 3.3);
+pop("#s3-ddt", T.s3 + 3.7, 0.45);
+tl.fromTo("#s3-ddt2", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, T.s3 + 3.95);
 // 4.3 s: gráfica de posición; la tangente (derivada) recorre la curva
 tl.fromTo(["#s3-panel", "#s3-svg"], { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, T.s3 + 4.2);
 const ej = document.getElementById("s3-ejes"), LE = ej.getTotalLength();
@@ -93,7 +95,7 @@ function tangente() {
   tan.setAttribute("x1", (px - dx / n * L).toFixed(1)); tan.setAttribute("y1", (py - dy / n * L).toFixed(1));
   tan.setAttribute("x2", (px + dx / n * L).toFixed(1)); tan.setAttribute("y2", (py + dy / n * L).toFixed(1));
   mark.setAttribute("cx", px.toFixed(1)); mark.setAttribute("cy", py.toFixed(1));
-  const txt = (6.1449 * t).toFixed(2).replace(".", ",") + " km/s";
+  const txt = t > 0.97 ? "DART: 6,14 km/s" : "la velocidad";   // el dato real solo al final (no se inventan velocidades intermedias)
   if (txt !== ult) { ult = txt; val.textContent = txt; }
 }
 tangente();
@@ -101,7 +103,7 @@ tl.fromTo([tan, mark], { opacity: 0 }, { opacity: 1, duration: 0.3 }, T.s3 + 5.6
 tl.fromTo("#s3-read", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, T.s3 + 5.6);
 tl.fromTo(S, { p: 0.06 }, { p: 1, duration: 2.6, ease: "power1.inOut", onUpdate: tangente, immediateRender: false }, T.s3 + 5.8);
 tl.fromTo("#s3-c1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, T.s3 + 6.1);
-tl.fromTo("#s3-c2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, T.s3 + 7.0);
+tl.fromTo("#s3-c2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, T.s3 + 6.6);
 salida("#s3-in", T.s3 + 8.62);
 window.__timelines["s3"] = tl;
 })();

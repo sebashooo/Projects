@@ -14,8 +14,8 @@
 .cyan{color:#4fe0ff}.pink{color:#ff5fa8}.yel{color:#ffd257}
 .pill{position:absolute;display:flex;align-items:center;gap:14px;padding:14px 30px;border-radius:999px;font-weight:800;font-size:38px;white-space:nowrap}
 .pill.amarilla{background:#ffd257;color:#1b1340}
-.pill.borde{border:4px solid currentColor;background:rgba(20,11,43,.55)}
-.chip{position:absolute;display:block;padding:12px 26px;border-radius:18px;font-size:34px;white-space:nowrap}
+.pill.borde{border:4px solid currentColor;background:rgba(20,11,43,.92)}
+.chip{position:absolute;display:block;padding:12px 26px;border-radius:18px;font-size:34px;white-space:nowrap;background:rgba(20,11,43,.92)}
 .pt{position:absolute;display:block;width:16px;height:16px;border-radius:50%;opacity:0}
 .titulo{font-weight:900;letter-spacing:-0.04em;line-height:1.02}
 
@@ -25,14 +25,14 @@
 #s1-earth{left:260px;top:820px;width:560px;height:560px}
 #s1-ring{left:150px;top:960px;width:780px;height:280px}
 #s1-pill{left:80px;top:400px;transform-origin:0 50%}
-#s1-pillsub{left:84px;top:492px;font-size:28px;color:#cbbff0;letter-spacing:.06em}
+#s1-pillsub{left:84px;top:492px;font-size:32px;color:#e3dbff;letter-spacing:.02em}
 #s1-nave{left:0;top:0;width:300px;height:140px}
 #s1-ast{left:705px;top:645px;width:230px;height:230px}
 #s1-tray{left:0;top:0;width:1080px;height:1920px}
 #s1-q{left:80px;top:1500px;width:920px}
-#s1-q .tag{display:inline-block;padding:10px 24px;border-radius:999px;border:4px solid #ff5fa8;color:#ff5fa8;font-size:30px;font-weight:800;letter-spacing:.08em;margin-bottom:20px}
+#s1-q .tag{display:inline-block;padding:10px 24px;border-radius:999px;border:4px solid #ff5fa8;background:rgba(20,11,43,.92);color:#ff5fa8;font-size:30px;font-weight:800;letter-spacing:.08em;margin-bottom:20px}
 #s1-q .q{font-size:64px;font-weight:800;letter-spacing:-0.03em;line-height:1.08}
-#s1-chip2{left:520px;top:1385px;color:#4fe0ff;border:3px solid #4fe0ff;background:rgba(20,11,43,.6)}
+#s1-chip2{left:520px;top:1385px;color:#4fe0ff;border:3px solid #4fe0ff}
 
 </style>
 <div id="root" data-composition-id="s1" data-width="1080" data-height="1920">
@@ -125,18 +125,18 @@ tl.fromTo("#n1-fuego", { opacity: 0.2 }, { opacity: 0.8, duration: 0.35, ease: "
 // 7.3 s: «un experimento real»: la Tierra baja, aparece el asteroide, se dibuja la trayectoria
 tl.fromTo("#s1-earth", { x: 0, y: 0, scale: 1 }, { x: -310, y: 190, scale: 0.57, duration: 1.0, ease: "power3.inOut", immediateRender: false }, T.s1 + 7.2);
 tl.fromTo("#s1-ring", { x: 0, y: 0, scale: 1 }, { x: -310, y: 190, scale: 0.57, duration: 1.0, ease: "power3.inOut", immediateRender: false }, T.s1 + 7.2);
-tl.fromTo("#s1-nave", { x: 610, y: 690, rotation: -12 }, { x: 250, y: 930, rotation: -24, duration: 1.0, ease: "power3.inOut", immediateRender: false }, T.s1 + 7.3);
+tl.fromTo("#s1-nave", { x: 610, y: 690, rotation: -12 }, { x: 320, y: 915, rotation: -40, duration: 1.0, ease: "power3.inOut", immediateRender: false }, T.s1 + 7.3);
 pop("#s1-ast", T.s1 + 8.0, 0.7, { from: { rotation: -20 }, to: { rotation: 0 } });
 tl.fromTo("#s1-ast", { rotation: 0 }, { rotation: 8, duration: 2, ease: "sine.inOut", yoyo: true, repeat: 2, immediateRender: false }, T.s1 + 8.8);
 const p1 = document.getElementById("s1-path"), L1 = p1.getTotalLength();
 p1.style.strokeDasharray = L1; p1.style.strokeDashoffset = L1;
 tl.fromTo(p1, { strokeDashoffset: L1 }, { strokeDashoffset: 0, duration: 1.1, ease: "power2.out" }, T.s1 + 9.0);
 tl.fromTo("#s1-meta", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, T.s1 + 10.0);
-tl.fromTo("#s1-q .tag", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.45, ease: "expo.out" }, T.s1 + 9.4);
+tl.fromTo("#s1-q .tag", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.45, ease: "expo.out" }, T.s1 + 7.6);
 document.querySelectorAll("#s1-q .q").forEach((el, i) => tl.fromTo(el, { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.4, ease: "power4.out" }, T.s1 + 9.8 + i * 0.22));
 // 13.2 s: «mediante el impacto de una nave»: la nave avanza hacia el asteroide
 tl.fromTo("#s1-chip2", { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, T.s1 + 13.3);
-tl.fromTo("#s1-nave", { x: 250, y: 930 }, { x: 420, y: 752, duration: 2.2, ease: "power2.in", immediateRender: false }, T.s1 + 13.4);
+tl.fromTo("#s1-nave", { x: 320, y: 915 }, { x: 439, y: 816, duration: 2.2, ease: "power2.in", immediateRender: false }, T.s1 + 13.4);
 salida("#s1-in", T.s1 + 15.62);
 window.__timelines["s1"] = tl;
 })();

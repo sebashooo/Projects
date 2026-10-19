@@ -66,6 +66,7 @@ const rnd = mulberry32(20220926);
 let estrellas = "";
 for (let i = 0; i < 130; i++) {
   const x = Math.round(rnd() * W), y = Math.round(rnd() * (H + 120)), s = (1.5 + rnd() * 3.2).toFixed(1), o = (0.35 + rnd() * 0.6).toFixed(2);
+  if (x > 64 && x < 1016 && y > 52 && y < 600) continue;     // sin estrellas que parezcan puntos entre las letras
   estrellas += `<i class="st tw${i % 3}" style="left:${x}px;top:${y}px;width:${s}px;height:${s}px;opacity:${o}"></i>`;
 }
 
@@ -117,8 +118,8 @@ html,body{margin:0;width:${W}px;height:${H}px;overflow:hidden;background:#140b2b
 .cyan{color:#4fe0ff}.pink{color:#ff5fa8}.yel{color:#ffd257}
 .pill{position:absolute;display:flex;align-items:center;gap:14px;padding:14px 30px;border-radius:999px;font-weight:800;font-size:38px;white-space:nowrap}
 .pill.amarilla{background:#ffd257;color:#1b1340}
-.pill.borde{border:4px solid currentColor;background:rgba(20,11,43,.55)}
-.chip{position:absolute;display:block;padding:12px 26px;border-radius:18px;font-size:34px;white-space:nowrap}
+.pill.borde{border:4px solid currentColor;background:rgba(20,11,43,.92)}
+.chip{position:absolute;display:block;padding:12px 26px;border-radius:18px;font-size:34px;white-space:nowrap;background:rgba(20,11,43,.92)}
 .pt{position:absolute;display:block;width:16px;height:16px;border-radius:50%;opacity:0}
 .titulo{font-weight:900;letter-spacing:-0.04em;line-height:1.02}
 /* escena 1 */
@@ -128,27 +129,27 @@ html,body{margin:0;width:${W}px;height:${H}px;overflow:hidden;background:#140b2b
 #s1-earth{left:260px;top:820px;width:560px;height:560px}
 #s1-ring{left:150px;top:960px;width:780px;height:280px}
 #s1-pill{left:80px;top:400px;transform-origin:0 50%}
-#s1-pillsub{left:84px;top:492px;font-size:28px;color:#cbbff0;letter-spacing:.06em}
+#s1-pillsub{left:84px;top:492px;font-size:32px;color:#e3dbff;letter-spacing:.02em}
 #s1-nave{left:0;top:0;width:300px;height:140px}
 #s1-ast{left:705px;top:645px;width:230px;height:230px}
 #s1-tray{left:0;top:0;width:${W}px;height:${H}px}
 #s1-q{left:80px;top:1500px;width:920px}
-#s1-q .tag{display:inline-block;padding:10px 24px;border-radius:999px;border:4px solid #ff5fa8;color:#ff5fa8;font-size:30px;font-weight:800;letter-spacing:.08em;margin-bottom:20px}
+#s1-q .tag{display:inline-block;padding:10px 24px;border-radius:999px;border:4px solid #ff5fa8;background:rgba(20,11,43,.92);color:#ff5fa8;font-size:30px;font-weight:800;letter-spacing:.08em;margin-bottom:20px}
 #s1-q .q{font-size:64px;font-weight:800;letter-spacing:-0.03em;line-height:1.08}
-#s1-chip2{left:520px;top:1385px;color:#4fe0ff;border:3px solid #4fe0ff;background:rgba(20,11,43,.6)}
+#s1-chip2{left:520px;top:1385px;color:#4fe0ff;border:3px solid #4fe0ff}
 /* escena 2 */
 #s2-cal{left:340px;top:260px;width:400px;height:380px;border-radius:34px;background:#f4f0ff;overflow:hidden;transform-origin:50% 50%}
 #s2-cal .top{height:96px;background:#ff5fa8;color:#1b1340;font-size:44px;font-weight:700;letter-spacing:.08em;display:flex;align-items:center;justify-content:center}
 #s2-cal .dia{height:284px;display:flex;align-items:center;justify-content:center;line-height:1;font-size:176px;font-weight:700;color:#1b1340;letter-spacing:-0.04em}
 #s2-calsub{left:0;top:670px;width:${W}px;text-align:center;font-size:40px;font-weight:700;color:#e3dbff}
-#s2-dimo{left:390px;top:900px;width:300px;height:300px}
-#s2-didy{left:330px;top:870px;width:420px;height:420px}
+#s2-dimo{left:390px;top:900px;width:300px;height:300px;z-index:3}
+#s2-didy{left:330px;top:870px;width:420px;height:420px;z-index:2}
 #s2-nave{left:0;top:0;width:300px;height:140px}
 #s2-flash{left:280px;top:930px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,#fff 0%,#ffd257 35%,rgba(255,95,168,0) 70%)}
 #s2-boom{left:120px;top:780px;color:#ff5fa8;font-size:64px;font-weight:900;letter-spacing:-0.02em}
 #s2-orb{left:0;top:0;width:${W}px;height:${H}px}
 #s2-l1{left:310px;top:1335px;color:#e3dbff}
-#s2-l2{left:260px;top:735px;color:#ffd257}
+#s2-l2{left:300px;top:1225px;color:#ffd257}
 #s2-rep{left:560px;top:240px;width:440px;height:178px;border-radius:26px;background:rgba(244,240,255,.1);border:3px solid rgba(244,240,255,.35);padding:26px 28px}
 #s2-rep .t{font-size:36px;font-weight:800;margin-left:96px}
 #s2-rep .s{font-size:28px;color:#cbbff0;margin-left:96px;margin-top:8px}
@@ -174,25 +175,27 @@ html,body{margin:0;width:${W}px;height:${H}px;overflow:hidden;background:#140b2b
 #s3-read .b{font-size:52px;font-weight:700;font-variant-numeric:tabular-nums;margin-top:4px}
 #s3-c1{left:80px;top:1580px;color:#4fe0ff;border:4px solid #4fe0ff}
 #s3-c2{left:420px;top:1580px;color:#ffd257;border:4px solid #ffd257}
+#s3-c2 sup{font-size:.72em;line-height:0;vertical-align:.5em}
 /* escena 4 */
 #s4-t{left:80px;top:210px;width:920px}
 #s4-t .a{font-size:100px;color:#ff5fa8}
 #s4-t .b{font-size:56px;font-weight:700;letter-spacing:-0.02em;margin-top:8px;color:#e3dbff}
 #s4-f{left:80px;top:500px;width:920px;padding:26px 0;border-radius:26px;border:4px solid #ffd257;background:rgba(20,11,43,.6);text-align:center;font-size:54px;font-weight:700;transform-origin:50% 50%}
 #s4-inc{left:80px;top:700px;color:#4fe0ff}
+#s4-f .cap{display:inline-block;width:.6em;height:.72em;vertical-align:-.02em}
 #s4-grid{left:268px;top:800px;width:544px;height:544px}
 .dot{position:absolute;display:block;width:40px;height:40px;border-radius:50%;background:#7d6bc0}
 #s4-esc{left:0;top:1370px;width:${W}px;text-align:center;font-size:32px;color:#cbbff0}
 #s4-riesgo{left:80px;top:1460px;width:920px;padding:24px 0;border-radius:26px;background:#ff5fa8;color:#1b1340;text-align:center;transform-origin:50% 50%}
 #s4-riesgo .a{font-size:34px;font-weight:800;letter-spacing:.06em}
-#s4-riesgo .b{font-size:72px;font-weight:700;margin-top:4px}
+#s4-riesgo .b{font-size:58px;font-weight:700;margin-top:4px}
 /* escena 5 */
 #s5-pre{left:80px;top:250px;font-size:60px;font-weight:700;color:#e3dbff}
 #s5-card{left:80px;top:340px;width:920px;height:200px;border-radius:34px;background:#4fe0ff;color:#140b2b;display:flex;align-items:center;justify-content:center;font-size:92px;font-weight:900;letter-spacing:-0.04em;transform-origin:50% 50%}
 #s5-a{left:80px;top:640px;color:#4fe0ff;border:4px solid #4fe0ff;font-size:44px}
 #s5-b{left:560px;top:760px;color:#ffd257;border:4px solid #ffd257;font-size:44px}
 #s5-c{left:180px;top:880px;color:#ff5fa8;border:4px solid #ff5fa8;font-size:44px}
-#s5-caja{left:400px;top:1040px;width:280px;height:200px;border-radius:30px;border:5px solid #4fe0ff;background:#1b1340;display:flex;align-items:center;justify-content:center;font-size:92px;font-weight:700;transform-origin:50% 50%}
+#s5-caja{z-index:5;left:400px;top:1040px;width:280px;height:200px;border-radius:30px;border:5px solid #4fe0ff;background:#1b1340;display:flex;align-items:center;justify-content:center;font-size:92px;font-weight:700;transform-origin:50% 50%}
 #s5-svg{left:0;top:0;width:${W}px;height:${H}px}
 #s5-fin{left:0;top:1690px;width:${W}px;text-align:center;font-size:34px;color:#e3dbff}
 </style>
@@ -264,22 +267,23 @@ html,body{margin:0;width:${W}px;height:${H}px;overflow:hidden;background:#140b2b
       <text x="880" y="690" text-anchor="end" font-family="Space Mono" font-size="28" fill="#cbbff0">tiempo t</text>
       <text x="130" y="250" font-family="Space Mono" font-size="28" fill="#cbbff0">posición s(t)</text>
       <path id="s3-curva" d="" fill="none" stroke="#4fe0ff" stroke-width="9" stroke-linecap="round"/>
-      <line id="s3-tan" x1="0" y1="0" x2="0" y2="0" stroke="#ffd257" stroke-width="6" stroke-linecap="round" opacity="0"/>
+      <defs><clipPath id="s3-clip"><rect x="112" y="90" width="790" height="548"/></clipPath></defs>
+      <line id="s3-tan" x1="0" y1="0" x2="0" y2="0" stroke="#ffd257" stroke-width="6" stroke-linecap="round" opacity="0" clip-path="url(#s3-clip)"/>
       <circle id="s3-mark" cx="0" cy="0" r="14" fill="#ff5fa8" stroke="#fff" stroke-width="4" opacity="0"/>
     </svg>
-    <div id="s3-read" class="abs mono"><div class="a">pendiente = v = ds/dt</div><div class="b" id="s3-val">0,00 km/s</div></div>
+    <div id="s3-read" class="abs mono"><div class="a">pendiente de s(t) = v = ds/dt</div><div class="b"><span id="s3-val">la velocidad</span></div></div>
     <div id="s3-c1" class="chip">movimiento</div>
-    <div id="s3-c2" class="chip">energía · <span class="mono">E = ½·m·v²</span></div>
+    <div id="s3-c2" class="chip">energía · <span class="mono">E = m·v<sup>2</sup>/2</span></div>
   </div></section>
 
   <!-- ESCENA 4 · 41–51 s -->
   <section id="s4" class="clip scene" data-start="41" data-duration="10" data-track-index="1"><div class="inner" id="s4-in">
     <div id="s4-t" class="abs titulo"><div class="a blk w4">PROBABILIDAD</div><div class="b blk w4">y probabilidad condicional</div></div>
-    <div id="s4-f" class="abs mono">P(A|B) = P(A∩B) / P(B)</div>
+    <div id="s4-f" class="abs mono">P(A|B) = P(A<svg class="cap" viewBox="0 0 24 32"><path d="M4 31V14a8 8 0 0 1 16 0v17" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/></svg>B) / P(B)</div>
     <div id="s4-inc" class="pill borde">incertidumbre</div>
     <div id="s4-grid" class="abs">${grilla}</div>
-    <div id="s4-esc" class="abs mono">100 escenarios posibles</div>
-    <div id="s4-riesgo" class="abs"><div class="a">RIESGO DE IMPACTO</div><div class="b mono">4 / 100 = 4 %</div></div>
+    <div id="s4-esc" class="abs mono">B = 100 escenarios posibles</div>
+    <div id="s4-riesgo" class="abs"><div class="a">EJEMPLO · RIESGO DE IMPACTO (A)</div><div class="b mono">P(A|B) = 4 / 100 = 4 %</div></div>
   </div></section>
 
   <!-- ESCENA 5 · 51–58 s -->
@@ -349,18 +353,18 @@ tl.fromTo("#n1-fuego", { opacity: 0.2 }, { opacity: 0.8, duration: 0.35, ease: "
 // 7.3 s: «un experimento real»: la Tierra baja, aparece el asteroide, se dibuja la trayectoria
 tl.fromTo("#s1-earth", { x: 0, y: 0, scale: 1 }, { x: -310, y: 190, scale: 0.57, duration: 1.0, ease: "power3.inOut", immediateRender: false }, T.s1 + 7.2);
 tl.fromTo("#s1-ring", { x: 0, y: 0, scale: 1 }, { x: -310, y: 190, scale: 0.57, duration: 1.0, ease: "power3.inOut", immediateRender: false }, T.s1 + 7.2);
-tl.fromTo("#s1-nave", { x: 610, y: 690, rotation: -12 }, { x: 250, y: 930, rotation: -24, duration: 1.0, ease: "power3.inOut", immediateRender: false }, T.s1 + 7.3);
+tl.fromTo("#s1-nave", { x: 610, y: 690, rotation: -12 }, { x: 320, y: 915, rotation: -40, duration: 1.0, ease: "power3.inOut", immediateRender: false }, T.s1 + 7.3);
 pop("#s1-ast", T.s1 + 8.0, 0.7, { from: { rotation: -20 }, to: { rotation: 0 } });
 tl.fromTo("#s1-ast", { rotation: 0 }, { rotation: 8, duration: 2, ease: "sine.inOut", yoyo: true, repeat: 2, immediateRender: false }, T.s1 + 8.8);
 const p1 = document.getElementById("s1-path"), L1 = p1.getTotalLength();
 p1.style.strokeDasharray = L1; p1.style.strokeDashoffset = L1;
 tl.fromTo(p1, { strokeDashoffset: L1 }, { strokeDashoffset: 0, duration: 1.1, ease: "power2.out" }, T.s1 + 9.0);
 tl.fromTo("#s1-meta", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, T.s1 + 10.0);
-tl.fromTo("#s1-q .tag", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.45, ease: "expo.out" }, T.s1 + 9.4);
+tl.fromTo("#s1-q .tag", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.45, ease: "expo.out" }, T.s1 + 7.6);
 document.querySelectorAll("#s1-q .q").forEach((el, i) => tl.fromTo(el, { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.4, ease: "power4.out" }, T.s1 + 9.8 + i * 0.22));
 // 13.2 s: «mediante el impacto de una nave»: la nave avanza hacia el asteroide
 tl.fromTo("#s1-chip2", { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, T.s1 + 13.3);
-tl.fromTo("#s1-nave", { x: 250, y: 930 }, { x: 420, y: 752, duration: 2.2, ease: "power2.in", immediateRender: false }, T.s1 + 13.4);
+tl.fromTo("#s1-nave", { x: 320, y: 915 }, { x: 439, y: 816, duration: 2.2, ease: "power2.in", immediateRender: false }, T.s1 + 13.4);
 salida("#s1-in", T.s1 + 15.62);
 
 // ═══ ESCENA 2 ═══
@@ -404,8 +408,9 @@ function coloca() {
 }
 tl.fromTo(P, { th: Math.PI }, { th: Math.PI + Math.PI * 2 * 1.45, duration: 10.1, ease: "none", onUpdate: coloca, immediateRender: false }, T.s2 + 5.9);
 tl.fromTo(P, { rx: ORB.rx, ry: ORB.ry }, { rx: 340, ry: 132, duration: 1.0, ease: "power2.inOut", onUpdate: coloca, immediateRender: false }, T.s2 + 11.6);
-pop("#s2-l1", T.s2 + 6.3, 0.5);
-pop("#s2-l2", T.s2 + 7.0, 0.5);
+pop("#s2-l2", T.s2 + 3.0, 0.45);
+tl.to("#s2-l2", { opacity: 0, duration: 0.3 }, T.s2 + 4.75);
+pop("#s2-l1", T.s2 + 7.4, 0.5);
 // 8.4 s: «según los informes científicos de la NASA»
 tl.fromTo("#s2-rep", { opacity: 0, x: 120 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, T.s2 + 8.4);
 // 10.7 s: «logró modificar su período orbital»: 11 h 55 min → 11 h 23 min
@@ -415,7 +420,7 @@ tl.fromTo(M, { m: 55 }, { m: 23, duration: 1.7, ease: "power2.inOut", immediateR
   const v = Math.round(M.m); if (v !== ultimo) { ultimo = v; cont.textContent = "11 h " + String(v).padStart(2, "0") + " min"; } } }, T.s2 + 11.2);
 pop("#s2-menos", T.s2 + 12.9, 0.45);
 // 13.5 s: «demostrando que esta técnica puede funcionar»
-tl.to(["#s2-l1", "#s2-l2"], { opacity: 0, duration: 0.3 }, T.s2 + 13.3);
+tl.to("#s2-l1", { opacity: 0, duration: 0.3 }, T.s2 + 13.3);
 pop("#s2-ok", T.s2 + 13.6, 0.6);
 const tick = document.getElementById("s2-tick"), LT = tick.getTotalLength();
 tick.style.strokeDasharray = LT; tick.style.strokeDashoffset = LT;
@@ -432,9 +437,9 @@ salida("#s2-in", T.s2 + 15.62);
 cascada("#s3-q .w3", T.s3 + 0.2, [70, 70]);
 pop("#s3-lupa", T.s3 + 0.8, 0.6, { from: { rotation: -30 }, to: { rotation: 0 } });
 tl.fromTo("#s3-lupa", { y: 0 }, { y: -12, duration: 1, ease: "sine.inOut", yoyo: true, repeat: 6, immediateRender: false }, T.s3 + 1.4);
-tl.fromTo("#s3-big", { opacity: 0, scale: 1.5 }, { opacity: 1, scale: 1, duration: 0.28, ease: "power4.out" }, T.s3 + 2.6);
-pop("#s3-ddt", T.s3 + 3.1, 0.45);
-tl.fromTo("#s3-ddt2", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, T.s3 + 3.4);
+tl.fromTo("#s3-big", { opacity: 0, scale: 1.5 }, { opacity: 1, scale: 1, duration: 0.28, ease: "power4.out" }, T.s3 + 3.3);
+pop("#s3-ddt", T.s3 + 3.7, 0.45);
+tl.fromTo("#s3-ddt2", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, T.s3 + 3.95);
 // 4.3 s: gráfica de posición; la tangente (derivada) recorre la curva
 tl.fromTo(["#s3-panel", "#s3-svg"], { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, T.s3 + 4.2);
 const ej = document.getElementById("s3-ejes"), LE = ej.getTotalLength();
@@ -452,7 +457,7 @@ function tangente() {
   tan.setAttribute("x1", (px - dx / n * L).toFixed(1)); tan.setAttribute("y1", (py - dy / n * L).toFixed(1));
   tan.setAttribute("x2", (px + dx / n * L).toFixed(1)); tan.setAttribute("y2", (py + dy / n * L).toFixed(1));
   mark.setAttribute("cx", px.toFixed(1)); mark.setAttribute("cy", py.toFixed(1));
-  const txt = (6.1449 * t).toFixed(2).replace(".", ",") + " km/s";
+  const txt = t > 0.97 ? "DART: 6,14 km/s" : "la velocidad";   // el dato real solo al final (no se inventan velocidades intermedias)
   if (txt !== ult) { ult = txt; val.textContent = txt; }
 }
 tangente();
@@ -460,7 +465,7 @@ tl.fromTo([tan, mark], { opacity: 0 }, { opacity: 1, duration: 0.3 }, T.s3 + 5.6
 tl.fromTo("#s3-read", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, T.s3 + 5.6);
 tl.fromTo(S, { p: 0.06 }, { p: 1, duration: 2.6, ease: "power1.inOut", onUpdate: tangente, immediateRender: false }, T.s3 + 5.8);
 tl.fromTo("#s3-c1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, T.s3 + 6.1);
-tl.fromTo("#s3-c2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, T.s3 + 7.0);
+tl.fromTo("#s3-c2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, T.s3 + 6.6);
 salida("#s3-in", T.s3 + 8.62);
 
 // ═══ ESCENA 4 ═══
@@ -473,7 +478,7 @@ for (let i = 0; i < 100; i++) {
   tl.fromTo(el, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "power3.out" }, T.s4 + 3.9 + f * 0.045 + c * 0.012);
   tl.fromTo(el, { opacity: 1 }, { opacity: 0.45, duration: 0.6, ease: "sine.inOut", yoyo: true, repeat: 2, immediateRender: false }, T.s4 + 4.7 + ((c + f) % 7) * 0.09);
 }
-tl.fromTo("#s4-inc", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.45, ease: "expo.out" }, T.s4 + 4.3);
+tl.fromTo("#s4-inc", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.45, ease: "expo.out" }, T.s4 + 5.6);
 tl.fromTo("#s4-esc", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, T.s4 + 4.6);
 // 7 s: riesgo de impacto: 4 de 100 escenarios
 [12, 37, 58, 84].forEach((i, k) => {
@@ -487,19 +492,19 @@ salida("#s4-in", T.s4 + 9.62);
 tl.fromTo("#s5-pre", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, T.s5 + 0.1);
 tl.fromTo("#s5-card", { opacity: 0, scale: 1.35 }, { opacity: 1, scale: 1, duration: 0.3, ease: "power4.out" }, T.s5 + 0.45);
 // 1.6 s: los datos reales de la misión entran en la derivada
-tl.fromTo("#s5-a", { opacity: 0, x: -500 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, T.s5 + 1.6);
-tl.fromTo("#s5-b", { opacity: 0, x: 500 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, T.s5 + 1.8);
-tl.fromTo("#s5-c", { opacity: 0, y: 300 }, { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" }, T.s5 + 2.0);
-pop("#s5-caja", T.s5 + 2.7, 0.5);
-[["#s5-a", 210, 450], ["#s5-b", -150, 330], ["#s5-c", 180, 210]].forEach(([s, dx, dy], i) =>
-  tl.to(s, { x: dx, y: dy, scale: 0.3, opacity: 0, duration: 0.55, ease: "power3.in" }, T.s5 + 3.2 + i * 0.12));
-tl.fromTo("#s5-caja", { scale: 1 }, { scale: 1.08, duration: 0.15, ease: "power2.out", yoyo: true, repeat: 1, immediateRender: false }, T.s5 + 3.8);
+tl.fromTo("#s5-a", { opacity: 0, x: -500 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, T.s5 + 1.3);
+tl.fromTo("#s5-b", { opacity: 0, x: 500 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, T.s5 + 1.45);
+tl.fromTo("#s5-c", { opacity: 0, y: 300 }, { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" }, T.s5 + 1.6);
+pop("#s5-caja", T.s5 + 3.0, 0.5);
+[["#s5-a", 235, 460], ["#s5-b", -205, 340], ["#s5-c", 150, 220]].forEach(([s, dx, dy], i) =>      // al centro de la caja
+  tl.to(s, { x: dx, y: dy, scale: 0.3, opacity: 0, duration: 0.55, ease: "power3.in" }, T.s5 + 3.9 + i * 0.1));
+tl.fromTo("#s5-caja", { scale: 1 }, { scale: 1.08, duration: 0.15, ease: "power2.out", yoyo: true, repeat: 1, immediateRender: false }, T.s5 + 4.45);
 const draw = (id, t, dd) => { const p = document.getElementById(id), L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L;
   tl.fromTo(p, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: dd, ease: "power2.out" }, t); };
-draw("s5-flecha", T.s5 + 4.1, 0.4);
-draw("s5-ejes", T.s5 + 4.4, 0.5);
-draw("s5-curva", T.s5 + 4.8, 0.8);
-tl.fromTo("#s5-fin", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, T.s5 + 5.3);
+draw("s5-flecha", T.s5 + 4.6, 0.3);
+draw("s5-ejes", T.s5 + 4.8, 0.4);
+draw("s5-curva", T.s5 + 5.0, 0.7);
+tl.fromTo("#s5-fin", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, T.s5 + 5.0);
 salida("#s5-in", T.s5 + 6.55);
 
 window.__timelines["main"] = tl;

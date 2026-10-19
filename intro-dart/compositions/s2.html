@@ -14,8 +14,8 @@
 .cyan{color:#4fe0ff}.pink{color:#ff5fa8}.yel{color:#ffd257}
 .pill{position:absolute;display:flex;align-items:center;gap:14px;padding:14px 30px;border-radius:999px;font-weight:800;font-size:38px;white-space:nowrap}
 .pill.amarilla{background:#ffd257;color:#1b1340}
-.pill.borde{border:4px solid currentColor;background:rgba(20,11,43,.55)}
-.chip{position:absolute;display:block;padding:12px 26px;border-radius:18px;font-size:34px;white-space:nowrap}
+.pill.borde{border:4px solid currentColor;background:rgba(20,11,43,.92)}
+.chip{position:absolute;display:block;padding:12px 26px;border-radius:18px;font-size:34px;white-space:nowrap;background:rgba(20,11,43,.92)}
 .pt{position:absolute;display:block;width:16px;height:16px;border-radius:50%;opacity:0}
 .titulo{font-weight:900;letter-spacing:-0.04em;line-height:1.02}
 
@@ -23,14 +23,14 @@
 #s2-cal .top{height:96px;background:#ff5fa8;color:#1b1340;font-size:44px;font-weight:700;letter-spacing:.08em;display:flex;align-items:center;justify-content:center}
 #s2-cal .dia{height:284px;display:flex;align-items:center;justify-content:center;line-height:1;font-size:176px;font-weight:700;color:#1b1340;letter-spacing:-0.04em}
 #s2-calsub{left:0;top:670px;width:1080px;text-align:center;font-size:40px;font-weight:700;color:#e3dbff}
-#s2-dimo{left:390px;top:900px;width:300px;height:300px}
-#s2-didy{left:330px;top:870px;width:420px;height:420px}
+#s2-dimo{left:390px;top:900px;width:300px;height:300px;z-index:3}
+#s2-didy{left:330px;top:870px;width:420px;height:420px;z-index:2}
 #s2-nave{left:0;top:0;width:300px;height:140px}
 #s2-flash{left:280px;top:930px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,#fff 0%,#ffd257 35%,rgba(255,95,168,0) 70%)}
 #s2-boom{left:120px;top:780px;color:#ff5fa8;font-size:64px;font-weight:900;letter-spacing:-0.02em}
 #s2-orb{left:0;top:0;width:1080px;height:1920px}
 #s2-l1{left:310px;top:1335px;color:#e3dbff}
-#s2-l2{left:260px;top:735px;color:#ffd257}
+#s2-l2{left:300px;top:1225px;color:#ffd257}
 #s2-rep{left:560px;top:240px;width:440px;height:178px;border-radius:26px;background:rgba(244,240,255,.1);border:3px solid rgba(244,240,255,.35);padding:26px 28px}
 #s2-rep .t{font-size:36px;font-weight:800;margin-left:96px}
 #s2-rep .s{font-size:28px;color:#cbbff0;margin-left:96px;margin-top:8px}
@@ -151,8 +151,9 @@ function coloca() {
 }
 tl.fromTo(P, { th: Math.PI }, { th: Math.PI + Math.PI * 2 * 1.45, duration: 10.1, ease: "none", onUpdate: coloca, immediateRender: false }, T.s2 + 5.9);
 tl.fromTo(P, { rx: ORB.rx, ry: ORB.ry }, { rx: 340, ry: 132, duration: 1.0, ease: "power2.inOut", onUpdate: coloca, immediateRender: false }, T.s2 + 11.6);
-pop("#s2-l1", T.s2 + 6.3, 0.5);
-pop("#s2-l2", T.s2 + 7.0, 0.5);
+pop("#s2-l2", T.s2 + 3.0, 0.45);
+tl.to("#s2-l2", { opacity: 0, duration: 0.3 }, T.s2 + 4.75);
+pop("#s2-l1", T.s2 + 7.4, 0.5);
 // 8.4 s: «según los informes científicos de la NASA»
 tl.fromTo("#s2-rep", { opacity: 0, x: 120 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, T.s2 + 8.4);
 // 10.7 s: «logró modificar su período orbital»: 11 h 55 min → 11 h 23 min
@@ -162,7 +163,7 @@ tl.fromTo(M, { m: 55 }, { m: 23, duration: 1.7, ease: "power2.inOut", immediateR
   const v = Math.round(M.m); if (v !== ultimo) { ultimo = v; cont.textContent = "11 h " + String(v).padStart(2, "0") + " min"; } } }, T.s2 + 11.2);
 pop("#s2-menos", T.s2 + 12.9, 0.45);
 // 13.5 s: «demostrando que esta técnica puede funcionar»
-tl.to(["#s2-l1", "#s2-l2"], { opacity: 0, duration: 0.3 }, T.s2 + 13.3);
+tl.to("#s2-l1", { opacity: 0, duration: 0.3 }, T.s2 + 13.3);
 pop("#s2-ok", T.s2 + 13.6, 0.6);
 const tick = document.getElementById("s2-tick"), LT = tick.getTotalLength();
 tick.style.strokeDasharray = LT; tick.style.strokeDashoffset = LT;

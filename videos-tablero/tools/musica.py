@@ -104,9 +104,9 @@ def generar(dur, escritura, SR, semilla=7):
         m = 1 << int(np.ceil(np.log2(len(x) + len(h))))
         return np.fft.irfft(np.fft.rfft(x, m) * np.fft.rfft(h, m), m)[: len(x)]
 
-    # la máscara de escritura entra y sale en 0.25 s
-    r = int(0.25 * SR)
-    m = np.convolve(np.pad(escritura[:n], r, mode="edge"), np.ones(2 * r + 1) / (2 * r + 1), "valid")[:n]
+    # la máscara de escritura entra y sale en 0.2 s, dentro de la escritura (no pisa la voz)
+    r = int(0.2 * SR); c = np.concatenate([[0], np.cumsum(escritura[:n])]); i = np.arange(n)
+    m = np.minimum((c[i + 1] - c[np.maximum(i + 1 - r, 0)]) / r, (c[np.minimum(i + r, n)] - c[i]) / r)
     L = base_L + esc_L * m; R = base_R + esc_R * m
     L = L + 0.25 * conv(L, ir(1)); R = R + 0.25 * conv(R, ir(2))
     fade = np.ones(n); fi, fo = int(1.0 * SR), int(2.0 * SR)

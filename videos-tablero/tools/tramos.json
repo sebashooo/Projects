@@ -1,52 +1,250 @@
 {
  "salida": "matematicas_planeta.mp4",
- "nota": "Tramos en segundos de cada video original. explica = se conserva la voz (×1.25, sin cambiar el tono); escribe = escritura en el tablero (×2.5, se quita el audio original y la música pasa al frente); otro = pausa corta sin voz ni escritura (×2, silencio con la música de fondo). ganancia_db sube la voz de un tramo grabado más bajo. Clasificación verificada cuadro a cuadro (hojas cada 0.5 s y tiras a 4–10 fps alrededor de cada límite) y con el audio cada 20 ms.",
- "velocidades": {"explica": 1.25, "escribe": 2.5, "otro": 2.0},
+ "nota": "Tramos en segundos de cada video original. explica = se conserva la voz (×1.25, sin cambiar el tono); escribe = escritura en el tablero (×2.5, se quita el audio original y la música pasa al frente); otro = pausa corta sin voz ni escritura (×2, silencio con la música de fondo). ganancia_db sube la voz de un tramo grabado más bajo. Clasificación verificada cuadro a cuadro (hojas cada 0.5 s y tiras a 4–10 fps alrededor de cada límite) y con el audio cada 20 ms. Revisión técnica: los finales de explicación se movieron a donde la voz ya se apagó (v3 51.92 y 65.58; v4 18.25 y 45.39), v3 118.3 queda en el silencio tras la palabra, v3 66.3–112.61 es una sola explicación para evitar cambios seguidos, y el video termina en v4 57.45 con fundido.",
+ "velocidades": {
+  "explica": 1.25,
+  "escribe": 2.5,
+  "otro": 2.0
+ },
  "fundido_entre_videos": 0.3,
  "musica_bajo_voz_db": 8,
  "musica_escritura_extra_db": 7,
  "lufs": -12,
  "videos": [
-  {"archivo": "fuente/1_primer_video.mp4", "color": [1.051, 1.059, 1.080],
-   "tramos": [{"inicio": 0, "fin": 15.76, "tipo": "explica", "que": "presentación de las integrantes"}]},
-  {"archivo": "fuente/2_segundo_video.mp4", "color": [1.086, 1.093, 1.110], "filtros_audio": ["equalizer=f=234:t=q:w=30:g=-8"],
-   "tramos": [{"inicio": 0, "fin": 10.66, "tipo": "explica", "que": "fórmula v(t) = ds/dt"}]},
-  {"archivo": "fuente/3_tercer_video.mp4", "color": [1.033, 1.041, 1.056],
+  {
+   "archivo": "fuente/1_primer_video.mp4",
+   "color": [
+    1.051,
+    1.059,
+    1.08
+   ],
    "tramos": [
-    {"inicio": 0, "fin": 4.25, "tipo": "explica", "ganancia_db": 10, "que": "6,1449 km/s (voz grabada muy baja)"},
-    {"inicio": 4.25, "fin": 10.75, "tipo": "explica"},
-    {"inicio": 10.75, "fin": 17.6, "tipo": "escribe", "que": "6,1449 × 1000 = 6144,9 m/s"},
-    {"inicio": 17.6, "fin": 37.75, "tipo": "explica", "que": "velocidad = ds/dt, S(t) = 6144,9t + So"},
-    {"inicio": 37.75, "fin": 46.25, "tipo": "escribe", "que": "ds/dt = d/dt (6144,9t + So)"},
-    {"inicio": 46.25, "fin": 51.75, "tipo": "explica", "que": "derivada (incluye el corchete trazado hablando)"},
-    {"inicio": 51.75, "fin": 53.0, "tipo": "otro", "que": "paneo sin voz"},
-    {"inicio": 53.0, "fin": 65.3, "tipo": "explica", "que": "6144,9 m/s"},
-    {"inicio": 65.3, "fin": 66.3, "tipo": "otro", "que": "transición"},
-    {"inicio": 66.3, "fin": 109.35, "tipo": "explica", "que": "energía cinética Ec = ½mv², masa y velocidad, E(v) = 289,7v²"},
-    {"inicio": 109.35, "fin": 110.31, "tipo": "otro", "que": "subraya en silencio (1 s)"},
-    {"inicio": 110.31, "fin": 112.61, "tipo": "explica"},
-    {"inicio": 112.61, "fin": 118.13, "tipo": "escribe", "que": "dE/dv = 289,7·(2v), leyendo en voz alta"},
-    {"inicio": 118.13, "fin": 120.2, "tipo": "explica", "que": "explica dE/dv de frente"},
-    {"inicio": 120.2, "fin": 125.3, "tipo": "escribe", "que": "dE/dv = 579,4v, leyendo a ráfagas"},
-    {"inicio": 125.3, "fin": 134.97, "tipo": "explica", "que": "explica la derivada"},
-    {"inicio": 134.97, "fin": 146.55, "tipo": "escribe", "que": "dE/dv = 579,4(6144,9) = 3560335 J/(m/s), dictando a ráfagas"},
-    {"inicio": 146.55, "fin": 161.5, "tipo": "explica", "que": "explica el resultado"},
-    {"inicio": 161.5, "fin": 163.0, "tipo": "otro", "que": "sale de cuadro, corte"},
-    {"inicio": 163.0, "fin": 182.8, "tipo": "explica", "que": "probabilidad / riesgo de impacto, asteroide 2024 YR4, máximo 3,1 % → 0,004 %"},
-    {"inicio": 182.8, "fin": 187.8, "tipo": "escribe", "que": "3,1 % − 0,004 % = 3,96"},
-    {"inicio": 187.8, "fin": 197.65, "tipo": "explica"},
-    {"inicio": 197.65, "fin": 200.9, "tipo": "escribe", "que": "3,1 / 0,004 = 775"},
-    {"inicio": 200.9, "fin": 204.55, "tipo": "explica"}]},
-  {"archivo": "fuente/4_cuarto_video.mp4", "color": [1.031, 1.034, 1.047],
+    {
+     "inicio": 0,
+     "fin": 15.76,
+     "tipo": "explica",
+     "que": "presentación de las integrantes"
+    }
+   ]
+  },
+  {
+   "archivo": "fuente/2_segundo_video.mp4",
+   "color": [
+    1.086,
+    1.093,
+    1.11
+   ],
+   "filtros_audio": [
+    "equalizer=f=234:t=q:w=30:g=-8"
+   ],
    "tramos": [
-    {"inicio": 0, "fin": 18.1, "tipo": "explica", "que": "probabilidad condicional P(A|B)"},
-    {"inicio": 18.1, "fin": 19.1, "tipo": "otro"},
-    {"inicio": 19.1, "fin": 25.1, "tipo": "explica", "que": "100 escenarios, 4 presentan impacto"},
-    {"inicio": 25.1, "fin": 26.2, "tipo": "otro"},
-    {"inicio": 26.2, "fin": 33.8, "tipo": "explica"},
-    {"inicio": 33.8, "fin": 41.1, "tipo": "escribe", "que": "P(A|B) = 4/100 = 0,04"},
-    {"inicio": 41.1, "fin": 45.35, "tipo": "explica"},
-    {"inicio": 45.35, "fin": 48.85, "tipo": "escribe", "que": "0,04 × 100 = 4 %"},
-    {"inicio": 48.85, "fin": 57.75, "tipo": "explica", "que": "cierre: 4 %"}]}
+    {
+     "inicio": 0,
+     "fin": 10.66,
+     "tipo": "explica",
+     "que": "fórmula v(t) = ds/dt"
+    }
+   ]
+  },
+  {
+   "archivo": "fuente/3_tercer_video.mp4",
+   "color": [
+    1.033,
+    1.041,
+    1.056
+   ],
+   "tramos": [
+    {
+     "inicio": 0,
+     "fin": 4.25,
+     "tipo": "explica",
+     "ganancia_db": 10,
+     "que": "6,1449 km/s (voz grabada muy baja)"
+    },
+    {
+     "inicio": 4.25,
+     "fin": 10.75,
+     "tipo": "explica"
+    },
+    {
+     "inicio": 10.75,
+     "fin": 17.6,
+     "tipo": "escribe",
+     "que": "6,1449 × 1000 = 6144,9 m/s"
+    },
+    {
+     "inicio": 17.6,
+     "fin": 37.75,
+     "tipo": "explica",
+     "que": "velocidad = ds/dt, S(t) = 6144,9t + So"
+    },
+    {
+     "inicio": 37.75,
+     "fin": 46.25,
+     "tipo": "escribe",
+     "que": "ds/dt = d/dt (6144,9t + So)"
+    },
+    {
+     "inicio": 46.25,
+     "fin": 51.92,
+     "tipo": "explica",
+     "que": "derivada (incluye el corchete trazado hablando)"
+    },
+    {
+     "inicio": 51.92,
+     "fin": 53.0,
+     "tipo": "otro",
+     "que": "paneo sin voz"
+    },
+    {
+     "inicio": 53.0,
+     "fin": 65.58,
+     "tipo": "explica",
+     "que": "6144,9 m/s"
+    },
+    {
+     "inicio": 65.58,
+     "fin": 66.3,
+     "tipo": "otro",
+     "que": "transición"
+    },
+    {
+     "inicio": 66.3,
+     "fin": 112.61,
+     "tipo": "explica",
+     "que": "energía cinética Ec = ½mv², masa y velocidad, E(v) = 289,7v² (incluye el subrayado en silencio)"
+    },
+    {
+     "inicio": 112.61,
+     "fin": 118.3,
+     "tipo": "escribe",
+     "que": "dE/dv = 289,7·(2v), leyendo en voz alta"
+    },
+    {
+     "inicio": 118.3,
+     "fin": 120.2,
+     "tipo": "explica",
+     "que": "explica dE/dv de frente"
+    },
+    {
+     "inicio": 120.2,
+     "fin": 125.3,
+     "tipo": "escribe",
+     "que": "dE/dv = 579,4v, leyendo a ráfagas"
+    },
+    {
+     "inicio": 125.3,
+     "fin": 134.97,
+     "tipo": "explica",
+     "que": "explica la derivada"
+    },
+    {
+     "inicio": 134.97,
+     "fin": 146.55,
+     "tipo": "escribe",
+     "que": "dE/dv = 579,4(6144,9) = 3560335 J/(m/s), dictando a ráfagas"
+    },
+    {
+     "inicio": 146.55,
+     "fin": 161.5,
+     "tipo": "explica",
+     "que": "explica el resultado"
+    },
+    {
+     "inicio": 161.5,
+     "fin": 163.0,
+     "tipo": "otro",
+     "que": "sale de cuadro, corte"
+    },
+    {
+     "inicio": 163.0,
+     "fin": 182.8,
+     "tipo": "explica",
+     "que": "probabilidad / riesgo de impacto, asteroide 2024 YR4, máximo 3,1 % → 0,004 %"
+    },
+    {
+     "inicio": 182.8,
+     "fin": 187.8,
+     "tipo": "escribe",
+     "que": "3,1 % − 0,004 % = 3,96"
+    },
+    {
+     "inicio": 187.8,
+     "fin": 197.65,
+     "tipo": "explica"
+    },
+    {
+     "inicio": 197.65,
+     "fin": 200.9,
+     "tipo": "escribe",
+     "que": "3,1 / 0,004 = 775"
+    },
+    {
+     "inicio": 200.9,
+     "fin": 204.55,
+     "tipo": "explica"
+    }
+   ]
+  },
+  {
+   "archivo": "fuente/4_cuarto_video.mp4",
+   "color": [
+    1.031,
+    1.034,
+    1.047
+   ],
+   "tramos": [
+    {
+     "inicio": 0,
+     "fin": 18.25,
+     "tipo": "explica",
+     "que": "probabilidad condicional P(A|B)"
+    },
+    {
+     "inicio": 18.25,
+     "fin": 19.1,
+     "tipo": "otro"
+    },
+    {
+     "inicio": 19.1,
+     "fin": 25.1,
+     "tipo": "explica",
+     "que": "100 escenarios, 4 presentan impacto"
+    },
+    {
+     "inicio": 25.1,
+     "fin": 26.2,
+     "tipo": "otro"
+    },
+    {
+     "inicio": 26.2,
+     "fin": 33.8,
+     "tipo": "explica"
+    },
+    {
+     "inicio": 33.8,
+     "fin": 41.1,
+     "tipo": "escribe",
+     "que": "P(A|B) = 4/100 = 0,04"
+    },
+    {
+     "inicio": 41.1,
+     "fin": 45.39,
+     "tipo": "explica"
+    },
+    {
+     "inicio": 45.39,
+     "fin": 48.85,
+     "tipo": "escribe",
+     "que": "0,04 × 100 = 4 %"
+    },
+    {
+     "inicio": 48.85,
+     "fin": 57.45,
+     "tipo": "explica",
+     "que": "cierre: 4 %"
+    }
+   ]
+  }
  ]
 }

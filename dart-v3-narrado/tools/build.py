@@ -1,6 +1,6 @@
-# DART v3 narrado: pone cada grabación de voz en su escena, alarga solo las escenas donde la voz
-# necesita más tiempo, agrega música ambiental (sintetizada aquí, sin derechos de terceros) que baja
-# sola cuando hay voz, y deja el volumen final en -14 LUFS.
+# DART v3 narrado: pone cada grabación de voz en su escena (con la voz un poco acelerada y sin silencios
+# de sobra), ajusta cada escena de la animación a lo que dura su voz, agrega música ambiental (sintetizada
+# aquí, sin derechos de terceros) que baja sola cuando hay voz, y deja el volumen final en -14 LUFS.
 #   python3 tools/build.py   →  salida/DART_animacion_v3_narrado.mp4  (+ pistas en salida/pistas/)
 import json, os, subprocess
 import numpy as np
@@ -34,32 +34,65 @@ for i in range(1, 5):
     rms = np.sqrt(np.mean(act ** 2)) if len(act) else 0.1
     voz[i] = a * (10 ** (-17 / 20) / rms)            # misma energía de voz en todas (≈ -17 dBFS al hablar)
 
-# ── 2. línea de tiempo: cada escena dura lo que necesite su voz (nunca se acelera) ──
+# ── 2. tramos de voz más cortos: sin silencios de sobra y un poco más rápidos (mismo tono) ──
+TEMPO, PAUSA = PLAN["tempo_voz"], PLAN["pausa_max"]
+
+
+def acortar(seg, nombre):
+    h = int(0.01 * SR); k = len(seg) // h
+    mudo = 20 * np.log10(np.maximum(np.sqrt((seg[:k * h].reshape(k, h) ** 2).mean(1)), 1e-9)) < -40
+    habla = np.where(~mudo)[0]
+    a0, a1 = max(0, habla[0] - 4), min(k, habla[-1] + 9)          # deja 40 ms antes y 80 ms después de la voz
+    piezas, desde, i = [], a0, a0
+    while i < a1:                                                 # cada pausa interna larga queda en PAUSA s
+        if mudo[i]:
+            j = i
+            while j < a1 and mudo[j]: j += 1
+            if (j - i) * 0.01 > PAUSA + 0.06 and j < a1:
+                medio = int(PAUSA / 0.02)
+                piezas.append(seg[desde * h:(i + medio) * h]); desde = j - medio
+            i = j
+        else:
+            i += 1
+    piezas.append(seg[desde * h:a1 * h])
+    x = piezas[0]
+    cf = int(0.01 * SR)
+    for p in piezas[1:]:                                          # empalmes con fundido cruzado de 10 ms (en silencio)
+        r = np.linspace(0, 1, cf)
+        x = np.concatenate([x[:-cf], x[-cf:] * (1 - r) + p[:cf] * r, p[cf:]])
+    tmp = f"salida/pistas/tramo_{nombre}.wav"
+    sf.write(tmp, x, SR)
+    run("ffmpeg", "-v", "error", "-y", "-i", tmp, "-af", f"atempo={TEMPO}", tmp + ".r.wav")
+    y, _ = sf.read(tmp + ".r.wav"); os.replace(tmp + ".r.wav", tmp)
+    fi, fo = int(0.015 * SR), int(0.05 * SR)
+    y[:fi] *= np.linspace(0, 1, fi); y[-fo:] *= np.linspace(1, 0, fo)
+    return y
+
+
+# ── 3. línea de tiempo: cada escena dura lo que dura su voz; la animación se estira o se acelera
+#       para calzar (acelerar como máximo ×acel_video_max para que se siga leyendo) ──
 esc = PLAN["escenas"]
 t = 0.0
-for k, e in enumerate(esc):
+for e in esc:
+    e["voz"] = acortar(voz[e["a"]][int(e["desde"] * SR): int(e["hasta"] * SR)].copy(), e["n"])
     V = e["v1"] - e["v0"]
-    A = e["hasta"] - e["desde"]
-    T = max(V, PLAN["entrada"] + A + PLAN["salida"])
+    A = len(e["voz"]) / SR
+    T = max(V / PLAN["acel_video_max"], PLAN["entrada"] + A + PLAN["salida"])
     e.update(V=V, A=A, T=T, f=T / V, t0=t)
     t += T
 DUR = t + PLAN["cola_final"]
-print("escena  video→salida   factor   voz")
+print(f"voz ×{TEMPO} · escena  video→salida   velocidad animación   voz")
 for e in esc:
-    print(f"  {e['n']}    {e['V']:5.2f}→{e['T']:5.2f} s   ×{e['f']:.2f}   audio {e['a']} [{e['desde']:.2f}–{e['hasta']:.2f}]")
+    print(f"  {e['n']}    {e['V']:5.2f}→{e['T']:5.2f} s   ×{1 / e['f']:.2f}   audio {e['a']} [{e['desde']:.2f}–{e['hasta']:.2f}] → {e['A']:.2f} s")
 print(f"duración final: {DUR:.2f} s (fuente 64 s)")
 
 n = int(DUR * SR)
 pista_voz = np.zeros(n)
 for e in esc:
-    a = voz[e["a"]]
-    seg = a[int(e["desde"] * SR): int(e["hasta"] * SR)].copy()
-    fi, fo = int(0.02 * SR), int(0.06 * SR)          # entrada corta; salida algo más larga (los cortes caen en silencio)
-    seg[:fi] *= np.linspace(0, 1, fi); seg[-fo:] *= np.linspace(1, 0, fo)
     i0 = int((e["t0"] + PLAN["entrada"]) * SR)
-    pista_voz[i0:i0 + len(seg)] += seg[: n - i0]
+    pista_voz[i0:i0 + len(e["voz"])] += e["voz"][: n - i0]
 
-# ── 3. música ambiental espacial (pads suaves + campanitas lentas + bajo profundo) ──
+# ── 4. música ambiental espacial (pads suaves + campanitas lentas + bajo profundo) ──
 rng = np.random.default_rng(11)
 def tt(d): return np.arange(int(d * SR)) / SR
 def env(m, a, r):
@@ -96,7 +129,7 @@ ruido = np.fft.irfft(X / (1 + (6000 / np.maximum(fr, 1)) ** 4) / (1 + (fr / 1200
 L += ruido * 0.004; R += np.roll(ruido, 900) * 0.004
 musica = np.stack([L, R], 1) * env(n, 2.0, 3.0)[:, None]
 
-# ── 4. mezcla: la música va ~12 dB bajo la voz en las pausas y baja ~8 dB más cuando hay voz (≈20 dB debajo) ──
+# ── 5. mezcla: la música va ~12 dB bajo la voz en las pausas y baja ~8 dB más cuando hay voz (≈20 dB debajo) ──
 vr = np.sqrt(np.mean(pista_voz[np.abs(pista_voz) > 0.02] ** 2))
 mr = np.sqrt(np.mean(musica ** 2))
 musica *= (vr * 10 ** (-12 / 20)) / mr
@@ -120,7 +153,7 @@ sf.write("salida/pistas/voz_completa.wav", pista_voz, SR)
 sf.write("salida/pistas/musica_con_ducking.wav", musica, SR)
 sf.write("salida/pistas/mezcla.wav", mezcla, SR)
 
-# ── 5. video: cada escena estirada a su duración (cuadros repetidos, sin deformar) + cola final ──
+# ── 6. video: cada escena estirada o acelerada a su duración (cuadros repetidos o saltados, sin deformar) + cola final ──
 fc = []
 for k, e in enumerate(esc):
     fc.append(f"[0:v]trim={e['v0']}:{e['v1']},setpts=(PTS-STARTPTS)*{e['f']:.5f},fps=30[v{k}]")
@@ -129,7 +162,7 @@ run("ffmpeg", "-v", "error", "-y", "-i", FUENTE, "-i", "salida/pistas/mezcla.wav
     "-map", "[vout]", "-map", "1:a", "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p",
     "-c:a", "pcm_s16le", "-t", f"{DUR:.3f}", "salida/pistas/sin_normalizar.mkv")
 
-# ── 6. volumen final -14 LUFS: ganancia medida + limitador que solo toca los picos (sin bombeo) ──
+# ── 7. volumen final -14 LUFS: ganancia medida + limitador que solo toca los picos (sin bombeo) ──
 m = subprocess.run(["ffmpeg", "-hide_banner", "-i", "salida/pistas/sin_normalizar.mkv", "-af", "loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json", "-f", "null", "-"], capture_output=True, text=True).stderr
 j = json.loads(m[m.rindex("{"): m.rindex("}") + 1])
 ganancia = -14.0 - float(j["input_i"]) + 0.1
@@ -137,5 +170,5 @@ run("ffmpeg", "-v", "error", "-y", "-i", "salida/pistas/sin_normalizar.mkv", "-c
     "-af", f"volume={ganancia:.2f}dB,alimiter=limit=0.75:attack=1:release=60:level=false",
     "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-movflags", "+faststart", "salida/DART_animacion_v3_narrado.mp4")
 os.remove("salida/pistas/sin_normalizar.mkv")
-json.dump([{k: e[k] for k in ("n", "v0", "v1", "a", "desde", "hasta", "t0", "T", "f")} for e in esc], open("salida/pistas/linea_de_tiempo.json", "w"), indent=1)
+json.dump([{k: e[k] for k in ("n", "v0", "v1", "a", "desde", "hasta", "A", "t0", "T", "f")} for e in esc], open("salida/pistas/linea_de_tiempo.json", "w"), indent=1)
 print("listo: salida/DART_animacion_v3_narrado.mp4")

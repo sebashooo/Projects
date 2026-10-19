@@ -58,7 +58,11 @@
    "hasta": 23.8
   }
  ],
- "entrada": 0.35,
- "salida": 0.45,
- "cola_final": 2.0
+ "entrada": 0.2,
+ "salida": 0.3,
+ "cola_final": 1.0,
+ "tempo_voz": 1.25,
+ "pausa_max": 0.2,
+ "acel_video_max": 1.5,
+ "nota_ritmo": "tempo_voz: velocidad de la voz (1 = original; atempo, no cambia el tono). pausa_max: silencio máximo dentro de un tramo (s). acel_video_max: lo más rápido que puede ir la animación cuando la voz es más corta que su escena. entrada/salida: silencio antes y después de la voz en cada escena."
 }

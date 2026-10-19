@@ -93,6 +93,14 @@ def generar(dur, escritura, SR, semilla=7):
         for q, (m, tb) in enumerate(zip(motivo, (0, 1 + SWING, 2, 3))):
             put((esc_L, esc_R), kalimba(int(m)), t0 + tb * PULSO + 0.01, 0.07 * (1 if q % 2 == 0 else 0.75), pan=(-0.3 if q % 2 else 0.3))
 
+    # al empezar cada escritura: un arpegio corto de kalimba justo en el corte (anuncia el «time-lapse»)
+    inicios = np.where(np.diff(np.concatenate([[0], (escritura[:n] > 0.5).astype(int)])) == 1)[0]
+    for i0 in inicios:
+        t0 = i0 / SR
+        ch = ACORDES[int(t0 / COMPAS) % 4]
+        for q, m in enumerate([ch[0] + 12, ch[1] + 12, ch[2] + 12, ch[3] + 12]):
+            put((base_L, base_R), kalimba(m), t0 + 0.06 + q * 0.07, 0.075 * (1 - 0.12 * q), pan=-0.3 + 0.2 * q)
+
     # reverb corta para unir todo
     ti = tt(1.6)
     def ir(sem):

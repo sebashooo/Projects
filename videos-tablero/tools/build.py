@@ -148,10 +148,10 @@ def nivelar(x):
         if j - i >= 15: resp[i:j] = True
         i = max(j, i + 1)
     act = (Lm > ref - 12) & ~resp                              # solo frases con voz de verdad
-    g = np.full(k, np.nan); g[act] = np.clip(0.75 * (ref - Lm[act]), -5, 6)
+    g = np.full(k, np.nan); g[act] = np.clip(0.6 * (ref - Lm[act]), -5, 4)
     idx = np.where(act)[0]; g = np.interp(np.arange(k), idx, g[idx])
     g[~act] = np.minimum(g[~act], 0)                           # las pausas nunca se suben
-    g = np.convolve(np.pad(g, 15, mode="edge"), np.ones(31) / 31, "valid")
+    g = np.convolve(np.pad(g, 50, mode="edge"), np.ones(101) / 101, "valid")   # lento (1 s): no aplana las sílabas
     m = np.convolve(np.pad(resp.astype(float), 2, mode="edge"), np.ones(5) / 5, "valid")
     g = g * (1 - m) - 8 * m
     return x * 10 ** (np.interp(np.arange(len(x)) / hop, np.arange(k), g) / 20)
@@ -163,9 +163,9 @@ rms = 20 * np.log10(np.sqrt((nivelada[:kk * h50].reshape(kk, h50) ** 2).mean(1))
 umbral = np.median(rms[rms > rms.max() - 20]) - 12          # 12 dB bajo la voz: ahí empieza el expansor
 sf.write(f"{P}/_niv.wav", nivelada, SR)
 run("ffmpeg", "-v", "error", "-y", "-i", f"{P}/_niv.wav", "-af", ",".join([
-    f"agate=threshold={10 ** (umbral / 20):.5f}:ratio=2:range=0.25:attack=10:release=200:knee=4",   # baja el ruido de sala
+    f"agate=threshold={10 ** (umbral / 20):.5f}:ratio=3:range=0.15:attack=8:release=150:knee=3",   # baja el ruido de sala
     "equalizer=f=3000:t=q:w=1.2:g=2.5",
-    "acompressor=threshold=-24dB:ratio=2.5:attack=5:release=120:knee=4:makeup=3",
+    "acompressor=threshold=-22dB:ratio=2:attack=8:release=150:knee=6:makeup=2",
     "deesser=i=0.3",
     "alimiter=limit=0.9:attack=2:release=40:level=false"]), f"{P}/voz_completa.wav")
 os.remove(f"{P}/_niv.wav")
@@ -202,7 +202,8 @@ g *= 1 - rampa(sin_voz, 0.15)                              # en escritura y paus
 nv = nivel_voz(pista_voz); nm = nivel_voz(musica_st.mean(1))
 musica_st *= 10 ** ((nv - CFG["musica_bajo_voz_db"] - nm) / 20)          # nivel de la base en pausas
 me = rampa(escritura, 0.2)                                 # al escribir la música pasa al frente
-musica_st *= 10 ** (CFG["musica_escritura_extra_db"] * me / 20)[:, None]
+mo = rampa(sin_voz * (1 - escritura), 0.15)                # en las pausas cortas sube un poco (sin hueco)
+musica_st *= 10 ** ((CFG["musica_escritura_extra_db"] * me + CFG["musica_pausa_extra_db"] * mo) / 20)[:, None]
 F = np.fft.rfftfreq(n, 1 / SR); banda = ((F > 1000) & (F < 5000)).astype(float)
 mb = np.fft.irfft(np.fft.rfft(musica_st, axis=0) * banda[:, None], n, axis=0)
 musica_st = (musica_st - mb) * 10 ** (-6 * g / 20)[:, None] + mb * 10 ** (-11 * g / 20)[:, None]

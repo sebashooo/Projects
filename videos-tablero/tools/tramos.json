@@ -9,6 +9,7 @@
  "fundido_entre_videos": 0.3,
  "musica_bajo_voz_db": 8,
  "musica_escritura_extra_db": 7,
+ "musica_pausa_extra_db": 4,
  "lufs": -12,
  "videos": [
   {

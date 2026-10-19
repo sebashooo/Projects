@@ -8,7 +8,9 @@ import soundfile as sf
 
 os.chdir(os.path.join(os.path.dirname(__file__), ".."))
 SR, FPS, W, H = 48000, 30, 1080, 1920
-CFG = json.load(open(sys.argv[1] if len(sys.argv) > 1 else "tools/tramos.json"))
+ARGS = [a for a in sys.argv[1:] if not a.startswith("--")]
+REUSAR_VIDEO = "--reusar-video" in sys.argv                # rehace solo el audio y la unión final
+CFG = json.load(open(ARGS[0] if ARGS else "tools/tramos.json"))
 P = "salida/pistas"
 os.makedirs(P, exist_ok=True)
 VOZ = {"explica"}                                          # tramos que conservan el audio original
@@ -185,10 +187,11 @@ for k, v in enumerate(CFG["videos"], 1):
     lista = []
     for i, tr in enumerate(v["tramos"]):
         out = f"{P}/tramos/v{k}_{i:02d}.mp4"
+        lista.append(out)
+        if REUSAR_VIDEO and os.path.exists(out): continue
         run("ffmpeg", "-v", "error", "-y", "-ss", f"{tr['inicio']:.3f}", "-to", f"{tr['fin']:.3f}", "-i", v["archivo"], "-an",
             "-vf", f"{mejora},setpts=(PTS-STARTPTS)/{velocidad(tr['tipo'])},fps={FPS},tpad=stop_mode=clone:stop=-1",
             "-frames:v", str(tr["cuadros"]), "-c:v", "libx264", "-preset", "veryfast", "-crf", "14", "-pix_fmt", "yuv420p", out)
-        lista.append(out)
     with open(f"{P}/tramos/v{k}.txt", "w") as f:
         f.writelines(f"file '{os.path.basename(x)}'\n" for x in lista)
     run("ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", f"{P}/tramos/v{k}.txt", "-c", "copy", f"{P}/tramos/video_{k}.mp4")
@@ -203,7 +206,7 @@ for k in range(1, len(CFG["videos"])):
     fg.append(f"{prev}[{k}:v]xfade=transition=fade:duration={FUNDIDO}:offset={off:.4f}[x{k}]"); prev = f"[x{k}]"
 na = len(CFG["videos"])
 run("ffmpeg", "-v", "error", "-y", *ins, "-i", f"{P}/mezcla.wav", "-filter_complex", ";".join(fg) + f";{prev}format=yuv420p[vout]",
-    "-map", "[vout]", "-map", f"{na}:a", "-c:v", "libx264", "-preset", "medium", "-crf", "19", "-c:a", "pcm_s16le",
+    "-map", "[vout]", "-map", f"{na}:a", "-c:v", "libx264", "-preset", "medium", "-crf", "22", "-maxrate", "3500k", "-bufsize", "7000k", "-c:a", "pcm_s16le",
     "-t", f"{TOTAL / FPS:.3f}", f"{P}/sin_normalizar.mkv")
 m = subprocess.run(["ffmpeg", "-hide_banner", "-i", f"{P}/sin_normalizar.mkv", "-af", "loudnorm=print_format=json", "-f", "null", "-"],
                    capture_output=True, text=True).stderr

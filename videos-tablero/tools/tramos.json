@@ -4,7 +4,7 @@
  "velocidades": {"explica": 1.25, "escribe": 2.5, "otro": 2.0},
  "fundido_entre_videos": 0.3,
  "musica_bajo_voz_db": 8,
- "musica_escritura_extra_db": 12,
+ "musica_escritura_extra_db": 7,
  "lufs": -12,
  "videos": [
   {"archivo": "fuente/1_primer_video.mp4", "color": [1.051, 1.059, 1.080],

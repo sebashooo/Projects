@@ -1,5 +1,5 @@
 {
- "nota": "Escenas del video fuente (segundos) y el tramo de audio que narra cada una. a = archivo de voz; desde/hasta en segundos dentro de ese archivo (cortes en el centro de pausas reales). Los finales se movieron al silencio real después de medir la envolvente (escena 1 deja fuera un golpe de 80 ms al final de la grabación 1).",
+ "nota": "Escenas del video fuente (segundos) y el tramo de audio que narra cada una. a = archivo de voz; desde/hasta en segundos dentro de ese archivo (cortes en pausas reales). Los finales se movieron al silencio real después de medir la envolvente (escena 1 deja fuera un golpe de 80 ms al final de la grabación 1; escena 3 empieza en 0.2 s para dejar fuera un «mm» suelto antes de la primera palabra). Los límites 2/3 y 3/4 están en el instante vacío entre el fundido de una escena y el dibujo de la siguiente (20.05 s y 31.0 s).",
  "escenas": [
   {
    "n": 1,
@@ -12,22 +12,22 @@
   {
    "n": 2,
    "v0": 6.77,
-   "v1": 20.7,
+   "v1": 20.05,
    "a": 2,
    "desde": 0.0,
    "hasta": 23.45
   },
   {
    "n": 3,
-   "v0": 20.7,
-   "v1": 32.0,
+   "v0": 20.05,
+   "v1": 31.0,
    "a": 3,
-   "desde": 0.0,
+   "desde": 0.2,
    "hasta": 15.45
   },
   {
    "n": 4,
-   "v0": 32.0,
+   "v0": 31.0,
    "v1": 41.67,
    "a": 3,
    "desde": 15.9,

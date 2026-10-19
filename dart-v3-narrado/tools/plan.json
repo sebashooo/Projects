@@ -1,0 +1,64 @@
+{
+ "nota": "Escenas del video fuente (segundos) y el tramo de audio que narra cada una. a = archivo de voz; desde/hasta en segundos dentro de ese archivo (cortes en el centro de pausas reales). Los finales se movieron al silencio real después de medir la envolvente (escena 1 deja fuera un golpe de 80 ms al final de la grabación 1).",
+ "escenas": [
+  {
+   "n": 1,
+   "v0": 0.0,
+   "v1": 6.77,
+   "a": 1,
+   "desde": 0.3,
+   "hasta": 9.03
+  },
+  {
+   "n": 2,
+   "v0": 6.77,
+   "v1": 20.7,
+   "a": 2,
+   "desde": 0.0,
+   "hasta": 23.45
+  },
+  {
+   "n": 3,
+   "v0": 20.7,
+   "v1": 32.0,
+   "a": 3,
+   "desde": 0.0,
+   "hasta": 15.45
+  },
+  {
+   "n": 4,
+   "v0": 32.0,
+   "v1": 41.67,
+   "a": 3,
+   "desde": 15.9,
+   "hasta": 25.85
+  },
+  {
+   "n": 5,
+   "v0": 41.67,
+   "v1": 53.13,
+   "a": 4,
+   "desde": 0.0,
+   "hasta": 9.4
+  },
+  {
+   "n": 6,
+   "v0": 53.13,
+   "v1": 58.67,
+   "a": 4,
+   "desde": 9.8,
+   "hasta": 18.85
+  },
+  {
+   "n": 7,
+   "v0": 58.67,
+   "v1": 64.0,
+   "a": 4,
+   "desde": 19.1,
+   "hasta": 23.8
+  }
+ ],
+ "entrada": 0.35,
+ "salida": 0.45,
+ "cola_final": 2.0
+}

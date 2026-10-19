@@ -1,3 +1,5 @@
 renders/
 .hyperframes/
 node_modules/
+salida/*
+!salida/*.mp4

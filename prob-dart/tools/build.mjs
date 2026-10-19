@@ -56,6 +56,7 @@ let estrellas = "";
 for (let i = 0; i < 130; i++) {
   const x = Math.round(rnd() * W), y = Math.round(rnd() * (H + 60)), s = (1.5 + rnd() * 3.2).toFixed(1), o = (0.35 + rnd() * 0.6).toFixed(2);
   if (x > 64 && x < 1016 && y > 52 && y < 470) continue;
+  if (x > 50 && x < 1030 && y > 1370 && y < 1850) continue;
   estrellas += `<i class="st tw${i % 3}" style="left:${x}px;top:${y}px;width:${s}px;height:${s}px;opacity:${o}"></i>`;
 }
 const ANCHO_BARRA = 920, HUECO = 10;
@@ -77,14 +78,16 @@ OFF.forEach((o, i) => {
   const choca = Math.abs(o) < R_TIE1;
   abanico += `<line id="fan${i}" x1="${AST1[0]}" y1="${AST1[1]}" x2="${ex.toFixed(1)}" y2="${ey.toFixed(1)}" stroke="${choca ? "#ff5fa8" : "#4fe0ff"}" stroke-width="${choca ? 6 : 4}" stroke-linecap="round" opacity="0"/>`;
 });
-// observaciones: puntos medidos sobre la trayectoria real (la de desvío +220 px), con un pequeño error de medida
-const REAL = 220, obs = [];
-for (let k = 0; k < 6; k++) {
-  const t = 0.1 + k * 0.09, err = [9, -12, 6, -8, 11, -5][k];
-  const ex = TIE1[0] + perp[0] * REAL - u[0] * 120, ey = TIE1[1] + perp[1] * REAL - u[1] * 120;
-  obs.push([AST1[0] + (ex - AST1[0]) * t + perp[0] * err, AST1[1] + (ey - AST1[1]) * t + perp[1] * err]);
+// trayectoria estimada: una franja (no una línea exacta) que casi siempre pasa de largo pero aún roza la Tierra → P(impacto) sigue abierta
+const REAL = 190, ANCHO = 90;
+const realFin = [TIE1[0] + perp[0] * REAL - u[0] * 40, TIE1[1] + perp[1] * REAL - u[1] * 40];
+const banda = `M ${AST1[0]} ${AST1[1]} L ${(realFin[0] + perp[0] * ANCHO).toFixed(1)} ${(realFin[1] + perp[1] * ANCHO).toFixed(1)} L ${(realFin[0] - perp[0] * ANCHO).toFixed(1)} ${(realFin[1] - perp[1] * ANCHO).toFixed(1)} Z`;
+// observaciones: posiciones ya recorridas (detrás del asteroide), con un pequeño error de medida
+const obs = [];
+for (let k = 0; k < 4; k++) {
+  const t = -0.31 + k * 0.05, err = [7, -9, 6, -5][k];
+  obs.push([AST1[0] + (realFin[0] - AST1[0]) * t + perp[0] * err, AST1[1] + (realFin[1] - AST1[1]) * t + perp[1] * err]);
 }
-const realFin = [TIE1[0] + perp[0] * REAL - u[0] * 120, TIE1[1] + perp[1] * REAL - u[1] * 120];
 
 // riesgo de impacto de 2024 YR4 con la Tierra (2032): valores publicados por la NASA a medida que llegaban observaciones
 const YR4 = [
@@ -92,6 +95,10 @@ const YR4 = [
   { f: "19 feb", dia: 21, v: 1.5 }, { f: "20 feb", dia: 22, v: 0.28 }, { f: "24 feb", dia: 26, v: 0.004 },
 ];
 const GX = (d) => 110 + (d / 26) * 720, GY = (v) => 470 - (v / 3.5) * 380;
+const ptsYR4 = YR4.map((p) => [GX(p.dia), GY(p.v)]);
+const largos = ptsYR4.map((p, i) => (i ? Math.hypot(p[0] - ptsYR4[i - 1][0], p[1] - ptsYR4[i - 1][1]) : 0));
+const totalYR4 = largos.reduce((a, b) => a + b, 0);
+const fraccionesYR4 = largos.map((_, i) => +(largos.slice(0, i + 1).reduce((a, b) => a + b, 0) / totalYR4).toFixed(3));
 const lineaYR4 = YR4.map((p, i) => `${i ? "L" : "M"} ${GX(p.dia).toFixed(1)} ${GY(p.v).toFixed(1)}`).join(" ");
 
 const html = `<!doctype html>
@@ -138,12 +145,11 @@ html,body{margin:0;width:${W}px;height:${H}px;overflow:hidden;background:#140b2b
 #p1-ast{left:745px;top:555px;width:190px;height:190px}
 #p1-svg{left:0;top:0;width:${W}px;height:${H}px}
 #p1-tel{left:800px;top:1280px;width:170px;height:170px}
-#p1-lobs{left:690px;top:1205px;color:#ffd257;border:3px solid #ffd257;font-size:30px}
-#p1-ltray{left:560px;top:930px;color:#ffd257;border:3px solid #ffd257;font-size:30px}
+#p1-lobs{left:550px;top:1372px;color:#ffd257;border:3px solid #ffd257;font-size:30px}
+#p1-ltray{left:300px;top:670px;color:#ffd257;border:3px solid #ffd257;font-size:30px}
 #p1-q{left:80px;top:1520px;width:920px;padding:24px 0;border-radius:26px;border:4px solid #ff5fa8;background:rgba(20,11,43,.92);text-align:center;transform-origin:50% 50%}
 #p1-q .a{font-size:30px;font-weight:800;letter-spacing:.08em;color:#ff5fa8}
 #p1-q .b{font-size:60px;font-weight:700;margin-top:6px}
-#p1-q .c{font-size:30px;color:#e3dbff;margin-top:8px}
 /* escena 2 */
 #p2-t{left:80px;top:200px;width:920px}
 #p2-t .a{font-size:84px}
@@ -152,12 +158,12 @@ html,body{margin:0;width:${W}px;height:${H}px;overflow:hidden;background:#140b2b
 #p2-cap b{color:#ffd257;font-weight:700}
 #p2-svg{left:70px;top:520px;width:940px;height:560px}
 #p2-pico{left:560px;top:560px;background:#ff5fa8;color:#1b1340;font-size:34px;font-weight:700;transform-origin:50% 100%}
-#p2-fin{left:380px;top:905px;background:#4fe0ff;color:#1b1340;font-size:34px;font-weight:700;transform-origin:50% 0%}
+#p2-fin{left:597px;top:1000px;background:#4fe0ff;color:#1b1340;font-size:34px;font-weight:700;transform-origin:50% 0%}
 #p2-diag{left:0;top:0;width:${W}px;height:${H}px}
 #p2-tierra{left:170px;top:1190px;width:200px;height:200px}
 #p2-ast{left:800px;top:1110px;width:120px;height:120px}
-#p2-nueva{left:600px;top:1400px;color:#ffd257;border:3px solid #ffd257;font-size:30px}
-#p2-menos{left:60px;top:1405px;color:#4fe0ff;border:3px solid #4fe0ff;font-size:30px}
+#p2-nueva{left:60px;top:1400px;color:#ffd257;border:3px solid #ffd257;font-size:30px}
+#p2-menos{left:640px;top:1400px;color:#4fe0ff;border:3px solid #4fe0ff;font-size:30px}
 #p2-c1{left:172px;top:1500px;color:#ffd257;border:4px solid #ffd257}
 #p2-c2{left:392px;top:1500px;color:#ff5fa8;border:4px solid #ff5fa8}
 #p2-c3{left:742px;top:1500px;color:#4fe0ff;border:4px solid #4fe0ff}
@@ -186,15 +192,15 @@ html,body{margin:0;width:${W}px;height:${H}px;overflow:hidden;background:#140b2b
     <svg id="p1-escudo" class="abs" viewBox="0 0 520 520"><path id="p1-esc" d="M260 20 L460 92 L460 250 Q460 410 260 500 Q60 410 60 250 L60 92 Z" fill="rgba(79,224,255,.08)" stroke="#4fe0ff" stroke-width="10" stroke-linejoin="round"/></svg>
     <div id="p1-tierra" class="abs">${tierra("t1")}</div>
     <svg id="p1-svg" class="abs" viewBox="0 0 ${W} ${H}">${abanico}
-      <path id="p1-real" d="M ${AST1[0]} ${AST1[1]} L ${realFin[0].toFixed(1)} ${realFin[1].toFixed(1)}" fill="none" stroke="#ffd257" stroke-width="7" stroke-linecap="round"/>
-      ${obs.map((p, k) => `<g id="obs${k}" opacity="0"><circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="11" fill="#ffd257"/><circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="22" fill="none" stroke="#ffd257" stroke-width="3" opacity=".6"/></g>`).join("")}
-      <line id="p1-mira" x1="845" y1="1300" x2="${obs[5][0].toFixed(1)}" y2="${obs[5][1].toFixed(1)}" stroke="#ffd257" stroke-width="3" stroke-dasharray="10 12" opacity="0"/>
+      <path id="p1-banda" d="${banda}" fill="rgba(255,210,87,.22)" stroke="#ffd257" stroke-width="3" stroke-linejoin="round" opacity="0"/>
+      ${obs.map((p, k) => `<g id="obs${k}" opacity="0"><circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="9" fill="#ffd257"/><circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="16" fill="none" stroke="#ffd257" stroke-width="3" opacity=".6"/></g>`).join("")}
+      <line id="p1-mira" x1="845" y1="1300" x2="${obs[1][0].toFixed(1)}" y2="${obs[1][1].toFixed(1)}" stroke="#ffd257" stroke-width="3" stroke-dasharray="10 12" opacity="0"/>
     </svg>
     <div id="p1-ast" class="abs">${asteroide("a1")}</div>
     <div id="p1-tel" class="abs">${telescopio}</div>
     <div id="p1-lobs" class="chip">observaciones</div>
     <div id="p1-ltray" class="chip">trayectoria</div>
-    <div id="p1-q" class="abs"><div class="a">RIESGO DE IMPACTO</div><div class="b mono">P(impacto) = ?</div><div class="c" id="p1-qc">se estima con observaciones y la trayectoria</div></div>
+    <div id="p1-q" class="abs"><div class="a">RIESGO DE IMPACTO</div><div class="b mono">P(impacto) = ?</div></div>
   </div></section>
 
   <!-- ESCENA 2 · 13–23 s -->
@@ -206,8 +212,8 @@ html,body{margin:0;width:${W}px;height:${H}px;overflow:hidden;background:#140b2b
       <path d="M110 70 L110 470 L850 470" fill="none" stroke="#cbbff0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
       ${[1, 2, 3].map((v) => `<line x1="110" y1="${GY(v)}" x2="850" y2="${GY(v)}" stroke="rgba(244,240,255,.14)" stroke-width="2"/><text x="96" y="${GY(v) + 10}" text-anchor="end" font-family="Space Mono" font-size="28" fill="#cbbff0">${v} %</text>`).join("")}
       <text x="110" y="520" font-family="Space Mono" font-size="28" fill="#cbbff0">ene 2025</text>
-      <text x="850" y="520" text-anchor="end" font-family="Space Mono" font-size="28" fill="#cbbff0">feb 2025</text>
       <path id="p2-linea" d="${lineaYR4}" fill="none" stroke="#ffd257" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle id="pt5r" cx="${GX(26).toFixed(1)}" cy="${GY(0.004).toFixed(1)}" r="22" fill="none" stroke="#4fe0ff" stroke-width="4" opacity="0"/>
       ${YR4.map((p, i) => `<circle id="pt${i}" cx="${GX(p.dia).toFixed(1)}" cy="${GY(p.v).toFixed(1)}" r="11" fill="#ffd257" opacity="0"/>`).join("")}
     </svg>
     <div id="p2-pico" class="chip mono">18 feb: 3,1 %</div>
@@ -253,15 +259,16 @@ function cascada(sel, t, dy = [80, 50, 80]) {
   });
 }
 function pop(sel, t, d = 0.6, extra = {}) { tl.fromTo(sel, { scale: 0, opacity: 0, ...extra.from }, { scale: 1, opacity: 1, duration: d, ease: "power3.out", ...extra.to }, t); }
-function trazo(el, t, d) { const L = el.getTotalLength(); el.style.strokeDasharray = L; el.style.strokeDashoffset = L;
-  tl.fromTo(el, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: d, ease: "power2.out" }, t); }
+function trazo(el, t, d, ease = "power2.out") { const L = el.getTotalLength(); el.style.strokeDasharray = L; el.style.strokeDashoffset = L;
+  tl.fromTo(el, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: d, ease }, t); }
 
 // ═══ ESCENA 1 ═══
 // 0–3.9 s: «la probabilidad en la defensa planetaria»
 cascada("#p1-t .w", T.p1 + 0.2);
 pop("#p1-tierra", T.p1 + 0.5, 0.9, { from: { y: 100 }, to: { y: 0 } });
 trazo(document.getElementById("p1-esc"), T.p1 + 1.2, 1.2);
-tl.fromTo("#p1-escudo", { scale: 0.9 }, { scale: 1.03, duration: 1.1, ease: "sine.inOut", yoyo: true, repeat: 2, immediateRender: false }, T.p1 + 2.4);
+tl.fromTo("#p1-escudo", { opacity: 0 }, { opacity: 1, duration: 0.3 }, T.p1 + 1.2);
+tl.fromTo("#p1-escudo", { scale: 1 }, { scale: 1.04, duration: 0.7, ease: "sine.inOut", yoyo: true, repeat: 1, immediateRender: false }, T.p1 + 2.4);   // termina en 1 antes del movimiento
 // 3.9–8.6 s: «estimar el riesgo de que un asteroide impacte la Tierra»
 tl.fromTo("#p1-t", { scale: 1, y: 0 }, { scale: 0.6, y: -30, duration: 0.7, ease: "power3.inOut" }, T.p1 + 3.8);
 tl.fromTo(["#p1-tierra", "#p1-escudo"], { x: 0, y: 0, scale: 1 }, { x: -240, y: 180, scale: 0.72, duration: 0.9, ease: "power3.inOut", immediateRender: false }, T.p1 + 3.9);
@@ -275,44 +282,46 @@ for (let i = 0; i < 9; i++) {
 }
 tl.set("#t1-feliz", { opacity: 0 }, T.p1 + 5.9); tl.set("#t1-duda", { opacity: 1 }, T.p1 + 5.9);
 tl.fromTo("#p1-q", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" }, T.p1 + 6.2);
-// 8.6–13 s: «teniendo en cuenta sus observaciones y su trayectoria»
-pop("#p1-tel", T.p1 + 8.5, 0.5, { from: { rotation: -15 }, to: { rotation: 0 } });
-tl.fromTo("#p1-lobs", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.4, ease: "expo.out" }, T.p1 + 8.8);
-tl.fromTo("#p1-mira", { opacity: 0 }, { opacity: 0.8, duration: 0.3 }, T.p1 + 8.9);
-for (let k = 0; k < 6; k++) tl.fromTo("#obs" + k, { opacity: 0 }, { opacity: 1, duration: 0.15 }, T.p1 + 9.0 + k * 0.22);
-for (let i = 0; i < 9; i++) tl.to("#fan" + i, { opacity: 0.25, duration: 0.5 }, T.p1 + 10.5);
-trazo(document.getElementById("p1-real"), T.p1 + 10.6, 0.9);
-tl.fromTo("#p1-ltray", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" }, T.p1 + 10.9);
-tl.fromTo("#p1-qc", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, T.p1 + 11.4);
+// 9.2–13 s: «teniendo en cuenta sus observaciones y su trayectoria»
+pop("#p1-tel", T.p1 + 9.6, 0.5, { from: { rotation: -15 }, to: { rotation: 0 } });
+tl.fromTo("#p1-mira", { opacity: 0 }, { opacity: 0.8, duration: 0.3 }, T.p1 + 10.2);
+tl.fromTo("#p1-lobs", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.4, ease: "expo.out" }, T.p1 + 10.3);
+for (let k = 0; k < 4; k++) tl.fromTo("#obs" + k, { opacity: 0 }, { opacity: 1, duration: 0.15 }, T.p1 + 10.35 + k * 0.18);
+for (let i = 0; i < 9; i++) tl.to("#fan" + i, { opacity: 0, duration: 0.4 }, T.p1 + 10.9);
+tl.fromTo("#p1-banda", { opacity: 0, scale: 0, svgOrigin: "${AST1[0]} ${AST1[1]}" }, { opacity: 1, scale: 1, svgOrigin: "${AST1[0]} ${AST1[1]}", duration: 0.6, ease: "power3.out" }, T.p1 + 11.1);
+tl.fromTo("#p1-ltray", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" }, T.p1 + 11.4);
 salida("#p1-in", T.p1 + 12.62);
 
 // ═══ ESCENA 2 ═══
 // 0–3.6 s: «estas estimaciones pueden cambiar cuando se obtiene nueva información» — el caso real de 2024 YR4
 cascada("#p2-t .w2", T.p2 + 0.1, [70, 70]);
 tl.fromTo(["#p2-card", "#p2-cap", "#p2-svg"], { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, T.p2 + 0.4);
-trazo(document.getElementById("p2-linea"), T.p2 + 0.8, 2.0);
-const tPunto = [0, 0.28, 0.6, 0.7, 0.8, 1.0];                          // fracción de la línea en que se llega a cada punto
+trazo(document.getElementById("p2-linea"), T.p2 + 0.8, 2.0, "none");
+const tPunto = ${JSON.stringify(fraccionesYR4)};                          // fracción de la línea en que se llega a cada punto
 tPunto.forEach((f, i) => tl.fromTo("#pt" + i, { opacity: 0, scale: 0.4, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.2, transformOrigin: "50% 50%" }, T.p2 + 0.8 + f * 2.0));
-pop("#p2-pico", T.p2 + 2.05, 0.4);
+pop("#p2-pico", T.p2 + 0.85 + tPunto[2] * 2.0, 0.4);
 pop("#p2-fin", T.p2 + 2.85, 0.4);
+tl.fromTo("#pt5r", { opacity: 0, scale: 0.4, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.35, ease: "power3.out", transformOrigin: "50% 50%" }, T.p2 + 2.85);
 // 3.6–6.6 s: «la probabilidad permite analizar la incertidumbre»: con nueva información el cono se cierra
-pop("#p2-tierra", T.p2 + 3.5, 0.5);
-pop("#p2-ast", T.p2 + 3.6, 0.5);
+tl.set("#t2-feliz", { opacity: 0 }, 0); tl.set("#t2-duda", { opacity: 1 }, 0);
+pop("#p2-tierra", T.p2 + 2.8, 0.5);
+pop("#p2-ast", T.p2 + 2.9, 0.5);
 const C = { abre: 1, centro: 0 }, AST = [860, 1170], TIE = [270, 1290], RT = 95;
 const cono = Array.from({ length: 7 }, (_, i) => document.getElementById("cono" + i));
 function abanico2() {
   const dx = TIE[0] - AST[0], dy = TIE[1] - AST[1], n = Math.hypot(dx, dy), ux = dx / n, uy = dy / n, px = -uy, py = ux;
   cono.forEach((ln, i) => {
     const off = C.centro + (i - 3) * 60 * C.abre;
-    const ex = TIE[0] + px * off - ux * 90, ey = TIE[1] + py * off - uy * 90;
+    const ex = TIE[0] + px * off - ux * 40, ey = TIE[1] + py * off - uy * 40;
     ln.setAttribute("x2", ex.toFixed(1)); ln.setAttribute("y2", ey.toFixed(1));
     ln.setAttribute("stroke", Math.abs(off) < RT ? "#ff5fa8" : "#4fe0ff");
   });
 }
 abanico2();
-cono.forEach((ln, i) => tl.fromTo(ln, { opacity: 0 }, { opacity: 0.9, duration: 0.3 }, T.p2 + 3.9 + i * 0.04));
-tl.fromTo("#p2-nueva", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" }, T.p2 + 4.2);
-tl.fromTo(C, { abre: 1, centro: 0 }, { abre: 0.15, centro: 150, duration: 1.6, ease: "power2.inOut", onUpdate: abanico2, immediateRender: false }, T.p2 + 4.6);
+cono.forEach((ln, i) => tl.fromTo(ln, { opacity: 0 }, { opacity: 0.9, duration: 0.3 }, T.p2 + 3.0 + i * 0.04));
+tl.fromTo("#p2-nueva", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" }, T.p2 + 3.2);
+tl.fromTo(C, { abre: 1, centro: 0 }, { abre: 0.15, centro: 150, duration: 1.6, ease: "power2.inOut", onUpdate: abanico2, immediateRender: false }, T.p2 + 3.8);
+tl.set("#t2-duda", { opacity: 0 }, T.p2 + 5.3); tl.set("#t2-feliz", { opacity: 1 }, T.p2 + 5.3);
 tl.fromTo("#p2-menos", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" }, T.p2 + 6.0);
 // 6.6–10 s: «cómo los datos científicos ayudan a evaluar posibles riesgos»
 [["#p2-c1", 6.7], ["#p2-f1", 6.85], ["#p2-c2", 7.0], ["#p2-f2", 7.15], ["#p2-c3", 7.3]].forEach(([s, t]) =>

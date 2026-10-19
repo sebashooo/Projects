@@ -10,7 +10,7 @@ Animación para la parte de probabilidad de la exposición «Las matemáticas ay
 
 | Tiempo | Quién habla | Qué se ve |
 |---|---|---|
-| 0:00–0:13 | Persona 1 | «La probabilidad en la defensa planetaria»: la Tierra con un escudo. Llega un asteroide con un abanico de trayectorias posibles (las rosadas chocan con la Tierra y las cian no) y aparece «Riesgo de impacto: P(impacto) = ?». Un telescopio toma observaciones (puntos amarillos) y con ellas se traza la trayectoria: «se estima con observaciones y la trayectoria». |
+| 0:00–0:13 | Persona 1 | «La probabilidad en la defensa planetaria»: la Tierra con un escudo. Llega un asteroide con un abanico de trayectorias posibles (las rosadas chocan con la Tierra y las cian no) y aparece «Riesgo de impacto: P(impacto) = ?». Un telescopio toma observaciones (puntos amarillos, por donde ya pasó el asteroide) y con ellas se estima la trayectoria: una franja amarilla que casi siempre pasa de largo pero todavía roza la Tierra, por eso el riesgo sigue siendo una pregunta. |
 | 0:13–0:23 | Persona 2 | «Las estimaciones pueden cambiar»: el caso real del **asteroide 2024 YR4**. Su probabilidad de chocar con la Tierra en 2032 subió hasta **3,1 % (18 feb 2025)** y, con nuevas observaciones, bajó a **0,004 % (24 feb 2025)**. Luego el cono de incertidumbre se cierra («+ nueva información», «menos incertidumbre»), aparece datos → probabilidad → riesgo y cierra con «más datos = menos incertidumbre». |
 
 Arriba hay una barra con 2 segmentos y el número de tramo (1 / 2, 2 / 2).

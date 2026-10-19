@@ -25,12 +25,12 @@
 #p2-cap b{color:#ffd257;font-weight:700}
 #p2-svg{left:70px;top:520px;width:940px;height:560px}
 #p2-pico{left:560px;top:560px;background:#ff5fa8;color:#1b1340;font-size:34px;font-weight:700;transform-origin:50% 100%}
-#p2-fin{left:380px;top:905px;background:#4fe0ff;color:#1b1340;font-size:34px;font-weight:700;transform-origin:50% 0%}
+#p2-fin{left:597px;top:1000px;background:#4fe0ff;color:#1b1340;font-size:34px;font-weight:700;transform-origin:50% 0%}
 #p2-diag{left:0;top:0;width:1080px;height:1920px}
 #p2-tierra{left:170px;top:1190px;width:200px;height:200px}
 #p2-ast{left:800px;top:1110px;width:120px;height:120px}
-#p2-nueva{left:600px;top:1400px;color:#ffd257;border:3px solid #ffd257;font-size:30px}
-#p2-menos{left:60px;top:1405px;color:#4fe0ff;border:3px solid #4fe0ff;font-size:30px}
+#p2-nueva{left:60px;top:1400px;color:#ffd257;border:3px solid #ffd257;font-size:30px}
+#p2-menos{left:640px;top:1400px;color:#4fe0ff;border:3px solid #4fe0ff;font-size:30px}
 #p2-c1{left:172px;top:1500px;color:#ffd257;border:4px solid #ffd257}
 #p2-c2{left:392px;top:1500px;color:#ff5fa8;border:4px solid #ff5fa8}
 #p2-c3{left:742px;top:1500px;color:#4fe0ff;border:4px solid #4fe0ff}
@@ -48,8 +48,8 @@
       <path d="M110 70 L110 470 L850 470" fill="none" stroke="#cbbff0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
       <line x1="110" y1="361.42857142857144" x2="850" y2="361.42857142857144" stroke="rgba(244,240,255,.14)" stroke-width="2"/><text x="96" y="371.42857142857144" text-anchor="end" font-family="Space Mono" font-size="28" fill="#cbbff0">1 %</text><line x1="110" y1="252.85714285714286" x2="850" y2="252.85714285714286" stroke="rgba(244,240,255,.14)" stroke-width="2"/><text x="96" y="262.8571428571429" text-anchor="end" font-family="Space Mono" font-size="28" fill="#cbbff0">2 %</text><line x1="110" y1="144.28571428571428" x2="850" y2="144.28571428571428" stroke="rgba(244,240,255,.14)" stroke-width="2"/><text x="96" y="154.28571428571428" text-anchor="end" font-family="Space Mono" font-size="28" fill="#cbbff0">3 %</text>
       <text x="110" y="520" font-family="Space Mono" font-size="28" fill="#cbbff0">ene 2025</text>
-      <text x="850" y="520" text-anchor="end" font-family="Space Mono" font-size="28" fill="#cbbff0">feb 2025</text>
       <path id="p2-linea" d="M 110.0 328.9 L 359.2 220.3 L 663.8 133.4 L 691.5 307.1 L 719.2 439.6 L 830.0 469.6" fill="none" stroke="#ffd257" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle id="pt5r" cx="830.0" cy="469.6" r="22" fill="none" stroke="#4fe0ff" stroke-width="4" opacity="0"/>
       <circle id="pt0" cx="110.0" cy="328.9" r="11" fill="#ffd257" opacity="0"/><circle id="pt1" cx="359.2" cy="220.3" r="11" fill="#ffd257" opacity="0"/><circle id="pt2" cx="663.8" cy="133.4" r="11" fill="#ffd257" opacity="0"/><circle id="pt3" cx="691.5" cy="307.1" r="11" fill="#ffd257" opacity="0"/><circle id="pt4" cx="719.2" cy="439.6" r="11" fill="#ffd257" opacity="0"/><circle id="pt5" cx="830.0" cy="469.6" r="11" fill="#ffd257" opacity="0"/>
     </svg>
     <div id="p2-pico" class="chip mono">18 feb: 3,1 %</div>
@@ -105,36 +105,39 @@ function cascada(sel, t, dy = [80, 50, 80]) {
   });
 }
 function pop(sel, t, d = 0.6, extra = {}) { tl.fromTo(sel, { scale: 0, opacity: 0, ...extra.from }, { scale: 1, opacity: 1, duration: d, ease: "power3.out", ...extra.to }, t); }
-function trazo(el, t, d) { const L = el.getTotalLength(); el.style.strokeDasharray = L; el.style.strokeDashoffset = L;
-  tl.fromTo(el, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: d, ease: "power2.out" }, t); }
+function trazo(el, t, d, ease = "power2.out") { const L = el.getTotalLength(); el.style.strokeDasharray = L; el.style.strokeDashoffset = L;
+  tl.fromTo(el, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: d, ease }, t); }
 
 
 // 0–3.6 s: «estas estimaciones pueden cambiar cuando se obtiene nueva información» — el caso real de 2024 YR4
 cascada("#p2-t .w2", T.p2 + 0.1, [70, 70]);
 tl.fromTo(["#p2-card", "#p2-cap", "#p2-svg"], { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, T.p2 + 0.4);
-trazo(document.getElementById("p2-linea"), T.p2 + 0.8, 2.0);
-const tPunto = [0, 0.28, 0.6, 0.7, 0.8, 1.0];                          // fracción de la línea en que se llega a cada punto
+trazo(document.getElementById("p2-linea"), T.p2 + 0.8, 2.0, "none");
+const tPunto = [0,0.268,0.58,0.754,0.887,1];                          // fracción de la línea en que se llega a cada punto
 tPunto.forEach((f, i) => tl.fromTo("#pt" + i, { opacity: 0, scale: 0.4, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.2, transformOrigin: "50% 50%" }, T.p2 + 0.8 + f * 2.0));
-pop("#p2-pico", T.p2 + 2.05, 0.4);
+pop("#p2-pico", T.p2 + 0.85 + tPunto[2] * 2.0, 0.4);
 pop("#p2-fin", T.p2 + 2.85, 0.4);
+tl.fromTo("#pt5r", { opacity: 0, scale: 0.4, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.35, ease: "power3.out", transformOrigin: "50% 50%" }, T.p2 + 2.85);
 // 3.6–6.6 s: «la probabilidad permite analizar la incertidumbre»: con nueva información el cono se cierra
-pop("#p2-tierra", T.p2 + 3.5, 0.5);
-pop("#p2-ast", T.p2 + 3.6, 0.5);
+tl.set("#t2-feliz", { opacity: 0 }, 0); tl.set("#t2-duda", { opacity: 1 }, 0);
+pop("#p2-tierra", T.p2 + 2.8, 0.5);
+pop("#p2-ast", T.p2 + 2.9, 0.5);
 const C = { abre: 1, centro: 0 }, AST = [860, 1170], TIE = [270, 1290], RT = 95;
 const cono = Array.from({ length: 7 }, (_, i) => document.getElementById("cono" + i));
 function abanico2() {
   const dx = TIE[0] - AST[0], dy = TIE[1] - AST[1], n = Math.hypot(dx, dy), ux = dx / n, uy = dy / n, px = -uy, py = ux;
   cono.forEach((ln, i) => {
     const off = C.centro + (i - 3) * 60 * C.abre;
-    const ex = TIE[0] + px * off - ux * 90, ey = TIE[1] + py * off - uy * 90;
+    const ex = TIE[0] + px * off - ux * 40, ey = TIE[1] + py * off - uy * 40;
     ln.setAttribute("x2", ex.toFixed(1)); ln.setAttribute("y2", ey.toFixed(1));
     ln.setAttribute("stroke", Math.abs(off) < RT ? "#ff5fa8" : "#4fe0ff");
   });
 }
 abanico2();
-cono.forEach((ln, i) => tl.fromTo(ln, { opacity: 0 }, { opacity: 0.9, duration: 0.3 }, T.p2 + 3.9 + i * 0.04));
-tl.fromTo("#p2-nueva", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" }, T.p2 + 4.2);
-tl.fromTo(C, { abre: 1, centro: 0 }, { abre: 0.15, centro: 150, duration: 1.6, ease: "power2.inOut", onUpdate: abanico2, immediateRender: false }, T.p2 + 4.6);
+cono.forEach((ln, i) => tl.fromTo(ln, { opacity: 0 }, { opacity: 0.9, duration: 0.3 }, T.p2 + 3.0 + i * 0.04));
+tl.fromTo("#p2-nueva", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" }, T.p2 + 3.2);
+tl.fromTo(C, { abre: 1, centro: 0 }, { abre: 0.15, centro: 150, duration: 1.6, ease: "power2.inOut", onUpdate: abanico2, immediateRender: false }, T.p2 + 3.8);
+tl.set("#t2-duda", { opacity: 0 }, T.p2 + 5.3); tl.set("#t2-feliz", { opacity: 1 }, T.p2 + 5.3);
 tl.fromTo("#p2-menos", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" }, T.p2 + 6.0);
 // 6.6–10 s: «cómo los datos científicos ayudan a evaluar posibles riesgos»
 [["#p2-c1", 6.7], ["#p2-f1", 6.85], ["#p2-c2", 7.0], ["#p2-f2", 7.15], ["#p2-c3", 7.3]].forEach(([s, t]) =>

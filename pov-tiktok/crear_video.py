@@ -398,7 +398,9 @@ def main():
     if not con_imagen:
         sys.exit(f"No hay imágenes escena_XX en {carpeta_img}")
     completo = not faltan
-    salida = comun.RAIZ / (args.salida or ("video_final.mp4" if completo else "prueba.mp4"))
+    sufijo = Path(args.historia).stem.removeprefix("historia")      # historia_parte2.json → "_parte2"
+    salida = comun.RAIZ / (args.salida or f"{'video_final' if completo else 'prueba'}{sufijo}.mp4")
+    preview = comun.RAIZ / f"preview{sufijo}.png"
     if faltan:
         print(f"MODO PRUEBA: faltan las escenas {', '.join(str(e['n']) for e, _ in faltan)}. "
               f"Armo {salida.name} con {len(con_imagen)} escenas.")
@@ -473,7 +475,7 @@ def main():
             pegar(cuadro, rgba, x, y, min(1.0, (t - fin_escenas) / 0.25))
 
         if c == cuadro_preview:
-            Image.fromarray(cuadro).save(comun.RAIZ / "preview.png")
+            Image.fromarray(cuadro).save(preview)
         proceso.stdin.write(cuadro.tobytes())
         avance = int(100 * (c + 1) / cuadros) // 10
         if avance != ultimo_aviso:
@@ -484,9 +486,9 @@ def main():
         sys.exit("ffmpeg falló al codificar el video")
     temporal.unlink(missing_ok=True)
     m, s = divmod(total, 60)
-    print(f"\nListo: {salida.name} · {int(m)}:{s:04.1f} ({total:.1f} s) · {len(escenas)} escenas · preview.png = segundo 5")
+    print(f"\nListo: {salida.name} · {int(m)}:{s:04.1f} ({total:.1f} s) · {len(escenas)} escenas · {preview.name} = segundo 5")
     if faltan:
-        print(f"Cuando estén las escenas que faltan, vuelve a correr: {comun.comando_python()} crear_video.py")
+        print(f"Cuando estén las escenas que faltan, vuelve a correr: {comun.comando_python()} " + " ".join(sys.argv))
 
 
 if __name__ == "__main__":

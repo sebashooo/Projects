@@ -66,6 +66,20 @@ Escúchalas y pon la que te guste en `historia.json`, en `"voz": {"voz": "es-MX-
 
 **edge-tts necesita internet**, porque usa el servidor de voz de Microsoft.
 
+## Partes de esta historia
+
+| Parte | Archivo | Imágenes | Escenas | Cierre |
+|---|---|---|---|---|
+| 1 | `historia.json` | `imagenes/` | 1 a 8 | «Parte 2 en mi perfil» |
+| 2 | `historia_parte2.json` | `imagenes_parte2/` | 9 a 20 | «Parte 3 en mi perfil» |
+
+```bash
+python crear_video.py                                                        # parte 1 → video_final.mp4
+python crear_video.py --historia historia_parte2.json --imagenes imagenes_parte2   # parte 2 → video_final_parte2.mp4
+```
+
+Si a una parte le faltan imágenes, sale `prueba.mp4` o `prueba_parte2.mp4` solo con las escenas que tienen imagen. El nombre del video y el de `preview.png` toman el final del nombre del archivo de la historia, así que una parte no sobrescribe a la otra.
+
 ## Otra historia
 
 Copia `historia.json`, cambia el título y las escenas, y pon sus imágenes en otra carpeta:

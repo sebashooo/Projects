@@ -2,6 +2,6 @@
 audio/
 __pycache__/
 *.mp4
-preview.png
-imagenes/anteriores/
+preview*.png
+imagenes*/anteriores/
 muestras_voz/

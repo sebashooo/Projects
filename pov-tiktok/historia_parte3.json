@@ -1,0 +1,26 @@
+{
+  "titulo": "POV: Tienes 30 Días Para Convertir $1 En $1 Trillón (3)",
+  "voz": {
+    "voz": "es-VE-SebastianNeural",
+    "rate": "+8%",
+    "pitch": "-2Hz"
+  },
+  "cierre": "Parte 4 en mi perfil",
+  "estilo": "2D digital cartoon illustration in the style of modern YouTube \"stickman storytime\" explainer videos, matching the reference images exactly. Clean uniform black ink outlines, flat cel-shading with one soft shadow tone. Landscape 4:3. Highly detailed semi-realistic cartoon backgrounds with perspective depth. Palette: deep navy #0E1A2B, dark teal #12333A, glowing neon green #39FF7A for screens, charts, holograms and money, warm gold #D4A537 accents. Cinematic lighting. MAIN CHARACTER identical to the reference sheet: big perfect round pure white head with thin black outline, about one third of his height, no hair, no ears, no nose, no neck; two small black dot/oval eyes, short thick black expressive eyebrows, small simple mouth; slim stick-figure body; tailored PURE BLACK suit, white shirt collar, slim gold tie #D4A537, black shoes; white four-fingered cartoon hands. He stands in the left or right third, the key object on the other side. Assistants: same round-white-head stick figures with BLACK ties. Executives, presidents and other people: semi-realistic cartoon humans with gray hair and gray or navy suits. Text only when specified, exactly as written. AVOID: 3D, photorealism, anime, hair/ears/nose on the protagonist, non-gold tie on the protagonist, watermarks, real brand logos, borders.",
+  "referencias": [
+    "ficha_personaje.jpg",
+    "imagenes/escena_08.jpg"
+  ],
+  "escenas": [
+    {
+      "n": 19,
+      "narracion": "Y la encuentro en un archivo de la NASA: un asteroide lleno de metales valorado en miles de trillones, a solo semanas de la Tierra.",
+      "imagen": "Dark lab with a holographic blueprint of a rocket next to a glowing metallic asteroid. The character with his hand on his chin, eyebrows raised with a sudden idea."
+    },
+    {
+      "n": 20,
+      "narracion": "Pongo todo lo que tengo en una sola misión. El cohete despega. Y en ese momento suena mi teléfono. Es el jugador de Tokio. Dice: \"Yo llegué primero.\"",
+      "imagen": "A rocket launching at night with a huge trail of fire lighting the sky. The character in the foreground seen from behind, holding a ringing phone with a glowing screen."
+    }
+  ]
+}

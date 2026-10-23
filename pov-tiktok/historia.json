@@ -1,0 +1,108 @@
+{
+  "titulo": "POV: Tienes 30 Días Para Convertir $1 En $1 Trillón (1)",
+  "voz": {
+    "voz": "es-CO-GonzaloNeural",
+    "rate": "+8%",
+    "pitch": "-2Hz"
+  },
+  "cierre": "Parte 2 en mi perfil",
+  "estilo": "2D digital cartoon illustration in the style of modern YouTube \"stickman storytime\" explainer videos, matching the reference images exactly. Clean uniform black ink outlines, flat cel-shading with one soft shadow tone. Landscape 4:3. Highly detailed semi-realistic cartoon backgrounds with perspective depth. Palette: deep navy #0E1A2B, dark teal #12333A, glowing neon green #39FF7A for screens, charts, holograms and money, warm gold #D4A537 accents. Cinematic lighting. MAIN CHARACTER identical to the reference sheet: big perfect round pure white head with thin black outline, about one third of his height, no hair, no ears, no nose, no neck; two small black dot/oval eyes, short thick black expressive eyebrows, small simple mouth; slim stick-figure body; tailored PURE BLACK suit, white shirt collar, slim gold tie #D4A537, black shoes; white four-fingered cartoon hands. He stands in the left or right third, the key object on the other side. Assistants: same round-white-head stick figures with BLACK ties. Executives, presidents and other people: semi-realistic cartoon humans with gray hair and gray or navy suits. Text only when specified, exactly as written. AVOID: 3D, photorealism, anime, hair/ears/nose on the protagonist, non-gold tie on the protagonist, watermarks, real brand logos, borders.",
+  "referencias": [
+    "ficha_personaje.jpg",
+    "imagenes/escena_08.jpg"
+  ],
+  "escenas": [
+    {
+      "n": 1,
+      "narracion": "Me despierto y en la mesa hay una moneda de un dólar y una nota: \"Tienes 30 días para convertirla en un trillón. Si fallas, lo pierdes todo, incluso lo que ya tienes.\""
+    },
+    {
+      "n": 2,
+      "narracion": "Reviso mi cuenta. Cero. Mi casa, mi carro, mis ahorros… todo desapareció. Lo único que me queda en el mundo es esta moneda."
+    },
+    {
+      "n": 3,
+      "narracion": "Día 1. Con el dólar compro una botella de agua al por mayor. Hace 35 grados afuera del estadio. La vendo en tres dólares. Ya tripliqué mi dinero."
+    },
+    {
+      "n": 4,
+      "narracion": "Repito y repito. Al final del día tengo 400 dólares y una nevera. La gente hace fila. Ahí entiendo que esto no es suerte: es velocidad."
+    },
+    {
+      "n": 5,
+      "narracion": "Día 4. Contrato a dos vendedores y abro una tienda en línea. Vendo agua, hielo y ventiladores en cada evento de la ciudad. Ya voy en 20 mil dólares."
+    },
+    {
+      "n": 6,
+      "narracion": "Pero hago la cuenta y me congelo. A este ritmo, en 30 días no llego ni a un millón. Me faltan un millón de millones. Necesito algo mucho más grande."
+    },
+    {
+      "n": 7,
+      "narracion": "Pongo todo en una sola apuesta: una pequeña empresa de baterías que nadie conoce. Leí su patente toda la noche. Si tengo razón, esto explota."
+    },
+    {
+      "n": 8,
+      "narracion": "Día 10. Una automotriz gigante anuncia que va a usar sus baterías. La acción sube 4.000 por ciento. Mis 20 mil ahora son 80 millones."
+    },
+    {
+      "n": 9,
+      "narracion": "Compro la empresa completa. Ahora soy dueño de la tecnología que todos quieren. Los bancos que antes me ignoraban me llaman para prestarme dinero.",
+      "imagen": "Luxury top-floor skyscraper office at golden sunset, floor-to-ceiling windows with a glowing city skyline, dark wood conference table, a framed glowing green \"VOLTIX\" battery logo on the wall. The character seated at the head of the table signing a thick contract titled \"ADQUISICIÓN 100% VOLTIX\" with a gold pen, calm confident smile, one eyebrow raised. Three semi-realistic executives (gray and navy suits) watching respectfully. Phones on the table lit up with \"BANCO\" and \"INVERSIONISTA\"."
+    },
+    {
+      "n": 10,
+      "narracion": "Con los préstamos construyo la fábrica de baterías más grande del planeta. Funciona 24 horas. Cada auto eléctrico nuevo tiene mi batería adentro.",
+      "imagen": "Gigantic futuristic battery factory with robot arms, conveyor belts full of glowing batteries and neon green lights. The character standing on a metal catwalk on the left, pointing proudly at the production line. Tiny worker figures below to show the scale."
+    },
+    {
+      "n": 11,
+      "narracion": "Día 15. Mi patrimonio llega a 48 mil millones. Soy de las personas más ricas del mundo. Pero el contador sigue diciendo que me falta casi todo.",
+      "imagen": "Modern dark office with a huge wall screen showing \"$48.000.000.000\" and \"DÍA 15\" in neon green. The character standing in front of it, serious, arms crossed, eyebrows lowered."
+    },
+    {
+      "n": 12,
+      "narracion": "Esa noche aparece un hombre que no sé cómo entró. Me da un sobre: \"Otros 99 jugadores tienen el mismo reto. Solo uno puede ganar.\"",
+      "imagen": "Dark office at night, only a desk lamp on. A mysterious semi-realistic man in a gray suit, face hidden in shadow, hands the character a black envelope. The character's eyebrows show suspicion."
+    },
+    {
+      "n": 13,
+      "narracion": "En el mapa veo los puntos rojos. Otros jugadores. Uno en Tokio está comprando todo el litio del mundo. Sin litio, mis fábricas se detienen.",
+      "imagen": "Dark control room with a floating holographic world map, red blinking dots in many countries and one bigger red dot over Japan. The character on the left pointing at it, angry eyebrows."
+    },
+    {
+      "n": 14,
+      "narracion": "Día 18. Mis acciones caen 60 por ciento en un día. Pierdo 30 mil millones mientras duermo. Por primera vez siento miedo de verdad.",
+      "imagen": "Big screen with a red chart crashing down, red alert lights in the room. The character with both hands on his head, desperate eyebrows, mouth open."
+    },
+    {
+      "n": 15,
+      "narracion": "Vuelo a Bolivia. Si el otro jugador compró las minas, yo voy a comprar algo más valioso: el permiso de los gobiernos para explotarlas.",
+      "imagen": "Inside a helicopter cabin flying over a vast white salt desert under a blue sky. The character by the window looking out with determination."
+    },
+    {
+      "n": 16,
+      "narracion": "Ofrezco construir trenes, hospitales y escuelas a cambio de los derechos. Firmo con tres países en una semana. El jugador de Tokio se queda con minas que no puede abrir.",
+      "imagen": "Formal negotiation room with a long table, semi-realistic presidents and invented flags. The character standing, pointing at a large plan with trains, hospitals and schools, confident."
+    },
+    {
+      "n": 17,
+      "narracion": "Día 24. Controlo el 70 por ciento del litio del planeta. Mi fortuna llega a 410 mil millones. Pero el reloj ya no perdona.",
+      "imagen": "Office with a giant screen showing \"$410.000.000.000\" in neon green. Several assistant stick figures (black ties) clapping; the character in the center smiling."
+    },
+    {
+      "n": 18,
+      "narracion": "Me faltan 590 mil millones y quedan seis días. Ninguna empresa en la historia ha crecido tan rápido. Necesito una idea que nadie se haya atrevido a hacer.",
+      "imagen": "Night. The character at a tall skyscraper window, his tired reflection visible in the glass, city lights far below, quiet blue light."
+    },
+    {
+      "n": 19,
+      "narracion": "Y la encuentro en un archivo de la NASA: un asteroide lleno de metales valorado en miles de trillones, a solo semanas de la Tierra.",
+      "imagen": "Dark lab with a holographic blueprint of a rocket next to a glowing metallic asteroid. The character with his hand on his chin, eyebrows raised with a sudden idea."
+    },
+    {
+      "n": 20,
+      "narracion": "Pongo todo lo que tengo en una sola misión. El cohete despega. Y en ese momento suena mi teléfono. Es el jugador de Tokio. Dice: \"Yo llegué primero.\"",
+      "imagen": "A rocket launching at night with a huge trail of fire lighting the sky. The character in the foreground seen from behind, holding a ringing phone with a glowing screen."
+    }
+  ]
+}

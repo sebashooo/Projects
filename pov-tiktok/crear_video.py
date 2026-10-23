@@ -77,6 +77,10 @@ def voz_de_escena(n, texto, voz, carpeta):
             error = "el audio llegó vacío"
         except Exception as e:
             error = e
+            if "Invalid voice" in str(e):
+                mp3.unlink(missing_ok=True)
+                sys.exit(f"La voz «{voz['voz']}» no existe en edge-tts. En historia.json pon solo el nombre de la voz,\n"
+                         'por ejemplo "es-VE-SebastianNeural" (sin el número ni ".mp3" del archivo de muestra).')
         time.sleep(2 * (intento + 1))
     else:
         mp3.unlink(missing_ok=True)
@@ -382,6 +386,8 @@ def main():
     historia = comun.cargar_historia(args.historia)
     carpeta_img = Path(args.imagenes) if Path(args.imagenes).is_absolute() else comun.RAIZ / args.imagenes
     voz = {**VOZ_DEFECTO, **historia.get("voz", {})}
+    # acepta también el nombre del archivo de muestra de probar_voces.py ("04_es-VE-SebastianNeural.mp3")
+    voz["voz"] = re.sub(r"^\d+_", "", Path(voz["voz"].strip()).name.removesuffix(".mp3"))
     fuentes = comun.asegurar_fuentes()
     ffmpeg = comun.ffmpeg_exe()
 

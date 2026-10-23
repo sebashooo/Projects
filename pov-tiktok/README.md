@@ -15,6 +15,7 @@ Las imágenes que faltan las puede generar Gemini.
 | `ficha_personaje.jpg` | Hoja de referencia del personaje. Va en esta carpeta, junto a los scripts. |
 | `generar_imagenes.py` | Parte A: genera con Gemini las escenas sin imagen. |
 | `crear_video.py` | Parte B: arma `prueba.mp4` (si faltan imágenes) o `video_final.mp4` (si están todas). |
+| `probar_voces.py` | Genera la misma frase con varias voces para que elijas una. |
 | `instalar.py` | Detecta tu sistema (Windows, Mac o Linux), instala los paquetes, revisa ffmpeg, baja la fuente y crea `.env`. |
 | `musica.mp3` | Opcional. Si existe, suena en bucle al 12 % y baja al 8 % mientras hay voz. |
 
@@ -51,6 +52,15 @@ python crear_video.py                     # con las 20 imágenes sale video_fina
 ```
 
 En Mac y Linux escribe `python3` en vez de `python`.
+
+### Elegir la voz
+
+```bash
+python probar_voces.py            # genera la escena 1 con 10 voces en español en muestras_voz/
+python probar_voces.py --todas-es # todas las voces en español de edge-tts
+```
+
+Escúchalas y pon la que te guste en `historia.json`, en `"voz": {"voz": "es-MX-JorgeNeural", "rate": "+8%", "pitch": "-2Hz"}`. Si cambias la voz, `crear_video.py` vuelve a generar los audios.
 
 `crear_video.py` también guarda `preview.png`, que es el cuadro del segundo 5, y al final dice cuánto dura el video. La voz de cada escena se guarda en `audio/escena_XX.mp3`, y los tiempos de cada palabra en `audio/escena_XX.json`. Si no cambias el texto, la siguiente corrida reutiliza esos audios.
 
